@@ -1,6 +1,7 @@
 # eCommerce
 
 ## Project Name: Uptrend
+- <https://github.com/ecommerce-wdd10-team3/eCommerce>
 
 ## Team3 Member(Alphabetical order)
 
