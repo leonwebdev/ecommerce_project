@@ -2,8 +2,6 @@
 
 ## Project Name: Uptrend
 
----
-
 ## Team3 Member(Alphabetical order)
 
 -   Dhruval: Backend/PHP
