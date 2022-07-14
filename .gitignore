@@ -25,3 +25,8 @@ Homestead.json
 
 composer.phar
 /vendor/
+
+# Custom
+tmp
+/tmp
+*.tmp
