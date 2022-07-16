@@ -28,5 +28,12 @@ composer.phar
 
 # Custom
 tmp
+tmp/
 /tmp
+/tmp/
 *.tmp
+.tmp
+/.vscode
+.vscode
+Thumbs.db
+/Thumbs.db
