@@ -3,8 +3,8 @@
 
 $font-family-primary: 'Outfit', sans-serif;
 $font-weight-primary: 300;
-$font-color-primary: #707070;
-$font-color-primary-hover: #1E1E1E;
+$color-primary: #707070;
+$color-primary-hover: #1E1E1E;
 
 * {
 	box-sizing: border-box;
@@ -15,16 +15,16 @@ html, body {
 	padding: 0;
 	font-family: $font-family-primary;
 	font-weight: $font-weight-primary;
-	color: $font-color-primary;
+	color: $color-primary;
 }
 
 a {
-	color: $font-color-primary;
+	color: $color-primary;
 	text-decoration: none;
 }
 
 a:hover {
-	color: $font-color-primary-hover;
+	color: $color-primary-hover;
 }
 
 ul {
@@ -35,11 +35,37 @@ ul {
 
 .btn {
     font-size: 18px;
-    background-color: $font-color-primary;
-    border: 1px solid $font-color-primary;
     padding: 20px;
-    color: #fff;
+    text-align: center;
     @include transition();
+
+    &.btn_black {
+        color: #fff;
+        background-color: $color-primary;
+        &:hover {
+            color: #fff;
+            background-color: $color-primary-hover;
+        }
+    }
+    
+    &.btn_white {
+        background-color: #fff;
+        color: $color-primary;
+        border: 1px solid $color-primary;
+        &:hover {
+            background-color: $color-primary;
+            color: #fff;
+        }
+    }
+
+    &.btn_white_no_border {
+        background-color: #fff;
+        color: $color-primary;
+        border-bottom: 1px solid #fff;
+        &:hover {
+            border-bottom: 1px solid $color-primary;
+        }
+    }
 }
 
 .container {
@@ -101,6 +127,24 @@ ul {
 
     .utils {
         width: 190px;
+
+        .icon {
+            position: relative;
+            .profile_dropdown {
+                display: none;
+                border: 1px solid rgba(0,0,0,.3);
+                padding: 30px;
+                position: absolute;
+                left: calc(-250px / 2 + (50px / 2));
+                min-width: 250px;
+                li {
+                    margin-bottom: 10px;
+                    &:last-of-type {
+                        margin-bottom: 0;
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -253,7 +297,7 @@ $details-left-margin: 40px;
             }
             select {
                 padding: 20px 15px;
-                color: $font-color-primary;
+                color: $color-primary;
                 font-size: 16px;
                 border-radius: 0;
                 min-width: 300px;

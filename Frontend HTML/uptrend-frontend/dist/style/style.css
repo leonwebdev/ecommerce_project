@@ -27,12 +27,35 @@ ul {
 
 .btn {
   font-size: 18px;
-  background-color: #707070;
-  border: 1px solid #707070;
   padding: 20px;
-  color: #fff;
+  text-align: center;
   transition: all 300ms ease-in-out;
   -webkit-transition: all 300ms ease-in-out;
+}
+.btn.btn_black {
+  color: #fff;
+  background-color: #707070;
+}
+.btn.btn_black:hover {
+  color: #fff;
+  background-color: #1E1E1E;
+}
+.btn.btn_white {
+  background-color: #fff;
+  color: #707070;
+  border: 1px solid #707070;
+}
+.btn.btn_white:hover {
+  background-color: #707070;
+  color: #fff;
+}
+.btn.btn_white_no_border {
+  background-color: #fff;
+  color: #707070;
+  border-bottom: 1px solid #fff;
+}
+.btn.btn_white_no_border:hover {
+  border-bottom: 1px solid #707070;
 }
 
 .container {
@@ -86,6 +109,23 @@ ul {
 }
 .nav_bar .utils {
   width: 190px;
+}
+.nav_bar .utils .icon {
+  position: relative;
+}
+.nav_bar .utils .icon .profile_dropdown {
+  display: none;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  padding: 30px;
+  position: absolute;
+  left: -100px;
+  min-width: 250px;
+}
+.nav_bar .utils .icon .profile_dropdown li {
+  margin-bottom: 10px;
+}
+.nav_bar .utils .icon .profile_dropdown li:last-of-type {
+  margin-bottom: 0;
 }
 
 /* =============== Breadcrumb =============== */
