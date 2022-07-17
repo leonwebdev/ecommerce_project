@@ -9,6 +9,7 @@
                     <p class="text-danger">whoami : {{ $whoami }}</p>
                     {{-- <p class="text-danger">{{ var_dump($users) }}</p> --}}
                     <p class="text-primary">{{ $users }}</p>
+                    <p class="text-success">{{ $shipping_charge }}</p>
                 </div>
             </div>
         </div>

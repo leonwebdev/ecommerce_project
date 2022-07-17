@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Shipping_charge;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -31,6 +32,7 @@ class HomeController extends Controller
     {
         $whoami = exec('whoami');
         $users = User::all();
-        return view('test', compact('whoami', 'users'));
+        $shipping_charge = Shipping_charge::all();
+        return view('test', compact('whoami', 'users', 'shipping_charge'));
     }
 }
