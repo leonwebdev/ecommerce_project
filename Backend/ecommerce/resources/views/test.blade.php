@@ -12,6 +12,8 @@
                     <p class="text-success">{{ $shipping_charge }}</p>
                     <p class="text-warning">{{ $tax }}</p>
                     <p class="text-danger">{{ $inquiry }}</p>
+                    <p class="text-warning">{{ $user_address }}</p>
+                    <p class="text-success">{{ $user_1_address }}</p>
                 </div>
             </div>
         </div>
