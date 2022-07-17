@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Inquiry;
 use App\Models\Tax;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -35,6 +36,7 @@ class HomeController extends Controller
         $users = User::all();
         $shipping_charge = Shipping_charge::all();
         $tax = Tax::all();
-        return view('test', compact('whoami', 'users', 'shipping_charge', 'tax'));
+        $inquiry = Inquiry::all();
+        return view('test', compact('whoami', 'users', 'shipping_charge', 'tax', 'inquiry'));
     }
 }
