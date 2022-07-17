@@ -10,6 +10,7 @@
                     {{-- <p class="text-danger">{{ var_dump($users) }}</p> --}}
                     <p class="text-primary">{{ $users }}</p>
                     <p class="text-success">{{ $shipping_charge }}</p>
+                    <p class="text-warning">{{ $tax }}</p>
                 </div>
             </div>
         </div>

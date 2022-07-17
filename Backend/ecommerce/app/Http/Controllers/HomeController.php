@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Shipping_charge;
+use App\Models\Tax;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Models\Shipping_charge;
 
 class HomeController extends Controller
 {
@@ -15,7 +16,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        // $this->middleware('auth');
     }
 
     /**
@@ -33,6 +34,7 @@ class HomeController extends Controller
         $whoami = exec('whoami');
         $users = User::all();
         $shipping_charge = Shipping_charge::all();
-        return view('test', compact('whoami', 'users', 'shipping_charge'));
+        $tax = Tax::all();
+        return view('test', compact('whoami', 'users', 'shipping_charge', 'tax'));
     }
 }
