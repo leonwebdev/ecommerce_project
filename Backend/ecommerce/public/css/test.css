@@ -1,0 +1,18 @@
+.test_purpose {
+    color: rgb(165, 239, 63);
+}
+
+.test_purpose p.tglb + p {
+    display: none;
+}
+
+.test_purpose p.tglb {
+    color: rgb(255, 227, 44);
+    background-color: rgba(42, 163, 182, 0.316);
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.tglb {
+    text-transform: capitalize;
+}

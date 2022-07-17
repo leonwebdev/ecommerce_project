@@ -1,2 +1,4 @@
-/* import Bootstrap from Node_modules
-@import "~bootstrap/dist/css/bootstrap.css"; */
+/* --------- Import Test CSS----------------------
+---------------------------------------------- */
+
+@import "test.css";

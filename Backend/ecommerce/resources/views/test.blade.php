@@ -1,19 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
+    <div class="container test_purpose">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card bg-black">
-                    <p class="text-success">sadfsadfsadf</p>
                     <p class="text-danger">whoami : {{ $whoami }}</p>
-                    {{-- <p class="text-danger">{{ var_dump($users) }}</p> --}}
-                    <p class="text-primary">{{ $users }}</p>
-                    <p class="text-success">{{ $shipping_charge }}</p>
-                    <p class="text-warning">{{ $tax }}</p>
-                    <p class="text-danger">{{ $inquiry }}</p>
-                    <p class="text-warning">{{ $user_address }}</p>
-                    <p class="text-success">{{ $user_1_address }}</p>
+                    <div class="tgdiv"><p class="tglb">&#9658;User</p><p>{{ $users }}</p></div>
+                    <div class="tgdiv"><p class="tglb">&#9658;shipping_charge</p><p>{{ $shipping_charge }}</p></div>
+                    <div class="tgdiv"><p class="tglb">&#9658;tax</p><p>{{ $tax }}</p></div>
+                    <div class="tgdiv"><p class="tglb">&#9658;inquiry</p><p>{{ $inquiry }}</p></div>
+                    <div class="tgdiv"><p class="tglb">&#9658;user_address</p><p>{{ $user_address }}</p></div>
+                    <div class="tgdiv"><p class="tglb">&#9658;user_1_address</p><p>{{ $user_1_address }}</p></div>
                 </div>
             </div>
         </div>
