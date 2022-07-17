@@ -1,6 +1,195 @@
 @import '../../node_modules/bootstrap/scss/bootstrap.scss';
 
-body {
-    font-size: 16px;
-    font-family: 'Courier New', Courier, monospace;
+* {
+	box-sizing: border-box;
+}
+
+html, body {
+	margin: 0;
+	padding: 0;
+	font-family: 'Outfit', sans-serif;
+	font-weight: 300;
+	color: #707070;
+}
+
+a {
+	color: #707070;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #1E1E1E;
+}
+
+ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+/* =============== General =============== */
+.wrapper {
+	width: 100%;
+	max-width: 1280px;
+	margin: 0 auto;
+	padding: 0 20px;
+}
+
+.icon {
+	display: inline-block;
+	vertical-align: top;
+	padding: 24px 5px;
+    a {
+        display: block;
+        padding: 10px;
+    }
+}
+
+/* =============== Navbar =============== */
+.nav_bar {
+	padding: 40px 0;
+
+    .wrapper > div,
+    .wrapper > nav {
+        display: inline-block;
+        vertical-align: top;
+    }
+
+    .wrapper {
+        nav, .utils {
+            margin-left: 40px;
+        }
+
+        nav {
+            width: calc(100% - 100px - 190px - 90px);
+
+            ul li {
+                display: inline-block;
+                padding: 20px 30px;
+
+                a {
+                    padding: 20px;
+                    display: block;
+                    font-size: 18px;
+                }
+            }
+        }
+    }
+
+    .logo {
+        width: 100px;
+    }
+
+    .utils {
+        width: 190px;
+    }
+}
+
+/* =============== Breadcrumb =============== */
+.breadcrumb {
+	padding: 40px 0;
+
+    span {
+        margin-right: 15px;
+    }
+}
+
+/* =============== Sidebar =============== */
+aside  {
+    form {
+        margin-bottom: 40px;
+
+        > div {
+            padding: 5px 0;
+        }
+
+        label, input {
+            cursor: pointer;
+        }
+    }
+}
+
+/* =============== Footer =============== */
+footer {
+	background-color: #F8F8F8;
+	text-align: center;
+	padding: 35px 0;
+
+    .footer_menu {
+        ul li {
+            display: inline-block;
+	        vertical-align: top;
+
+            a {
+                display: block;
+                padding: 30px 20px;
+            }
+        }
+    }
+}
+
+/* =============== Product List page =============== */
+.list_page {
+	margin-bottom: 60px;
+}
+
+aside,
+.list_item {
+	display: inline-block;
+	vertical-align: top;
+}
+
+aside {
+	width: 250px;
+	margin-right: 40px;
+}
+
+.list_item {
+	width: calc(100% - 250px - 45px);
+
+    .content {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+
+        .item {
+            flex: 0 0 33.333333%;
+            padding: 0 20px; 
+            margin-bottom: 30px;
+
+            .product_img {
+                position: relative;
+
+                a {
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                    left: 0;
+                    top: 0;
+                    transition: all 300ms ease-in-out;
+
+                    &:hover {
+                        background-color: rgba(0,0,0,.1);
+                    }
+                }
+
+                img {
+                    width: 100%;
+                    height: auto;
+                }
+            }
+
+            .desc {
+                p {
+                    margin: 10px 0;
+                }
+
+                .price {
+                    text-align: right;
+                    font-weight: 400;
+                }
+            }
+
+        }
+    }
 }
