@@ -47,4 +47,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Define Table Relationship, One User can have many User_address
+     */
+    public function user_address()
+    {
+        return $this->hasMany(User_address::class, 'user_id');
+    }
 }
