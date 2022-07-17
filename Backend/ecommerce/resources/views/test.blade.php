@@ -12,6 +12,7 @@
                     <div class="tgdiv"><p class="tglb">&#9658;inquiry</p><p>{{ $inquiry }}</p></div>
                     <div class="tgdiv"><p class="tglb">&#9658;user_address</p><p>{{ $user_address }}</p></div>
                     <div class="tgdiv"><p class="tglb">&#9658;user_1_address</p><p>{{ $user_1_address }}</p></div>
+                    <div class="tgdiv"><p class="tglb">&#9658;order</p><p>{{ $order }}</p></div>
                 </div>
             </div>
         </div>
