@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Order_variant;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -27,5 +28,6 @@ class DatabaseSeeder extends Seeder
         $this->call(UserAddressTableSeeder::class);
         $this->call(OrderTableSeeder::class);
         $this->call(TransactionTableSeeder::class);
+        $this->call(OrderVariantTableSeeder::class);
     }
 }

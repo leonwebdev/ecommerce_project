@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Inquiry;
 use App\Models\Order;
+use App\Models\Order_variant;
 use App\Models\Tax;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -44,6 +45,7 @@ class HomeController extends Controller
         $user_1_address = User::find(1)->user_address;
         $order = Order::all();
         $transaction = Transaction::all();
+        $order_variant = Order_variant::all();
         // dd($user_1_address);
         return view('test', compact(
             'whoami',
@@ -55,6 +57,7 @@ class HomeController extends Controller
             'user_1_address',
             'order',
             'transaction',
+            'order_variant',
         ));
     }
 }
