@@ -9,6 +9,7 @@ use App\Models\Tax;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Shipping_charge;
+use App\Models\Size;
 use App\Models\Transaction;
 use App\Models\User_address;
 use App\Models\Variant;
@@ -48,6 +49,7 @@ class HomeController extends Controller
         $transaction = Transaction::all();
         $order_variant = Order_variant::all();
         $variant = Variant::all();
+        $size = Size::all();
         // dd($user_1_address);
         return view('test', compact(
             'whoami',
@@ -61,6 +63,7 @@ class HomeController extends Controller
             'transaction',
             'order_variant',
             'variant',
+            'size',
         ));
     }
 }
