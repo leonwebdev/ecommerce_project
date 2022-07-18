@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use App\Models\Shipping_charge;
 use App\Models\Transaction;
 use App\Models\User_address;
+use App\Models\Variant;
 
 class HomeController extends Controller
 {
@@ -46,6 +47,7 @@ class HomeController extends Controller
         $order = Order::all();
         $transaction = Transaction::all();
         $order_variant = Order_variant::all();
+        $variant = Variant::all();
         // dd($user_1_address);
         return view('test', compact(
             'whoami',
@@ -58,6 +60,7 @@ class HomeController extends Controller
             'order',
             'transaction',
             'order_variant',
+            'variant',
         ));
     }
 }
