@@ -26,5 +26,6 @@ class DatabaseSeeder extends Seeder
         $this->call(InquiryTableSeeder::class);
         $this->call(UserAddressTableSeeder::class);
         $this->call(OrderTableSeeder::class);
+        $this->call(TransactionTableSeeder::class);
     }
 }

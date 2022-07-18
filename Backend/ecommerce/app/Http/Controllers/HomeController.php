@@ -8,6 +8,7 @@ use App\Models\Tax;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Shipping_charge;
+use App\Models\Transaction;
 use App\Models\User_address;
 
 class HomeController extends Controller
@@ -42,6 +43,7 @@ class HomeController extends Controller
         $user_address = User_address::all();
         $user_1_address = User::find(1)->user_address;
         $order = Order::all();
+        $transaction = Transaction::all();
         // dd($user_1_address);
         return view('test', compact(
             'whoami',
@@ -52,6 +54,7 @@ class HomeController extends Controller
             'user_address',
             'user_1_address',
             'order',
+            'transaction',
         ));
     }
 }

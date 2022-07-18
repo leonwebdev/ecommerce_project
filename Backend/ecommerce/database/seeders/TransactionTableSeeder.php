@@ -6,7 +6,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-class TaxTableSeeder extends Seeder
+class TransactionTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,11 +15,11 @@ class TaxTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('taxes')->insert([
-            'province' => 'BC',
-            'gst' => 0.05,
-            'pst' => 0.07,
-            'vat' => 0,
+        DB::table('transactions')->insert([
+            'order_id' => 1,
+            'response' => '200',
+            'status' => '200',
+            'credit_card_info' => '0356',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
