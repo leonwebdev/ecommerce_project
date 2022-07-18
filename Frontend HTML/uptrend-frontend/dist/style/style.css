@@ -278,6 +278,10 @@ aside {
   max-width: 700px;
   margin: 0 auto;
 }
+.form#login {
+  max-width: 700px;
+  margin: 60px auto 0;
+}
 .form h1 {
   text-align: center;
   margin-bottom: 60px;
