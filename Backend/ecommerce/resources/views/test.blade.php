@@ -24,4 +24,7 @@
             </div>
         </div>
     </div>
+    <div id="collapse_all_button_div">
+        <button id="collapse_all" class="btn btn-danger">Collapse All</button>
+    </div>
 @endsection
