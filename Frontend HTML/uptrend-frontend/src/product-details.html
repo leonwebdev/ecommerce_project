@@ -1,0 +1,54 @@
+<partial src="_header.html" title="Product Details"></partial>
+
+<!-- Breadcrumb start -->
+<div class="breadcrumb">
+    <div class="wrapper">
+        <span><a href="#">All Outfit</a></span>
+        <span>&#62;</span>
+        <span><a href="#">Women</a></span>
+        <span>&#62;</span>
+        <span><a href="#">Top</a></span>
+        <span>&#62;</span>
+        <span>Vivamus suscipit tortor eget felis</span>
+    </div>
+</div><!-- Breadcrumb end -->
+
+<div class="container details_page">
+    <div class="wrapper">
+        <div class="content">
+            <div class="left">
+                <div class="product_image">
+                    <img src="assets/images/item1.jpg" alt="item1">
+                </div>
+            </div>
+            <div class="right">
+                <h1>Vivamus suscipit tortor eget felis [product name]</h1>
+                <div class="product_desc">
+                    <div class="price">$38.00 CAD</div>
+                    <div class="color">White</div>
+                    <div class="availability">
+                        <img src="assets/images/icon-unavailable.svg" alt="unavailable icon" width="17" height="17"> 
+                        <span>Currently unavailable (show when out of stock)</span>
+                    </div>
+                    <!-- display: none; the <select> tag when all out of stock -->
+                    <div class="select_size">
+                        <select name="size">
+                            <option value="">Select size</option>
+                            <option value="xxl">XLL</option>
+                            <option value="xl">XL</option>
+                            <option value="l">l</option>
+                            <option value="s">S</option>
+                            <option value="xs">XS</option>
+                        </select>
+                    </div>
+                    <div>
+                         <!-- disable the button for clicking when out of stock  -->
+                        <a class="btn btn_black" href="#">Add to bag</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<partial src="_footer.html"></partial>
