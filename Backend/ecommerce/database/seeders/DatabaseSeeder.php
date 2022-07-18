@@ -30,5 +30,6 @@ class DatabaseSeeder extends Seeder
         $this->call(TransactionTableSeeder::class);
         $this->call(OrderVariantTableSeeder::class);
         $this->call(VariantTableSeeder::class);
+        $this->call(SizeTableSeeder::class);
     }
 }
