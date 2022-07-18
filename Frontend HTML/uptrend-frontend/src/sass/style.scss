@@ -3,8 +3,11 @@
 
 $font-family-primary: 'Outfit', sans-serif;
 $font-weight-primary: 300;
+$font-weight-title: 400;
 $color-primary: #707070;
 $color-primary-hover: #1E1E1E;
+$color-important: #e04c41;
+$color-error: #e04c41;
 
 * {
 	box-sizing: border-box;
@@ -16,6 +19,10 @@ html, body {
 	font-family: $font-family-primary;
 	font-weight: $font-weight-primary;
 	color: $color-primary;
+}
+
+h1 {
+    font-weight: $font-weight-title;
 }
 
 a {
@@ -31,6 +38,16 @@ ul {
 	margin: 0;
 	padding: 0;
 	list-style: none;
+}
+
+input, select, textarea, button {
+    &:focus {
+        outline: none;
+    }
+}
+
+button {
+    cursor: pointer;
 }
 
 .btn {
@@ -314,6 +331,85 @@ $details-left-margin: 40px;
                     line-height: 1.2em;
                 }
             }
+        }
+    }
+}
+
+/* =============== Form page =============== */
+$form-label-width: 150px;
+$form-label-margin: 30px;
+
+.form {
+    &#register {
+        max-width: 700px;
+        margin: 0 auto;
+    }
+    h1 {
+        text-align: center;
+        margin-bottom: 60px;
+    }
+    a {
+        text-decoration: underline;
+    }
+    form {
+        p {
+            margin-bottom: 20px;
+        }
+        p.required {
+            label {
+                position: relative;
+                &:after {
+                    content: '*';
+                    display: inline-block;
+                    position: absolute;
+                    color: $color-important;
+                    font-weight: 400;
+                    right: -12px;
+                }
+            }
+        }
+        label {
+            display: inline-block;
+            width: $form-label-width;
+            text-align: right;
+            margin-right: $form-label-margin;
+        }
+       
+        input:not([type="checkbox"]) {
+            line-height: 2.2em;
+            padding: 5px;
+            font-size: 16px;
+            width: calc(100% - $form-label-width - $form-label-margin - 5px);
+            border-radius: 0;
+            border: 1px solid $color-primary;
+        }
+        p.terms {
+            input {
+                margin-left: calc($form-label-width + $form-label-margin);
+            }
+            label {
+                width: auto;
+            }
+        }
+        
+        span {
+            &.error {
+                color: $color-error;
+                display: block;
+                margin-left: calc($form-label-width + $form-label-margin);
+                line-height: 1.5em;
+            }
+        }
+        .highlight {
+            color: $color-important;
+            margin-left: calc($form-label-width + $form-label-margin);
+            text-align: right;
+        }
+
+        button {
+            min-width: 250px;
+            margin: 40px auto 0;
+            display: block;
         }
     }
 }

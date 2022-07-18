@@ -1,0 +1,96 @@
+<partial src="_header.html" title="Products"></partial>
+
+<div class="container">
+    <div class="wrapper">
+        <div class="content form" id="register">
+            <h1>Register</h1>
+
+            <form method="post" novalidate>
+                <p class="required">
+                    <label for="first_name">First Name</label>
+                    <input type="text" id="first_name" name="first_name" value="" />
+                    <span class="error">[error message]</span>
+                </p>
+                
+                <p class="required">
+                    <label for="last_name">Last Name</label>
+                    <input type="text" id="last_name" name="last_name" value=""/>
+                    <span class="error">[error message]</span>
+                </p>
+
+                <p class="required">
+                    <label for="email">Email</label>
+                    <input type="text" id="email" name="email" value=""/>
+                    <span class="error">[error message]</span>
+                </p>
+
+                <!-- <p class="required">
+                    <label for="street">Street</label>
+                    <input type="text" id="street" name="street" value="" />
+                    <span class="error">[error message]</span>
+                </p>
+
+                <p class="required">
+                    <label for="city">City</label>
+                    <input type="text" id="city" name="city" value="" />
+                    <span class="error">[error message]</span>
+                </p>
+
+                <p class="required">
+                    <label for="postal_code">Postal Code</label>
+                    <input type="text" id="postal_code" name="postal_code" value="" />
+                    <span class="error">[error message]</span>
+                </p>
+
+                <p class="required">
+                    <label for="province">Province</label>
+                    <input type="text" id="province" name="province" value="" />
+                    <span class="error">[error message]</span>
+                </p>
+
+                <p class="required">
+                    <label for="country">Country</label>
+                    <input type="text" id="country" name="country" value="" />
+                    <span class="error">[error message]</span>
+                </p> -->
+
+                <p>
+                    <label for="phone">Phone</label>
+                    <input type="text" id="phone" name="phone" value="" />
+                    <!-- <span class="error">[error message]</span> -->
+                </p>
+
+                <p class="required">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" />
+                    <span class="error">[error message]</span>
+                </p>
+
+                <p class="required">
+                    <label for="confirm_password">Confirm Password</label>
+                    <input type="password" id="confirm_password" name="confirm_password" />
+                    <span class="error">[error message]</span>
+                </p>
+
+                <p class="required terms">
+                    <input type="checkbox" name="terms" id="terms" />
+                    <label for="terms">I accept the 
+                        <a href="#" target="_blank">Terms of Use</a> & 
+                        <a href="#" target="_blank">Privacy Policy</a> .
+                    </label>
+                    <span class="error">[error message]</span>
+                </p>
+                
+                <p>
+                    <button class="btn btn_white">Register</button>
+                </p>
+
+                <p class="highlight">* Required fields.</p>
+
+            </form>
+        </div>
+
+    </div>
+</div>
+
+<partial src="_footer.html"></partial>
