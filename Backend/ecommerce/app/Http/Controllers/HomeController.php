@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Inquiry;
 use App\Models\Order;
 use App\Models\Order_variant;
 use App\Models\Product;
+use App\Models\Product_media;
 use App\Models\Tax;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -52,6 +54,8 @@ class HomeController extends Controller
         $variant = Variant::all();
         $size = Size::all();
         $products = Product::all();
+        $product_media = Product_media::all();
+        $categories = Category::all();
         // dd($user_1_address);
         return view('test', compact(
             'whoami',
@@ -67,6 +71,8 @@ class HomeController extends Controller
             'variant',
             'size',
             'products',
+            'product_media',
+            'categories',
         ));
     }
 }

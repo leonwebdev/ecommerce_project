@@ -1,0 +1,336 @@
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: "Outfit", sans-serif;
+  font-weight: 300;
+  color: #707070;
+}
+
+h1 {
+  font-weight: 400;
+}
+
+a {
+  color: #707070;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #1E1E1E;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+input:focus, select:focus, textarea:focus, button:focus {
+  outline: none;
+}
+
+.col {
+  display: inline-block;
+  vertical-align: top;
+  margin: 0 10px;
+}
+.col.col-5 {
+  width: calc(41.6666666667% - 20px - 2px);
+}
+.col.col-6 {
+  width: calc(50% - 20px - 2px);
+}
+.col.col-7 {
+  width: calc(58.3333333333% - 20px - 2px);
+}
+
+button {
+  cursor: pointer;
+}
+
+.btn {
+  font-size: 18px;
+  padding: 20px;
+  text-align: center;
+  transition: all 300ms ease-in-out;
+  -webkit-transition: all 300ms ease-in-out;
+}
+.btn.btn_black {
+  color: #fff;
+  background-color: #707070;
+}
+.btn.btn_black:hover {
+  color: #fff;
+  background-color: #1E1E1E;
+}
+.btn.btn_white {
+  background-color: #fff;
+  color: #707070;
+  border: 1px solid #707070;
+}
+.btn.btn_white:hover {
+  background-color: #707070;
+  color: #fff;
+}
+.btn.btn_white_no_border {
+  background-color: #fff;
+  color: #707070;
+  border-bottom: 1px solid #fff;
+}
+.btn.btn_white_no_border:hover {
+  border-bottom: 1px solid #707070;
+}
+
+.container {
+  margin-bottom: 60px;
+}
+
+/* =============== General =============== */
+.wrapper {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.icon {
+  display: inline-block;
+  vertical-align: top;
+  padding: 24px 5px;
+}
+.icon a {
+  display: block;
+  padding: 10px;
+}
+
+/* =============== Navbar =============== */
+.nav_bar {
+  padding: 40px 0;
+}
+.nav_bar .wrapper > div,
+.nav_bar .wrapper > nav {
+  display: inline-block;
+  vertical-align: top;
+}
+.nav_bar .wrapper nav, .nav_bar .wrapper .utils {
+  margin-left: 40px;
+}
+.nav_bar .wrapper nav {
+  width: calc(100% - 100px - 190px - 90px);
+}
+.nav_bar .wrapper nav ul li {
+  display: inline-block;
+  padding: 20px 30px;
+}
+.nav_bar .wrapper nav ul li a {
+  padding: 20px;
+  display: block;
+  font-size: 18px;
+}
+.nav_bar .logo {
+  width: 100px;
+}
+.nav_bar .utils {
+  width: 190px;
+}
+.nav_bar .utils .icon {
+  position: relative;
+}
+.nav_bar .utils .icon .profile_dropdown {
+  display: none;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  padding: 30px;
+  position: absolute;
+  left: -100px;
+  min-width: 250px;
+}
+.nav_bar .utils .icon .profile_dropdown li {
+  margin-bottom: 10px;
+}
+.nav_bar .utils .icon .profile_dropdown li:last-of-type {
+  margin-bottom: 0;
+}
+
+/* =============== Breadcrumb =============== */
+.breadcrumb {
+  padding: 40px 0;
+}
+.breadcrumb span {
+  margin-right: 15px;
+}
+
+/* =============== Sidebar =============== */
+aside form {
+  margin-bottom: 40px;
+}
+aside form > div {
+  padding: 5px 0;
+}
+aside form label, aside form input {
+  cursor: pointer;
+}
+
+/* =============== Footer =============== */
+footer {
+  background-color: #F8F8F8;
+  text-align: center;
+  padding: 35px 0;
+}
+footer .footer_menu ul li {
+  display: inline-block;
+  vertical-align: top;
+}
+footer .footer_menu ul li a {
+  display: block;
+  padding: 30px 20px;
+}
+
+/* =============== Product List page =============== */
+aside,
+.list_item {
+  display: inline-block;
+  vertical-align: top;
+}
+
+aside {
+  width: 250px;
+  margin-right: 40px;
+}
+
+.list_item {
+  width: calc(100% - 250px - 40px - 5px);
+}
+.list_item .content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.list_item .content .item {
+  flex: 0 0 33.333333%;
+  padding: 0 20px;
+  margin-bottom: 30px;
+}
+.list_item .content .item .product_img {
+  position: relative;
+}
+.list_item .content .item .product_img a {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  transition: all 300ms ease-in-out;
+  -webkit-transition: all 300ms ease-in-out;
+}
+.list_item .content .item .product_img a:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.list_item .content .item .product_img img {
+  width: 100%;
+  height: auto;
+}
+.list_item .content .item .desc p {
+  margin: 10px 0;
+}
+.list_item .content .item .desc .price {
+  text-align: right;
+  font-weight: 400;
+}
+
+/* =============== Product Details page =============== */
+.details_page .content {
+  padding: 0 60px;
+}
+.details_page h1 {
+  font-size: 28px;
+}
+.details_page .price {
+  font-size: 20px;
+}
+.details_page .left, .details_page .right {
+  display: inline-block;
+  vertical-align: top;
+}
+.details_page .left {
+  width: 400px;
+  margin-right: 40px;
+}
+.details_page .left .product_image img {
+  width: 100%;
+  height: auto;
+}
+.details_page .right {
+  width: calc(100% - 400px - 40px - 5px);
+}
+.details_page .right .product_desc > div {
+  margin-bottom: 20px;
+}
+.details_page .right .product_desc select {
+  padding: 20px 15px;
+  color: #707070;
+  font-size: 16px;
+  border-radius: 0;
+  min-width: 300px;
+}
+.details_page .right .product_desc a {
+  display: inline-block;
+  min-width: 300px;
+  text-align: center;
+}
+.details_page .right .product_desc .availability {
+  vertical-align: middle;
+}
+.details_page .right .product_desc .availability span {
+  line-height: 1.2em;
+}
+
+/* =============== Form page =============== */
+.form#register {
+  max-width: 700px;
+  margin: 0 auto;
+}
+.form#login {
+  max-width: 400px;
+  margin: 60px auto 0;
+}
+.form h1 {
+  text-align: center;
+  margin-bottom: 60px;
+}
+.form a {
+  text-decoration: underline;
+}
+.form form p {
+  margin-bottom: 20px;
+}
+.form form input:not([type=checkbox]) {
+  line-height: 2.2em;
+  padding: 10px;
+  font-size: 16px;
+  width: 100%;
+  border-radius: 0;
+  border: none;
+  border-bottom: 1px solid #9e9e9e;
+}
+.form form p.terms {
+  text-align: center;
+}
+.form form span.error {
+  color: #e04c41;
+  display: block;
+  margin-left: 10px;
+  line-height: 1.5em;
+}
+.form form .highlight {
+  color: #e04c41;
+  text-align: center;
+}
+.form form button {
+  min-width: 250px;
+  margin: 40px auto 0;
+  display: block;
+}
