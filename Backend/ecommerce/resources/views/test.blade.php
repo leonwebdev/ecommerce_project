@@ -18,6 +18,7 @@
                     <div class="tgdiv"><p class="tglb">&#9658;variant</p><p>{{ $variant }}</p></div>
                     <div class="tgdiv"><p class="tglb">&#9658;size</p><p>{{ $size }}</p></div>
                     <div class="tgdiv"><p class="tglb">&#9658;product</p><p>{{ $products }}</p></div>
+                    <div class="tgdiv"><p class="tglb">&#9658;product_media</p><p>{{ $product_media }}</p></div>
                 </div>
             </div>
         </div>
