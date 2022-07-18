@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Inquiry;
 use App\Models\Order;
 use App\Models\Order_variant;
+use App\Models\Product;
 use App\Models\Tax;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -50,6 +51,7 @@ class HomeController extends Controller
         $order_variant = Order_variant::all();
         $variant = Variant::all();
         $size = Size::all();
+        $products = Product::all();
         // dd($user_1_address);
         return view('test', compact(
             'whoami',
@@ -64,6 +66,7 @@ class HomeController extends Controller
             'order_variant',
             'variant',
             'size',
+            'products',
         ));
     }
 }
