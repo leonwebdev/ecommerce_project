@@ -53,16 +53,19 @@ input:focus, select:focus, textarea:focus, button:focus {
 .col {
   display: inline-block;
   vertical-align: top;
-  margin: 0 10px;
+  padding: 0 10px;
 }
 .col.col-5 {
-  width: calc(41.6666666667% - 20px - 2px);
+  width: calc((100% - 4px) / 12 * 5);
 }
 .col.col-6 {
-  width: calc(50% - 20px - 2px);
+  width: calc((100% - 4px) / 12 * 6);
 }
 .col.col-7 {
-  width: calc(58.3333333333% - 20px - 2px);
+  width: calc((100% - 4px) / 12 * 7);
+}
+.col.col-12 {
+  width: 100%;
 }
 
 button {
@@ -324,6 +327,20 @@ aside {
 .form form p {
   margin-bottom: 20px;
 }
+.form form p.terms {
+  text-align: center;
+}
+.form form p.required {
+  position: relative;
+}
+.form form p.required:after {
+  content: "*";
+  position: absolute;
+  display: inline-block;
+  right: 0;
+  top: 0;
+  color: #e04c41;
+}
 .form form input:not([type=checkbox]) {
   line-height: 2.2em;
   padding: 10px;
@@ -333,9 +350,6 @@ aside {
   border: none;
   border-bottom: 1px solid #9e9e9e;
 }
-.form form p.terms {
-  text-align: center;
-}
 .form form span.error {
   color: #e04c41;
   display: block;
@@ -344,7 +358,7 @@ aside {
 }
 .form form .highlight {
   color: #e04c41;
-  text-align: center;
+  text-align: left;
 }
 .form form button {
   min-width: 250px;
