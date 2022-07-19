@@ -23,3 +23,8 @@ Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/test', [HomeController::class, 'test']);
+
+require __DIR__ . '/dhruval-route.php';
+require __DIR__ . '/lihang-route.php';
+require __DIR__ . '/jenny-route.php';
+require __DIR__ . '/lakshita-route.php';
