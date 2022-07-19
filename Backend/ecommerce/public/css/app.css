@@ -2,6 +2,15 @@
 ---------------------------------------------- */
 
 @import "test.css";
+
+/* --------- Import Individual CSS----------------------
+---------------------------------------------- */
+
+@import "dhruval.css";
+@import "jenny.css";
+@import "lakshita.css";
+@import "lihang.css";
+
 * {
     box-sizing: border-box;
 }
