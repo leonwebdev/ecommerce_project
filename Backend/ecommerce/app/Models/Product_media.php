@@ -16,4 +16,12 @@ class Product_media extends Model
         'label',
         'image',
     ];
+
+    /**
+     * Define Relationship, One Product_media can belongs To One Product
+     */
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
 }

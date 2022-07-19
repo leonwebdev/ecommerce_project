@@ -27,5 +27,12 @@ class CategoryTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+        DB::table('categories')->insert([
+            'title' => 'Leisure',
+            'image' => 'ccxdfe445644ds.jpg',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
     }
 }

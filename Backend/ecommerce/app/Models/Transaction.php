@@ -17,4 +17,12 @@ class Transaction extends Model
         'status',
         'credit_card_info',
     ];
+
+    /**
+     * Define Relationship, One Transaction can belongs To one Order
+     */
+    public function order()
+    {
+        return $this->belongsTo(Order::class);
+    }
 }

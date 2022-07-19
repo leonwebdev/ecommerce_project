@@ -28,11 +28,13 @@ class DatabaseSeeder extends Seeder
         $this->call(UserAddressTableSeeder::class);
         $this->call(OrderTableSeeder::class);
         $this->call(TransactionTableSeeder::class);
-        $this->call(OrderVariantTableSeeder::class);
-        $this->call(VariantTableSeeder::class);
         $this->call(SizeTableSeeder::class);
         $this->call(ProductTableSeeder::class);
         $this->call(ProductMediaTableSeeder::class);
         $this->call(CategoryTableSeeder::class);
+        $this->call(GenderTableSeeder::class);
+        $this->call(AdvertisementTableSeeder::class);
+        $this->call(CategoryProductTableSeeder::class);
+        $this->call(OrderProductTableSeeder::class);
     }
 }

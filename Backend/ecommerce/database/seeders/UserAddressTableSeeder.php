@@ -17,7 +17,7 @@ class UserAddressTableSeeder extends Seeder
     {
         DB::table('user_addresses')->insert([
             'user_id' => '1',
-            'address' => '78 Good Ave',
+            'street' => '78 Good Ave',
             'city' => 'Winnipeg',
             'province' => 'Manitoba',
             'country' => 'Canada',
@@ -27,7 +27,7 @@ class UserAddressTableSeeder extends Seeder
         ]);
         DB::table('user_addresses')->insert([
             'user_id' => '2',
-            'address' => '135 Main Street',
+            'street' => '135 Main Street',
             'city' => 'Ottawa',
             'province' => 'Ontario',
             'country' => 'Canada',

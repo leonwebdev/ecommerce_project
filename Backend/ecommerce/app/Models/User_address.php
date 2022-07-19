@@ -13,7 +13,7 @@ class User_address extends Model
 
     protected $fillable = [
         'user_id',
-        'address',
+        'street',
         'city',
         'province',
         'country',
@@ -25,6 +25,6 @@ class User_address extends Model
      */
     public function user()
     {
-        return $this->belongsTo(User::class, 'default_address_id');
+        return $this->belongsTo(User::class);
     }
 }
