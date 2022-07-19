@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\Pivot;
 
 class Category extends Model
 {
@@ -15,4 +16,12 @@ class Category extends Model
         'title',
         'image',
     ];
+
+    /**
+     * Define Relationship, One Category can have many Product
+     */
+    public function products()
+    {
+        return $this->belongsToMany(Product::class);
+    }
 }

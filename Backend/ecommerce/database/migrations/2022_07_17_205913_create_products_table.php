@@ -16,16 +16,15 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('summary', 255);
-            $table->text('description');
+            $table->string('name', 255);
+            $table->string('slug', 255);
+            $table->string('color', 255);
+            $table->text('summary');
+            $table->longText('description');
             $table->decimal('price');
-            $table->enum('gender', [
-                "women",
-                "men",
-                "girl",
-                "boy",
-            ]);
+            $table->integer('quantity');
+            $table->integer('gender_id');
+            $table->integer('size_id');
             $table->softDeletes();
             $table->timestamps();
         });

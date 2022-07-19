@@ -6,7 +6,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-class ProductMediaTableSeeder extends Seeder
+class GenderTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,27 +15,25 @@ class ProductMediaTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('product_media')->insert([
-            'product_id' => 1,
-            'label' => 'dress',
-            'image' => '1asdfavyjmyj.jpg',
+        DB::table('genders')->insert([
+            'name' => 'women',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
-        DB::table('product_media')->insert([
-            'product_id' => 1,
-            'label' => 'coat',
-            'image' => 'yhnnuikuolsef.jpg',
+        DB::table('genders')->insert([
+            'name' => 'men',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
-        DB::table('product_media')->insert([
-            'product_id' => 2,
-            'label' => 'pants',
-            'image' => 'wf4dweradayuj.jpg',
+        DB::table('genders')->insert([
+            'name' => 'girl',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
-
+        DB::table('genders')->insert([
+            'name' => 'boy',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
     }
 }

@@ -51,8 +51,18 @@ class User extends Authenticatable
     /**
      * Define Table Relationship, One User can have many User_address
      */
-    public function user_address()
+    public function user_addresses()
     {
-        return $this->hasMany(User_address::class, 'user_id');
+        return $this->hasMany(User_address::class);
     }
+
+    /**
+     * Define Table Relationship, One User can have many Order
+     */
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
+
 }

@@ -14,4 +14,12 @@ class Size extends Model
     protected $fillable = [
         'name',
     ];
+
+    /**
+     * Define Relationship, One Size can have many Product
+     */
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
 }

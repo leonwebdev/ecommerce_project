@@ -6,7 +6,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-class OrderVariantTableSeeder extends Seeder
+class OrderProductTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,12 +15,13 @@ class OrderVariantTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('order_variants')->insert([
+        DB::table('order_product')->insert([
             'order_id' => 1,
-            'variant_id' => 1,
-            'price' => 3,
+            'product_id' => 1,
+            'unit_price' => 1,
             'quantity' => 1,
-            'product_name' => 'Girl Dress L',
+            'line_price' => 1,
+            'product_name' => 'Default Product Name',
             'created_at' => now(),
             'updated_at' => now(),
         ]);

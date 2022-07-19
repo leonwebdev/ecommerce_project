@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Inquiry;
 use App\Models\Order;
-use App\Models\Order_variant;
 use App\Models\Product;
 use App\Models\Product_media;
 use App\Models\Tax;
@@ -15,7 +14,6 @@ use App\Models\Shipping_charge;
 use App\Models\Size;
 use App\Models\Transaction;
 use App\Models\User_address;
-use App\Models\Variant;
 
 class HomeController extends Controller
 {
@@ -45,18 +43,20 @@ class HomeController extends Controller
         $users = User::all();
         $shipping_charge = Shipping_charge::all();
         $tax = Tax::all();
-        $inquiry = Inquiry::all();
+        $inquiry = Inquiry::find(1);
         $user_address = User_address::all();
-        $user_1_address = User::find(1)->user_address;
+        $user_1_address = User::find(1)->user_addresses;
         $order = Order::all();
         $transaction = Transaction::all();
-        $order_variant = Order_variant::all();
-        $variant = Variant::all();
         $size = Size::all();
         $products = Product::all();
         $product_media = Product_media::all();
         $categories = Category::all();
-        // dd($user_1_address);
+        $user_1_order = User::find(1)->orders;
+        $product_1_category = Product::find(1)->categories;
+        $order_1_products = Order::find(1)->products;
+        // var_dump($user_1_address);
+        // die();
         return view('test', compact(
             'whoami',
             'users',
@@ -67,12 +67,13 @@ class HomeController extends Controller
             'user_1_address',
             'order',
             'transaction',
-            'order_variant',
-            'variant',
             'size',
             'products',
             'product_media',
             'categories',
+            'user_1_order',
+            'product_1_category',
+            'order_1_products',
         ));
     }
 }

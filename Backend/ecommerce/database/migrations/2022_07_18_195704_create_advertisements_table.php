@@ -5,7 +5,6 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-
 return new class extends Migration
 {
     /**
@@ -15,13 +14,19 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('order_variants', function (Blueprint $table) {
+        Schema::create('advertisements', function (Blueprint $table) {
             $table->id();
-            $table->integer('order_id');
-            $table->integer('variant_id');
-            $table->decimal('price');
-            $table->integer('quantity');
-            $table->string('product_name', 255);
+            $table->string('image', 255);
+            $table->enum('pages', [
+                'all',
+                'home',
+                'product_list',
+            ]);
+            $table->enum('area', [
+                'top',
+                'bottom',
+                'sidebar',
+            ]);
             $table->softDeletes();
             $table->timestamps();
         });
@@ -34,6 +39,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('order_variants');
+        Schema::dropIfExists('advertisements');
     }
 };

@@ -6,16 +6,20 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Order_variant extends Model
+class Gender extends Model
 {
     use HasFactory;
     use SoftDeletes;
 
     protected $fillable = [
-        'order_id',
-        'variant_id',
-        'price',
-        'quantity',
-        'product_name',
+        'name',
     ];
+
+    /**
+     * Define Relationship, One Gender can belongs To many Product
+     */
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
 }
