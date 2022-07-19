@@ -34,11 +34,25 @@ a {
 a:hover {
 	color: $color-primary-hover;
 }
-
+.pheadline{
+    position:relative;
+    left:450px;
+    top:200px;
+    color:#fff;
+    font-weight:700px;
+    font-family:'Times New Roman', Times, serif;
+}
 ul {
 	margin: 0;
 	padding: 0;
 	list-style: none;
+}
+.imageabout{
+    width:100%;
+    height:400px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 input, select, textarea, button {
