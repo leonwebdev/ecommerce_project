@@ -1,19 +1,7 @@
 /* =============== Product List page =============== */
-$sidebar-width: 250px;
-$sidebar-margin: 40px;
-
-aside,
 .list_item {
-	display: inline-block;
+    display: inline-block;
 	vertical-align: top;
-}
-
-aside {
-	width: $sidebar-width;
-	margin-right: $sidebar-margin;
-}
-
-.list_item {
 	width: calc(100% - $sidebar-width - $sidebar-margin - 5px);
 
     .content {
