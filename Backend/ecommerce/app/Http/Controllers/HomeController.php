@@ -34,7 +34,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $title = 'ddd';
+        return view('home', compact(
+            'title',
+        ));
     }
 
     public function test()
@@ -55,6 +58,7 @@ class HomeController extends Controller
         $user_1_order = User::find(1)->orders;
         $product_1_category = Product::find(1)->categories;
         $order_1_products = Order::find(1)->products;
+        $title = "tets";
         // var_dump($user_1_address);
         // die();
         return view('test', compact(
@@ -74,6 +78,7 @@ class HomeController extends Controller
             'user_1_order',
             'product_1_category',
             'order_1_products',
+            'title',
         ));
     }
 }
