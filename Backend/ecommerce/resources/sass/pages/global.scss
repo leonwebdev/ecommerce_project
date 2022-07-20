@@ -1,12 +1,3 @@
-$font-family-primary: 'Outfit', sans-serif;
-$font-weight-primary: 300;
-$font-weight-title: 400;
-$color-primary: #707070;
-$color-light: #9e9e9e;
-$color-primary-hover: #1E1E1E;
-$color-important: #e04c41;
-$color-error: #e04c41;
-
 * {
 	box-sizing: border-box;
 }
@@ -61,18 +52,22 @@ input, select, textarea, button {
 .col {
     display: inline-block;
     vertical-align: top;
-    margin: 0 10px;
+    padding: 0 10px;
 
     &.col-5 {
-        width: calc(100% / 12 * 5 - 20px - 2px);
+        width: calc((100% - 4px) / 12 * 5);
     }
 
     &.col-6 {
-        width: calc(100% / 12 * 6 - 20px - 2px);
+        width: calc((100% - 4px) / 12 * 6);
     }
 
     &.col-7 {
-        width: calc(100% / 12 * 7 - 20px - 2px);
+        width: calc((100% - 4px) / 12 * 7);
+    }
+    
+    &.col-12 {
+        width: 100%;
     }
 }
 
@@ -148,6 +143,7 @@ button {
     }
 
     .wrapper {
+        position: relative;
         nav, .utils {
             margin-left: 40px;
         }
@@ -166,6 +162,49 @@ button {
                 }
             }
         }
+
+        .nav_dropdown {
+            background-color: #fff;
+            padding: 20px 40px;
+            position: absolute;
+            top: 80px;
+            left: 380px;
+            z-index: 9;
+            box-shadow: 1px 1px 10px rgba(0,0,0,.1);
+            display: none;
+
+            .nav_content {
+                display: flex;
+                flex-direction: row;
+                .nav_dropdown_title {
+                    font-size: 18px;
+                    font-weight: 400;
+                }
+
+                .nav_item {
+                    margin-right: 40px;
+                    padding: 0 10px;
+                    max-width: 160px;
+                    min-width: 100px;
+    
+                    ul {
+                        margin-top: 10px;
+                        li {
+                            padding: 10px;
+                        }
+                    }
+
+                }
+            } 
+        }
+
+        nav ul li a:hover {
+            + .nav_dropdown {
+                visibility: visible;
+                opacity: 1;
+                z-index: 999;
+            }
+        }
     }
 
     .logo {
@@ -179,6 +218,7 @@ button {
             position: relative;
             .profile_dropdown {
                 display: none;
+                background-color: #fff;
                 border: 1px solid rgba(0,0,0,.3);
                 padding: 30px;
                 position: absolute;
@@ -206,6 +246,10 @@ button {
 
 /* =============== Sidebar =============== */
 aside  {
+    display: inline-block;
+	vertical-align: top;
+	width: $sidebar-width;
+	margin-right: $sidebar-margin;
     form {
         margin-bottom: 40px;
 
@@ -238,69 +282,6 @@ footer {
     }
 }
 
-
-/* =============== Product Details page =============== */
-$details-left-width: 400px;
-$details-left-margin: 40px;
-
-.details_page {
-    .content {
-        padding: 0 60px;
-    }
-
-    h1 {
-        font-size: 28px;
-    }
-
-    .price {
-        font-size: 20px;
-    }
-
-    .left, .right {
-        display: inline-block;
-        vertical-align: top;
-    }
-
-    .left {
-        width: $details-left-width;
-        margin-right: $details-left-margin;
-        .product_image {
-            img {
-                width: 100%;
-                height: auto;
-            }
-        }
-    }
-    .right {
-        width: calc(100% - $details-left-width - $details-left-margin - 5px);
-
-        .product_desc {
-            > div {
-                margin-bottom: 20px;
-            }
-            select {
-                padding: 20px 15px;
-                color: $color-primary;
-                font-size: 16px;
-                border-radius: 0;
-                min-width: 300px;
-            }
-            a {
-                display: inline-block;
-                min-width: 300px;
-                text-align: center;
-            }
-
-            .availability {
-                vertical-align: middle;
-                span {
-                    line-height: 1.2em;
-                }
-            }
-        }
-    }
-}
-
 /* =============== Form page =============== */
 .form {
     h1 {
@@ -313,6 +294,22 @@ $details-left-margin: 40px;
     form {
         p {
             margin-bottom: 20px;
+
+            &.terms {
+                text-align: center;
+            }
+
+            &.required {
+                position: relative;
+                &:after {
+                    content: '*';
+                    position: absolute;
+                    display: inline-block;
+                    right: 0;
+                    top: 0;
+                    color: $color-important;
+                }
+            }
         }
        
         input:not([type="checkbox"]) {
@@ -324,9 +321,6 @@ $details-left-margin: 40px;
             border: none;
             border-bottom: 1px solid $color-light;
         }
-        p.terms {
-            text-align: center;
-        }
         
         span {
             &.error {
@@ -337,8 +331,8 @@ $details-left-margin: 40px;
             }
         }
         .highlight {
-            color: $color-important;;
-            text-align: center;
+            color: $color-important;
+            text-align: left;
         }
 
         button {
