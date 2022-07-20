@@ -4,5 +4,19 @@
 // Variables
 @import 'variables';
 
+// Mixin
+@import 'mixin';
+
 // Bootstrap
-@import '~bootstrap/scss/bootstrap';
+// @import '~bootstrap/scss/bootstrap';
+
+// Pages
+@import 'pages/global.scss';
+@import 'pages/home.scss';
+@import 'pages/product_list.scss';
+@import 'pages/product_details.scss';
+@import 'pages/register.scss';
+@import 'pages/login.scss';
+@import 'pages/profile.scss';
+@import 'pages/about.scss';
+@import 'pages/contact.scss';
