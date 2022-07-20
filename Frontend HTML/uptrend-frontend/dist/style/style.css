@@ -136,6 +136,9 @@ button {
   display: inline-block;
   vertical-align: top;
 }
+.nav_bar .wrapper {
+  position: relative;
+}
 .nav_bar .wrapper nav, .nav_bar .wrapper .utils {
   margin-left: 40px;
 }
@@ -151,6 +154,41 @@ button {
   display: block;
   font-size: 18px;
 }
+.nav_bar .wrapper .nav_dropdown {
+  background-color: #fff;
+  padding: 20px 40px;
+  position: absolute;
+  top: 80px;
+  left: 380px;
+  z-index: 9;
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.1);
+  display: none;
+}
+.nav_bar .wrapper .nav_dropdown .nav_content {
+  display: flex;
+  flex-direction: row;
+}
+.nav_bar .wrapper .nav_dropdown .nav_content .nav_dropdown_title {
+  font-size: 18px;
+  font-weight: 400;
+}
+.nav_bar .wrapper .nav_dropdown .nav_content .nav_item {
+  margin-right: 40px;
+  padding: 0 10px;
+  max-width: 160px;
+  min-width: 100px;
+}
+.nav_bar .wrapper .nav_dropdown .nav_content .nav_item ul {
+  margin-top: 10px;
+}
+.nav_bar .wrapper .nav_dropdown .nav_content .nav_item ul li {
+  padding: 10px;
+}
+.nav_bar .wrapper nav ul li a:hover + .nav_dropdown {
+  visibility: visible;
+  opacity: 1;
+  z-index: 999;
+}
 .nav_bar .logo {
   width: 100px;
 }
@@ -162,6 +200,7 @@ button {
 }
 .nav_bar .utils .icon .profile_dropdown {
   display: none;
+  background-color: #fff;
   border: 1px solid rgba(0, 0, 0, 0.3);
   padding: 30px;
   position: absolute;
