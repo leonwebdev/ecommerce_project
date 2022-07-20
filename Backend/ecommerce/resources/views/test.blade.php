@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container test_purpose">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card bg-black">
+    <div class="test_purpose">
+        <div>
+            <div>
+                <div>
                     {{-- <div><p><?= // Str::plural('gender')?></p></div> --}}
-                    <p class="text-danger">whoami : {{ $whoami }}</p>
+                    <p>whoami : {{ $whoami }}</p>
                     <div class="tgdiv"><p class="tglb">&#9658;User</p><p>{{ $users }}</p></div>
                     <div class="tgdiv"><p class="tglb">&#9658;shipping_charge</p><p>{{ $shipping_charge }}</p></div>
                     <div class="tgdiv"><p class="tglb">&#9658;tax</p><p>{{ $tax }}</p></div>
@@ -29,4 +29,5 @@
     <div id="collapse_all_button_div">
         <button id="collapse_all" class="btn btn-danger">Collapse All</button>
     </div>
+    <script src="js/test.js"></script>
 @endsection
