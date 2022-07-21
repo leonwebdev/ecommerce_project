@@ -17,4 +17,7 @@ use App\Http\Controllers\Admin\CategoryController;
  Route::get('/terms-and-conditions', [TermsController::class, 'index']);
  Route::get('/404', [PageNotFoundController::class, 'index']);
  Route::get('/admin/category', [App\Http\Controllers\Admin\CategoryController::class, 'index']);
-
+ Route::get('/admin/category/create',
+ [App\Http\Controllers\Admin\CategoryController::class, 'create']);
+Route::post('/admin/category',
+ [App\Http\Controllers\Admin\CategoryController::class, 'store']);

@@ -4,8 +4,6 @@
 
 <div class="container">
 <div class="wrapper">
-<div class="row">
-        <div class="col-8">
 
         <td><a href="/admin/category/create" class="btn btn-primary">Add a Category</a></td>
 
