@@ -15,27 +15,13 @@
                     @endforeach
                 </form>
                 <h3>Sizes</h3>
-                <form action="/">
-                    <div>
-                        <input type="checkbox" name="xxl" id="xxl" />
-                        <label for="xxl">XXL</label>
-                    </div>
-                    <div>
-                        <input type="checkbox" name="xl" id="xl" />
-                        <label for="xl">XL</label>
-                    </div>
-                    <div>
-                        <input type="checkbox" name="l" id="l" />
-                        <label for="l">L</label>
-                    </div>
-                    <div>
-                        <input type="checkbox" name="s" id="s" />
-                        <label for="s">S</label>
-                    </div>
-                    <div>
-                        <input type="checkbox" name="xs" id="xs" />
-                        <label for="xs">XS</label>
-                    </div>
+                <form action="{{ route('product') }}" method="GET">
+                    @foreach ($sizes as $size)
+                        <div>
+                            <input type="checkbox" name="{{ $size->name }}" id="{{ $size->name }}" />
+                            <label for="{{ $size->name }}">{{ $size->name }}</label>
+                        </div>
+                    @endforeach
                 </form>
             </aside>
             <!-- Aside ended -->
