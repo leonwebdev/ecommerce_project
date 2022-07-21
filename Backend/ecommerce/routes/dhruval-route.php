@@ -10,3 +10,6 @@ Route::get('/product', [ProductController::class, 'index'])
 
 Route::get('/product/{slug}', [ProductController::class, 'show'])
     ->name('product_detail');
+
+Route::get('/{gender}/product', [ProductController::class, 'genderFilter'])
+    ->name('gender_product_list');

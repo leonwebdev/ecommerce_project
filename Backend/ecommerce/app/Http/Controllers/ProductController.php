@@ -47,7 +47,6 @@ class ProductController extends Controller
                 $sizeIds = Size::whereIn('name', $sizeFilter)->get('id');
             }
             if (count($sizeIds) > 0 && count($categoryIds) > 0) {
-                // remove categories from list
                 $products = Product::with(['product_media', 'categories'])->whereHas('categories', function ($query) use ($categoryIds) {
                     $query->whereIn('category_id', $categoryIds);
                 })->whereIn('size_id', $sizeIds)->get();
@@ -57,6 +56,50 @@ class ProductController extends Controller
                 $products = Product::with(['product_media', 'categories'])->whereHas('categories', function ($query) use ($categoryIds) {
                     $query->whereIn('category_id', $categoryIds);
                 })->get();
+            }
+        }
+        return view('products/index', compact('title', 'categories', 'sizes', 'products', 'categoryFilter', 'sizeFilter'));
+    }
+    public function genderFilter($gender, Request $request)
+    {
+        $title = $gender;
+        // categories and sizes for sidebar
+        $categories = Category::all();
+        $sizes = Size::all();
+        // category filter
+        $categoryFilterStr = '';
+        $categoryFilter = [];
+        $categoryIds = [];
+        // size filter
+        $sizeFilterStr = '';
+        $sizeFilter = [];
+        $sizeIds = [];
+
+        // gender filter
+        $genderId = Gender::where('name', $gender)->get('id');
+        if (empty($request->query('category')) && empty($request->query('size'))) {
+            $products = Product::with(['product_media', 'categories'])->whereIn('gender_id', $genderId)->get();
+        } else {
+            if ($request->query('category')) {
+                $categoryFilterStr = $request->query('category');
+                $categoryFilter = explode(',', $categoryFilterStr);
+                $categoryIds = Category::whereIn('title', $categoryFilter)->get('id');
+            }
+            if ($request->query('size')) {
+                $sizeFilterStr = $request->query('size');
+                $sizeFilter = explode(',', $sizeFilterStr);
+                $sizeIds = Size::whereIn('name', $sizeFilter)->get('id');
+            }
+            if (count($sizeIds) > 0 && count($categoryIds) > 0) {
+                $products = Product::with(['product_media', 'categories'])->whereHas('categories', function ($query) use ($categoryIds) {
+                    $query->whereIn('category_id', $categoryIds);
+                })->whereIn('size_id', $sizeIds)->whereIn('gender_id', $genderId)->get();
+            } else if (count($sizeIds) > 0) {
+                $products = Product::with(['product_media', 'categories'])->whereIn('size_id', $sizeIds)->whereIn('gender_id', $genderId)->get();
+            } else {
+                $products = Product::with(['product_media', 'categories'])->whereHas('categories', function ($query) use ($categoryIds) {
+                    $query->whereIn('category_id', $categoryIds);
+                })->whereIn('gender_id', $genderId)->get();
             }
         }
         return view('products/index', compact('title', 'categories', 'sizes', 'products', 'categoryFilter', 'sizeFilter'));
