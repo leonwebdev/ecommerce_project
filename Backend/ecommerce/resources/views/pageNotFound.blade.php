@@ -3,8 +3,10 @@
 @section('content')
 <div class="container">
 <div class="wrapper">
+<div class="imageaboutpagenotfound" style="background-image: url('/images/axel-vazquez-A77FAov-OzI-unsplash.jpg');"data-img-width="1280" data-img-height="512"></div>
     <article>
     <div>
+   
         <div class="titlepagenotfound">
             <span>Page Not Found</span>
         </div>
