@@ -58,4 +58,46 @@ class CategoryController extends Controller
 
 
     }
+    /**
+     * edit function
+     *
+     * @return void
+     */
+    public function edit(Category $category)
+   
+    {
+        $title = 'Admin | Category';
+        return view('admin/category/edit', compact('category', 'title'));
+    }
+    /**
+     * update function
+     *
+     * @return void
+     */
+    public function update(Request $request, $id)
+    {
+        $valid = $request->validate([
+            'id' => 'required|integer',
+            'title' => 'required|string|max:255',
+            'image' => 'nullable|image'
+        ]);
+
+        if($request->file('image')) {
+            $path = $request->file('image')->store('public');
+        }
+
+        $category = Category::find($valid['id']);
+
+        $valid['image'] = basename($path ?? $category->image);
+
+        $category->update($valid);
+
+        if($category->save()) {
+            session()->flash('success', 'Category was successfully updated'); 
+        } else {
+            session()->flash('error', 'There was a problem updating the Category');
+        }
+        return redirect('/admin/category');
+
+    }
 }
