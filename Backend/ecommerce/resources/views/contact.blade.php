@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-div class="container">
+<div class="container">
     <div class="wrapper">
         <div class="content form" id="register">
             <h1>Contact</h1>
@@ -29,6 +29,7 @@ div class="container">
                     <span class="error">[error message]</span>
                 </p>
                 </form>
+                </div>
                 </div>
                 </div>
 
