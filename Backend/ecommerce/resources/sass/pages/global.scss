@@ -1,13 +1,14 @@
 * {
-	box-sizing: border-box;
+    box-sizing: border-box;
 }
 
-html, body {
-	margin: 0;
-	padding: 0;
-	font-family: $font-family-primary;
-	font-weight: $font-weight-primary;
-	color: $color-primary;
+html,
+body {
+    margin: 0;
+    padding: 0;
+    font-family: $font-family-primary;
+    font-weight: $font-weight-primary;
+    color: $color-primary;
 }
 
 h1 {
@@ -15,35 +16,38 @@ h1 {
 }
 
 a {
-	color: $color-primary;
-	text-decoration: none;
+    color: $color-primary;
+    text-decoration: none;
 }
 
 a:hover {
-	color: $color-primary-hover;
+    color: $color-primary-hover;
 }
-.pheadline{
-    position:relative;
-    left:450px;
-    top:200px;
-    color:#fff;
-    font-weight:700px;
-    font-family:'Times New Roman', Times, serif;
+.pheadline {
+    position: relative;
+    left: 450px;
+    top: 200px;
+    color: #fff;
+    font-weight: 700px;
+    font-family: "Times New Roman", Times, serif;
 }
 ul {
-	margin: 0;
-	padding: 0;
-	list-style: none;
+    margin: 0;
+    padding: 0;
+    list-style: none;
 }
-.imageabout{
-    width:100%;
-    height:400px;
+.imageabout {
+    width: 100%;
+    height: 400px;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
 }
 
-input, select, textarea, button {
+input,
+select,
+textarea,
+button {
     &:focus {
         outline: none;
     }
@@ -65,7 +69,7 @@ input, select, textarea, button {
     &.col-7 {
         width: calc((100% - 4px) / 12 * 7);
     }
-    
+
     &.col-12 {
         width: 100%;
     }
@@ -73,6 +77,15 @@ input, select, textarea, button {
 
 button {
     cursor: pointer;
+}
+// disable button
+.disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+    a.btn {
+        pointer-events: none;
+        text-decoration: none;
+    }
 }
 
 .btn {
@@ -89,7 +102,7 @@ button {
             background-color: $color-primary-hover;
         }
     }
-    
+
     &.btn_white {
         background-color: #fff;
         color: $color-primary;
@@ -111,21 +124,21 @@ button {
 }
 
 .container {
-	margin-bottom: 60px;
+    margin-bottom: 60px;
 }
 
 /* =============== General =============== */
 .wrapper {
-	width: 100%;
-	max-width: 1280px;
-	margin: 0 auto;
-	padding: 0 20px;
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 20px;
 }
 
 .icon {
-	display: inline-block;
-	vertical-align: top;
-	padding: 24px 5px;
+    display: inline-block;
+    vertical-align: top;
+    padding: 24px 5px;
     a {
         display: block;
         padding: 10px;
@@ -134,7 +147,7 @@ button {
 
 /* =============== Navbar =============== */
 .nav_bar {
-	padding: 40px 0;
+    padding: 40px 0;
 
     .wrapper > div,
     .wrapper > nav {
@@ -144,7 +157,8 @@ button {
 
     .wrapper {
         position: relative;
-        nav, .utils {
+        nav,
+        .utils {
             margin-left: 40px;
         }
 
@@ -170,7 +184,7 @@ button {
             top: 80px;
             left: 380px;
             z-index: 9;
-            box-shadow: 1px 1px 10px rgba(0,0,0,.1);
+            box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.1);
             display: none;
 
             .nav_content {
@@ -186,16 +200,15 @@ button {
                     padding: 0 10px;
                     max-width: 160px;
                     min-width: 100px;
-    
+
                     ul {
                         margin-top: 10px;
                         li {
                             padding: 10px;
                         }
                     }
-
                 }
-            } 
+            }
         }
 
         nav ul li a:hover {
@@ -219,7 +232,7 @@ button {
             .profile_dropdown {
                 display: none;
                 background-color: #fff;
-                border: 1px solid rgba(0,0,0,.3);
+                border: 1px solid rgba(0, 0, 0, 0.3);
                 padding: 30px;
                 position: absolute;
                 left: calc(-250px / 2 + (50px / 2));
@@ -237,7 +250,7 @@ button {
 
 /* =============== Breadcrumb =============== */
 .breadcrumb {
-	padding: 40px 0;
+    padding: 40px 0;
 
     span {
         margin-right: 15px;
@@ -245,11 +258,11 @@ button {
 }
 
 /* =============== Sidebar =============== */
-aside  {
+aside {
     display: inline-block;
-	vertical-align: top;
-	width: $sidebar-width;
-	margin-right: $sidebar-margin;
+    vertical-align: top;
+    width: $sidebar-width;
+    margin-right: $sidebar-margin;
     form {
         margin-bottom: 40px;
 
@@ -257,7 +270,8 @@ aside  {
             padding: 5px 0;
         }
 
-        label, input {
+        label,
+        input {
             cursor: pointer;
         }
     }
@@ -265,14 +279,14 @@ aside  {
 
 /* =============== Footer =============== */
 footer {
-	background-color: #F8F8F8;
-	text-align: center;
-	padding: 35px 0;
+    background-color: #f8f8f8;
+    text-align: center;
+    padding: 35px 0;
 
     .footer_menu {
         ul li {
             display: inline-block;
-	        vertical-align: top;
+            vertical-align: top;
 
             a {
                 display: block;
@@ -302,7 +316,7 @@ footer {
             &.required {
                 position: relative;
                 &:after {
-                    content: '*';
+                    content: "*";
                     position: absolute;
                     display: inline-block;
                     right: 0;
@@ -311,7 +325,7 @@ footer {
                 }
             }
         }
-       
+
         input:not([type="checkbox"]) {
             line-height: 2.2em;
             padding: 10px;
@@ -321,7 +335,7 @@ footer {
             border: none;
             border-bottom: 1px solid $color-light;
         }
-        
+
         span {
             &.error {
                 color: $color-error;
