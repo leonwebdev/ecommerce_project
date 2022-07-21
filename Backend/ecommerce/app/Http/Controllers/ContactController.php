@@ -8,7 +8,7 @@ class ContactController extends Controller
 {
     public function index()
     {
-        $title = 'contact';
+        $title = 'Contact';
         return view('contact', compact(
             'title',
         ));
