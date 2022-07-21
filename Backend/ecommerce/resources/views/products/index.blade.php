@@ -1,4 +1,4 @@
-@extends('layouts.app');
+@extends('layouts.app')
 
 @section('content')
     <div class="container list_page">
@@ -7,30 +7,12 @@
             <aside>
                 <h3>Categories</h3>
                 <form action="/">
-                    <div>
-                        <input type="checkbox" name="tops" id="tops" />
-                        <label for="tops">Tops</label>
-                    </div>
-                    <div>
-                        <input type="checkbox" name="bottoms" id="bottoms" />
-                        <label for="bottoms">Bottoms</label>
-                    </div>
-                    <div>
-                        <input type="checkbox" name="dresses" id="dresses" />
-                        <label for="dresses">Dresses</label>
-                    </div>
-                    <div>
-                        <input type="checkbox" name="jackets" id="jackets" />
-                        <label for="jackets">Jackets</label>
-                    </div>
-                    <div>
-                        <input type="checkbox" name="sport_wear" id="sport_wear" />
-                        <label for="sport_wear">Sport Wear</label>
-                    </div>
-                    <div>
-                        <input type="checkbox" name="accessories" id="accessories" />
-                        <label for="accessories">Accessories</label>
-                    </div>
+                    @foreach ($categories as $category)
+                        <div>
+                            <input type="checkbox" name="{{ $category->title }}" id="{{ $category->title }}" />
+                            <label for="{{ $category->title }}">{{ $category->title }}</label>
+                        </div>
+                    @endforeach
                 </form>
                 <h3>Sizes</h3>
                 <form action="/">
@@ -62,7 +44,7 @@
                 <div class="content">
                     <div class="item">
                         <div class="product_img"> <a href="product-details.html"></a>
-                            <img src="assets/images/item1.jpg" alt="item1">
+                            <img src="/images/item1.jpg" alt="item1">
                         </div>
                         <div class="desc">
                             <p>Vivamus suscipit tortor eget felis ...</p>
@@ -71,7 +53,7 @@
                     </div>
                     <div class="item">
                         <div class="product_img"> <a href="product-details.html"></a>
-                            <img src="assets/images/item1.jpg" alt="item1">
+                            <img src="/images/item1.jpg" alt="item1">
                         </div>
                         <div class="desc">
                             <p>Vivamus suscipit tortor eget felis ...</p>
@@ -80,7 +62,7 @@
                     </div>
                     <div class="item">
                         <div class="product_img"> <a href="product-details.html"></a>
-                            <img src="assets/images/item1.jpg" alt="item1">
+                            <img src="/images/item1.jpg" alt="item1">
                         </div>
                         <div class="desc">
                             <p>Vivamus suscipit tortor eget felis ...</p>
@@ -89,7 +71,7 @@
                     </div>
                     <div class="item">
                         <div class="product_img"> <a href="product-details.html"></a>
-                            <img src="assets/images/item1.jpg" alt="item1">
+                            <img src="/images/item1.jpg" alt="item1">
                         </div>
                         <div class="desc">
                             <p>Vivamus suscipit tortor eget felis ...</p>
@@ -98,7 +80,7 @@
                     </div>
                     <div class="item">
                         <div class="product_img"> <a href="product-details.html"></a>
-                            <img src="assets/images/item1.jpg" alt="item1">
+                            <img src="/images/item1.jpg" alt="item1">
                         </div>
                         <div class="desc">
                             <p>Vivamus suscipit tortor eget felis ...</p>
@@ -107,7 +89,7 @@
                     </div>
                     <div class="item">
                         <div class="product_img"> <a href="product-details.html"></a>
-                            <img src="assets/images/item1.jpg" alt="item1">
+                            <img src="/images/item1.jpg" alt="item1">
                         </div>
                         <div class="desc">
                             <p>Vivamus suscipit tortor eget felis ...</p>
