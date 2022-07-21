@@ -16,10 +16,11 @@ class ProductController extends Controller
      */
     public function index()
     {
+        $title = 'Product';
         $categories = Category::all();
         $genders = Gender::all();
         $sizes = Size::all();
-        return view('product/index', compact('categories', 'genders', 'sizes'));
+        return view('products/index', compact('title', 'categories', 'genders', 'sizes'));
     }
 
     /**
