@@ -1,5 +1,7 @@
-<partial src="_header.html" title="Contact"></partial>
-<div class="container">
+@extends('layouts.app')
+
+@section('content')
+div class="container">
     <div class="wrapper">
         <div class="content form" id="register">
             <h1>Contact</h1>
@@ -30,6 +32,4 @@
                 </div>
                 </div>
 
-
-
-<partial src="_footer.html"></partial>
+@endsection

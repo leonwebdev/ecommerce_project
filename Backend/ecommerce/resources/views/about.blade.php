@@ -1,4 +1,6 @@
-<partial src="_header.html" title="About"></partial>
+@extends('layouts.app')
+
+@section('content')
 <div class="container">
 <div class="wrapper">
 <h1 class="aboutheadline">About Us</h1>
@@ -14,4 +16,5 @@ For more information, please visit the Uptrend Group website: team3.uwpace.ca</p
 </div>
 </div>
 
-<partial src="_footer.html"></partial>
+
+@endsection
