@@ -33,5 +33,13 @@ class CategoryProductTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+        for ($i = 0; $i < 100; $i++) {
+            DB::table('category_product')->insert([
+                'product_id' => rand(1, 61),
+                'category_id' => rand(1, 3),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        }
     }
 }

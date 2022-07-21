@@ -33,6 +33,12 @@
             <!-- Aside ended -->
             <!-- Section start -->
             <section class="list_item">
+                <form action="{{ route('product_list') }}" method="get" autocomplete="off" novalidate class="d-flex">
+                    <input class="form-control me-2" type="search" name="search" placeholder="Search" aria-label="Search"
+                        maxlength="255">&nbsp;
+                    <button type="submit">Search</button>
+                </form>
+                <p>Total Product: {{ count($products) }}</p>
                 <div class="content">
                     @foreach ($products as $product)
                         {{-- {{ $product }} --}}
@@ -43,6 +49,8 @@
                             <div class="desc">
                                 <p>{{ $product->name }}</p>
                                 <div class="price">${{ number_format($product->price, 2) }} CAD</div>
+                                <div class="price">Size: {{ $product->size->name }} </div>
+                                <div class="price">Category: {{ $product->categories->implode('title', ', ') }} </div>
                             </div>
                         </div>
                     @endforeach
@@ -65,8 +73,14 @@
             // remove unselected category from url
             selectedCategory.splice(selectedCategory.findIndex(x => x == e.target.value), 1);
         }
+        let url = '/product';
         let categoryStr = selectedCategory.toString();
-        window.location = '/product?category=' + categoryStr;
+        if (params.size) {
+            url = `${url}?category=${categoryStr}&size=${params.size}`;
+        } else {
+            url = `${url}?category=${categoryStr}`;
+        }
+        window.location = url;
     }
 
     function filterBySize(e, el) {
@@ -80,7 +94,13 @@
             // remove unselected size from url
             selectedSize.splice(selectedSize.findIndex(x => x == e.target.value), 1);
         }
+        let url = '/product';
         let sizeStr = selectedSize.toString();
-        window.location = '/product?size=' + sizeStr;
+        if (params.category) {
+            url = `${url}?category=${params.category}&size=${sizeStr}`;
+        } else {
+            url = `${url}?size=${sizeStr}`;
+        }
+        window.location = url;
     }
 </script>

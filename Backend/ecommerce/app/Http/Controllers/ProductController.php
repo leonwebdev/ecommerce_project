@@ -17,18 +17,49 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
-
-        $categoryFilterStr = $request->query('category');
-        $categoryFilter = explode(',', $categoryFilterStr);
-        $sizeFilterStr = $request->query('size');
-        $sizeFilter = explode(',', $sizeFilterStr);
         $title = 'Product';
+        // categories and sizes for sidebar
         $categories = Category::all();
-        $genders = Gender::all();
         $sizes = Size::all();
-        $products = Product::with('product_media')->get();
-        // $selectedCategory = 
-        return view('products/index', compact('title', 'categories', 'genders', 'sizes', 'products', 'categoryFilter', 'sizeFilter'));
+        // category filter
+        $categoryFilterStr = '';
+        $categoryFilter = [];
+        $categoryIds = [];
+        // size filter
+        $sizeFilterStr = '';
+        $sizeFilter = [];
+        $sizeIds = [];
+        // search
+        $search = $request->query('search');
+        if ($search) {
+            $products = Product::with(['product_media', 'categories'])->where('name', 'LIKE', '%' . $search . '%')->get();
+        } else if (empty($request->query('category')) && empty($request->query('size'))) {
+            $products = Product::with(['product_media', 'categories'])->get();
+        } else {
+            if ($request->query('category')) {
+                $categoryFilterStr = $request->query('category');
+                $categoryFilter = explode(',', $categoryFilterStr);
+                $categoryIds = Category::whereIn('title', $categoryFilter)->get('id');
+            }
+            if ($request->query('size')) {
+                $sizeFilterStr = $request->query('size');
+                $sizeFilter = explode(',', $sizeFilterStr);
+                $sizeIds = Size::whereIn('name', $sizeFilter)->get('id');
+            }
+            if (count($sizeIds) > 0 && count($categoryIds) > 0) {
+                // remove categories from list
+                $products = Product::with(['product_media', 'categories'])->whereHas('categories', function ($query) use ($categoryIds) {
+                    $query->whereIn('category_id', $categoryIds);
+                })->whereIn('size_id', $sizeIds)->get();
+            } else if (count($sizeIds) > 0) {
+                $products = Product::with(['product_media', 'categories'])->whereIn('size_id', $sizeIds)->get();
+            } else {
+                $products = Product::with(['product_media', 'categories'])->whereHas('categories', function ($query) use ($categoryIds) {
+                    $query->whereIn('category_id', $categoryIds);
+                })->get();
+            }
+        }
+        return view('products/index', compact('title', 'categories', 'sizes', 'products', 'categoryFilter', 'sizeFilter'));
     }
 
     /**
