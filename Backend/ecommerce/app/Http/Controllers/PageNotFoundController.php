@@ -8,8 +8,8 @@ class PageNotFoundController extends Controller
 {
     public function index()
     {
-        $title = '404 Page Not Found';
-        return view('404PageNotFound', compact(
+        $title = 'Page Not Found';
+        return view('pageNotFound', compact(
             'title',
         ));
     }
