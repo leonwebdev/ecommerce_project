@@ -9,8 +9,6 @@ class AboutController extends Controller
     public function index()
     {
         $title = 'About';
-        return view('about', compact(
-            'title',
-        ));
+        return view('about', compact('title'));
     }
 }

@@ -9,8 +9,6 @@ class PageNotFoundController extends Controller
     public function index()
     {
         $title = 'Page Not Found';
-        return view('pageNotFound', compact(
-            'title',
-        ));
+        return view('pageNotFound', compact('title'));
     }
 }
