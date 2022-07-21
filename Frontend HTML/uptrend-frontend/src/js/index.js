@@ -15,13 +15,23 @@ function getCurrentYear() {
 }
 
 function menuDropdown() {
-    $('.icon.profile a').mouseover(function(e) {
+    $('.icon.profile a, .profile_dropdown').mouseover(function(e) {
         e.preventDefault();
-        $('.profile_dropdown').stop().fadeIn(300);
+        $('.profile_dropdown').stop().fadeIn(100);
     });
 
-    $('.icon.profile a').mouseleave(function(e) {
+    $('.icon.profile a, .profile_dropdown').mouseleave(function(e) {
         e.preventDefault();
         $('.profile_dropdown').stop().fadeOut(300);
+    });
+
+    $('nav ul li a, .nav_dropdown').mouseover(function(e) {
+        e.preventDefault();
+        $('.nav_dropdown').stop().fadeIn(100);
+    });
+
+    $('nav ul li a, .nav_dropdown').mouseleave(function(e) {
+        e.preventDefault();
+        $('.nav_dropdown').stop().fadeOut(300);
     });
 }

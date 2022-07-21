@@ -53,16 +53,19 @@ input:focus, select:focus, textarea:focus, button:focus {
 .col {
   display: inline-block;
   vertical-align: top;
-  margin: 0 10px;
+  padding: 0 10px;
 }
 .col.col-5 {
-  width: calc(41.6666666667% - 20px - 2px);
+  width: calc((100% - 4px) / 12 * 5);
 }
 .col.col-6 {
-  width: calc(50% - 20px - 2px);
+  width: calc((100% - 4px) / 12 * 6);
 }
 .col.col-7 {
-  width: calc(58.3333333333% - 20px - 2px);
+  width: calc((100% - 4px) / 12 * 7);
+}
+.col.col-12 {
+  width: 100%;
 }
 
 button {
@@ -133,6 +136,9 @@ button {
   display: inline-block;
   vertical-align: top;
 }
+.nav_bar .wrapper {
+  position: relative;
+}
 .nav_bar .wrapper nav, .nav_bar .wrapper .utils {
   margin-left: 40px;
 }
@@ -148,6 +154,41 @@ button {
   display: block;
   font-size: 18px;
 }
+.nav_bar .wrapper .nav_dropdown {
+  background-color: #fff;
+  padding: 20px 40px;
+  position: absolute;
+  top: 80px;
+  left: 380px;
+  z-index: 9;
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.1);
+  display: none;
+}
+.nav_bar .wrapper .nav_dropdown .nav_content {
+  display: flex;
+  flex-direction: row;
+}
+.nav_bar .wrapper .nav_dropdown .nav_content .nav_dropdown_title {
+  font-size: 18px;
+  font-weight: 400;
+}
+.nav_bar .wrapper .nav_dropdown .nav_content .nav_item {
+  margin-right: 40px;
+  padding: 0 10px;
+  max-width: 160px;
+  min-width: 100px;
+}
+.nav_bar .wrapper .nav_dropdown .nav_content .nav_item ul {
+  margin-top: 10px;
+}
+.nav_bar .wrapper .nav_dropdown .nav_content .nav_item ul li {
+  padding: 10px;
+}
+.nav_bar .wrapper nav ul li a:hover + .nav_dropdown {
+  visibility: visible;
+  opacity: 1;
+  z-index: 999;
+}
 .nav_bar .logo {
   width: 100px;
 }
@@ -159,6 +200,7 @@ button {
 }
 .nav_bar .utils .icon .profile_dropdown {
   display: none;
+  background-color: #fff;
   border: 1px solid rgba(0, 0, 0, 0.3);
   padding: 30px;
   position: absolute;
@@ -324,6 +366,20 @@ aside {
 .form form p {
   margin-bottom: 20px;
 }
+.form form p.terms {
+  text-align: center;
+}
+.form form p.required {
+  position: relative;
+}
+.form form p.required:after {
+  content: "*";
+  position: absolute;
+  display: inline-block;
+  right: 0;
+  top: 0;
+  color: #e04c41;
+}
 .form form input:not([type=checkbox]) {
   line-height: 2.2em;
   padding: 10px;
@@ -333,9 +389,6 @@ aside {
   border: none;
   border-bottom: 1px solid #9e9e9e;
 }
-.form form p.terms {
-  text-align: center;
-}
 .form form span.error {
   color: #e04c41;
   display: block;
@@ -344,7 +397,7 @@ aside {
 }
 .form form .highlight {
   color: #e04c41;
-  text-align: center;
+  text-align: left;
 }
 .form form button {
   min-width: 250px;

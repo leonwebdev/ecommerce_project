@@ -1,15 +1,3 @@
-// @import '../../node_modules/bootstrap/scss/bootstrap.scss';
-@import '_mixin.scss';
-
-$font-family-primary: 'Outfit', sans-serif;
-$font-weight-primary: 300;
-$font-weight-title: 400;
-$color-primary: #707070;
-$color-light: #9e9e9e;
-$color-primary-hover: #1E1E1E;
-$color-important: #e04c41;
-$color-error: #e04c41;
-
 * {
 	box-sizing: border-box;
 }
@@ -184,10 +172,7 @@ button {
             z-index: 9;
             box-shadow: 1px 1px 10px rgba(0,0,0,.1);
             display: none;
-            // visibility: hidden;
-            // opacity: 0;
-            // z-index: -99;
-            
+
             .nav_content {
                 display: flex;
                 flex-direction: row;
@@ -261,6 +246,10 @@ button {
 
 /* =============== Sidebar =============== */
 aside  {
+    display: inline-block;
+	vertical-align: top;
+	width: $sidebar-width;
+	margin-right: $sidebar-margin;
     form {
         margin-bottom: 40px;
 
@@ -293,145 +282,8 @@ footer {
     }
 }
 
-/* =============== Product List page =============== */
-$sidebar-width: 250px;
-$sidebar-margin: 40px;
-
-aside,
-.list_item {
-	display: inline-block;
-	vertical-align: top;
-}
-
-aside {
-	width: $sidebar-width;
-	margin-right: $sidebar-margin;
-}
-
-.list_item {
-	width: calc(100% - $sidebar-width - $sidebar-margin - 5px);
-
-    .content {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-
-        .item {
-            flex: 0 0 33.333333%;
-            padding: 0 20px; 
-            margin-bottom: 30px;
-
-            .product_img {
-                position: relative;
-
-                a {
-                    position: absolute;
-                    width: 100%;
-                    height: 100%;
-                    left: 0;
-                    top: 0;
-                    @include transition();
-
-                    &:hover {
-                        background-color: rgba(0,0,0,.1);
-                    }
-                }
-
-                img {
-                    width: 100%;
-                    height: auto;
-                }
-            }
-
-            .desc {
-                p {
-                    margin: 10px 0;
-                }
-
-                .price {
-                    text-align: right;
-                    font-weight: 400;
-                }
-            }
-
-        }
-    }
-}
-
-/* =============== Product Details page =============== */
-$details-left-width: 400px;
-$details-left-margin: 40px;
-
-.details_page {
-    .content {
-        padding: 0 60px;
-    }
-
-    h1 {
-        font-size: 28px;
-    }
-
-    .price {
-        font-size: 20px;
-    }
-
-    .left, .right {
-        display: inline-block;
-        vertical-align: top;
-    }
-
-    .left {
-        width: $details-left-width;
-        margin-right: $details-left-margin;
-        .product_image {
-            img {
-                width: 100%;
-                height: auto;
-            }
-        }
-    }
-    .right {
-        width: calc(100% - $details-left-width - $details-left-margin - 5px);
-
-        .product_desc {
-            > div {
-                margin-bottom: 20px;
-            }
-            select {
-                padding: 20px 15px;
-                color: $color-primary;
-                font-size: 16px;
-                border-radius: 0;
-                min-width: 300px;
-            }
-            a {
-                display: inline-block;
-                min-width: 300px;
-                text-align: center;
-            }
-
-            .availability {
-                vertical-align: middle;
-                span {
-                    line-height: 1.2em;
-                }
-            }
-        }
-    }
-}
-
 /* =============== Form page =============== */
 .form {
-    &#register {
-        max-width: 700px;
-        margin: 0 auto;
-    }
-
-    &#login {
-        max-width: 400px;
-        margin: 60px auto 0;
-    }
-
     h1 {
         text-align: center;
         margin-bottom: 60px;
