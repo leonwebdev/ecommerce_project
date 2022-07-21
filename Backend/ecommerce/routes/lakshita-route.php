@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\TermsController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\PageNotFoundController;
 
 
 // Route::get('/test', [HomeController::class, 'test']);
