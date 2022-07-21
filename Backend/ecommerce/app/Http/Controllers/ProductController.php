@@ -15,14 +15,20 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+
+        $categoryFilterStr = $request->query('category');
+        $categoryFilter = explode(',', $categoryFilterStr);
+        $sizeFilterStr = $request->query('size');
+        $sizeFilter = explode(',', $sizeFilterStr);
         $title = 'Product';
         $categories = Category::all();
         $genders = Gender::all();
         $sizes = Size::all();
         $products = Product::with('product_media')->get();
-        return view('products/index', compact('title', 'categories', 'genders', 'sizes', 'products'));
+        // $selectedCategory = 
+        return view('products/index', compact('title', 'categories', 'genders', 'sizes', 'products', 'categoryFilter', 'sizeFilter'));
     }
 
     /**

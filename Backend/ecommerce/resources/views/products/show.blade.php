@@ -21,6 +21,7 @@
                         {{-- color label aheade of value? --}}
                         @if ($product->qty == 0)
                             <div class="availability">
+                                {{-- {{ 'image/products/' . $product->images[0] }} --}}
                                 <img src="/images/icon-unavailable.svg" alt="unavailable icon" width="17"
                                     height="17">
                                 <span>Currently unavailable (show when out of stock)</span>
