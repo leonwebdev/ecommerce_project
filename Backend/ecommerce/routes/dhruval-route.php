@@ -6,3 +6,7 @@ use App\Http\Controllers\ProductController;
 
 Route::get('/product', [ProductController::class, 'index'])
     ->name('product_list');
+
+
+Route::get('/product/{slug}', [ProductController::class, 'show'])
+    ->name('product_detail');
