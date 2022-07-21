@@ -4,12 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class TermsController extends Controller
+class PageNotFoundController extends Controller
 {
     public function index()
     {
-        $title = 'Terms & Conditions';
-        return view('terms', compact(
+        $title = '404 Page Not Found';
+        return view('404PageNotFound', compact(
             'title',
         ));
     }
