@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProductController;
 
 
-// Route::get('/product', [ProductController::class, 'test']);
+Route::get('/product', [ProductController::class, 'index']);
