@@ -15,7 +15,7 @@
                     @endforeach
                 </form>
                 <h3>Sizes</h3>
-                <form action="{{ route('product') }}" method="GET">
+                <form action="{{ route('product_list') }}" method="GET">
                     @foreach ($sizes as $size)
                         <div>
                             <input type="checkbox" name="{{ $size->name }}" id="{{ $size->name }}" />
@@ -28,60 +28,19 @@
             <!-- Section start -->
             <section class="list_item">
                 <div class="content">
-                    <div class="item">
-                        <div class="product_img"> <a href="product-details.html"></a>
-                            <img src="/images/item1.jpg" alt="item1">
+                    @foreach ($products as $product)
+                        {{-- {{ $product }} --}}
+                        <div class="item">
+                            <div class="product_img"> <a href="/product/{{ $product->slug }}"></a>
+                                <img src="/images/item1.jpg" alt="item1">
+                            </div>
+                            <div class="desc">
+                                <p>{{ $product->name }}</p>
+                                <div class="price">${{ number_format($product->price, 2) }} CAD</div>
+                            </div>
                         </div>
-                        <div class="desc">
-                            <p>Vivamus suscipit tortor eget felis ...</p>
-                            <div class="price">$38.00 CAD</div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="product_img"> <a href="product-details.html"></a>
-                            <img src="/images/item1.jpg" alt="item1">
-                        </div>
-                        <div class="desc">
-                            <p>Vivamus suscipit tortor eget felis ...</p>
-                            <div class="price">$38.00 CAD</div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="product_img"> <a href="product-details.html"></a>
-                            <img src="/images/item1.jpg" alt="item1">
-                        </div>
-                        <div class="desc">
-                            <p>Vivamus suscipit tortor eget felis ...</p>
-                            <div class="price">$38.00 CAD</div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="product_img"> <a href="product-details.html"></a>
-                            <img src="/images/item1.jpg" alt="item1">
-                        </div>
-                        <div class="desc">
-                            <p>Vivamus suscipit tortor eget felis ...</p>
-                            <div class="price">$38.00 CAD</div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="product_img"> <a href="product-details.html"></a>
-                            <img src="/images/item1.jpg" alt="item1">
-                        </div>
-                        <div class="desc">
-                            <p>Vivamus suscipit tortor eget felis ...</p>
-                            <div class="price">$38.00 CAD</div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="product_img"> <a href="product-details.html"></a>
-                            <img src="/images/item1.jpg" alt="item1">
-                        </div>
-                        <div class="desc">
-                            <p>Vivamus suscipit tortor eget felis ...</p>
-                            <div class="price">$38.00 CAD</div>
-                        </div>
-                    </div>
+                    @endforeach
+
                 </div>
             </section>
             <!-- Section ended -->

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Gender;
+use App\Models\Product;
 use App\Models\Size;
 use Illuminate\Http\Request;
 
@@ -20,7 +21,8 @@ class ProductController extends Controller
         $categories = Category::all();
         $genders = Gender::all();
         $sizes = Size::all();
-        return view('products/index', compact('title', 'categories', 'genders', 'sizes'));
+        $products = Product::with('Product_media')->get();
+        return view('products/index', compact('title', 'categories', 'genders', 'sizes', 'products'));
     }
 
     /**
