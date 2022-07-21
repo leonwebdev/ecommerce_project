@@ -28,5 +28,6 @@ class ProductTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+        \App\Models\Product::factory(60)->create();
     }
 }
