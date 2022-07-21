@@ -1,4 +1,6 @@
-<partial src="_header.html" title="Contact"></partial>
+@extends('layouts.app')
+
+@section('content')
 <div class="container">
     <div class="wrapper">
         <div class="content form" id="register">
@@ -29,7 +31,6 @@
                 </form>
                 </div>
                 </div>
+                </div>
 
-
-
-<partial src="_footer.html"></partial>
+@endsection

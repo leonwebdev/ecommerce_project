@@ -3,13 +3,13 @@
      <div class="wrapper">
          <div class="footer_menu">
              <ul>
-                 <li> <a href="about.html">About</a>
+                 <li> <a href="/about">About</a>
                  </li>
-                 <li> <a href="contact.html">Contact</a>
+                 <li> <a href="/contact.html">Contact</a>
                  </li>
-                 <li> <a href="terms.html">Terms & Condition</a>
+                 <li> <a href="/terms">Terms & Condition</a>
                  </li>
-                 <li> <a href="privacy.html">Privacy Policy</a>
+                 <li> <a href="/privacy">Privacy Policy</a>
                  </li>
              </ul>
          </div>
