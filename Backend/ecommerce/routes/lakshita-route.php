@@ -5,3 +5,6 @@ use App\Http\Controllers\HomeController;
 
 
 // Route::get('/test', [HomeController::class, 'test']);
+
+ Route::get('/about', [AboutController::class, 'about']);
+
