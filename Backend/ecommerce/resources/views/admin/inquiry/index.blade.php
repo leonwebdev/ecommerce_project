@@ -2,50 +2,53 @@
 
 @section('content')
 
-  <div class="header_bar">
-    <h1>{{ $title }}</h1>
+    <div class="header_bar">
+      <h1>{{ $title }}</h1>
 
-    <!-- Search form -->
-    <div class="search_form">
-            <form class="d-md-flex input-group w-auto my-auto">
-                <input autocomplete="off" type="search" class="form-control rounded" placeholder='' style="min-width: 225px" />
-                <span class="input-group-text border-0">
-                    <i class="fas fa-search"></i></span>
-            </form>
-        </div>
+      <!-- Search form -->
+      <div class="search_form">
+        <form class="d-md-flex input-group w-auto my-auto">
+            <input autocomplete="off" type="search" class="form-control rounded" placeholder='' style="min-width: 225px" />
+            <span class="input-group-text border-0">
+                <i class="fas fa-search"></i></span>
+        </form>
+      </div>
     </div>
-    <a href="/admin/category/create" class="btn btn-primary">Add a Category</a></td>
-  <!-- List Tables -->
-  <table class="table table-striped">
-    <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Title</th>
-          <th scope="col">Image</th>
-          <th scope="col">Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        @foreach($categories as $category)
-        <tr scope="row">
-        <td>{{ $category->id }}</td>
-        <td>{{ $category->title }}</td>
-        <td><img src="/storage/{{ $category->image }}" height="100px" width="100px"/></td>
-        <td><a href="/admin/category/edit/{{ $category->id }}" class="btn btn-info">Edit</a>
-        <form method="post" action="/admin/category/{{ $category->id }}">
-                  @csrf
-                  @method('DELETE')
-                  <input type="hidden" name="id" value="{{ $category->id }}" />
-                  <button
-                  class="btn btn-danger" onclick="return confirm('Do you really want to delete {{ $category->title }}?')">Delete</button>
-              </form>
-          </td>
-        </tr>
-      @endforeach
-      </tbody>
-  </table>
-  <div class="px-3">
-      {!! $categories->links('pagination::bootstrap-5') !!}
-  </div>
+    <!-- List Tables -->
+    <table class="table table-striped">
+      <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Message</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          @foreach($inquiries as $inquiry)
+          <tr scope="row">
+          <td>{{ $inquiry->id }}</td>
+          <td>{{ $inquiry->name }}</td>
+          <td>{{ $inquiry->email }}</td>
+          <td>{{ $inquiry->phone }}</td>
+          <td>{{ $inquiry->message }}</td>
+          <td>
+          <form method="post" action="/admin/inquiry/{{ $inquiry->id }}">
+                    @csrf
+                    @method('DELETE')
+                    <input type="hidden" name="id" value="{{ $inquiry->id }}" />
+                    <button
+                    class="btn btn-danger" onclick="return confirm('Do you really want to delete {{ $inquiry->name }}?')">Delete</button>
+                </form>
+            </td>
+          </tr>
+        @endforeach
+        </tbody>
+    </table>
+    <div class="px-3">
+        {!! $inquiries->links('pagination::bootstrap-5') !!}
+    </div>
 
 @endsection

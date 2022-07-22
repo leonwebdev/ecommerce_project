@@ -6,6 +6,7 @@ use App\Http\Controllers\AboutController;
 use App\Http\Controllers\TermsController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\PageNotFoundController;
+use App\Http\Controllers\Admin\InquiryController;
 use App\Http\Controllers\PrivacyPolicyController;
 use App\Http\Controllers\Admin\CategoryController;
 
@@ -25,4 +26,5 @@ Route::post('/admin/category',[App\Http\Controllers\Admin\CategoryController::cl
 Route::put('/admin/category/{id}',[App\Http\Controllers\Admin\CategoryController::class, 'update'])->name('category_update');
 Route::delete('/admin/category/{id}', [App\Http\Controllers\Admin\CategoryController::class, 'destroy']);
 Route::post('/admin/category',[App\Http\Controllers\Admin\CategoryController::class, 'search']);
-Route::get('/admin/inquiry', [App\Http\Controllers\Admin\CategoryController::class, 'index']);
+// Inquiry Controler
+Route::get('/admin/inquiry', [App\Http\Controllers\Admin\InquiryController::class, 'index']);
