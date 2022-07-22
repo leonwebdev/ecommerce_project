@@ -9,19 +9,19 @@
         <nav>
             <ul>
                 <li>
-                    <a class="active" href="product-list.html">All Outfits</a>
+                    <a class="active" href="/product">All Outfits</a>
                 </li>
                 <li>
-                    <a href="#">Women</a>
+                    <a href="/women/product">Women</a>
                 </li>
                 <li>
-                    <a href="#">Man</a>
+                    <a href="/men/product">Men</a>
                 </li>
                 <li>
-                    <a href="#">Boys</a>
+                    <a href="/boy/product">Boys</a>
                 </li>
                 <li>
-                    <a href="#">Girls</a>
+                    <a href="/girl/product">Girls</a>
                 </li>
             </ul>
         </nav>

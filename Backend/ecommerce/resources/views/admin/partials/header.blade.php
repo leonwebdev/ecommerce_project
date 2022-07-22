@@ -24,6 +24,10 @@
                     <i class="fas fa-rectangle-ad fa-fw me-3"></i>
                     <span>Advertisements</span>
                 </a>
+                <a href="/admin/inquiry" class="list-group-item list-group-item-action py-2 ripple">
+                    <i class="fas fa-rectangle-ad fa-fw me-3"></i>
+                    <span>Inquiry</span>
+                </a>
             </div>
         </div>
     </nav>
