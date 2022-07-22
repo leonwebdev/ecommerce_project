@@ -19,4 +19,15 @@ class ForgotPasswordController extends Controller
     */
 
     use SendsPasswordResetEmails;
+
+    /**
+     * Uptrend Customize !!! Display the form to request a password reset link.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function showLinkRequestForm()
+    {
+        $title = "Reset Password";
+        return view('auth.passwords.email', compact('title'));
+    }
 }
