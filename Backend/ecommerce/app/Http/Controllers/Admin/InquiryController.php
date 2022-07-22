@@ -20,4 +20,20 @@ class InquiryController extends Controller
         
         return view('/admin/inquiry/index', compact('inquiries','title'));
     }
+    /**
+     * destroy function
+     *
+     * @return void
+     */
+    public function destroy(Request $request, $id)
+    {
+        $inquiry = Inquiry::find($id);
+        if($inquiry->delete()) {
+            session()->flash('success', 'Inquiry was deleted');
+            return redirect('/admin/inquiry');
+        }
+        session()->flash('error', 'There was a problem deleting the Inquiry');
+        return redirect('/admin/inquiry');
+    }
+       
 }

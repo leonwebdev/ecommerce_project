@@ -28,3 +28,4 @@ Route::delete('/admin/category/{id}', [App\Http\Controllers\Admin\CategoryContro
 Route::post('/admin/category',[App\Http\Controllers\Admin\CategoryController::class, 'search']);
 // Inquiry Controler
 Route::get('/admin/inquiry', [App\Http\Controllers\Admin\InquiryController::class, 'index']);
+Route::delete('/admin/inquiry/{id}', [App\Http\Controllers\Admin\InquiryController::class, 'destroy']);

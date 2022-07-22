@@ -100,7 +100,7 @@ class CategoryController extends Controller
         return redirect('/admin/category');
 
     }
-        /**
+    /**
      * destroy function
      *
      * @return void

@@ -36,12 +36,11 @@
           <td>{{ $inquiry->message }}</td>
           <td>
           <form method="post" action="/admin/inquiry/{{ $inquiry->id }}">
-                    @csrf
-                    @method('DELETE')
-                    <input type="hidden" name="id" value="{{ $inquiry->id }}" />
-                    <button
-                    class="btn btn-danger" onclick="return confirm('Do you really want to delete {{ $inquiry->name }}?')">Delete</button>
-                </form>
+                @csrf
+                @method('DELETE')
+                <input type="hidden" name="id" value="{{ $inquiry->id }}" />
+                <button class="btn btn-danger" onclick="return confirm('Do you really want to delete {{ $inquiry->name }}?')">Delete</button>
+          </form>
             </td>
           </tr>
         @endforeach
