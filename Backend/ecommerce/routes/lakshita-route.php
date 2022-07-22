@@ -33,9 +33,9 @@ Route::get('/admin/inquiry', [App\Http\Controllers\Admin\InquiryController::clas
 Route::delete('/admin/inquiry/{id}', [App\Http\Controllers\Admin\InquiryController::class, 'destroy']);
 // Advertisement Controler
 Route::get('/admin/advertisement', [App\Http\Controllers\Admin\AdvertisementController::class, 'index']);
-Route::get('/admin/category/create',[App\Http\Controllers\Admin\CategoryController::class, 'create']);
-Route::post('/admin/category',[App\Http\Controllers\Admin\CategoryController::class, 'store']);
-Route::get('/admin/category/edit/{category}',[App\Http\Controllers\Admin\CategoryController::class, 'edit'])->name('category_edit');
-Route::put('/admin/category/{id}',[App\Http\Controllers\Admin\CategoryController::class, 'update'])->name('category_update');
-Route::delete('/admin/category/{id}', [App\Http\Controllers\Admin\CategoryController::class, 'destroy']);
-Route::post('/admin/category',[App\Http\Controllers\Admin\CategoryController::class, 'search']);
+//Route::get('/admin/advertisement/create',[App\Http\Controllers\Admin\AdvertisementController::class, 'create']);
+// Route::post('/admin/category',[App\Http\Controllers\Admin\CategoryController::class, 'store']);
+// Route::get('/admin/category/edit/{category}',[App\Http\Controllers\Admin\CategoryController::class, 'edit'])->name('category_edit');
+// Route::put('/admin/category/{id}',[App\Http\Controllers\Admin\CategoryController::class, 'update'])->name('category_update');
+// Route::delete('/admin/category/{id}', [App\Http\Controllers\Admin\CategoryController::class, 'destroy']);
+Route::post('/admin/advertisement',[App\Http\Controllers\Admin\AdvertisementController::class, 'search']);

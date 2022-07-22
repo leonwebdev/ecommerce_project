@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Advertisement;
+use App\Http\Controllers\Controller;
 
 class AdvertisementController extends Controller
 {
