@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +22,13 @@ Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/test', [HomeController::class, 'test']);
+
+Route::middleware(['auth', 'admin'])->group(function() {
+   // includes all admin routes
+});
+
+Route::get('/admin/order', [AdminOrderController::class, 'index'])
+    ->name('admin_order');
 
 require __DIR__ . '/dhruval-route.php';
 require __DIR__ . '/lihang-route.php';
