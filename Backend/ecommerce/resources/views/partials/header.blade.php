@@ -38,8 +38,27 @@
                 </a>
                 <div class="profile_dropdown">
                     <ul>
-                        <li><a class="btn btn_black" href="register.html">Register</a></li>
-                        <li><a class="btn btn_white_no_border" href="login.html">Login</a></li>
+                        @guest
+
+                            @if (Route::has('register'))
+                                <li><a class="btn btn_black" href="register">Register</a></li>
+                            @endif
+                            @if (Route::has('login'))
+                                <li><a class="btn btn_white_no_border" href="login">Login</a></li>
+                            @endif
+                        @else
+                            <li><a class="btn btn_black" href="logout"
+                                    onclick="event.preventDefault();
+                                    document.getElementById('logout-form').submit();">Logout</a>
+                            </li>
+                            <li><a class="btn btn_white_no_border"
+                                    href="profile">{{ Auth::user()->first_name . ' ' . Auth::user()->last_name }}</a></li>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+
+                        @endguest
+
                     </ul>
                 </div>
             </div>
@@ -84,7 +103,7 @@
                     </ul>
                 </div>
             </div>
-            
+
         </div>
     </div>
 </div><!-- Navigation bar end -->

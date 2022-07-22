@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('email', 255)->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password', 255);
-            $table->integer('default_address_id');
+            $table->integer('default_address_id')->nullable();
             $table->boolean('admin')->default(false);
             $table->softDeletes();
             $table->rememberToken();
