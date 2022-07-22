@@ -100,4 +100,27 @@ class CategoryController extends Controller
         return redirect('/admin/category');
 
     }
+        /**
+     * destroy function
+     *
+     * @return void
+     */
+    public function destroy(Request $request, $id)
+    {
+        $category = Category::find($id);
+        if($category->delete()) {
+            session()->flash('success', 'Category was deleted');
+            return redirect('/admin/category');
+        }
+        session()->flash('error', 'There was a problem deleting the Category');
+        return redirect('/admin/category');
+        
+    }
+    public function search(Request $request)
+    {
+
+    $category = Category::latest()->where('title','LIKE','%'.$request->input('search')."%")->simplePaginate(10);
+        
+    return view('/admin/category', compact('category'));
+    }
 }

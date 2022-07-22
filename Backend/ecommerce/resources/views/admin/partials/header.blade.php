@@ -12,7 +12,7 @@
                     <i class="fas fa-shirt fa-fw me-3"></i>
                     <span>Products</span>
                 </a>
-                <a href="#" class="list-group-item list-group-item-action py-2 ripple">
+                <a href="/admin/category" class="list-group-item list-group-item-action py-2 ripple">
                     <i class="fas fa-chart-bar fa-fw me-3"></i>
                     <span>Categories</span>
                 </a>
