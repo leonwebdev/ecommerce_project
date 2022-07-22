@@ -118,9 +118,8 @@ class CategoryController extends Controller
     }
     public function search(Request $request)
     {
-
-    $category = Category::latest()->where('title','LIKE','%'.$request->input('search')."%")->simplePaginate(10);
+    $categories = Category::latest()->where('title','LIKE','%'.$request->input('search')."%")->simplePaginate(10);
         
-    return view('/admin/category', compact('category'));
+    return view('/admin/category', compact('categories'));
     }
 }
