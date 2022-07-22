@@ -64,14 +64,13 @@ class ProductController extends Controller
             $images = $request->file('images');
             $imageArray = [];
             foreach ($images as $image) {
-                $path =  $image->store('public');
+                $path =  basename($image->store('public'));
                 array_push($imageArray, [
                     'image' => $path,
                     'label' => '',
                     'product_id' => $product->id
                 ]);
             }
-            // dd($imageArray);
             Product_media::insert($imageArray);
         }
         session()->flash('success', 'Product has been successfully created!');

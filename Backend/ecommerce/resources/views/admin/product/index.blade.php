@@ -35,7 +35,10 @@
                 <tr scope="row">
                     <td>{{ $product->id }}</td>
                     <td>
-                        {{-- <img src="/storage/{{ $category->image }}" height="100px" width="100px" /> --}}
+                        @if ($product->product_media && count($product->product_media))
+                            <img src="{{ asset('/storage/' . $product->product_media[0]->image) }}" height="100px"
+                                width="100px" />
+                        @endif
                     </td>
                     <td>{{ $product->name }}</td>
                     <td>${{ number_format($product->price, 2) }}</td>
