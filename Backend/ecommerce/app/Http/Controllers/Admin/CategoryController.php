@@ -67,7 +67,7 @@ class CategoryController extends Controller
    
     {
         $title = 'Admin | Category';
-        return view('admin/category/edit', compact('category', 'title'));
+        return view('/admin/category/edit', compact('category', 'title'));
     }
     /**
      * update function
@@ -118,8 +118,8 @@ class CategoryController extends Controller
     }
     public function search(Request $request)
     {
-    $categories = Category::latest()->where('title','LIKE','%'.$request->input('search')."%")->simplePaginate(10);
-        
-    return view('/admin/category', compact('categories'));
+        $categories = Category::latest()->where('title','LIKE','%'.$request->input('search')."%")->simplePaginate(10);
+            
+        return view('/admin/category', compact('categories'));
     }
 }

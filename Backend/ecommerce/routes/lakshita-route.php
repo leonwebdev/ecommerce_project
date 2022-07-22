@@ -24,4 +24,5 @@ Route::post('/admin/category',[App\Http\Controllers\Admin\CategoryController::cl
  Route::get('/admin/category/edit/{category}',[App\Http\Controllers\Admin\CategoryController::class, 'edit'])->name('category_edit');
 Route::put('/admin/category/{id}',[App\Http\Controllers\Admin\CategoryController::class, 'update'])->name('category_update');
 Route::delete('/admin/category/{id}', [App\Http\Controllers\Admin\CategoryController::class, 'destroy']);
+Route::post('/admin/category',[App\Http\Controllers\Admin\CategoryController::class, 'search']);
 Route::get('/admin/inquiry', [App\Http\Controllers\Admin\CategoryController::class, 'index']);
