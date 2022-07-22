@@ -5,7 +5,7 @@
         <div class="col-8">
             <div class="card mb-4">
                 <div class="card-header">
-                    <h2 class="mb-0">Add Post</h2>
+                    <h2 class="mb-0">Add Product</h2>
                 </div>
                 <div class="card-body">
                     {{ $errors }}

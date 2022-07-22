@@ -19,7 +19,7 @@ class ProductController extends Controller
         return view('/admin/product/index', compact('title', 'products'));
     }
     /**
-     * create function for add post form
+     * create function for add Product form
      *
      * @return void
      */
@@ -41,10 +41,9 @@ class ProductController extends Controller
             'color' => 'required|string|max:255',
             'price' => 'required|regex:/^\d+(\.\d{1,2})?$/',
             'quantity' => 'required|numeric|min:0',
-            'gender_id' => 'required|min:0',
-            'size_id' => 'required|min:0',
+            'gender_id' => 'required|min:1',
+            'size_id' => 'required|min:1',
             'category_id' => 'required|array|min:1',
-
             'images' => 'required',
             'images.*' => 'image|mimes:jpeg,png,jpg,svg|max:2048'
         ]);
