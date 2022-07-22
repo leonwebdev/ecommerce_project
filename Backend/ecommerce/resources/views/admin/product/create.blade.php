@@ -1,4 +1,4 @@
-@extends('layouts/app')
+@extends('layouts/admin')
 
 @section('content')
     <div class="row justify-content-center">
@@ -8,7 +8,7 @@
                     <h2 class="mb-0">Add Product</h2>
                 </div>
                 <div class="card-body">
-                    {{ $errors }}
+                    {{-- {{ $errors }} --}}
                     <form action="{{ route('admin_product_save') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3">
