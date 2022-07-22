@@ -5,9 +5,9 @@
              <ul>
                  <li> <a href="/about">About</a>
                  </li>
-                 <li> <a href="/contact.html">Contact</a>
+                 <li> <a href="/contact">Contact</a>
                  </li>
-                 <li> <a href="/terms">Terms & Condition</a>
+                 <li> <a href="/terms-and-conditions">Terms & Condition</a>
                  </li>
                  <li> <a href="/privacy">Privacy Policy</a>
                  </li>
