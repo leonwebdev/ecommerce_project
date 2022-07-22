@@ -74,10 +74,7 @@ class ProductController extends Controller
             // dd($imageArray);
             Product_media::insert($imageArray);
         }
-
-
         session()->flash('success', 'Product has been successfully created!');
-
         return redirect('/admin/product');
     }
 }

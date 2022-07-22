@@ -63,21 +63,15 @@
                         </div>
                         <div class="mb-3">
                             <label for="images" class="form-label">Image</label>
-                            <input type="file" name="images[]" multiple class="form-control" accept="image/*">
+                            <input type="file" name="images[]" multiple
+                                class="form-control  @error('images') is-invalid @enderror"" accept="image/*">
                             @if ($errors->has('images'))
                                 @foreach ($errors->get('images') as $error)
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $error }}</strong>
-                                    </span>
+                                    <div class="invalid-feedback">
+                                        {{ $error }}
+                                    </div>
                                 @endforeach
                             @endif
-                            {{-- <input type="file" class="form-control @error('image') is-invalid @enderror" id="image"
-                                name="image">
-                            @error('image')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror --}}
                         </div>
                         <div class="mb-3">
                             <label for="description" class="form-label">Description</label>
@@ -93,9 +87,9 @@
                             <label for="category_id" class="form-label">Category</label>
                             <select multiple class="form-select @error('category_id') is-invalid @enderror"
                                 name="category_id[]">
-                                @foreach ($categories as $index => $cat)
-                                    <option value="{{ $index }}"
-                                        {{ collect(old('category_id'))->contains($index) ? 'selected' : '' }}>
+                                @foreach ($categories as $cat)
+                                    <option value="{{ $cat->id }}"
+                                        {{ collect(old('category_id'))->contains($cat->id) ? 'selected' : '' }}>
                                         {{ $cat->title }}</option>
                                 @endforeach
                             </select>
@@ -110,9 +104,9 @@
                             <select class="form-select @error('gender_id') is-invalid @enderror" id="gender_id"
                                 name="gender_id">
                                 {{-- <option value="">Select Gender</option> --}}
-                                @foreach ($genders as $index => $item)
-                                    <option value="{{ $index }}"
-                                        {{ old('gender_id') == $index ? 'selected' : '' }}>{{ $item->name }}</option>
+                                @foreach ($genders as $item)
+                                    <option value="{{ $item->id }}"
+                                        {{ old('gender_id') == $item->id ? 'selected' : '' }}>{{ $item->name }}</option>
                                 @endforeach
                             </select>
                             @error('gender_id')
@@ -126,8 +120,9 @@
                             <select class="form-select @error('size_id') is-invalid @enderror" id="size_id"
                                 name="size_id">
                                 {{-- <option value="">Select Size</option> --}}
-                                @foreach ($sizes as $index => $item)
-                                    <option value="{{ $index }}" {{ old('size_id') == $index ? 'selected' : '' }}>
+                                @foreach ($sizes as $item)
+                                    <option value="{{ $item->id }}"
+                                        {{ old('size_id') == $item->id ? 'selected' : '' }}>
                                         {{ $item->name }}</option>
                                 @endforeach
                             </select>
