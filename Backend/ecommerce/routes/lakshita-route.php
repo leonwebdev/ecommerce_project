@@ -9,6 +9,7 @@ use App\Http\Controllers\PageNotFoundController;
 use App\Http\Controllers\Admin\InquiryController;
 use App\Http\Controllers\PrivacyPolicyController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\AdvertisementController;
 
 
 
@@ -19,6 +20,7 @@ use App\Http\Controllers\Admin\CategoryController;
  Route::get('/terms-and-conditions', [TermsController::class, 'index']);
  Route::get('/404', [PageNotFoundController::class, 'index']);
  Route::get('/privacy-policy', [PrivacyPolicyController::class, 'index']);
+ //Category Controller
  Route::get('/admin/category', [App\Http\Controllers\Admin\CategoryController::class, 'index']);
  Route::get('/admin/category/create',[App\Http\Controllers\Admin\CategoryController::class, 'create']);
 Route::post('/admin/category',[App\Http\Controllers\Admin\CategoryController::class, 'store']);
@@ -29,3 +31,11 @@ Route::post('/admin/category',[App\Http\Controllers\Admin\CategoryController::cl
 // Inquiry Controler
 Route::get('/admin/inquiry', [App\Http\Controllers\Admin\InquiryController::class, 'index']);
 Route::delete('/admin/inquiry/{id}', [App\Http\Controllers\Admin\InquiryController::class, 'destroy']);
+// Advertisement Controler
+Route::get('/admin/advertisement', [App\Http\Controllers\Admin\AdvertisementController::class, 'index']);
+Route::get('/admin/category/create',[App\Http\Controllers\Admin\CategoryController::class, 'create']);
+Route::post('/admin/category',[App\Http\Controllers\Admin\CategoryController::class, 'store']);
+Route::get('/admin/category/edit/{category}',[App\Http\Controllers\Admin\CategoryController::class, 'edit'])->name('category_edit');
+Route::put('/admin/category/{id}',[App\Http\Controllers\Admin\CategoryController::class, 'update'])->name('category_update');
+Route::delete('/admin/category/{id}', [App\Http\Controllers\Admin\CategoryController::class, 'destroy']);
+Route::post('/admin/category',[App\Http\Controllers\Admin\CategoryController::class, 'search']);
