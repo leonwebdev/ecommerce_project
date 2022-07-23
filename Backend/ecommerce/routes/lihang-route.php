@@ -3,13 +3,26 @@
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\ProfileController;
 
+// Route::get('/ltest', function () {
+//     return User::find(2)->user_addresses;
+// });
 
-// Route::get('/test', [HomeController::class, 'test']);
-
-Route::get('/ltest', function () {
-    return User::find(2)->user_addresses;
-});
-
+/*
+ ---------  Normal User Routes -------------------------------------------
+ */
 Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+
+/*
+ ---------  Admin User Routes -------------------------------------------
+ */
+// Route::middleware(['auth', 'admin'])->group(function () {
+// });
+Route::get('/admin/user', [UserController::class, 'index']);
+Route::get('/admin/user/edit/{user}', [UserController::class, 'edit'])->name('admin_user_edit');
+Route::put('/admin/user/{id}', [UserController::class, 'update']);
+// Route::get('/admin/user/create', [UserController::class, 'create'])->name('admin_user_add');
+// Route::post('/admin/user', [UserController::class, 'store']);
+Route::delete('/admin/user/{id}', [UserController::class, 'destroy']);

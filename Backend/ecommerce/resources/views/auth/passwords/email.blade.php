@@ -28,7 +28,7 @@
 
                         <div>
                             <div>
-                                <button type="submit" class="btn btn_black">
+                                <button type="submit" class="btn btn_white">
                                     {{ __('Send Password Reset Link') }}
                                 </button>
                             </div>
