@@ -67,7 +67,6 @@ class User extends Authenticatable
     /**
      * Get the User Full Address String
      *
-     * @param integer $id
      * @return string Full Address String
      */
     public function full_address()
@@ -82,7 +81,6 @@ class User extends Authenticatable
     /**
      * Get the User Postal Code
      *
-     * @param integer $id
      * @return string Postal Code String
      */
     public function user_postal_code()
