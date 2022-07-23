@@ -100,7 +100,7 @@ class UserController extends Controller
         ]);
 
         $user = User::find($id);
-        $address = User_address::find($id);
+        $address = User_address::find($user->default_address_id);
 
         // $v_user = [];
         // $v_address = [];
