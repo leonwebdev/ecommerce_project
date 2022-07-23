@@ -64,5 +64,45 @@ class User extends Authenticatable
         return $this->hasMany(Order::class);
     }
 
+    /**
+     * Get the User Full Address String
+     *
+     * @param integer $id
+     * @return string Full Address String
+     */
+    public function full_address($id)
+    {
+        $address = User_address::find($id);
+        // var_dump($address);
+        // die;
+        $full_address = $address->street . ', ' . $address->city . ', ' . $address->province . ', ' . $address->country;
+        return $full_address;
+    }
 
+    /**
+     * Get the User Postal Code
+     *
+     * @param integer $id
+     * @return string Postal Code String
+     */
+    public function user_postal_code($id)
+    {
+        $postal_code = User_address::find($id)->postal_code;
+        // var_dump($address);
+        // die;
+        return $postal_code;
+    }
+
+    /**
+     * Get the User Full Address Object
+     *
+     * @return Object Full Address Object
+     */
+    public function full_address_obj()
+    {
+        $address = User_address::find($this->id);
+        // var_dump($address);
+        // die;
+        return $address;
+    }
 }
