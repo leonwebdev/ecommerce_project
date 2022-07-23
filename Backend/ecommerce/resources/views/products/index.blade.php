@@ -51,6 +51,7 @@
                                 <div class="price">${{ number_format($product->price, 2) }} CAD</div>
                                 <div class="price">Size: {{ $product->size->name }} </div>
                                 <div class="price">Category: {{ $product->categories->implode('title', ', ') }} </div>
+                                <div class="price">Gender: {{ $product->gender->name }} </div>
                             </div>
                         </div>
                     @endforeach
@@ -73,7 +74,8 @@
             // remove unselected category from url
             selectedCategory.splice(selectedCategory.findIndex(x => x == e.target.value), 1);
         }
-        let url = '/product';
+
+        let url = window.location.pathname;
         let categoryStr = selectedCategory.toString();
         if (params.size) {
             url = `${url}?category=${categoryStr}&size=${params.size}`;
@@ -94,7 +96,8 @@
             // remove unselected size from url
             selectedSize.splice(selectedSize.findIndex(x => x == e.target.value), 1);
         }
-        let url = '/product';
+
+        let url = window.location.pathname;
         let sizeStr = selectedSize.toString();
         if (params.category) {
             url = `${url}?category=${params.category}&size=${sizeStr}`;
