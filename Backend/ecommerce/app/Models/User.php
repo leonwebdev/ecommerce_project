@@ -67,12 +67,11 @@ class User extends Authenticatable
     /**
      * Get the User Full Address String
      *
-     * @param integer $id
      * @return string Full Address String
      */
-    public function full_address($id)
+    public function full_address()
     {
-        $address = User_address::find($id);
+        $address = User_address::find($this->default_address_id);
         // var_dump($address);
         // die;
         $full_address = $address->street . ', ' . $address->city . ', ' . $address->province . ', ' . $address->country;
@@ -82,12 +81,11 @@ class User extends Authenticatable
     /**
      * Get the User Postal Code
      *
-     * @param integer $id
      * @return string Postal Code String
      */
-    public function user_postal_code($id)
+    public function user_postal_code()
     {
-        $postal_code = User_address::find($id)->postal_code;
+        $postal_code = User_address::find($this->default_address_id)->postal_code;
         // var_dump($address);
         // die;
         return $postal_code;
@@ -100,7 +98,7 @@ class User extends Authenticatable
      */
     public function full_address_obj()
     {
-        $address = User_address::find($this->id);
+        $address = User_address::find($this->default_address_id);
         // var_dump($address);
         // die;
         return $address;

@@ -21,7 +21,7 @@
                 <th scope="col">Name</th>
                 <th scope="col">Phone</th>
                 <th scope="col">Email</th>
-                <th scope="col">Address</th>
+                <th scope="col">Default Address</th>
                 <th scope="col">Postal Code</th>
                 <th scope="col">Action</th>
             </tr>
@@ -34,8 +34,8 @@
                             class="text-decoration-none">{{ $user->first_name . ' ' . $user->last_name }}</a></td>
                     <td>{{ $user->phone }}</td>
                     <td>{{ $user->email }}</td>
-                    <td>{{ $user->full_address($user->id) }}</td>
-                    <td class="fw-bold">{{ $user->user_postal_code($user->id) }}</td>
+                    <td>{{ $user->full_address() }}</td>
+                    <td class="fw-bold">{{ $user->user_postal_code() }}</td>
                     <td>
                         <div class="row">
                             <div class="col-auto ps-0 ms-0">

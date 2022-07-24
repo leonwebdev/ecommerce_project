@@ -32,7 +32,7 @@ class UsersTableSeeder extends Seeder
             'phone' => '321-321-4321',
             'email' => 'test@gmail.com',
             'password' => password_hash('P@ssw0rd', PASSWORD_DEFAULT),
-            'default_address_id' => 2,
+            'default_address_id' => 3,
             'created_at' => now(),
             'updated_at' => now()
         ]);

@@ -29,6 +29,62 @@ class ProfileController extends Controller
     public function index()
     {
         $title = "Profile";
-        return view('auth.profile', compact('title'));
+        $user = Auth::user()->id;
+        // return an integer, it's the Auth user id
+        $user = User::find($user);
+        $addresses = $user->user_addresses;
+        // echo ($addresses);
+        // die;
+        return view('auth.profile', compact('title', 'user', 'addresses',));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(User $user)
+    {
+        $title = "Edit Profile";
+        return view('auth.edit', compact('title', 'user'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        $valid = $request->validate(
+            [
+                'first_name' => ['required', 'string', 'min:3', 'max:255'],
+                'last_name' => ['required', 'string', 'min:3', 'max:255'],
+                'phone' => [
+                    'required', 'string', 'min:10', 'max:255',
+                    'regex:/^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/',
+                ],
+                'email' => ['required', 'string', 'email', 'min:5', 'max:255', 'unique:users,email,' . $id,],
+                'password' => [
+                    'nullable', 'string', 'min:8', 'max:255', 'confirmed',
+                    'regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[\W]).*$/',
+                ],
+            ],
+            [
+                'password.regex' => 'Password must include at least one Capital character, one lowercase character, one digit, one special character. Length between 8-255',
+            ]
+        );
+        // var_dump($valid);
+        // var_dump(User::find($id)->password);
+        // die;
+        if (is_null($valid['password'])) {
+            $valid['password'] = User::find($id)->password;
+        } else {
+            $valid['password'] = Hash::make($valid['password']);
+        }
+        User::find($id)->update($valid);
+        return redirect('/profile');
     }
 }
