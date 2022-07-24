@@ -138,6 +138,10 @@ class UserController extends Controller
     public function destroy($id)
     {
         $user = User::find($id);
+        $addresses = $user->user_addresses;
+        foreach ($addresses as $key => $address) {
+            $address->delete();
+        }
         if ($user->delete()) {
             session()->flash('success', 'User was deleted');
             return redirect('/admin/user');
