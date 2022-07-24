@@ -4,6 +4,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\UserAddressController;
 use App\Http\Controllers\Auth\ProfileController;
 use App\Http\Controllers\Auth\OrderHistoryController;
 
@@ -17,6 +18,8 @@ use App\Http\Controllers\Auth\OrderHistoryController;
 Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
 Route::get('/profile/edit/{user}', [ProfileController::class, 'edit'])->name('profile-edit');
 Route::put('/profile/{id}', [ProfileController::class, 'update']);
+Route::get('/address/edit/{user_address}', [UserAddressController::class, 'edit'])->name('address-edit');
+Route::put('/address/{id}', [UserAddressController::class, 'update']);
 Route::get('/order-history', [OrderHistoryController::class, 'index'])->name('order-history');
 
 /*

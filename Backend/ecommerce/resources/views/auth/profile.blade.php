@@ -33,7 +33,7 @@
                                     <div class="fw-bold">{{ $address->user_postal_code() }}</div>
                                 </div>
                                 <div class="action d-flex width-max-content align-items-top">
-                                    <div class="width-max-content pe-0_5"><a href="" class="lh-btn">Edit</a></div>
+                                    <div class="width-max-content pe-0_5"><a href="{{ route('address-edit', ['user_address' => $address->id ]) }}" class="lh-btn">Edit</a></div>
                                     @if ($address->is_default_address())
                                         <div class="width-max-content flex-grow-1">
                                             <a href="" class="lh-btn-outline"
