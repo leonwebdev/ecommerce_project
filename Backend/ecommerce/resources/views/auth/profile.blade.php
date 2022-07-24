@@ -60,6 +60,9 @@
                             </div>
                         @endforeach
                     </div>
+                    <div class="d-flex justify-content-end my-3">
+                        <a href="{{ route('address_add') }}" class="lh-btn fs-1_5">Add New Address</a>
+                    </div>
                 </div>
             </div>
         </div>

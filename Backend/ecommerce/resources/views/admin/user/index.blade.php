@@ -21,7 +21,7 @@
                 <th scope="col">Name</th>
                 <th scope="col">Phone</th>
                 <th scope="col">Email</th>
-                <th scope="col">Address</th>
+                <th scope="col">Default Address</th>
                 <th scope="col">Postal Code</th>
                 <th scope="col">Action</th>
             </tr>
