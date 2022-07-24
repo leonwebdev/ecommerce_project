@@ -1,4 +1,8 @@
+import $ from 'jquery';
 import "./bootstrap";
+import 'slick-carousel';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 'use strict';
 
@@ -7,6 +11,9 @@ $(document).ready(function() {
     menuDropdown();
     // footer
     getCurrentYear();
+    // home
+    homeBannerSlider();
+    homeFeaturedSlider();
 });
 
 /**
@@ -16,6 +23,9 @@ function getCurrentYear() {
     $('#footer_year').text(new Date().getFullYear());
 }
 
+/**
+ * Menu animation control
+ */
 function menuDropdown() {
     $('.icon.profile a, .profile_dropdown').mouseover(function(e) {
         e.preventDefault();
@@ -35,5 +45,59 @@ function menuDropdown() {
     $('nav ul li a, .nav_dropdown').mouseleave(function(e) {
         e.preventDefault();
         $('.nav_dropdown').stop().fadeOut(200);
+    });
+}
+
+/**
+ * Home page banner slider animation control
+ */
+function homeBannerSlider() {
+    $('.home .banner').slick({
+        dots: true,
+        arrows: true,
+        infinite: true,
+        speed: 500,
+        autoplay: true,
+        autoplaySpeed: 3000,
+        fade: true,
+        cssEase: 'linear',
+        draggable: true
+      });
+}
+
+/**
+ * Home page featured products slider animation control
+ */
+function homeFeaturedSlider() {
+    $('.featured_slider').slick({
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        dots: true,
+        centerMode: true,
+        focusOnSelect: true,
+        lazyLoad: 'ondemand',
+      });
+    
+    // add class name to the first tabs item when page loaded
+    $('.featured .tabs ul li:first').addClass('active');
+    $('.featured .content .row:first').addClass('show');
+
+    $('.featured .tabs ul li').each(function(tabIdx) {
+        
+        $(this).click(function(e) {
+            e.preventDefault();
+            // add class to selected tab
+            $('.featured .tabs ul li').removeClass('active');
+            $(this).addClass('active');
+            $('.featured .content .row').removeClass('show');
+            // add class to selected slider
+            $('.featured .content .row').each(function(itemIdx) {
+                var item = $(this);
+                
+                if(tabIdx == itemIdx) {
+                    item.addClass('show');
+                }
+            });
+        });
     });
 }

@@ -26,12 +26,12 @@ class GenderTableSeeder extends Seeder
             'updated_at' => now(),
         ]);
         DB::table('genders')->insert([
-            'name' => 'girl',
+            'name' => 'girls',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
         DB::table('genders')->insert([
-            'name' => 'boy',
+            'name' => 'boys',
             'created_at' => now(),
             'updated_at' => now(),
         ]);

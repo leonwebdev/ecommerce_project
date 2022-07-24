@@ -8,6 +8,10 @@
                     <i class="fas fa-clipboard fa-fw me-3"></i>
                     <span>Orders</span>
                 </a>
+                <a href="/admin/home" class="list-group-item list-group-item-action py-2 ripple">
+                    <i class="fas fa-house fa-fw me-3"></i>
+                    <span>Home Page</span>
+                </a>
                 <a href="/admin/product" class="list-group-item list-group-item-action py-2 ripple">
                     <i class="fas fa-shirt fa-fw me-3"></i>
                     <span>Products</span>
@@ -16,6 +20,14 @@
                     <i class="fas fa-chart-bar fa-fw me-3"></i>
                     <span>Categories</span>
                 </a>
+                <a href="/admin/advertisement" class="list-group-item list-group-item-action py-2 ripple">
+                    <i class="fas fa-rectangle-ad fa-fw me-3"></i>
+                    <span>Advertisements</span>
+                </a>
+                <a href="/admin/inquiry" class="list-group-item list-group-item-action py-2 ripple">
+                    <i class="fas fa-question fa-fw me-3"></i>
+                    <span>Inquiry</span>
+                </a>
                 <a href="/admin/user" class="list-group-item list-group-item-action py-2 ripple">
                     <i class="fas fa-user fa-fw me-3"></i>
                     <span>Users</span>
@@ -23,15 +35,6 @@
                 <a href="/admin/address" class="list-group-item list-group-item-action py-2 ripple">
                     <i class="fas fa-location-dot fa-fw me-3"></i>
                     <span>Addresses</span>
-                </a>
-
-                <a href="/admin/advertisement" class="list-group-item list-group-item-action py-2 ripple">
-                    <i class="fas fa-rectangle-ad fa-fw me-3"></i>
-                    <span>Advertisements</span>
-                </a>
-                <a href="/admin/inquiry" class="list-group-item list-group-item-action py-2 ripple">
-                    <i class="fas fa-rectangle-ad fa-fw me-3"></i>
-                    <span>Inquiry</span>
                 </a>
             </div>
         </div>

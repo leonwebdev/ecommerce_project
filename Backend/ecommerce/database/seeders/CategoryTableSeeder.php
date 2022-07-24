@@ -33,6 +33,11 @@ class CategoryTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
-
+        DB::table('categories')->insert([
+            'title' => 'Featured',
+            'image' => 'fghvacadad.jpg',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
     }
 }
