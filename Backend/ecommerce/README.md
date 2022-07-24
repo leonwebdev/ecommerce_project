@@ -8,3 +8,9 @@
 
 # Command for Laravel Production
 - compile the files from source folder to public folder when launching to server ``` npm run prod ```
+
+
+# Library / Plugin References
+
+### Frontend slider
+- [Slick (jQuery)](https://kenwheeler.github.io/slick/)
