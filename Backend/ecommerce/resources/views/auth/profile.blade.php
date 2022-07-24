@@ -14,7 +14,8 @@
                         <div class="">
                             <h1 class="my-2">{{ $title }}</h1>
                         </div>
-                        <div class="width-8 text-align-end"><a href="{{ route('profile-edit', ['user' => $user->id]) }}" class="lh-btn fs-1">Edit</a></div>
+                        <div class="width-8 text-align-end"><a href="{{ route('profile-edit', ['user' => $user->id]) }}"
+                                class="lh-btn fs-1">Edit</a></div>
                     </div>
                     <p class="col col-6 fs-1_4 text-end fw-bold">Name : </p>
                     <p class="col col-6 fs-1_4 text-start">{{ $user->first_name . ' ' . $user->last_name }}</p>
@@ -33,7 +34,9 @@
                                     <div class="fw-bold">{{ $address->user_postal_code() }}</div>
                                 </div>
                                 <div class="action d-flex width-max-content align-items-top">
-                                    <div class="width-max-content pe-0_5"><a href="{{ route('address-edit', ['user_address' => $address->id ]) }}" class="lh-btn">Edit</a></div>
+                                    <div class="width-max-content pe-0_5"><a
+                                            href="{{ route('address-edit', ['user_address' => $address->id]) }}"
+                                            class="lh-btn">Edit</a></div>
                                     @if ($address->is_default_address())
                                         <div class="width-max-content flex-grow-1">
                                             <a href="" class="lh-btn-outline"
@@ -41,8 +44,17 @@
                                         </div>
                                     @else
                                         <div class="width-max-content flex-grow-1">
-                                            <a href="" class="lh-btn">Set as Default</a>
+                                            <a href="" class="lh-btn"
+                                                onclick="event.preventDefault();
+                                                document.getElementById('set_default_address_{{ $address->id }}').submit();"
+                                                >Set as Default</a>
                                         </div>
+                                        <form action="/default-address/{{ $address->id }}" method="post" class="d-none"
+                                            id="set_default_address_{{ $address->id }}">
+                                            @csrf
+                                            @method('PUT')
+                                            <input type="hidden" name="id" value="{{ $user->id }}">
+                                        </form>
                                     @endif
                                 </div>
                             </div>

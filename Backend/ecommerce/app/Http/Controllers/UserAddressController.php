@@ -51,4 +51,22 @@ class UserAddressController extends Controller
         User_address::find($id)->update($valid);
         return redirect('/profile');
     }
+
+    /**
+     * Update the User Default Address.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function updateDefaultAddress(Request $request, $id)
+    {
+        $user_address = User_address::find($id);
+        $user = User::find($user_address->user_id);
+        $valid['default_address_id'] = $id;
+        $user->update($valid);
+        return redirect('/profile#User_address');
+    }
+
+
 }

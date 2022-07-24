@@ -20,6 +20,7 @@ Route::get('/profile/edit/{user}', [ProfileController::class, 'edit'])->name('pr
 Route::put('/profile/{id}', [ProfileController::class, 'update']);
 Route::get('/address/edit/{user_address}', [UserAddressController::class, 'edit'])->name('address-edit');
 Route::put('/address/{id}', [UserAddressController::class, 'update']);
+Route::put('/default-address/{id}', [UserAddressController::class, 'updateDefaultAddress']);
 Route::get('/order-history', [OrderHistoryController::class, 'index'])->name('order-history');
 
 /*
