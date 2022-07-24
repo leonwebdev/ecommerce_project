@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\UserAddressController;
 use App\Http\Controllers\Auth\ProfileController;
 use App\Http\Controllers\Auth\OrderHistoryController;
+use App\Http\Controllers\Admin\UserAddressController as AdminUserAddressController;
 
 // Route::get('/ltest', function () {
 //     return User::find(2)->user_addresses;
@@ -30,8 +31,8 @@ Route::middleware(['auth'])->group(function () {
 });
 
 /*
- ---------  Admin User Routes -------------------------------------------
- */
+---------  Admin User Routes -------------------------------------------
+*/
 // Route::middleware(['auth', 'admin'])->group(function () {
 // });
 
@@ -41,3 +42,8 @@ Route::put('/admin/user/{id}', [UserController::class, 'update']);
 // Route::get('/admin/user/create', [UserController::class, 'create'])->name('admin_user_add');
 // Route::post('/admin/user', [UserController::class, 'store']);
 Route::delete('/admin/user/{id}', [UserController::class, 'destroy']);
+Route::get('/admin/address', [AdminUserAddressController::class, 'index']);
+Route::get('/admin/address/edit/{address}', [AdminUserAddressController::class, 'edit'])->name('admin_address_edit');
+Route::delete('/admin/address/{id}', [AdminUserAddressController::class, 'destroy']);
+Route::put('/admin/default-address/{id}', [AdminUserAddressController::class, 'updateDefaultAddress']);
+Route::put('/admin/address/{id}', [AdminUserAddressController::class, 'update']);

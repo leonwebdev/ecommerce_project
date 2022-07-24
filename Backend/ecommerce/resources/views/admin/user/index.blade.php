@@ -37,20 +37,27 @@
                     <td>{{ $user->full_address() }}</td>
                     <td class="fw-bold">{{ $user->user_postal_code() }}</td>
                     <td>
-                        <div class="row">
+                        <div class="row mx-0">
                             <div class="col-auto ps-0 ms-0">
                                 <a class="btn btn-info" href="{{ route('admin_user_edit', ['user' => $user->id]) }}"
                                     role="button">Edit</a>
                             </div>
-                            <div class="col-auto ps-0 ms-0">
-                                <form method="post" action="/admin/user/{{ $user->id }}">
-                                    @csrf
-                                    @method('DELETE')
-                                    <input type="hidden" name="id" value="{{ $user->id }}" />
-                                    <button onclick="return confirm('Confirm delete this?')"
-                                        class="btn btn-danger">Delete</button>
-                                </form>
-                            </div>
+                            @if ($user->admin == true)
+                                <div class="col-auto ps-0 ms-0">
+                                    <a href="" class="btn btn-outline-danger"
+                                        onclick="event.preventDefault();">Cannot Delete Admin</a>
+                                </div>
+                            @else
+                                <div class="col-auto ps-0 ms-0">
+                                    <form method="post" action="/admin/user/{{ $user->id }}">
+                                        @csrf
+                                        @method('DELETE')
+                                        <input type="hidden" name="id" value="{{ $user->id }}" />
+                                        <button onclick="return confirm('Confirm delete this?')"
+                                            class="btn btn-danger">Delete</button>
+                                    </form>
+                                </div>
+                            @endif
                         </div>
                     </td>
                 </tr>
