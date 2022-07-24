@@ -95,17 +95,17 @@
 
     .collections {
         margin-bottom: 100px;
-        position: relative;
         
         > .wrapper {
             max-width: 980px;
+            position: relative;
         }
 
         .decorative_text {
             transform: rotate(90deg);
             position: absolute;
             top: 50%;
-            right: -120px;
+            right: -340px;
         }
 
         .content {
@@ -126,8 +126,7 @@
         .item {
             
             position: relative;
-            
-
+        
             > .bg_img {
                 background-repeat: no-repeat;
                 background-size: 100%;
@@ -150,7 +149,7 @@
                 @include transition();
 
                 &:hover {
-                    background-color: rgba($color: #000000, $alpha: .2);
+                    background-color: rgba($color: #000000, $alpha: .3);
 
                     ~ .bg_img {
                         background-size: 110%;
@@ -167,8 +166,6 @@
                 }
             }
         }
-
-        
 
         .item_1 {
             height: 390px;
@@ -208,6 +205,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding: 20px 0;
 
             .tabs {
                 margin-left: auto;
@@ -217,43 +215,62 @@
                         display: inline-block;
                         font-size: 30px;
                         margin-right: 20px;
+                        text-transform: capitalize;
+                        color: #989898;
+                        cursor: pointer;
+
                         &:last-of-type {
                             margin-right: 0;
                         }
-                        a {
-                            color: #989898;
+
+                        &:after {
+                            content: '';
+                            display: block;
+                            position: absolute;
+                            width: 100%;
+                            height: 0;
+                            background-color: $color-primary;
+                            opacity: .6;
+                            bottom: -6px;
+                            left: 0;
+                        }
+
+                        &.active, &:hover {
+                            position: relative;
+                            color: $color-primary; 
                             
                             &:after {
-                                content: '';
-                                display: block;
-                                position: absolute;
-                                width: 100%;
-                                height: 0;
-                                background-color: $color-primary;
-                                opacity: .6;
-                                bottom: -6px;
-                                left: 0;
+                                height: 6px;
                             }
-
-                            &.active, &:hover {
-                                position: relative;
-                                color: $color-primary; 
-                                
-                                &:after {
-                                    height: 6px;
-                                }
-                                
-                            }
+                            
                         }
+                        
                     }
                 }
             }
         }
 
         .content {
-            .featured_slider {
+            position: relative;
+            min-height: 485px;
+            > .row {
+                position: absolute;
+                width: 100%;
                 max-width: 970px;
-                float: right;
+                top: 0;
+                right: 0;
+                opacity: 0;
+                visibility: hidden;
+                @include transition();
+                &.show {
+                    opacity: 1;
+                    visibility: visible;
+                }
+            }
+
+            .featured_slider {
+                margin-left: auto;
+                margin-right: 0;
 
                 .slick-list {
                     margin-bottom: 20px;
@@ -297,8 +314,10 @@
 
                 .slick-dots {
                     text-align: left;
+                    bottom: -45px;
 
                     li {
+                        margin: 0 3px;
                         button {
                             &:before {
                                 font-size: 12px;

@@ -48,6 +48,9 @@ function menuDropdown() {
     });
 }
 
+/**
+ * Home page banner slider animation control
+ */
 function homeBannerSlider() {
     $('.home .banner').slick({
         dots: true,
@@ -62,6 +65,9 @@ function homeBannerSlider() {
       });
 }
 
+/**
+ * Home page featured products slider animation control
+ */
 function homeFeaturedSlider() {
     $('.featured_slider').slick({
         slidesToShow: 3,
@@ -71,4 +77,27 @@ function homeFeaturedSlider() {
         focusOnSelect: true,
         lazyLoad: 'ondemand',
       });
+    
+    // add class name to the first tabs item when page loaded
+    $('.featured .tabs ul li:first').addClass('active');
+    $('.featured .content .row:first').addClass('show');
+
+    $('.featured .tabs ul li').each(function(tabIdx) {
+        
+        $(this).click(function(e) {
+            e.preventDefault();
+            // add class to selected tab
+            $('.featured .tabs ul li').removeClass('active');
+            $(this).addClass('active');
+            $('.featured .content .row').removeClass('show');
+            // add class to selected slider
+            $('.featured .content .row').each(function(itemIdx) {
+                var item = $(this);
+                
+                if(tabIdx == itemIdx) {
+                    item.addClass('show');
+                }
+            });
+        });
+    });
 }

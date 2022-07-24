@@ -45,7 +45,6 @@
         </div>
     </div><!-- End Collections -->
 
-
     <!-- Sliders for featured products -->
     <div class="featured">
         <div class="wrapper">
@@ -53,60 +52,34 @@
                 <div class="decorative_text">featured</div>
                 <div class="tabs">
                     <ul>
-                        <li><a class="active" href="#">Women</a></li>
-                        <Li><a href="#">Men</a></Li>
-                        <li><a href="#">Boys</a></li>
-                        <li><a href="#">Girls</a></li>
+                        @foreach($genders as $gender)
+                        <li>{{ $gender->name }}</li>
+                        @endforeach
                     </ul>
                 </div>
             </div>
             <div class="content">
-                <div class="featured_slider">
-                     <div class="featured_item">
-                        <div class="product_img">
-                            <a href="/product/girl-dress">
-                                <img src="/images/item1.jpg" alt="item" />
-                            </a>
+                @foreach($genders as $gender)
+                    <div class="row">
+                        <div class="featured_slider">
+                        @foreach($featured as $item)
+                            @if($item->gender_id == $gender->id)
+                            <div class="featured_item">
+                                <div class="product_img">
+                                    <a href="/product/{{ $item->slug }}">
+                                        <img src="/images/item1.jpg" alt="item" />
+                                    </a>
+                                </div>
+                                <div class="title">
+                                    {{ $item->name }}
+                                </div>
+                                <div class="price">${{ $item->price }} CAD</div>
+                            </div>
+                            @endif
+                        @endforeach
                         </div>
-                        <div class="title">
-                            Vivamus suscipit tortor eget ...
-                        </div>
-                        <div class="price">$38.00</div>
                     </div>
-                     <div class="featured_item">
-                        <div class="product_img">
-                            <a href="/product/girl-dress">
-                                <img src="/images/item1.jpg" alt="item" />
-                            </a>
-                        </div>
-                        <div class="title">
-                            Vivamus suscipit tortor eget ...
-                        </div>
-                        <div class="price">$38.00</div>
-                    </div>
-                     <div class="featured_item">
-                        <div class="product_img">
-                            <a href="/product/girl-dress">
-                                <img src="/images/item1.jpg" alt="item" />
-                            </a>
-                        </div>
-                        <div class="title">
-                            Vivamus suscipit tortor eget ...
-                        </div>
-                        <div class="price">$38.00</div>
-                    </div>
-                    <div class="featured_item">
-                        <div class="product_img">
-                            <a href="/product/girl-dress">
-                                <img src="/images/item1.jpg" alt="item" />
-                            </a>
-                        </div>
-                        <div class="title">
-                            Vivamus suscipit tortor eget ...
-                        </div>
-                        <div class="price">$38.00</div>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </div><!-- End of Sliders for featured products -->
