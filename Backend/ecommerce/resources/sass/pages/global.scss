@@ -58,6 +58,10 @@ button {
     vertical-align: top;
     padding: 0 10px;
 
+    &.col-4 {
+        width: calc((100% - 8px) / 12 * 4);
+    }
+
     &.col-5 {
         width: calc((100% - 4px) / 12 * 5);
     }
@@ -109,6 +113,17 @@ button {
         border: 1px solid $color-primary;
         &:hover {
             background-color: $color-primary;
+            color: #fff;
+        }
+    }
+
+    &.btn_white_border {
+        background-color: transparent;
+        color: #fff;
+        border: 1px solid #fff;
+        &:hover {
+            border: 1px solid #000;
+            background-color: #000;
             color: #fff;
         }
     }
