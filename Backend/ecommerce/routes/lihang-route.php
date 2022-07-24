@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\ProfileController;
+use App\Http\Controllers\Auth\OrderHistoryController;
 
 // Route::get('/ltest', function () {
 //     return User::find(2)->user_addresses;
@@ -14,6 +15,9 @@ use App\Http\Controllers\Auth\ProfileController;
  ---------  Normal User Routes -------------------------------------------
  */
 Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+Route::get('/profile/edit/{user}', [ProfileController::class, 'edit'])->name('profile-edit');
+Route::put('/profile/{id}', [ProfileController::class, 'update']);
+Route::get('/order-history', [OrderHistoryController::class, 'index'])->name('order-history');
 
 /*
  ---------  Admin User Routes -------------------------------------------

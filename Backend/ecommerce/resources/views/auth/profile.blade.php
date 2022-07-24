@@ -14,7 +14,7 @@
                         <div class="">
                             <h1 class="my-2">{{ $title }}</h1>
                         </div>
-                        <div class="width-8 text-align-end"><a href="" class="lh-btn fs-1">Edit</a></div>
+                        <div class="width-8 text-align-end"><a href="{{ route('profile-edit', ['user' => $user->id]) }}" class="lh-btn fs-1">Edit</a></div>
                     </div>
                     <p class="col col-6 fs-1_4 text-end fw-bold">Name : </p>
                     <p class="col col-6 fs-1_4 text-start">{{ $user->first_name . ' ' . $user->last_name }}</p>
