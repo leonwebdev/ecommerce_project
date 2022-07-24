@@ -181,3 +181,19 @@ div a.lh-btn:hover {
     background-color: rgb(182, 182, 182);
     color: rgb(36, 36, 36);
 }
+.btn.btn_white_no_border.lh {
+    border-bottom: none;
+    border-top: 1px solid #ffffff;
+}
+
+.btn.btn_white_no_border.lh:hover {
+    border-bottom: none;
+    border-top: 1px solid #707070;
+}
+
+hr {
+    border-top: 1px solid black;
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+}
