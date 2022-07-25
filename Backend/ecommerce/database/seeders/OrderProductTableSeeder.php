@@ -18,12 +18,23 @@ class OrderProductTableSeeder extends Seeder
         DB::table('order_product')->insert([
             'order_id' => 1,
             'product_id' => 1,
-            'unit_price' => 1,
+            'unit_price' => 7.99,
             'quantity' => 1,
-            'line_price' => 1,
+            'line_price' => 7.99,
             'product_name' => 'Default Product Name',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+        DB::table('order_product')->insert([
+            'order_id' => 1,
+            'product_id' => 2,
+            'unit_price' => 6.99,
+            'quantity' => 2,
+            'line_price' => 13.98,
+            'product_name' => 'Default Product Name',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
     }
 }
