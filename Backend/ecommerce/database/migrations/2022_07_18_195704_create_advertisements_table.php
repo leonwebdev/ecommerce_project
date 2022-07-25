@@ -17,6 +17,8 @@ return new class extends Migration
         Schema::create('advertisements', function (Blueprint $table) {
             $table->id();
             $table->string('image', 255);
+            $table->string('title', 255);
+            $table->string('link', 255);
             $table->enum('pages', [
                 'all',
                 'home',

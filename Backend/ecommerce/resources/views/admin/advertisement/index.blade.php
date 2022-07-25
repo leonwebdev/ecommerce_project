@@ -28,21 +28,21 @@
           </tr>
         </thead>
         <tbody>
-          @foreach($inquiries as $inquiry)
+          @foreach($advertisements as $advertisement)
           <tr scope="row">
-          <td>{{ $inquiry->id }}</td>
-          <td><img src="/storage/{{ $inquiry->image }}" height="100px" width="100px"/></td>
-          <td>{{ $inquiry->title }}</td>
-          <td>{{ $inquiry->link }}</td>
-          <td>{{ $inquiry->pages }}</td>
-          <td>{{ $inquiry->area }}</td> 
-          <td><a href="/admin/inquiry/edit/{{ $inquiry->id }}" class="btn btn-info">Edit</a>
-          <form method="post" action="/admin/inquiry/{{ $inquiry->id }}">
+          <td>{{ $advertisement->id }}</td>
+          <td><img src="/storage/{{ $advertisement->image }}" height="100px" width="100px"/></td>
+          <td>{{ $advertisement->title }}</td>
+          <td><a href="{{ $advertisement->link }}" title="link">{{ $advertisement->link }}</a></td>
+          <td>{{ $advertisement->pages }}</td>
+          <td>{{ $advertisement->area }}</td> 
+          <td><a href="/admin/advertisement/edit/{{ $advertisement->id }}" class="btn btn-info">Edit</a>
+          <form method="post" action="/admin/advertisement/{{ $advertisement->id }}">
                     @csrf
                     @method('DELETE')
-                    <input type="hidden" name="id" value="{{ $inquiry->id }}" />
+                    <input type="hidden" name="id" value="{{ $advertisement->id }}" />
                     <button
-                    class="btn btn-danger" onclick="return confirm('Do you really want to delete {{ $inquiry->title }}?')">Delete</button>
+                    class="btn btn-danger" onclick="return confirm('Do you really want to delete {{ $advertisement->title }}?')">Delete</button>
                 </form>
             </td>
           </tr>
@@ -50,7 +50,7 @@
         </tbody>
     </table>
     <div class="px-3">
-        {!! $categories->links('pagination::bootstrap-5') !!}
+        {!! $advertisements->links('pagination::bootstrap-5') !!}
     </div>
 
 @endsection
