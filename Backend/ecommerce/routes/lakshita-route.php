@@ -21,7 +21,7 @@ Route::middleware(['auth'])->group(function () {
  Route::get('/terms-and-conditions', [TermsController::class, 'index']);
  Route::get('/404', [PageNotFoundController::class, 'index']);
  Route::get('/privacy-policy', [PrivacyPolicyController::class, 'index']);
- 
+
 });
 
  //Category Controller
@@ -37,9 +37,9 @@ Route::get('/admin/inquiry', [App\Http\Controllers\Admin\InquiryController::clas
 Route::delete('/admin/inquiry/{id}', [App\Http\Controllers\Admin\InquiryController::class, 'destroy']);
 // Advertisement Controler
 Route::get('/admin/advertisement', [App\Http\Controllers\Admin\AdvertisementController::class, 'index']);
-//Route::get('/admin/advertisement/create',[App\Http\Controllers\Admin\AdvertisementController::class, 'create']);
-// Route::post('/admin/category',[App\Http\Controllers\Admin\CategoryController::class, 'store']);
+Route::get('/admin/advertisement/create',[App\Http\Controllers\Admin\AdvertisementController::class, 'create']);
+Route::post('/admin/advertisement',[App\Http\Controllers\Admin\AdvertisementController::class, 'store']);
 // Route::get('/admin/category/edit/{category}',[App\Http\Controllers\Admin\CategoryController::class, 'edit'])->name('category_edit');
 // Route::put('/admin/category/{id}',[App\Http\Controllers\Admin\CategoryController::class, 'update'])->name('category_update');
 // Route::delete('/admin/category/{id}', [App\Http\Controllers\Admin\CategoryController::class, 'destroy']);
-Route::post('/admin/advertisement',[App\Http\Controllers\Admin\AdvertisementController::class, 'search']);
+// Route::post('/admin/advertisement/search',[App\Http\Controllers\Admin\AdvertisementController::class, 'search']);

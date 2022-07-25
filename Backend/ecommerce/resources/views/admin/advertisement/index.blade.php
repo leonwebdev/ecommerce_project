@@ -14,7 +14,7 @@
         </form>
       </div>
     </div>
-    <a href="/admin/category/create" class="btn btn-primary">Add a Advertisement</a></td>
+    <a href="/admin/advertisement/create" class="btn btn-primary">Add a Advertisement</a></td>
     <!-- List Tables -->
     <table class="table table-striped">
       <thead>

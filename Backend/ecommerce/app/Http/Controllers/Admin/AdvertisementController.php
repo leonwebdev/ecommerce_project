@@ -28,36 +28,42 @@ class AdvertisementController extends Controller
     public function create()
     {
         $title = 'Admin | Advertisement';
-        return view('/admin/advertisement/create', compact('title'));
+        $pages=['all','home','product-list'];
+        $area=['top','bottom','sidebar'];
+        return view('/admin/advertisement/create', compact('title','pages','area'));
     }
     /**
      * store function
      *
      * @return void
      */
-    // public function store(Request $request)
-    // {
+    public function store(Request $request)
+    {
 
-    //     $valid = $request->validate([
-    //         'title' => 'required|string|max:255',
-    //         'image' => 'nullable|image'
-    //     ]);
-    //     if($request->file('image')) {
-    //         $path =  $request->file('image')->store('public');
-    //     }
+        $valid = $request->validate([
+            'image' => 'nullable|image',
+            'title' => 'required|string|max:255',
+            'link' => 'required|string|max:255',
+            'pages' => 'required|string|max:255',
+            'area' => 'required|string|max:255'
+            
+        ]);
+        if($request->file('image')) {
+            $path =  $request->file('image')->store('public');
+        }
 
-    //     // Must give in_print a value
-    //     $valid['image'] = basename($path ?? 'default.jpg') ;
-    //     //$valid['in_print'] = $valid['in_print'] ?? 0;
+        // Must give in_print a value
+        $valid['image'] = basename($path ?? 'default.jpg') ;
+        //$valid['in_print'] = $valid['in_print'] ?? 0;
 
-    //     advertisement::create($valid);
+        Advertisement::create($valid);
 
-    //     session()->flash('success', 'advertisement successfully created!');
+        session()->flash('success', 'advertisement successfully created!');
         
-    //     return redirect('/admin/advertisement');
+        return redirect('/admin/advertisement');
 
 
-    // }
+    }
     // /**
     //  * edit function
     //  *
@@ -120,6 +126,6 @@ class AdvertisementController extends Controller
     {
         $advertisements = Advertisement::latest()->where('title','LIKE','%'.$request->input('search')."%")->simplePaginate(10);
             
-        return view('/admin/advertisement', compact('categories'));
+        return view('/admin/advertisement', compact('advertisements'));
     }
 }
