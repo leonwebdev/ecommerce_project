@@ -5,16 +5,20 @@
         <div class="col-8">
             <div class="card mb-4">
                 <div class="card-header">
-                    <h2 class="mb-0">Add Product</h2>
+                    <h2 class="mb-0">Edit Product</h2>
                 </div>
                 <div class="card-body">
                     {{-- {{ $errors }} --}}
-                    <form action="{{ route('admin_product_save') }}" method="POST" enctype="multipart/form-data">
+                    {{ $product }}
+                    <form action="{{ route('admin_product_update', ['product' => $product->id]) }}" method="POST"
+                        enctype="multipart/form-data">
                         @csrf
+                        @method('PUT')
+
                         <div class="mb-3">
                             <label for="name" class="form-label">Name</label>
                             <input type="text" class="form-control @error('name') is-invalid @enderror" id="name"
-                                name="name" placeholder="Enter Name" value="{{ old('name') }}">
+                                name="name" placeholder="Enter Name" value="{{ old('name', $product->name) }}">
                             @error('name')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -24,7 +28,7 @@
                         <div class="mb-3">
                             <label for="slug" class="form-label">Slug</label>
                             <input type="text" class="form-control @error('slug') is-invalid @enderror" id="slug"
-                                name="slug" placeholder="Enter Slug" value="{{ old('slug') }}">
+                                name="slug" placeholder="Enter Slug" value="{{ old('slug', $product->slug) }}">
                             @error('slug')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -34,7 +38,7 @@
                         <div class="mb-3">
                             <label for="color" class="form-label">Color</label>
                             <input type="text" class="form-control @error('color') is-invalid @enderror" id="color"
-                                name="color" placeholder="Enter Color" value="{{ old('color') }}">
+                                name="color" placeholder="Enter Color" value="{{ old('color', $product->color) }}">
                             @error('color')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -44,7 +48,7 @@
                         <div class="mb-3">
                             <label for="price" class="form-label">Price</label>
                             <input type="text" class="form-control @error('price') is-invalid @enderror" id="price"
-                                name="price" placeholder="Enter Price" value="{{ old('price') }}">
+                                name="price" placeholder="Enter Price" value="{{ old('price', $product->price) }}">
                             @error('price')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -54,7 +58,8 @@
                         <div class="mb-3">
                             <label for="quantity" class="form-label">Quantity</label>
                             <input type="text" class="form-control @error('quantity') is-invalid @enderror"
-                                id="quantity" name="quantity" placeholder="Enter Quantity" value="{{ old('quantity') }}">
+                                id="quantity" name="quantity" placeholder="Enter Quantity"
+                                value="{{ old('quantity', $product->quantity) }}">
                             @error('quantity')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -63,8 +68,22 @@
                         </div>
                         <div class="mb-3">
                             <label for="images" class="form-label">Image</label>
+                            @if ($product->product_media && count($product->product_media) > 0)
+                                <div>
+                                    @foreach ($product->product_media as $item)
+                                        <div class="d-inline-block p-2">
+                                            <img class="img-thumbnail" width="100" height="100"
+                                                data-id="{{ $item->id }}" src="/storage/{{ $item->image }}" />
+                                            <button type="button" class="d-block m-auto mt-2 btn btn-danger btn-sm"
+                                                data-id="{{ $item->id }}"
+                                                onclick="if(confirm('Are you sure you want to delete the image?')) onMediaDelete(event,this);">Delete</button>
+                                        </div>
+                                    @endforeach
+                                </div>
+                                <br />
+                            @endif
                             <input type="file" name="images[]" multiple
-                                class="form-control  @error('images') is-invalid @enderror"" accept="image/*">
+                                class="form-control  @error('images') is-invalid @enderror" accept="image/*">
                             @if ($errors->has('images'))
                                 @foreach ($errors->get('images') as $error)
                                     <div class="invalid-feedback">
@@ -76,7 +95,7 @@
                         <div class="mb-3">
                             <label for="description" class="form-label">Description</label>
                             <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description"
-                                rows="3" placeholder="Enter Description">{!! old('description') !!}</textarea>
+                                rows="3" placeholder="Enter Description">{!! old('description', $product->description) !!}</textarea>
                             @error('description')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -89,7 +108,7 @@
                                 name="category_id[]">
                                 @foreach ($categories as $cat)
                                     <option value="{{ $cat->id }}"
-                                        {{ collect(old('category_id'))->contains($cat->id) ? 'selected' : '' }}>
+                                        {{ collect(old('category_id', $oldCategoryIds))->contains($cat->id) ? 'selected' : '' }}>
                                         {{ $cat->title }}</option>
                                 @endforeach
                             </select>
@@ -106,7 +125,8 @@
                                 {{-- <option value="">Select Gender</option> --}}
                                 @foreach ($genders as $item)
                                     <option value="{{ $item->id }}"
-                                        {{ old('gender_id') == $item->id ? 'selected' : '' }}>{{ $item->name }}</option>
+                                        {{ old('gender_id', $product->gender_id) == $item->id ? 'selected' : '' }}>
+                                        {{ $item->name }}</option>
                                 @endforeach
                             </select>
                             @error('gender_id')
@@ -142,3 +162,22 @@
         </div>
     </div>
 @endsection
+<script>
+    function onMediaDelete(e, el) {
+        const id = el.dataset.id;
+        $(document).ready(function() {
+            $.ajax({
+                url: "/admin/product/media/" + id,
+                type: 'DELETE',
+                data: {
+                    "id": id,
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function() {
+                    $(`img[data-id="${id}"]`).hide();
+                }
+            });
+
+        });
+    }
+</script>

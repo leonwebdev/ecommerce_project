@@ -10,6 +10,12 @@ Route::get('/admin/product/create', [App\Http\Controllers\Admin\ProductControlle
     ->name('admin_product_add');
 Route::post('/admin/product', [App\Http\Controllers\Admin\ProductController::class, 'store'])
     ->name('admin_product_save');
+Route::get('/admin/product/edit/{product}', [App\Http\Controllers\Admin\ProductController::class, 'edit'])
+    ->name('admin_product_edit');
+Route::put('/admin/product/{product}', [App\Http\Controllers\Admin\ProductController::class, 'update'])
+    ->name('admin_product_update');
+Route::delete('/admin/product/media/{media}', [App\Http\Controllers\Admin\ProductController::class, 'deleteMedia'])
+    ->name('admin_product_media_delete');
 
 Route::get('/product', [ProductController::class, 'index'])
     ->name('product_list');
