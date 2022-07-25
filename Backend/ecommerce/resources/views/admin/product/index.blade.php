@@ -48,7 +48,9 @@
                     <td>{{ $product->gender->name }}</td>
 
                     <td>
-                        <a class="btn btn-info" href="#" role="button">Edit</a>
+                        <a class="btn btn-info"
+                            href="{{ route('admin_product_edit', ['product' => $product->id]) }}">Edit</a>
+                        {{-- <a class="btn btn-info" href="#" role="button">Edit</a> --}}
                         <a class="btn btn-danger" href="#" role="button">Delete</a>
                     </td>
                 </tr>
