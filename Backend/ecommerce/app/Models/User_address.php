@@ -27,4 +27,41 @@ class User_address extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    /**
+     * Get the Current Full Address String
+     *
+     * @return string Full Address String
+     */
+    public function full_address()
+    {
+        $full_address = $this->street . ', ' . $this->city . ', ' . $this->province . ', ' . $this->country;
+        return $full_address;
+    }
+
+    /**
+     * Get the Current Postal Code
+     *
+     * @return string Postal Code String
+     */
+    public function user_postal_code()
+    {
+        $postal_code = $this->postal_code;
+        return $postal_code;
+    }
+
+    /**
+     * Return true if this is User default address
+     *
+     * @return boolean
+     */
+    public function is_default_address()
+    {
+        $user_default_address_id = User::find($this->user_id)->default_address_id;
+        if ($this->id == $user_default_address_id) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

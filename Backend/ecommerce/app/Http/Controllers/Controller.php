@@ -10,4 +10,11 @@ use Illuminate\Routing\Controller as BaseController;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+    /**
+     * Pagination limit
+     *
+     * @var integer
+     */
+    protected $MAX_PER_PAGE = 10;
 }

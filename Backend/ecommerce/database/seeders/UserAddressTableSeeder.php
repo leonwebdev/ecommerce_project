@@ -35,5 +35,36 @@ class UserAddressTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now()
         ]);
+        DB::table('user_addresses')->insert([
+            'user_id' => '2',
+            'street' => '256 Nice Ave',
+            'city' => 'Calgary',
+            'province' => 'Alberta',
+            'country' => 'Canada',
+            'postal_code' => 'A7C 3S4',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('user_addresses')->insert([
+            'user_id' => '2',
+            'street' => '37 Awesome Ave',
+            'city' => 'Lansord',
+            'province' => 'Nova Scotia',
+            'country' => 'Canada',
+            'postal_code' => 'E7X 3G4',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('user_addresses')->insert([
+            'user_id' => '1',
+            'street' => '1354 Johnson Street',
+            'city' => 'Brandon',
+            'province' => 'Princess Edward Island',
+            'country' => 'Canada',
+            'postal_code' => 'W0Z 8K2',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
     }
 }

@@ -8,21 +8,33 @@
                     <i class="fas fa-clipboard fa-fw me-3"></i>
                     <span>Orders</span>
                 </a>
+                <a href="/admin/home" class="list-group-item list-group-item-action py-2 ripple">
+                    <i class="fas fa-house fa-fw me-3"></i>
+                    <span>Home Page</span>
+                </a>
                 <a href="/admin/product" class="list-group-item list-group-item-action py-2 ripple">
                     <i class="fas fa-shirt fa-fw me-3"></i>
                     <span>Products</span>
                 </a>
-                <a href="#" class="list-group-item list-group-item-action py-2 ripple">
+                <a href="/admin/category" class="list-group-item list-group-item-action py-2 ripple">
                     <i class="fas fa-chart-bar fa-fw me-3"></i>
                     <span>Categories</span>
                 </a>
-                <a href="#" class="list-group-item list-group-item-action py-2 ripple">
+                <a href="/admin/advertisement" class="list-group-item list-group-item-action py-2 ripple">
+                    <i class="fas fa-rectangle-ad fa-fw me-3"></i>
+                    <span>Advertisements</span>
+                </a>
+                <a href="/admin/inquiry" class="list-group-item list-group-item-action py-2 ripple">
+                    <i class="fas fa-question fa-fw me-3"></i>
+                    <span>Inquiry</span>
+                </a>
+                <a href="/admin/user" class="list-group-item list-group-item-action py-2 ripple">
                     <i class="fas fa-user fa-fw me-3"></i>
                     <span>Users</span>
                 </a>
-                <a href="#" class="list-group-item list-group-item-action py-2 ripple">
-                    <i class="fas fa-rectangle-ad fa-fw me-3"></i>
-                    <span>Advertisements</span>
+                <a href="/admin/address" class="list-group-item list-group-item-action py-2 ripple">
+                    <i class="fas fa-location-dot fa-fw me-3"></i>
+                    <span>Addresses</span>
                 </a>
             </div>
         </div>
@@ -48,14 +60,26 @@
             <!-- Right links -->
             <ul class="navbar-nav ms-auto d-flex flex-row">
                 <!-- User -->
-                <li class="nav-item">
-                    <a class="nav-link d-flex align-items-center" role="button">
-                        [Show User Name]
-                    </a>
+                @auth
+                    <li class="nav-item">
+                    <a class="nav-link d-flex align-items-center" href="/admin/order"
+                        role="button">{{ Auth::user()->first_name . ' ' . Auth::user()->last_name }}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link d-flex align-items-center" href="#">Logout</a>
+                    <a class="nav-link d-flex align-items-center text-danger fw-bold" href="/logout"
+                        onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();">Logout</a>
                 </li>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+
+                @else
+                <li class="nav-item">
+                    <span>You have not login yet, this message display for development.</span>
+                </li>
+                @endauth
+
             </ul>
         </div>
         <!-- Container wrapper -->
