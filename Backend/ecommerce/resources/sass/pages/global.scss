@@ -252,6 +252,7 @@ button {
                 position: absolute;
                 left: calc(-250px / 2 + (50px / 2));
                 min-width: 250px;
+                z-index: 9999;
                 li {
                     margin-bottom: 10px;
                     &:last-of-type {
