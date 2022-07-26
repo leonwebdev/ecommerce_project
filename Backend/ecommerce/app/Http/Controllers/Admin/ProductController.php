@@ -140,11 +140,20 @@ class ProductController extends Controller
         $media = Product_media::find($id);
         if ($media->delete()) {
             return response()->json([
-                'success' => 'Media deleted successfully!'
+                'success' => 'Media has been deleted successfully!'
             ]);
         }
         return response()->json([
             'error' => 'There was a problem deleting media!'
         ]);
+    }
+    public function destroy(Product $product)
+    {
+        if ($product->delete()) {
+            session()->flash('success', 'Product has been deleted successfully');
+            return redirect('/admin/product');
+        }
+        session()->flash('error', 'There was a problem deleting the product!');
+        return redirect('/admin/product');
     }
 }

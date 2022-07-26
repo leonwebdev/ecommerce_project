@@ -14,6 +14,8 @@ Route::get('/admin/product/edit/{product}', [App\Http\Controllers\Admin\ProductC
     ->name('admin_product_edit');
 Route::put('/admin/product/{product}', [App\Http\Controllers\Admin\ProductController::class, 'update'])
     ->name('admin_product_update');
+Route::delete('/admin/product/{product}', [App\Http\Controllers\Admin\ProductController::class, 'destroy'])
+    ->name('admin_product_delete');
 Route::delete('/admin/product/media/{media}', [App\Http\Controllers\Admin\ProductController::class, 'deleteMedia'])
     ->name('admin_product_media_delete');
 

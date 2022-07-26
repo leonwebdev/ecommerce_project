@@ -46,12 +46,16 @@
                     <td>{{ $product->categories->implode('title', ', ') }}</td>
                     <td>{{ $product->size->name }}</td>
                     <td>{{ $product->gender->name }}</td>
-
                     <td>
                         <a class="btn btn-info"
                             href="{{ route('admin_product_edit', ['product' => $product->id]) }}">Edit</a>
-                        {{-- <a class="btn btn-info" href="#" role="button">Edit</a> --}}
-                        <a class="btn btn-danger" href="#" role="button">Delete</a>
+                        <form method="post" action="{{ route('admin_product_delete', ['product' => $product->id]) }}">
+                            @csrf
+                            @method('DELETE')
+                            <input type="hidden" name="id" value="{{ $product->id }}" />
+                            <button class="btn btn-danger"
+                                onclick="return confirm('Do you really want to delete {{ $product->name }}?')">Delete</button>
+                        </form>
                     </td>
                 </tr>
             @endforeach
