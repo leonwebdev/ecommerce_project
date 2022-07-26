@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
@@ -47,5 +48,27 @@ class LoginController extends Controller
     {
         $title = "Login";
         return view('auth.login', compact('title'));
+    }
+
+    /**
+     * Uptrend Customize !!! Get the post register / login redirect path.
+     *
+     * @return string
+     */
+    public function redirectPath()
+    {
+        if (method_exists($this, 'redirectTo')) {
+            return $this->redirectTo();
+        }
+
+        // var_dump(Auth::user()->admin);
+        // die;
+        if (
+            Auth::user()->admin
+        ) {
+            return '/admin/user';
+        }
+
+        return property_exists($this, 'redirectTo') ? $this->redirectTo : '/home';
     }
 }
