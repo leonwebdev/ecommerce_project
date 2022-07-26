@@ -142,7 +142,7 @@
                                 {{-- <option value="">Select Size</option> --}}
                                 @foreach ($sizes as $item)
                                     <option value="{{ $item->id }}"
-                                        {{ old('size_id') == $item->id ? 'selected' : '' }}>
+                                        {{ old('size_id', $product->size_id) == $item->id ? 'selected' : '' }}>
                                         {{ $item->name }}</option>
                                 @endforeach
                             </select>
