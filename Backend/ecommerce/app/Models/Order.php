@@ -16,7 +16,7 @@ class Order extends Model
         'user_id',
         'gst',
         'pst',
-        'vat',
+        'hst',
         'sub_total',
         'shipping_charge',
         'total',
@@ -30,7 +30,7 @@ class Order extends Model
      */
     public function products()
     {
-        return $this->belongsToMany(Product::class)->using(Order_product::class)->withPivot('unit_price', 'quantity', 'line_price', 'product_name', 'updated_at', 'created_at');
+        return $this->belongsToMany(Product::class)->using(Order_product::class)->withPivot('unit_price', 'quantity', 'line_price', 'product_name', 'size', 'updated_at', 'created_at');
     }
 
     /**

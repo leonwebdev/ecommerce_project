@@ -11,14 +11,14 @@
                 <div class="content form" id="profile">
                     <h1 class="my-2">{{ $title }}</h1>
                     <div id="order_history_container" class="my-2">
-                        @if (!Auth::user()->id == $user->id)
-                            <h3 class="text-align-center my-3">You are not authorised to view this order detail. <a
+                        @if (Auth::user()->id !== $user->id)
+                            <h3 class="text-align-center my-3 mx-3">You are not authorised to view this order detail. <a
                                     href="/product" id="shopping_now">Shopping Now.</a></h3>
                         @else
                             <div class="order_container mx-1 mb-5">
                                 <div class="order_heading d-flex justify-content-space-between align-items-center">
                                     <h2 class="fw-bold mb-1">Order Status</h2>
-                                    <div><a href="" class="lh-btn no-hover"
+                                    <div><a href="" class="lh-btn no-hover text-transform-capitalize"
                                             onclick="event.preventDefault();">{{ $order->order_status }}</a></div>
                                 </div>
                                 <div class="product_list">

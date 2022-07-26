@@ -129,18 +129,18 @@
 }
 
 .mx-1 {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
 }
 
 .mx-2 {
-    margin-top: 2rem;
-    margin-bottom: 2rem;
+    margin-left: 2rem;
+    margin-right: 2rem;
 }
 
 .mx-3 {
-    margin-top: 3rem;
-    margin-bottom: 3rem;
+    margin-left: 3rem;
+    margin-right: 3rem;
 }
 
 .mb-0_5 {
@@ -238,7 +238,8 @@ div a.lh-btn:hover {
 div a.lh-btn.no-hover {
     background-color: rgb(43, 43, 43);
     color: rgb(255, 255, 255);
-    padding-top: 2px;
+    padding-top: 4px;
+    cursor: default;
 }
 
 div a.lh-btn.no-hover:hover {
@@ -265,13 +266,26 @@ hr {
     max-width: 700px;
 }
 
+.text-align-left {
+    text-align: left;
+}
+
+.text-align-right {
+    text-align: right;
+}
 .text-align-center {
     text-align: center;
 }
 
 a#shopping_now {
     background: rgb(17, 132, 252);
-    background: linear-gradient(140deg, rgba(17, 132, 252, 1) 0%, rgba(131, 58, 180, 0.8477766106442577) 35%, rgba(253, 29, 29, 0.8757878151260504) 75%, rgba(252, 176, 69, 1) 100%);
+    background: linear-gradient(
+        140deg,
+        rgba(17, 132, 252, 1) 0%,
+        rgba(131, 58, 180, 0.8477766106442577) 35%,
+        rgba(253, 29, 29, 0.8757878151260504) 75%,
+        rgba(252, 176, 69, 1) 100%
+    );
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -304,6 +318,6 @@ a#shopping_now {
     border-bottom: 1px solid rgb(227, 227, 227);
 }
 
-.text-align-right {
-    text-align: right;
+.text-transform-capitalize {
+    text-transform: capitalize;
 }
