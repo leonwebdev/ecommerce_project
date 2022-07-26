@@ -114,10 +114,16 @@
     margin-right: 0;
 }
 
+.my-0 {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
 .my-1 {
     margin-top: 1rem;
     margin-bottom: 1rem;
 }
+
 .my-2 {
     margin-top: 2rem;
     margin-bottom: 2rem;
@@ -166,6 +172,15 @@
 .mb-5 {
     margin-bottom: 5rem;
 }
+
+.mb-6 {
+    margin-bottom: 6rem;
+}
+
+.mb-7 {
+    margin-bottom: 7rem;
+}
+
 .address_row {
     padding-bottom: 1rem;
     margin-bottom: 1rem;
@@ -209,6 +224,7 @@
 div a.lh-btn {
     padding: 5px;
     font-size: 1rem;
+    display: inline-block;
     text-decoration: none;
     font-weight: 700;
     border-radius: 3px;
@@ -220,8 +236,9 @@ div a.lh-btn {
 
 div a.lh-btn-outline {
     padding: 5px;
-     cursor: default;
+    cursor: default;
     font-size: 1rem;
+    display: inline-block;
     text-decoration: none;
     font-weight: 700;
     border-radius: 3px;
@@ -239,7 +256,8 @@ div a.lh-btn:hover {
 div a.lh-btn.no-hover {
     background-color: rgb(43, 43, 43);
     color: rgb(255, 255, 255);
-    padding-top: 4px;
+    // padding-top: 4px;
+    display: inline-block;
     cursor: default;
 }
 
@@ -295,17 +313,22 @@ a#shopping_now {
 }
 
 .order_heading {
-    border-bottom: 1px solid rgb(30, 30, 30);
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
 }
 
-// .order_container div.product_list {
-//     // font-family: Arial, Helvetica, sans-serif;
-//     padding-right: 1px;
-// }
+.order_container {
+    border-bottom: 1px solid rgba(92, 92, 92, 0.382);
+    padding-bottom: 1rem;
+    // font-family: Arial, Helvetica, sans-serif;
+    // padding-right: 1px;
+}
 
 .min-width-20 {
     min-width: 20rem;
+}
+
+.min-width-40 {
+    min-width: 40rem;
 }
 
 .text-black {
