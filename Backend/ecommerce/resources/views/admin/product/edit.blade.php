@@ -9,7 +9,7 @@
                 </div>
                 <div class="card-body">
                     {{-- {{ $errors }} --}}
-                    {{ $product }}
+                    {{-- {{ $product }} --}}
                     <form action="{{ route('admin_product_update', ['product' => $product->id]) }}" method="POST"
                         enctype="multipart/form-data">
                         @csrf
