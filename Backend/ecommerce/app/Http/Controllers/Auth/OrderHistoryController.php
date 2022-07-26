@@ -42,6 +42,8 @@ class OrderHistoryController extends Controller
         //     }
         // }
         // var_dump($orders);
+        // session()->flash('success', 'Test Flash Message. Test Flash Message.');
+        // session()->flash('error', 'Test Flash Message. Test Flash Message.');
         return view('auth.order_history.index', compact('title', 'orders'));
     }
 
