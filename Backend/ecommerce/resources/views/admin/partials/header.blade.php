@@ -12,10 +12,6 @@
                     <i class="fas fa-clipboard fa-fw me-3"></i>
                     <span>Orders</span>
                 </a>
-                <a href="/admin/home" class="list-group-item list-group-item-action py-2 ripple">
-                    <i class="fas fa-house fa-fw me-3"></i>
-                    <span>Home Page</span>
-                </a>
                 <a href="/admin/product" class="list-group-item list-group-item-action py-2 ripple">
                     <i class="fas fa-shirt fa-fw me-3"></i>
                     <span>Products</span>
