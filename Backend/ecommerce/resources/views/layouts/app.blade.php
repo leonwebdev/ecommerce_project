@@ -28,13 +28,16 @@
 <body>
 
     <!-- Page Header-->
-    @include('partials/header')
-
+    @include('partials.header')
+    <!-- Page Header-->
+    <!-- Flash Message -->
+    @include('partials.flash')
+    <!-- Flash Message -->
     <!-- Page Content-->
     @yield('content')
-
+    <!-- Page Content-->
     <!-- Page Footer-->
-    @include('partials/footer')
+    @include('partials.footer')
 </body>
 
 </html>
