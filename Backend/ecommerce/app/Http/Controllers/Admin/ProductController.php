@@ -12,10 +12,16 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+
         $title = 'Admin | Product';
-        $products = Product::with(['product_media', 'gender', 'size', 'categories'])->latest()->paginate(10);
+        $search = $request->query('search');
+        if ($search) {
+            $products = Product::with(['product_media', 'gender', 'size', 'categories'])->where('name', 'LIKE', '%' . $search . '%')->latest()->paginate(10);
+        } else {
+            $products = Product::with(['product_media', 'gender', 'size', 'categories'])->latest()->paginate(10);
+        }
         return view('/admin/product/index', compact('title', 'products'));
     }
     /**
