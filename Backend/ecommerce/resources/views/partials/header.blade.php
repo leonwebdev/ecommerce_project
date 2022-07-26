@@ -64,7 +64,7 @@
             </div>
             <!-- Profile ended-->
             <div class="icon cart">
-                <a href=":javascript;">
+                <a href="/cart">
                     <img src="/images/icon-cart.svg" alt="cart icon" width="30" height="30" />
                 </a>
             </div>
