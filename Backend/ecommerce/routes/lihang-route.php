@@ -28,6 +28,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/address', [UserAddressController::class, 'store']);
     Route::put('/default-address/{id}', [UserAddressController::class, 'updateDefaultAddress']);
     Route::get('/order-history', [OrderHistoryController::class, 'index'])->name('order-history');
+    Route::get('/order-history/{id}', [OrderHistoryController::class, 'show'])->name('order-history-detail');
 });
 
 /*
