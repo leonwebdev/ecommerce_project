@@ -5,12 +5,11 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class HomeController extends Controller
+class DashboardController extends Controller
 {
     public function index(Request $request)
     {
-
-        // $title = 'Admin | Home';
-        // return view('/admin/home/index', compact('title'));
+        $title = 'Admin | Dashboard';
+        return view('/admin/dashboard/index', compact('title'));
     }
 }
