@@ -28,15 +28,38 @@
                     font-size: 24px;
                     font-weight: 300;
                 }
-    
+
                 .delete {
                     text-align: right;
                 }
-    
+
+                .color {
+                    text-transform: lowercase;
+                }
+
+                .size {
+                    text-transform: uppercase;
+                }
+
                 .qty {
-                    select {
+                    input {
                         padding: 5px 10px;
                         border-radius: 0;
+                        border: unset;
+                        max-width: 45px;
+                        text-align: center;
+                    }
+
+                    /* Chrome, Safari, Edge, Opera */
+                    input::-webkit-outer-spin-button,
+                    input::-webkit-inner-spin-button {
+                        -webkit-appearance: none;
+                        margin: 0;
+                    }
+
+                    /* Firefox */
+                    input[type=number] {
+                        -moz-appearance: textfield;
                     }
                 }
 

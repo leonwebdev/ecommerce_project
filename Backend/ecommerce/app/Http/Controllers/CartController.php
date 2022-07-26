@@ -2,22 +2,33 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
 {
     /**
-     * Show the application dashboard.
+     * Show the Cart item list.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
         $title = 'Shopping Cart';
+        $session = $request->session()->get('cart');
 
+        if($session) {
+            print_r( $session);
+            print_r( array_keys($session));
+            $products = Product::whereIn('id', array_keys($session))->with('size')->get();
+        } else {
+            $products = [];
+            $session = [];
+        }
+    
         return view('cart/index', compact(
-            'title', 
+            'title', 'products', 'session'
         ));
     }
 
