@@ -45,9 +45,9 @@
                                     role="button">Edit</a>
                             </div>
                             @if ($address->is_default_address())
-                                <div class="col-auto ps-0 ms-0">
-                                    <a href="" class="btn btn-outline-danger"
-                                        onclick="event.preventDefault();">Cannot Delete Default Address</a>
+                                <div class="col-auto ps-0 ms-0" tabindex="0" data-bs-toggle="tooltip" title="Cannot Delete Default Address">
+                                    <a href="" class="btn btn-outline-danger disabled" role="button"
+                                        onclick="event.preventDefault();">Delete</a>
                                 </div>
                             @else
                                 <div class="col-auto ps-0 ms-0">
