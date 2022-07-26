@@ -22,8 +22,8 @@ Route::delete('/admin/product/media/{media}', [App\Http\Controllers\Admin\Produc
     ->name('admin_product_media_delete');
 // product end
 
-Route::get('/admin/home', [App\Http\Controllers\Admin\HomeController::class, 'index'])
-    ->name('admin_home');
+Route::get('/admin/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])
+    ->name('admin_dashboard');
 
 Route::get('/product', [ProductController::class, 'index'])
     ->name('product_list');

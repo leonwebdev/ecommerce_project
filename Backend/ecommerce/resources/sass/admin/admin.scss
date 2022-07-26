@@ -1,5 +1,5 @@
 // Bootstrap
-@import '~bootstrap/scss/bootstrap';
+@import "~bootstrap/scss/bootstrap";
 
 body {
     background-color: #fbfbfb;
@@ -71,6 +71,9 @@ main {
     }
 }
 
-table td form{
-    display:inline-block;
+table td form {
+    display: inline-block;
 }
+
+// pages
+@import "dashboard.scss";

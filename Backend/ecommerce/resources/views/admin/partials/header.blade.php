@@ -4,6 +4,10 @@
     <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white">
         <div class="position-sticky">
             <div class="list-group list-group-flush mx-3 mt-4">
+                <a href="/admin/dashboard" class="list-group-item list-group-item-action py-2 ripple">
+                    <i class="fa fa-tachometer fa-fw me-3"></i>
+                    <span>Dashboard</span>
+                </a>
                 <a href="/admin/order" class="list-group-item list-group-item-action py-2 ripple">
                     <i class="fas fa-clipboard fa-fw me-3"></i>
                     <span>Orders</span>
@@ -62,22 +66,21 @@
                 <!-- User -->
                 @auth
                     <li class="nav-item">
-                    <a class="nav-link d-flex align-items-center" href="/admin/order"
-                        role="button">{{ Auth::user()->first_name . ' ' . Auth::user()->last_name }}</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link d-flex align-items-center text-danger fw-bold" href="/logout"
-                        onclick="event.preventDefault();
+                        <a class="nav-link d-flex align-items-center" href="/admin/order"
+                            role="button">{{ Auth::user()->first_name . ' ' . Auth::user()->last_name }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link d-flex align-items-center text-danger fw-bold" href="/logout"
+                            onclick="event.preventDefault();
                             document.getElementById('logout-form').submit();">Logout</a>
-                </li>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                @csrf
-                            </form>
-
+                    </li>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
                 @else
-                <li class="nav-item">
-                    <span>You have not login yet, this message display for development.</span>
-                </li>
+                    <li class="nav-item">
+                        <span>You have not login yet, this message display for development.</span>
+                    </li>
                 @endauth
 
             </ul>
