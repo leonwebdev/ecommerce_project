@@ -23,6 +23,7 @@ return new class extends Migration
             $table->integer('quantity');
             $table->decimal('line_price');
             $table->string('product_name', 255);
+            $table->string('size', 255);
             $table->softDeletes();
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
