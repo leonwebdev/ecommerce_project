@@ -53,7 +53,7 @@ class CartController extends Controller
      * @param [type] $id product id
      * @return void
      */
-    public function addToCart(Request $request, $id) {
+    public function create(Request $request, $id) {
         $session = $request->session()->get('cart');
         if( isset($session[$id]) ) {
             $session[$id] = $session[$id] + 1;
@@ -74,7 +74,7 @@ class CartController extends Controller
      * @param Request $request
      * @return void
      */
-    public function updateCart(Request $request) {
+    public function edit(Request $request) {
 
         $session = $request->session()->get('cart');
         $id = $request->input('id');

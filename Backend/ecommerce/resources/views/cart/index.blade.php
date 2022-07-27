@@ -54,20 +54,18 @@
                                     <form action="{{ route('updateCart') }}" method="get">
                                         @csrf
                                         <input type="hidden" name="id" value="{{ $product->id }}">
-                                        <input type="hidden" name="action" value="plus">
-                                        <button>+</button>
-                                    </form>
-
-                                    <span class="num">{{ $session[$product->id] }}</span>
-
-                                    
-                                    <form action="{{ route('updateCart') }}" method="get">
-                                        @csrf
-                                        <input type="hidden" name="id" value="{{ $product->id }}">
                                         <input type="hidden" name="action" value="minus">
                                         <button>-</button>
                                     </form>
 
+                                    <span class="num">{{ $session[$product->id] }}</span>
+
+                                    <form action="{{ route('updateCart') }}" method="get">
+                                        @csrf
+                                        <input type="hidden" name="id" value="{{ $product->id }}">
+                                        <input type="hidden" name="action" value="plus">
+                                        <button>+</button>
+                                    </form>
                                 </div>
 
                                 <div class="col col-4 price">
@@ -104,8 +102,6 @@
                 <h2>Summary</h2>
                 <div class="subtotal"><strong>Subtotal: </strong>${{ $subtotal }} CAD</div>
                 <div class="tital_item"><strong>Quantity: </strong>{{ $total_qty }}</div>
-                <!-- !! Exceeded $80 for local free delivery !! -->
-                <!-- !! Exceeded $300 for local internetional delivery !! -->
                 <div class="checkout_btn @if($disable_checkout) disabled @endif">
                     <a class="btn btn_black" href="#">Checkout Cart</a>
                 </div>
