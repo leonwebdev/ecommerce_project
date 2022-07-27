@@ -18,7 +18,7 @@
                                 <div class="order_container mx-1 mb-7">
                                     <div class="order_heading d-flex justify-content-space-between align-items-center">
                                         <h2 class="fw-bold my-0">&#35; Order {{ $key+1 }}</h2>
-                                        <div><a href="" class="lh-btn no-hover text-transform-capitalize"
+                                        <div><a href="" class="lh-btn no-hover text-transform-capitalize {{ $order->order_status }}"
                                                 onclick="event.preventDefault();"
                                                 >{{ $order->order_status }}</a></div>
                                     </div>

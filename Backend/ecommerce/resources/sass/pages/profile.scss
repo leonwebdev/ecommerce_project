@@ -371,3 +371,19 @@ a#shopping_now {
 .wrapper-alert{
     padding: 0 20px;
 }
+
+.lh-btn.no-hover.text-transform-capitalize.pending{
+    background-color: rgb(6, 87, 122);
+}
+
+.lh-btn.no-hover.text-transform-capitalize.confirmed{
+    background-color: rgb(7, 101, 18);
+}
+
+.lh-btn.no-hover.text-transform-capitalize.delivered{
+    background-color: rgb(135, 103, 8);
+}
+
+.lh-btn.no-hover.text-transform-capitalize.cancelled{
+    background-color: rgb(148, 7, 7);
+}
