@@ -19,5 +19,6 @@ class Order_product extends Pivot
         'quantity',
         'line_price',
         'product_name',
+        'size',
     ];
 }

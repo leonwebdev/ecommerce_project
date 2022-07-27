@@ -35,7 +35,10 @@
                 <tr scope="row">
                     <td>{{ $product->id }}</td>
                     <td>
-                        {{-- <img src="/storage/{{ $category->image }}" height="100px" width="100px" /> --}}
+                        @if ($product->product_media && count($product->product_media))
+                            <img src="{{ asset('/storage/' . $product->product_media[0]->image) }}" height="100px"
+                                width="100px" />
+                        @endif
                     </td>
                     <td>{{ $product->name }}</td>
                     <td>${{ number_format($product->price, 2) }}</td>
@@ -45,7 +48,9 @@
                     <td>{{ $product->gender->name }}</td>
 
                     <td>
-                        <a class="btn btn-info" href="#" role="button">Edit</a>
+                        <a class="btn btn-info"
+                            href="{{ route('admin_product_edit', ['product' => $product->id]) }}">Edit</a>
+                        {{-- <a class="btn btn-info" href="#" role="button">Edit</a> --}}
                         <a class="btn btn-danger" href="#" role="button">Delete</a>
                     </td>
                 </tr>

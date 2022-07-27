@@ -2,17 +2,18 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Order;
 use App\Models\User_address;
+use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Auth\Events\Registered;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
-use Illuminate\Support\Facades\Auth;
 
 class OrderHistoryController extends Controller
 {
@@ -41,8 +42,20 @@ class OrderHistoryController extends Controller
         //     }
         // }
         // var_dump($orders);
-        // echo $orders;
+        // session()->flash('success', 'Test Flash Message. Test Flash Message.');
+        // session()->flash('error', 'Test Flash Message. Test Flash Message.');
+        return view('auth.order_history.index', compact('title', 'orders'));
+    }
+
+    public function show($id)
+    {
+        $title = "Order Detail";
+
+        $order = Order::find($id);
+        $user = User::find($order->user_id);
+        // echo $order;
         // die;
-        return view('auth.order_history', compact('title', 'orders'));
+
+        return view('auth.order_history.show', compact('title', 'order', 'user'));
     }
 }
