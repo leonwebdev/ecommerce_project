@@ -17,10 +17,12 @@ class AdvertisementTableSeeder extends Seeder
     {
         DB::table('advertisements')->insert([
             'image' => 'sflasintvalisvnafv241.jpg',
+            'title' => 'Diwali Sale',
+            'link' => 'https://www.google.com/',
             'pages' => 'all',
             'area' => 'top',
             'created_at' => now(),
-            'updated_at' => now(),
+            'updated_at' => now()
         ]);
     }
 }

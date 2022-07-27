@@ -12,8 +12,8 @@
           <form  enctype="multipart/form-data" id="edit" action="/admin/category/{{ $category->id }}" method="post">
               @csrf 
               @method('PUT')
+              <input type="hidden" name="id" value="{{ $category->id }}" />
               <div class="mb-3">
-                <input type="hidden" name="id" value="{{ $category->id }}" />
                 <label for="title" class="form-label">Title</label>
                 <input type="text" name="title" class="form-control" id="title" value="{{ old('title', $category->title) }}" />
                 @error('name')
