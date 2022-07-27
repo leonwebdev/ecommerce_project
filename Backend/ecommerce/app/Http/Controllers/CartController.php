@@ -17,15 +17,32 @@ class CartController extends Controller
         $title = 'Shopping Cart';
         $session = $request->session()->get('cart');
 
+        $subtotal = 0;
+        $total_qty = 0;
+        $disable_checkout = false;
+
         if($session) {
             $products = Product::whereIn('id', array_keys($session))->with('size')->get();
+
+            foreach($products as $product) {
+                // calc cart summary
+                $subtotal += 
+                    floatval($product->price) * $session[$product->id];
+                $total_qty += $session[$product->id];
+                // disable checkout button when out of stock item exists
+                if($product->quantity == 0 || $product->quantity < $session[$product->id]) {
+                    $disable_checkout = true;
+                }
+            }
         } else {
             $products = [];
             $session = [];
         }
+
+        $subtotal = number_format($subtotal, 2);
     
         return view('cart/index', compact(
-            'title', 'products', 'session'
+            'title', 'products', 'session', 'subtotal', 'total_qty', 'disable_checkout'
         ));
     }
 

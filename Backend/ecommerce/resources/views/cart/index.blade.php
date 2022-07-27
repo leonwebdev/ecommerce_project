@@ -102,12 +102,11 @@
 
             <div class="cart_info col col-3">
                 <h2>Summary</h2>
-                <div class="subtotal"><strong>Subtotal: </strong>$1000</div>
-                <div class="tital_item"><strong>Total Items: </strong>3</div>
+                <div class="subtotal"><strong>Subtotal: </strong>${{ $subtotal }} CAD</div>
+                <div class="tital_item"><strong>Quantity: </strong>{{ $total_qty }}</div>
                 <!-- !! Exceeded $80 for local free delivery !! -->
                 <!-- !! Exceeded $300 for local internetional delivery !! -->
-                <div class="checkout_btn">
-                    <!-- !! Disable button is out of stock item exists !! -->
+                <div class="checkout_btn @if($disable_checkout) disabled @endif">
                     <a class="btn btn_black" href="#">Checkout Cart</a>
                 </div>
             </div>
