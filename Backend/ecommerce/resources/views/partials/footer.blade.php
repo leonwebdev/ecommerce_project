@@ -9,7 +9,7 @@
                  </li>
                  <li> <a href="/terms-and-conditions">Terms & Condition</a>
                  </li>
-                 <li> <a href="/privacy">Privacy Policy</a>
+                 <li> <a href="/privacy-policy">Privacy Policy</a>
                  </li>
              </ul>
          </div>

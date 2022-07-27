@@ -28,98 +28,110 @@ class AdvertisementController extends Controller
     public function create()
     {
         $title = 'Admin | Advertisement';
-        return view('/admin/advertisement/create', compact('title'));
+        $pages=['all','home','product-list'];
+        $area=['top','bottom','sidebar'];
+        return view('/admin/advertisement/create', compact('title','pages','area'));
     }
     /**
      * store function
      *
      * @return void
      */
-    // public function store(Request $request)
-    // {
+    public function store(Request $request)
+    {
 
-    //     $valid = $request->validate([
-    //         'title' => 'required|string|max:255',
-    //         'image' => 'nullable|image'
-    //     ]);
-    //     if($request->file('image')) {
-    //         $path =  $request->file('image')->store('public');
-    //     }
+        $valid = $request->validate([
+            'image' => 'nullable|image',
+            'title' => 'required|string|max:255',
+            'link' => 'required|string|max:255',
+            'pages' => 'required|string|max:255',
+            'area' => 'required|string|max:255'
+            
+        ]);
+        if($request->file('image')) {
+            $path =  $request->file('image')->store('public');
+        }
 
-    //     // Must give in_print a value
-    //     $valid['image'] = basename($path ?? 'default.jpg') ;
-    //     //$valid['in_print'] = $valid['in_print'] ?? 0;
+        // Must give in_print a value
+        $valid['image'] = basename($path ?? 'default.jpg') ;
+        //$valid['in_print'] = $valid['in_print'] ?? 0;
 
-    //     advertisement::create($valid);
+        Advertisement::create($valid);
 
-    //     session()->flash('success', 'advertisement successfully created!');
+        session()->flash('success', 'Advertisement successfully created!');
         
-    //     return redirect('/admin/advertisement');
+        return redirect('/admin/advertisement');
 
 
-    // }
+    }
     // /**
     //  * edit function
     //  *
     //  * @return void
     //  */
-    // public function edit(advertisement $advertisement)
+    public function edit(Advertisement $advertisement)
    
-    // {
-    //     $title = 'Admin | advertisement';
-    //     return view('/admin/advertisement/edit', compact('advertisement', 'title'));
-    // }
-    // /**
-    //  * update function
-    //  *
-    //  * @return void
-    //  */
-    // public function update(Request $request, $id)
-    // {
-    //     $valid = $request->validate([
-    //         'id' => 'required|integer',
-    //         'title' => 'required|string|max:255',
-    //         'image' => 'nullable|image'
-    //     ]);
+    {
+       
+        $title = 'Admin | Advertisement';
+        $pages=['all','home','product-list'];
+        $area=['top','bottom','sidebar'];
+        return view('/admin/advertisement/edit', compact('advertisement', 'title','pages','area'));
+    }
+    /**
+     * update function
+     *
+     * @return void
+     */
+    public function update(Request $request, $id)
+    {
+        $valid = $request->validate([
+            'id' => 'required|integer',
+            'image' => 'nullable|image',
+            'title' => 'required|string|max:255',
+            'link' => 'required|string|max:255',
+            'pages' => 'required|string|max:255',
+            'area' => 'required|string|max:255'
+        ]);
 
-    //     if($request->file('image')) {
-    //         $path = $request->file('image')->store('public');
-    //     }
+        if($request->file('image')) {
+            $path = $request->file('image')->store('public');
+        }
 
-    //     $advertisement = advertisement::find($valid['id']);
+        $advertisement = Advertisement::find($valid['id']);
 
-    //     $valid['image'] = basename($path ?? $advertisement->image);
+        $valid['image'] = basename($path ?? $advertisement->image);
 
-    //     $advertisement->update($valid);
+        $advertisement->update($valid);
 
-    //     if($advertisement->save()) {
-    //         session()->flash('success', 'advertisement was successfully updated'); 
-    //     } else {
-    //         session()->flash('error', 'There was a problem updating the advertisement');
-    //     }
-    //     return redirect('/admin/advertisement');
+        if($advertisement->save()) {
+            session()->flash('success', 'Advertisement was successfully updated'); 
+        } else {
+            session()->flash('error', 'There was a problem updating the advertisement');
+        }
+        return redirect('/admin/advertisement');
 
-    // }
-    // /**
-    //  * destroy function
-    //  *
-    //  * @return void
-    //  */
-    // public function destroy(Request $request, $id)
-    // {
-    //     $advertisement = advertisement::find($id);
-    //     if($advertisement->delete()) {
-    //         session()->flash('success', 'advertisement was deleted');
-    //         return redirect('/admin/advertisement');
-    //     }
-    //     session()->flash('error', 'There was a problem deleting the advertisement');
-    //     return redirect('/admin/advertisement');
+    }
+    /**
+     * destroy function
+     *
+     * @return void
+     */
+    public function destroy(Request $request, $id)
+    {
+        $advertisement = Advertisement::find($id);
+        if($advertisement->delete()) {
+            session()->flash('success', 'Advertisement was deleted');
+            return redirect('/admin/advertisement');
+        }
+        session()->flash('error', 'There was a problem deleting the advertisement');
+        return redirect('/admin/advertisement');
         
-    // }
+    }
     public function search(Request $request)
     {
         $advertisements = Advertisement::latest()->where('title','LIKE','%'.$request->input('search')."%")->simplePaginate(10);
             
-        return view('/admin/advertisement', compact('categories'));
+        return view('/admin/advertisement', compact('advertisements'));
     }
 }
