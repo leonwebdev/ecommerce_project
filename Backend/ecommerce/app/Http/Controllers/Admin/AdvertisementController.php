@@ -58,7 +58,7 @@ class AdvertisementController extends Controller
 
         Advertisement::create($valid);
 
-        session()->flash('success', 'advertisement successfully created!');
+        session()->flash('success', 'Advertisement successfully created!');
         
         return redirect('/admin/advertisement');
 
@@ -105,7 +105,7 @@ class AdvertisementController extends Controller
         $advertisement->update($valid);
 
         if($advertisement->save()) {
-            session()->flash('success', 'advertisement was successfully updated'); 
+            session()->flash('success', 'Advertisement was successfully updated'); 
         } else {
             session()->flash('error', 'There was a problem updating the advertisement');
         }
@@ -117,17 +117,17 @@ class AdvertisementController extends Controller
      *
      * @return void
      */
-    // public function destroy(Request $request, $id)
-    // {
-    //     $advertisement = advertisement::find($id);
-    //     if($advertisement->delete()) {
-    //         session()->flash('success', 'advertisement was deleted');
-    //         return redirect('/admin/advertisement');
-    //     }
-    //     session()->flash('error', 'There was a problem deleting the advertisement');
-    //     return redirect('/admin/advertisement');
+    public function destroy(Request $request, $id)
+    {
+        $advertisement = Advertisement::find($id);
+        if($advertisement->delete()) {
+            session()->flash('success', 'Advertisement was deleted');
+            return redirect('/admin/advertisement');
+        }
+        session()->flash('error', 'There was a problem deleting the advertisement');
+        return redirect('/admin/advertisement');
         
-    // }
+    }
     public function search(Request $request)
     {
         $advertisements = Advertisement::latest()->where('title','LIKE','%'.$request->input('search')."%")->simplePaginate(10);
