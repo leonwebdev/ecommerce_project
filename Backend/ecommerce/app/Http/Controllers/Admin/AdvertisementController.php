@@ -69,48 +69,54 @@ class AdvertisementController extends Controller
     //  *
     //  * @return void
     //  */
-    // public function edit(advertisement $advertisement)
+    public function edit(Advertisement $advertisement)
    
-    // {
-    //     $title = 'Admin | advertisement';
-    //     return view('/admin/advertisement/edit', compact('advertisement', 'title'));
-    // }
-    // /**
-    //  * update function
-    //  *
-    //  * @return void
-    //  */
-    // public function update(Request $request, $id)
-    // {
-    //     $valid = $request->validate([
-    //         'id' => 'required|integer',
-    //         'title' => 'required|string|max:255',
-    //         'image' => 'nullable|image'
-    //     ]);
+    {
+       
+        $title = 'Admin | Advertisement';
+        $pages=['all','home','product-list'];
+        $area=['top','bottom','sidebar'];
+        return view('/admin/advertisement/edit', compact('advertisement', 'title','pages','area'));
+    }
+    /**
+     * update function
+     *
+     * @return void
+     */
+    public function update(Request $request, $id)
+    {
+        $valid = $request->validate([
+            'id' => 'required|integer',
+            'image' => 'nullable|image',
+            'title' => 'required|string|max:255',
+            'link' => 'required|string|max:255',
+            'pages' => 'required|string|max:255',
+            'area' => 'required|string|max:255'
+        ]);
 
-    //     if($request->file('image')) {
-    //         $path = $request->file('image')->store('public');
-    //     }
+        if($request->file('image')) {
+            $path = $request->file('image')->store('public');
+        }
 
-    //     $advertisement = advertisement::find($valid['id']);
+        $advertisement = Advertisement::find($valid['id']);
 
-    //     $valid['image'] = basename($path ?? $advertisement->image);
+        $valid['image'] = basename($path ?? $advertisement->image);
 
-    //     $advertisement->update($valid);
+        $advertisement->update($valid);
 
-    //     if($advertisement->save()) {
-    //         session()->flash('success', 'advertisement was successfully updated'); 
-    //     } else {
-    //         session()->flash('error', 'There was a problem updating the advertisement');
-    //     }
-    //     return redirect('/admin/advertisement');
+        if($advertisement->save()) {
+            session()->flash('success', 'advertisement was successfully updated'); 
+        } else {
+            session()->flash('error', 'There was a problem updating the advertisement');
+        }
+        return redirect('/admin/advertisement');
 
-    // }
-    // /**
-    //  * destroy function
-    //  *
-    //  * @return void
-    //  */
+    }
+    /**
+     * destroy function
+     *
+     * @return void
+     */
     // public function destroy(Request $request, $id)
     // {
     //     $advertisement = advertisement::find($id);

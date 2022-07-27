@@ -7,7 +7,7 @@
                 <div class="card-header">
                     <h2 class="mb-0">Add Advertisement</h2>
                     </div>
-                @dump($errors);
+               
                 <div class="card-body">
                 {{-- {{ $errors }} --}}
                 <form  enctype="multipart/form-data" id="create" action="/admin/advertisement" method="post">

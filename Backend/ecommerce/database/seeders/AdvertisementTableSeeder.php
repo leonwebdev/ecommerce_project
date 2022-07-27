@@ -20,10 +20,9 @@ class AdvertisementTableSeeder extends Seeder
             'title' => 'Diwali Sale',
             'link' => 'https://www.google.com/',
             'pages' => 'all',
-            'pages' => 'all',
             'area' => 'top',
             'created_at' => now(),
-            'updated_at' => now(),
+            'updated_at' => now()
         ]);
     }
 }
