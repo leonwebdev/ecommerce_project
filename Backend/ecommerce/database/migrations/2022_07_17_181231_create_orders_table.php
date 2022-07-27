@@ -20,7 +20,7 @@ return new class extends Migration
             $table->integer('user_id');
             $table->decimal('gst');
             $table->decimal('pst');
-            $table->decimal('vat');
+            $table->decimal('hst');
             $table->decimal('sub_total');
             $table->decimal('shipping_charge');
             $table->decimal('total');
@@ -29,7 +29,7 @@ return new class extends Migration
                 "confirmed",
                 "delivered",
                 "cancelled",
-            ]);
+            ])->default("pending");
             $table->string('shipping_address');
             $table->string('billing_address');
             $table->softDeletes();

@@ -17,15 +17,17 @@ return new class extends Migration
         Schema::create('advertisements', function (Blueprint $table) {
             $table->id();
             $table->string('image', 255);
+            $table->string('title', 255);
+            $table->string('link', 255);
             $table->enum('pages', [
                 'all',
                 'home',
-                'product_list',
+                'product-list'
             ]);
             $table->enum('area', [
                 'top',
                 'bottom',
-                'sidebar',
+                'sidebar'
             ]);
             $table->softDeletes();
             $table->timestamps();

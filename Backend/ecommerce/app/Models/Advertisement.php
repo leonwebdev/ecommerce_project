@@ -13,6 +13,8 @@ class Advertisement extends Model
 
     protected $fillable = [
         'image',
+        'title',
+        'link',
         'pages',
         'area',
     ];
