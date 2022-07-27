@@ -32,7 +32,7 @@ class ProductController extends Controller
         // search
         $search = $request->query('search');
         if ($search) {
-            $products = Product::with(['product_media', 'categories'])->where('name', 'LIKE', '%' . $search . '%')->get();
+            $products = Product::where('name', 'LIKE', '%' . $search . '%')->get();
         } else if (empty($request->query('category')) && empty($request->query('size'))) {
             $products = Product::with(['product_media', 'categories'])->get();
         } else {
@@ -47,13 +47,13 @@ class ProductController extends Controller
                 $sizeIds = Size::whereIn('name', $sizeFilter)->get('id');
             }
             if (count($sizeIds) > 0 && count($categoryIds) > 0) {
-                $products = Product::with(['product_media', 'categories'])->whereHas('categories', function ($query) use ($categoryIds) {
+                $products = Product::whereHas('categories', function ($query) use ($categoryIds) {
                     $query->whereIn('category_id', $categoryIds);
                 })->whereIn('size_id', $sizeIds)->get();
             } else if (count($sizeIds) > 0) {
-                $products = Product::with(['product_media', 'categories'])->whereIn('size_id', $sizeIds)->get();
+                $products = Product::whereIn('size_id', $sizeIds)->get();
             } else {
-                $products = Product::with(['product_media', 'categories'])->whereHas('categories', function ($query) use ($categoryIds) {
+                $products = Product::whereHas('categories', function ($query) use ($categoryIds) {
                     $query->whereIn('category_id', $categoryIds);
                 })->get();
             }
@@ -62,7 +62,7 @@ class ProductController extends Controller
     }
     public function genderFilter($gender, Request $request)
     {
-        $title = $gender;
+        $title = ucfirst($gender);
         // categories and sizes for sidebar
         $categories = Category::all();
         $sizes = Size::all();
@@ -78,7 +78,7 @@ class ProductController extends Controller
         // gender filter
         $genderId = Gender::where('name', $gender)->get('id');
         if (empty($request->query('category')) && empty($request->query('size'))) {
-            $products = Product::with(['product_media', 'categories'])->whereIn('gender_id', $genderId)->get();
+            $products = Product::whereIn('gender_id', $genderId)->get();
         } else {
             if ($request->query('category')) {
                 $categoryFilterStr = $request->query('category');
@@ -91,13 +91,13 @@ class ProductController extends Controller
                 $sizeIds = Size::whereIn('name', $sizeFilter)->get('id');
             }
             if (count($sizeIds) > 0 && count($categoryIds) > 0) {
-                $products = Product::with(['product_media', 'categories'])->whereHas('categories', function ($query) use ($categoryIds) {
+                $products = Product::whereHas('categories', function ($query) use ($categoryIds) {
                     $query->whereIn('category_id', $categoryIds);
                 })->whereIn('size_id', $sizeIds)->whereIn('gender_id', $genderId)->get();
             } else if (count($sizeIds) > 0) {
-                $products = Product::with(['product_media', 'categories'])->whereIn('size_id', $sizeIds)->whereIn('gender_id', $genderId)->get();
+                $products = Product::whereIn('size_id', $sizeIds)->whereIn('gender_id', $genderId)->get();
             } else {
-                $products = Product::with(['product_media', 'categories'])->whereHas('categories', function ($query) use ($categoryIds) {
+                $products = Product::whereHas('categories', function ($query) use ($categoryIds) {
                     $query->whereIn('category_id', $categoryIds);
                 })->whereIn('gender_id', $genderId)->get();
             }
@@ -113,8 +113,8 @@ class ProductController extends Controller
      */
     public function show($slug)
     {
-        $product = Product::with(['product_media', 'gender', 'size', 'categories'])->where('slug', $slug)->first();
-        $title = $product->title;
+        $product = Product::with('product_media')->where('slug', $slug)->first();
+        $title = $product->name;
         return view('products/show', compact('title', 'product'));
     }
 }
