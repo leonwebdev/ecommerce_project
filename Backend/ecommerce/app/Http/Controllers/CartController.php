@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
 {
@@ -19,8 +18,6 @@ class CartController extends Controller
         $session = $request->session()->get('cart');
 
         if($session) {
-            print_r( $session);
-            print_r( array_keys($session));
             $products = Product::whereIn('id', array_keys($session))->with('size')->get();
         } else {
             $products = [];
@@ -52,5 +49,39 @@ class CartController extends Controller
         $prev_url = url()->previous();
 
         return redirect($prev_url);
+    }
+
+    /**
+     * Update cart item quantity in session
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function updateCart(Request $request) {
+
+        $session = $request->session()->get('cart');
+        $id = $request->input('id');
+        $action = $request->input('action');
+
+        if(!empty($action) && isset($session[$id])) {
+            switch($action) {
+                case 'plus':
+                    $session[$id] = $session[$id] + 1;
+                    break;
+                case 'minus':
+                    if($session[$id] == 1) {
+                        unset($session[$id]);
+                    } else {
+                        $session[$id] = $session[$id] - 1;
+                    }
+                    break;
+                case 'delete':
+                    unset($session[$id]);
+                    break;
+            }
+            $request->session()->put('cart', $session);
+        }
+
+        return redirect()->route('cartIndex');
     }
 }

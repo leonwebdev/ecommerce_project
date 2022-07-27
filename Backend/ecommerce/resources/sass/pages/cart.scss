@@ -3,6 +3,10 @@
     .cart_list {
         margin-right: 80px;
         
+        .empty_cart {
+            text-align: center;
+            margin: 80px 0;
+        }
         
         .cart_item {
             padding: 20px 0;
@@ -42,24 +46,20 @@
                 }
 
                 .qty {
-                    input {
-                        padding: 5px 10px;
-                        border-radius: 0;
-                        border: unset;
-                        max-width: 45px;
-                        text-align: center;
+                    form {
+                        display: inline-block;
+                        vertical-align: top;
+
+                        button {
+                            border: 1px solid $color-light;
+                            border-radius: 0;
+                            background-color: #fff;
+                            color: $color-primary;
+                        }
                     }
 
-                    /* Chrome, Safari, Edge, Opera */
-                    input::-webkit-outer-spin-button,
-                    input::-webkit-inner-spin-button {
-                        -webkit-appearance: none;
-                        margin: 0;
-                    }
-
-                    /* Firefox */
-                    input[type=number] {
-                        -moz-appearance: textfield;
+                    span.num {
+                        padding: 0 10px;
                     }
                 }
 
