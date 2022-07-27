@@ -182,6 +182,22 @@ button {
         display: block;
         padding: 10px;
     }
+
+    &.cart {
+        a {
+            position: relative;
+            span.count {
+                position: absolute;
+                top: 0;
+                left: 60%;
+                transform: translateX(-60%);
+                -webkit-transform: translateX(-60%);
+                color: $color-primary;
+                font-weight: 400;
+                font-size: 14px;
+            }
+        }
+    }
 }
 
 /* =============== Navbar =============== */
