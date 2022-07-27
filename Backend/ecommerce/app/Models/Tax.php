@@ -15,6 +15,6 @@ class Tax extends Model
         'province',
         'gst',
         'pst',
-        'vat',
+        'hst',
     ];
 }

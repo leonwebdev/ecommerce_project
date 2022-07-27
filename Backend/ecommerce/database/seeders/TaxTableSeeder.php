@@ -19,9 +19,10 @@ class TaxTableSeeder extends Seeder
             'province' => 'BC',
             'gst' => 0.05,
             'pst' => 0.07,
-            'vat' => 0,
+            'hst' => 0,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+
     }
 }
