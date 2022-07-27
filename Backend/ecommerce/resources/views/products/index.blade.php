@@ -38,7 +38,6 @@
                         maxlength="255">&nbsp;
                     <button type="submit">Search</button>
                 </form>
-                <p>Total Product: {{ count($products) }}</p>
                 <div class="content">
                     @foreach ($products as $product)
                         <div class="item">
@@ -51,7 +50,11 @@
                             </div>
                         </div>
                     @endforeach
+                </div>
 
+                <div class="pagination-wrapper">
+
+                    {!! $products->links('pagination::bootstrap-5') !!}
                 </div>
             </section>
             <!-- Section ended -->

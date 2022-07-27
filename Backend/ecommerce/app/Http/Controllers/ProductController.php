@@ -32,9 +32,9 @@ class ProductController extends Controller
         // search
         $search = $request->query('search');
         if ($search) {
-            $products = Product::where('name', 'LIKE', '%' . $search . '%')->get();
+            $products = Product::where('name', 'LIKE', '%' . $search . '%')->paginate(16);
         } else if (empty($request->query('category')) && empty($request->query('size'))) {
-            $products = Product::with(['product_media', 'categories'])->get();
+            $products = Product::with(['product_media', 'categories'])->paginate(16);
         } else {
             if ($request->query('category')) {
                 $categoryFilterStr = $request->query('category');
@@ -49,13 +49,13 @@ class ProductController extends Controller
             if (count($sizeIds) > 0 && count($categoryIds) > 0) {
                 $products = Product::whereHas('categories', function ($query) use ($categoryIds) {
                     $query->whereIn('category_id', $categoryIds);
-                })->whereIn('size_id', $sizeIds)->get();
+                })->whereIn('size_id', $sizeIds)->paginate(16);
             } else if (count($sizeIds) > 0) {
-                $products = Product::whereIn('size_id', $sizeIds)->get();
+                $products = Product::whereIn('size_id', $sizeIds)->paginate(16);
             } else {
                 $products = Product::whereHas('categories', function ($query) use ($categoryIds) {
                     $query->whereIn('category_id', $categoryIds);
-                })->get();
+                })->paginate(16);
             }
         }
         return view('products/index', compact('title', 'categories', 'sizes', 'products', 'categoryFilter', 'sizeFilter'));

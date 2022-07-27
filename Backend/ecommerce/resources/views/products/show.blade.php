@@ -12,8 +12,6 @@
                 </div>
                 <div class="right">
                     <div class="product_desc">
-
-                        {{ $product }}
                         <h1>{{ $product->name }}</h1>
 
                         <div class="price">${{ number_format($product->price, 2) }} CAD</div>
