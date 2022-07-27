@@ -29,7 +29,7 @@ use App\Http\Controllers\Admin\AdvertisementController;
  Route::get('/admin/category/edit/{category}',[App\Http\Controllers\Admin\CategoryController::class, 'edit'])->name('category_edit');
  Route::put('/admin/category/{id}',[App\Http\Controllers\Admin\CategoryController::class, 'update'])->name('category_update');
  Route::delete('/admin/category/{id}', [App\Http\Controllers\Admin\CategoryController::class, 'destroy']);
- Route::post('/admin/category',[App\Http\Controllers\Admin\CategoryController::class, 'search']);
+//  Route::post('/admin/category',[App\Http\Controllers\Admin\CategoryController::class, 'search']);
 // Inquiry Controler
 Route::get('/admin/inquiry', [App\Http\Controllers\Admin\InquiryController::class, 'index']);
 Route::delete('/admin/inquiry/{id}', [App\Http\Controllers\Admin\InquiryController::class, 'destroy']);
