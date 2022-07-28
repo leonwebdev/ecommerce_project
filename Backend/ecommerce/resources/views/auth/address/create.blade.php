@@ -46,9 +46,12 @@
                             <input type="checkbox" name="terms" id="terms" />
                             <label for="terms">I accept the <a href="#" target="_blank">Terms of Use</a> & <a
                                     href="#" target="_blank">Privacy Policy</a> .</label>
+                            @error('terms')
+                                <span class="error">{{ $message }}</span>
+                            @enderror
                         </p>
                         <p>
-                            <button id="register_btn" class="btn btn_white" disabled>Create</button>
+                            <button id="register_btn" class="btn btn_white">Create</button>
                         </p>
                         <p class="highlight">* Required fields.</p>
                     </form>
@@ -56,12 +59,5 @@
             </div>
         </div>
     </main>
-    <script>
-        $(document).ready(function() {
-            console.log("jQuery loaded, register form displayed");
-            $('#terms').click(function() {
-                $('#register_btn').attr("disabled", !this.checked);
-            });
-        });
-    </script>
+    <script></script>
 @endsection

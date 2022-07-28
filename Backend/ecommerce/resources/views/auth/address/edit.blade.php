@@ -46,13 +46,16 @@
                                     <span class="error">{{ $message }}</span>
                                 @enderror
                             </p>
-                            <p class="col col-12 terms">
+                            <p class="col col-12 terms required">
                                 <input type="checkbox" name="terms" id="terms" />
                                 <label for="terms">I accept the <a href="#" target="_blank">Terms of Use</a> & <a
                                         href="#" target="_blank">Privacy Policy</a> .</label>
+                                @error('terms')
+                                    <span class="error">{{ $message }}</span>
+                                @enderror
                             </p>
                             <p>
-                                <button id="register_btn" class="btn btn_white" disabled>Update</button>
+                                <button id="register_btn" class="btn btn_white">Update</button>
                             </p>
                         </form>
                     @else

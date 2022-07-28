@@ -71,9 +71,11 @@ class ProfileController extends Controller
                     'nullable', 'string', 'min:8', 'max:255', 'confirmed',
                     'regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[\W]).*$/',
                 ],
+                'terms' => ['required'],
             ],
             [
                 'password.regex' => 'Password must include at least one Capital character, one lowercase character, one digit, one special character. Length between 8-255',
+                'terms.required' => 'Please check here to accept our terms and conditions to register.',
             ]
         );
         // var_dump($valid);
