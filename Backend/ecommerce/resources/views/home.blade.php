@@ -19,7 +19,6 @@
         <div class="collections">
             <div class="wrapper">
                 <div class="decorative_text">Collections</div>
-
                 <div class="content">
                     @foreach ($genderCollection as $key => $item)
                         <div class="item item_{{ $key + 1 }}">
@@ -33,7 +32,6 @@
                             <div class="bg_img" style="background-image: url(/storage/{{ $item->image }})"></div>
                         </div>
                     @endforeach
-
                 </div>
             </div>
         </div><!-- End Collections -->

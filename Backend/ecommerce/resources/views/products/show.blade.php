@@ -6,7 +6,16 @@
 
                 <div class="left">
                     <div class="product_image">
-                        <img src="/images/item1.jpg" alt="item1">
+                        <div class="slider product-images">
+                            <div>
+                                <img src="/images/item1.jpg" alt="item1">
+                            </div>
+                        </div>
+                        {{-- <div class="slider product-images-nav">
+                            <div>
+                                <img src="/images/item1.jpg" alt="item1">
+                            </div>
+                        </div> --}}
                         {{-- {{ $product->product_media }} --}}
                     </div>
                 </div>
