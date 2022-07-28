@@ -14,10 +14,35 @@ class UserAddressController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $title = 'Admin | Address';
-        $addresses = User_address::orderBy('user_id', 'asc')->paginate($this->MAX_PER_PAGE);
+        $search = $request->query('search');
+        if ($search) {
+            $addresses = User_address::select(
+                'user_addresses.id',
+                'user_addresses.user_id',
+                'user_addresses.street',
+                'user_addresses.city',
+                'user_addresses.province',
+                'user_addresses.country',
+                'user_addresses.postal_code',
+            )
+                ->join('users', 'users.id', '=', 'user_addresses.user_id')
+                ->where('users.first_name', 'LIKE', '%' . $search . '%')
+                ->orWhere('users.last_name', 'LIKE', '%' . $search . '%')
+                ->orWhere('users.email', 'LIKE', '%' . $search . '%')
+                ->orWhere('user_addresses.street', 'LIKE', '%' . $search . '%')
+                ->orWhere('user_addresses.city', 'LIKE', '%' . $search . '%')
+                ->orWhere('user_addresses.province', 'LIKE', '%' . $search . '%')
+                ->orWhere('user_addresses.country', 'LIKE', '%' . $search . '%')
+                ->orWhere('user_addresses.postal_code', 'LIKE', '%' . $search . '%')
+                ->orderBy('user_addresses.user_id', 'asc')
+                ->orderBy('user_addresses.id', 'asc')
+                ->paginate($this->MAX_PER_PAGE);
+        } else {
+            $addresses = User_address::orderBy('user_id', 'asc')->paginate($this->MAX_PER_PAGE);
+        }
         return view('admin.address.index', compact('title', 'addresses',));
     }
 

@@ -27,7 +27,15 @@ class UserController extends Controller
         $title = $this->title;
         $search = $request->query('search');
         if ($search) {
-            $users = User::select('*')
+            $users = User::select(
+                'users.id',
+                'users.first_name',
+                'users.last_name',
+                'users.phone',
+                'users.email',
+                'users.default_address_id',
+                'users.admin',
+            )
                 ->join('user_addresses', 'users.id', '=', 'user_addresses.user_id')
                 ->where('users.first_name', 'LIKE', '%' . $search . '%')
                 ->orWhere('users.last_name', 'LIKE', '%' . $search . '%')
@@ -42,6 +50,9 @@ class UserController extends Controller
         } else {
             $users = User::latest()->paginate($this->MAX_PER_PAGE);
         }
+        // echo $users;
+        // var_dump($users);
+        // die;
         return view('admin.user.index', compact('users', 'title'));
     }
 
