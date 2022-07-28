@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-
+use App\Models\Gender;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\ServiceProvider;
@@ -28,6 +28,12 @@ class ViewServiceProvider extends ServiceProvider
     {
         view()->composer('*', function($view) {
             $view->with('count_cart', Session::get('cart'));
-        });   
+        });
+
+        view()->composer('*', function ($view) {
+            $view->with('genders', Gender::all());
+        });
+
+
     }
 }

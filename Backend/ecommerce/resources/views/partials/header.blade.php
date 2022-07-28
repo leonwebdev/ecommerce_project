@@ -11,18 +11,11 @@
                 <li>
                     <a class="active" href="/product">All Outfits</a>
                 </li>
-                <li>
-                    <a href="/women/product">Women</a>
-                </li>
-                <li>
-                    <a href="/men/product">Men</a>
-                </li>
-                <li>
-                    <a href="/boys/product">Boys</a>
-                </li>
-                <li>
-                    <a href="/girls/product">Girls</a>
-                </li>
+                @foreach ($genders as $gender)
+                    <li>
+                        <a href="/{{ $gender->name }}/product" class="text-transform-capitalize">{{ $gender->name }}</a>
+                    </li>
+                @endforeach
             </ul>
         </nav>
         <div class="utils">
