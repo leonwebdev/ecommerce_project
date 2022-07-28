@@ -46,7 +46,11 @@ class UserAddressController extends Controller
                 'province' => ['required', 'string', 'min:3', 'max:255'],
                 'country' => ['required', 'string', 'min:3', 'max:255'],
                 'postal_code' => ['required', 'string', 'min:6', 'max:255'],
+                'terms' => ['required'],
             ],
+            [
+                'terms.required' => 'Please check here to accept our terms and conditions to register.',
+            ]
         );
         User_address::find($id)->update($valid);
         return redirect('/profile');
@@ -94,7 +98,11 @@ class UserAddressController extends Controller
                 'province' => ['required', 'string', 'min:3', 'max:255'],
                 'country' => ['required', 'string', 'min:3', 'max:255'],
                 'postal_code' => ['required', 'string', 'min:6', 'max:255'],
+                'terms' => ['required'],
             ],
+            [
+                'terms.required' => 'Please check here to accept our terms and conditions to register.',
+            ]
         );
         $user_address = new User_address;
         $user_address->user_id = Auth::user()->id;

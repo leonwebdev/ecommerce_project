@@ -52,28 +52,24 @@
                                     <span class="error">{{ $message }}</span>
                                 @enderror
                             </p>
-                            <p class="col col-12 terms">
+                            <p class="col col-12 terms required">
                                 <input type="checkbox" name="terms" id="terms" />
                                 <label for="terms">I accept the <a href="#" target="_blank">Terms of Use</a> & <a
                                         href="#" target="_blank">Privacy Policy</a> .</label>
+                                @error('terms')
+                                    <span class="error">{{ $message }}</span>
+                                @enderror
                             </p>
                             <p>
-                                <button id="register_btn" class="btn btn_white" disabled>Update</button>
+                                <button id="register_btn" class="btn btn_white">Update</button>
                             </p>
                         </form>
                     @else
-                    <h1 style="color: red">You are not authorised to edit other people's personal information.</h1>
+                        <h1 style="color: red">You are not authorised to edit other people's personal information.</h1>
                     @endif
                 </div>
             </div>
         </div>
     </main>
-    <script>
-        $(document).ready(function() {
-            console.log("jQuery loaded, register form displayed");
-            $('#terms').click(function() {
-                $('#register_btn').attr("disabled", !this.checked);
-            });
-        });
-    </script>
+    <script></script>
 @endsection
