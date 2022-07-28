@@ -184,50 +184,91 @@
             </div>
         </div>
 
-        {{-- <div style="width: 600px; margin: auto;">
-            <canvas id="myPieChart"></canvas>
-        </div>
         <!-- Pie Chart -->
-        <div class="col-xl-4 col-lg-5">
-            <div class="card shadow mb-4">
-                <!-- Card Header - Dropdown -->
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
-                    <div class="dropdown no-arrow">
-                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                            aria-labelledby="dropdownMenuLink">
-                            <div class="dropdown-header">Dropdown Header:</div>
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- Card Body -->
-                <div class="card-body">
-                    <div class="chart-pie pt-4 pb-2">
-                        <canvas id="myPieChart"></canvas>
-                    </div>
-                    <div class="mt-4 text-center small">
-                        <span class="mr-2">
-                            <i class="fas fa-circle text-primary"></i> Direct
-                        </span>
-                        <span class="mr-2">
-                            <i class="fas fa-circle text-success"></i> Social
-                        </span>
-                        <span class="mr-2">
-                            <i class="fas fa-circle text-info"></i> Referral
-                        </span>
-                    </div>
-                </div>
+        <div class="row g-2">
+            <div class="col-md-6">
+                <h2 class="h4 text-gray-800">Product by Category</h2>
+                <div id="productByCategory" style="width: 600px; height: 500px;margin: auto;"></div>
             </div>
-        </div> --}}
+            <div class="col-md-6">
+                <h2 class="h4 text-gray-800">Product by Gender</h2>
+                <div id="productByGender" style="width: 600px; height: 500px;margin: auto;"></div>
+            </div>
+            <!-- line Chart -->
+            <div class="col-md-6">
+                <h2 class="h4 text-gray-800">Monthly Sales</h2>
+                <div id="salesLineChart" style="width: 600px; height: 500px;margin: auto;"></div>
+            </div>
+        </div>
 
+    </div>
     </div>
     <!-- /.container-fluid -->
 @endsection
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+    google.charts.load('current', {
+        'packages': ['corechart']
+    });
+    google.charts.setOnLoadCallback(drawChart);
+
+    function productByCategoryChart() {
+        let productByCategoryData = google.visualization.arrayToDataTable([
+            ['Category', 'Product Count'],
+            @php
+                foreach ($productByCategory as $cat) {
+                    echo "['" . $cat->title . "', " . $cat->products_count . '],';
+                }
+            @endphp
+        ]);
+        let options = {
+            title: '',
+            is3D: false,
+        };
+        let productByCategory = new google.visualization.PieChart(document.getElementById('productByCategory'));
+        productByCategory.draw(productByCategoryData, options);
+    }
+
+    function productByGenderChart() {
+        let productByGenderData = google.visualization.arrayToDataTable([
+            ['Gender', 'Product Count'],
+            @php
+                foreach ($productByGender as $gender) {
+                    echo "['" . ucfirst($gender->name) . "', " . $gender->products_count . '],';
+                }
+            @endphp
+        ]);
+        let options = {
+            title: '',
+            is3D: true,
+        };
+        let productByGender = new google.visualization.PieChart(document.getElementById('productByGender'));
+        productByGender.draw(productByGenderData, options);
+    }
+
+    function salesChart() {
+        let salesData = google.visualization.arrayToDataTable([
+            ['Month', 'Amount'],
+            @php
+                foreach ($sales as $month) {
+                    echo "['" . ucfirst($month->month) . "', " . number_format($month->sales, 2) . '],';
+                }
+            @endphp
+        ]);
+        let options = {
+            title: '',
+            is3D: true,
+        };
+        let salesLineChart = new google.visualization.LineChart(document.getElementById('salesLineChart'));
+        salesLineChart.draw(salesData, options);
+    }
+
+    function drawChart() {
+        // pie chart
+        productByCategoryChart();
+        productByGenderChart();
+
+        // line chart
+        salesChart();
+    }
+</script>
