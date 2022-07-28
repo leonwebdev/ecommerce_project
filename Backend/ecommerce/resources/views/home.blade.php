@@ -19,28 +19,19 @@
         <div class="collections">
             <div class="wrapper">
                 <div class="decorative_text">Collections</div>
-
                 <div class="content">
-                    <div class="item item_1">
-                        <a href="#"><span>New for Woman</span></a>
-                        <div class="bg_img" style="background-image: url('/images/home/collections_1.jpg')"></div>
-                    </div>
-                    <div class="item item_2">
-                        <a href="#"><span>Sports</span></a>
-                        <div class="bg_img" style="background-image: url('/images/home/collections_2.jpg')"></div>
-                    </div>
-                    <div class="item item_3">
-                        <a href="#"><span>Smart Casual</span></a>
-                        <div class="bg_img" style="background-image: url('/images/home/collections_3.jpg')"></div>
-                    </div>
-                    <div class="item item_4">
-                        <a href="#"><span>Spring for Kids</span></a>
-                        <div class="bg_img" style="background-image: url('/images/home/collections_4.jpg')"></div>
-                    </div>
-                    <div class="item item_5">
-                        <a href="#"><span>All Boys</span></a>
-                        <div class="bg_img" style="background-image: url('/images/home/collections_5.jpg')"></div>
-                    </div>
+                    @foreach ($genderCollection as $key => $item)
+                        <div class="item item_{{ $key + 1 }}">
+                            <a href="/{{ $item->name }}/product"><span>{{ ucfirst($item->name) }}</span></a>
+                            <div class="bg_img" style="background-image: url('/images/{{ $item->image }}')"></div>
+                        </div>
+                    @endforeach
+                    @foreach ($categoryCollection as $key => $item)
+                        <div class="item item_{{ $key + 4 }}">
+                            <a href="/product?category={{ $item->title }}"><span>{{ ucfirst($item->title) }}</span></a>
+                            <div class="bg_img" style="background-image: url(/storage/{{ $item->image }})"></div>
+                        </div>
+                    @endforeach
                 </div>
             </div>
         </div><!-- End Collections -->
