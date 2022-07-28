@@ -38,10 +38,10 @@ class ProductController extends Controller
 
         if ($search) {
             $products = Product::where('name', 'LIKE', '%' . $search . '%')
-                ->paginate(16);
+                ->paginate(12);
         } else if (empty($request->query('category')) && empty($request->query('size'))) {
             $products = Product::with(['product_media', 'categories'])
-                ->paginate(16);
+                ->paginate(12);
         } else {
 
             if ($request->query('category')) {
@@ -61,15 +61,15 @@ class ProductController extends Controller
                     $query->whereIn('category_id', $categoryIds);
                 })
                     ->whereIn('size_id', $sizeIds)
-                    ->paginate(16);
+                    ->paginate(12);
             } else if (count($sizeIds) > 0) {
                 $products = Product::whereIn('size_id', $sizeIds)
-                    ->paginate(16);
+                    ->paginate(12);
             } else {
                 $products = Product::whereHas('categories', function ($query) use ($categoryIds) {
                     $query->whereIn('category_id', $categoryIds);
                 })
-                    ->paginate(16);
+                    ->paginate(12);
             }
         }
         return view(
@@ -107,7 +107,7 @@ class ProductController extends Controller
 
         if (empty($request->query('category')) && empty($request->query('size'))) {
             $products = Product::whereIn('gender_id', $genderId)
-                ->paginate(16);
+                ->paginate(12);
         } else {
 
             if ($request->query('category')) {
@@ -128,15 +128,15 @@ class ProductController extends Controller
                 })
                     ->whereIn('size_id', $sizeIds)
                     ->whereIn('gender_id', $genderId)
-                    ->paginate(16);
+                    ->paginate(12);
             } else if (count($sizeIds) > 0) {
                 $products = Product::whereIn('size_id', $sizeIds)
                     ->whereIn('gender_id', $genderId)
-                    ->paginate(16);
+                    ->paginate(12);
             } else {
                 $products = Product::whereHas('categories', function ($query) use ($categoryIds) {
                     $query->whereIn('category_id', $categoryIds);
-                })->whereIn('gender_id', $genderId)->paginate(16);
+                })->whereIn('gender_id', $genderId)->paginate(12);
             }
         }
         return view(
