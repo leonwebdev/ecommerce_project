@@ -18,10 +18,10 @@
                     <a href="/men/product">Men</a>
                 </li>
                 <li>
-                    <a href="/boy/product">Boys</a>
+                    <a href="/boys/product">Boys</a>
                 </li>
                 <li>
-                    <a href="/girl/product">Girls</a>
+                    <a href="/girls/product">Girls</a>
                 </li>
             </ul>
         </nav>
@@ -33,7 +33,7 @@
             </div>
             <!-- Profile start-->
             <div class="icon profile">
-                <a href=":javascript;">
+                <a href="" onclick="event.preventDefault();">
                     <img src="/images/icon-profile.svg" alt="profile icon" width="30" height="30" />
                 </a>
                 <div class="profile_dropdown">

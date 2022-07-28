@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('province', 255);
             $table->decimal('gst');
             $table->decimal('pst');
-            $table->decimal('vat');
+            $table->decimal('hst');
             $table->softDeletes();
             $table->timestamps();
         });
