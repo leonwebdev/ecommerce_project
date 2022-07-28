@@ -54,8 +54,14 @@ class ViewServiceProvider extends ServiceProvider
             );
         });
 
-        view()->composer('*', function ($view) {
-            $view->with('genders', Gender::all());
+        view()->composer('products.show', function ($view) {
+            $view->with(
+                'ad',
+                Advertisement::where('pages', '=', 'product-detail')
+                ->where('area', '=', 'top')
+                ->inRandomOrder()
+                    ->first()
+            );
         });
 
 
