@@ -6,12 +6,14 @@
 
         <!-- Search form -->
         <div class="search_form">
-            <form class="d-md-flex input-group w-auto my-auto">
-                <input autocomplete="off" type="search" class="form-control rounded" placeholder='' style="min-width: 225px" />
-                <span class="input-group-text border-0">
-                    <i class="fas fa-search"></i></span>
+            <form class="d-md-flex input-group w-auto my-auto" action="{{ route('admin_product_list') }}" method="get">
+                <input autocomplete="off" type="search" class="form-control rounded" name="search" placeholder='Search'
+                    maxlength="255" style="min-width: 225px" />
+                <button class="input-group-text border-0" type="submit">
+                    <i class="fas fa-search"></i></button>
             </form>
         </div>
+
     </div>
     <a href="{{ route('admin_product_add') }}" class="btn btn-primary">Add a Product</a>
 
@@ -46,12 +48,16 @@
                     <td>{{ $product->categories->implode('title', ', ') }}</td>
                     <td>{{ $product->size->name }}</td>
                     <td>{{ $product->gender->name }}</td>
-
                     <td>
                         <a class="btn btn-info"
                             href="{{ route('admin_product_edit', ['product' => $product->id]) }}">Edit</a>
-                        {{-- <a class="btn btn-info" href="#" role="button">Edit</a> --}}
-                        <a class="btn btn-danger" href="#" role="button">Delete</a>
+                        <form method="post" action="{{ route('admin_product_delete', ['product' => $product->id]) }}">
+                            @csrf
+                            @method('DELETE')
+                            <input type="hidden" name="id" value="{{ $product->id }}" />
+                            <button class="btn btn-danger"
+                                onclick="return confirm('Do you really want to delete {{ $product->name }}?')">Delete</button>
+                        </form>
                     </td>
                 </tr>
             @endforeach
