@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\User_address;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 
 class UserController extends Controller
 {
@@ -21,10 +22,26 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $title = $this->title;
-        $users = User::latest()->paginate($this->MAX_PER_PAGE);
+        $search = $request->query('search');
+        if ($search) {
+            $users = User::select('*')
+                ->join('user_addresses', 'users.id', '=', 'user_addresses.user_id')
+                ->where('users.first_name', 'LIKE', '%' . $search . '%')
+                ->orWhere('users.last_name', 'LIKE', '%' . $search . '%')
+                ->orWhere('users.email', 'LIKE', '%' . $search . '%')
+                ->orWhere('user_addresses.street', 'LIKE', '%' . $search . '%')
+                ->orWhere('user_addresses.city', 'LIKE', '%' . $search . '%')
+                ->orWhere('user_addresses.province', 'LIKE', '%' . $search . '%')
+                ->orWhere('user_addresses.country', 'LIKE', '%' . $search . '%')
+                ->orWhere('user_addresses.postal_code', 'LIKE', '%' . $search . '%')
+                ->orderBy('users.created_at')
+                ->paginate($this->MAX_PER_PAGE);
+        } else {
+            $users = User::latest()->paginate($this->MAX_PER_PAGE);
+        }
         return view('admin.user.index', compact('users', 'title'));
     }
 
