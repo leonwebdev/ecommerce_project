@@ -30,7 +30,7 @@
                                                 <th class="pe-1 pm-1 fw-bold text-black border-grey">Size</th>
                                                 <th class="pe-1 pm-1 fw-bold text-black border-grey">Unit Price</th>
                                                 <th class="pe-1 pm-1 fw-bold text-black border-grey">Quantity</th>
-                                                <th class="pe-1 pm-1 fw-bold text-black border-grey">Line Price</th>
+                                                <th class="pe-1 pm-1 fw-bold text-black border-grey">Price</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -62,6 +62,8 @@
                                                 </span>&#36;{{ $order->total }}</div>
                                         </div>
                                     </div>
+                                    <div class="mb-0_5"><span class="text-black fw-bold">Order Date:
+                                        </span>{{ $order->created_at }}</div>
                                     <div class="mb-0_5"><span class="text-black fw-bold">Shipping address:
                                         </span>{{ $order->shipping_address }}</div>
                                     <div class="mb-0_5"><span class="text-black fw-bold">Billing address:
