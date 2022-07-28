@@ -1,36 +1,50 @@
 @extends('layouts.app')
-
 @section('content')
-<div class="container">
-    <div class="wrapper">
-        <div class="content form" id="register">
-            <h1>Contact</h1>
+    <main class="contact-form">
+        <div class="container">
+            <div class="wrapper">
+                <div class="content form" id="contact">
+                    <h1>Contact Us</h1>
+                    <form action="/contact" id="create" method="POST">
+                        @csrf
+                        <p class="col col-6 required">
+                            <input type="text" id="name" name="name" placeholder="Name"
+                                value="{{ old('name') }}" />
+                            @error('name')
+                                <span class="error">{{ $message }}</span>
+                            @enderror
+                        </p>
+                        <p class="col col-6 required">
+                            <input type="text" id="email" name="email" placeholder="Email"
+                                value="{{ old('email') }}" />
+                            @error('email')
+                                <span class="error">{{ $message }}</span>
+                            @enderror
+                        </p>
 
-            <form method="post" novalidate>
-                <p class="col col-6 required">
-                    <input type="text" id="first_name" name="first_name" placeholder="First Name" value="" />
-                    <span class="error">[error message]</span>
-                </p>
-                <p class="col col-6 required">
-                    <input type="text" id="last_name" name="last_name" placeholder="Last Name" value="" />
-                    <span class="error">[error message]</span>
-                </p>
-
-                <p class="col col-7 required">
-                    <input type="text" id="email" name="email" placeholder="Email"  value=""/>
-                    <span class="error">[error message]</span>
-                </p>
-                <p class="col col-5 required">
-                    <input type="text" id="phone" name="phone" placeholder="Phone" value="" />
-                    <span class="error">[error message]</span>
-                </p>
-                <p class="col col-5 required">
-                    <input type="text" id="message" name="message" placeholder="message" value="" />
-                    <span class="error">[error message]</span>
-                </p>
-                </form>
+                        <p class="col col-12 required">
+                            <input type="text" id="phone" name="phone" placeholder="Phone"
+                                value="{{ old('phone') }}" />
+                            @error('phone')
+                                <span class="error">{{ $message }}</span>
+                            @enderror
+                        </p>
+                        <p class="col col-12 required">
+                        <label for="message">Message:</label><br />
+                            <textarea rows="6" cols="90" id="message" name="message" placeholder="Message">
+                                {{ old('message') }}
+                            </textarea>
+                            @error('message')
+                                <span class="error">{{ $message }}</span>
+                            @enderror
+                        </p>
+                        <p>
+                            <button id="register_btn" class="btn btn_white">Submit</button>
+                        </p>
+                        <p class="highlight">* Required fields.</p>
+                    </form>
                 </div>
-                </div>
-                </div>
-
+            </div>
+        </div>
+    </main>
 @endsection
