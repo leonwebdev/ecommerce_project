@@ -2,8 +2,10 @@
 @section('content')
     <div class="container details_page">
         <div class="wrapper">
+            <div class="ads ads-top mb-3">
+                <a href="{{ $ad->link }}"><img src="/storage/{{ $ad->image }}" alt="{{ $ad->title }}"></a>
+            </div>
             <div class="content">
-
                 <div class="left">
                     <div class="product_image">
                         <div class="slider product-images">

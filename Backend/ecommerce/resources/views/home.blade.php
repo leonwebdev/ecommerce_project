@@ -4,15 +4,11 @@
     <div class="home">
         <!-- Banner -->
         <div class="banner">
-            <div class="banner_item" style="background-image: url('/images/home/slider1.png')">
-                <a href="#"></a>
+            @foreach ($ads as $ad)
+            <div class="banner_item" style="background-image: url('/storage/{{ $ad->image }}')">
+                <a href="{{ $ad->link }}"></a>
             </div>
-            <div class="banner_item" style="background-image: url('/images/home/slider2.jpg')">
-                <a href="#"></a>
-            </div>
-            <div class="banner_item" style="background-image: url('/images/home/slider3.jpg')">
-                <a href="#"></a>
-            </div>
+            @endforeach
         </div><!-- End Banner -->
 
         <!-- Collections -->

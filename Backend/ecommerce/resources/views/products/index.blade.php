@@ -29,6 +29,9 @@
                         </div>
                     @endforeach
                 </form>
+                <div class="ads ads-sidebar">
+                    <a href="{{ $ad->link }}"><img src="/storage/{{ $ad->image }}" alt="{{ $ad->title }}"></a>
+                </div>
             </aside>
             <!-- Aside ended -->
             <!-- Section start -->
