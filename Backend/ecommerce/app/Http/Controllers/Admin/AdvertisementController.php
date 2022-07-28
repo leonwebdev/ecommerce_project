@@ -17,7 +17,7 @@ class AdvertisementController extends Controller
     {
         $title = 'Admin | Advertisement';
         $advertisements = Advertisement::latest()->simplePaginate(10);
-        
+
         return view('/admin/advertisement/index', compact('advertisements','title'));
     }
      /**
@@ -28,8 +28,8 @@ class AdvertisementController extends Controller
     public function create()
     {
         $title = 'Admin | Advertisement';
-        $pages=['all','home','product-list'];
-        $area=['top','bottom','sidebar'];
+        $pages = ['all', 'home', 'product-list', 'product-detail',];
+        $area = ['top', 'bottom', 'sidebar', 'slider',];
         return view('/admin/advertisement/create', compact('title','pages','area'));
     }
     /**
@@ -46,7 +46,7 @@ class AdvertisementController extends Controller
             'link' => 'required|string|max:255',
             'pages' => 'required|string|max:255',
             'area' => 'required|string|max:255'
-            
+
         ]);
         if($request->file('image')) {
             $path =  $request->file('image')->store('public');
@@ -59,7 +59,7 @@ class AdvertisementController extends Controller
         Advertisement::create($valid);
 
         session()->flash('success', 'Advertisement successfully created!');
-        
+
         return redirect('/admin/advertisement');
 
 
@@ -70,12 +70,12 @@ class AdvertisementController extends Controller
     //  * @return void
     //  */
     public function edit(Advertisement $advertisement)
-   
+
     {
-       
+
         $title = 'Admin | Advertisement';
-        $pages=['all','home','product-list'];
-        $area=['top','bottom','sidebar'];
+        $pages = ['all', 'home', 'product-list', 'product-detail',];
+        $area = ['top', 'bottom', 'sidebar', 'slider',];
         return view('/admin/advertisement/edit', compact('advertisement', 'title','pages','area'));
     }
     /**
@@ -105,7 +105,7 @@ class AdvertisementController extends Controller
         $advertisement->update($valid);
 
         if($advertisement->save()) {
-            session()->flash('success', 'Advertisement was successfully updated'); 
+            session()->flash('success', 'Advertisement was successfully updated');
         } else {
             session()->flash('error', 'There was a problem updating the advertisement');
         }
@@ -126,12 +126,12 @@ class AdvertisementController extends Controller
         }
         session()->flash('error', 'There was a problem deleting the advertisement');
         return redirect('/admin/advertisement');
-        
+
     }
     public function search(Request $request)
     {
         $advertisements = Advertisement::latest()->where('title','LIKE','%'.$request->input('search')."%")->simplePaginate(10);
-            
+
         return view('/admin/advertisement', compact('advertisements'));
     }
 }
