@@ -12,10 +12,16 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+
         $title = 'Admin | Product';
-        $products = Product::with(['product_media', 'gender', 'size', 'categories'])->latest()->paginate(10);
+        $search = $request->query('search');
+        if ($search) {
+            $products = Product::with(['product_media', 'gender', 'size', 'categories'])->where('name', 'LIKE', '%' . $search . '%')->latest()->paginate(10);
+        } else {
+            $products = Product::with(['product_media', 'gender', 'size', 'categories'])->latest()->paginate(10);
+        }
         return view('/admin/product/index', compact('title', 'products'));
     }
     /**
@@ -140,11 +146,20 @@ class ProductController extends Controller
         $media = Product_media::find($id);
         if ($media->delete()) {
             return response()->json([
-                'success' => 'Media deleted successfully!'
+                'success' => 'Media has been deleted successfully!'
             ]);
         }
         return response()->json([
             'error' => 'There was a problem deleting media!'
         ]);
+    }
+    public function destroy(Product $product)
+    {
+        if ($product->delete()) {
+            session()->flash('success', 'Product has been deleted successfully');
+            return redirect('/admin/product');
+        }
+        session()->flash('error', 'There was a problem deleting the product!');
+        return redirect('/admin/product');
     }
 }

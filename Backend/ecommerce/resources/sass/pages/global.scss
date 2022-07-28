@@ -57,6 +57,18 @@ button {
     display: inline-block;
     vertical-align: top;
     padding: 0 10px;
+    
+    &.col-1 {
+        width: calc((100% - 8px) / 12);
+    }
+
+    &.col-2 {
+        width: calc((100% - 8px) / 12 * 2);
+    }
+
+    &.col-3 {
+        width: calc((100% - 10px) / 12 * 3);
+    }
 
     &.col-4 {
         width: calc((100% - 8px) / 12 * 4);
@@ -71,7 +83,19 @@ button {
     }
 
     &.col-7 {
-        width: calc((100% - 4px) / 12 * 7);
+        width: calc((100% - 6px) / 12 * 7);
+    }
+
+    &.col-8 {
+        width: calc((100% - 4px) / 12 * 8);
+    }
+
+    &.col-9 {
+        width: calc((100% - 4px) / 12 * 9);
+    }
+
+    &.col-10 {
+        width: calc((100% - 4px) / 12 * 10);
     }
 
     &.col-12 {
@@ -157,6 +181,22 @@ button {
     a {
         display: block;
         padding: 10px;
+    }
+
+    &.cart {
+        a {
+            position: relative;
+            span.count {
+                position: absolute;
+                top: 0;
+                left: 60%;
+                transform: translateX(-60%);
+                -webkit-transform: translateX(-60%);
+                color: $color-primary;
+                font-weight: 400;
+                font-size: 14px;
+            }
+        }
     }
 }
 

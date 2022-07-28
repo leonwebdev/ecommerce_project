@@ -23,13 +23,29 @@ class HomeController extends Controller
 
         $genders = Gender::all();
 
-        $featured = Product::with(['product_media'])->whereHas('categories', function($query) {
+        $featured = Product::with(['product_media'])->whereHas('categories', function ($query) {
             return $query->where('title', '=', 'Featured');
         })->get();
-        
+
+        $categoryCollection = Category::where('title', '<>', 'featured')
+            ->withCount('products')
+            ->orderBy('products_count', 'desc')
+            ->offset(0)
+            ->limit(2)
+            ->get();
+
+        $genderCollection = Gender::withCount('products')
+            ->orderBy('products_count', 'desc')
+            ->offset(0)
+            ->limit(3)
+            ->get();
+
         return view('home', compact(
-            'title', 'genders', 'featured', 
+            'title',
+            'genders',
+            'featured',
+            'categoryCollection',
+            'genderCollection'
         ));
     }
-   
 }

@@ -38,10 +38,8 @@
                         maxlength="255">&nbsp;
                     <button type="submit">Search</button>
                 </form>
-                <p>Total Product: {{ count($products) }}</p>
                 <div class="content">
                     @foreach ($products as $product)
-                        {{-- {{ $product }} --}}
                         <div class="item">
                             <div class="product_img"> <a href="/product/{{ $product->slug }}"></a>
                                 <img src="/images/item1.jpg" alt="item1">
@@ -49,13 +47,14 @@
                             <div class="desc">
                                 <p>{{ $product->name }}</p>
                                 <div class="price">${{ number_format($product->price, 2) }} CAD</div>
-                                <div class="price">Size: {{ $product->size->name }} </div>
-                                <div class="price">Category: {{ $product->categories->implode('title', ', ') }} </div>
-                                <div class="price">Gender: {{ $product->gender->name }} </div>
                             </div>
                         </div>
                     @endforeach
+                </div>
 
+                <div class="pagination-wrapper">
+
+                    {!! $products->links('pagination::bootstrap-5') !!}
                 </div>
             </section>
             <!-- Section ended -->
