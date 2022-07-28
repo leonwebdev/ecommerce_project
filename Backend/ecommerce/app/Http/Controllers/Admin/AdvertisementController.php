@@ -16,7 +16,7 @@ class AdvertisementController extends Controller
     public function index()
     {
         $title = 'Admin | Advertisement';
-        $advertisements = Advertisement::latest()->simplePaginate(10);
+        $advertisements = Advertisement::latest()->paginate($this->MAX_PER_PAGE);
 
         return view('/admin/advertisement/index', compact('advertisements','title'));
     }
@@ -130,7 +130,7 @@ class AdvertisementController extends Controller
     }
     public function search(Request $request)
     {
-        $advertisements = Advertisement::latest()->where('title','LIKE','%'.$request->input('search')."%")->simplePaginate(10);
+        $advertisements = Advertisement::latest()->where('title', 'LIKE', '%' . $request->input('search') . "%")->paginate($this->MAX_PER_PAGE);
 
         return view('/admin/advertisement', compact('advertisements'));
     }
