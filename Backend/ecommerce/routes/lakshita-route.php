@@ -14,8 +14,8 @@ use App\Http\Controllers\Admin\AdvertisementController;
 
  Route::get('/about', [AboutController::class, 'index']);
  Route::get('/contact', [ContactController::class, 'index']);
+ Route::post('/contact', [ContactController::class, 'store']);
  Route::get('/terms-and-conditions', [TermsController::class, 'index']);
- Route::get('/404', [PageNotFoundController::class, 'index']);
  Route::get('/privacy-policy', [PrivacyPolicyController::class, 'index']);
 
 /*
@@ -41,3 +41,4 @@ Route::get('/admin/advertisement/edit/{advertisement}',[App\Http\Controllers\Adm
 Route::put('/admin/advertisement/{id}',[App\Http\Controllers\Admin\AdvertisementController::class, 'update'])->name('advertisement_update');
 Route::delete('/admin/advertisement/{id}', [App\Http\Controllers\Admin\AdvertisementController::class, 'destroy']);
 // Route::post('/admin/advertisement/search',[App\Http\Controllers\Admin\AdvertisementController::class, 'search']);
+Route::fallback([App\Http\Controllers\PageNotFoundController::class, 'notfound']);
