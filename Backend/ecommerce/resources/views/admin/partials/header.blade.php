@@ -51,7 +51,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <!-- Brand -->
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="/admin/dashboard">
                 <img src="/images/logo-uptrend.svg" width="70" height="70" alt="UPtrend logo"
                     class="d-none d-lg-inline" />
                 <span>Admin Panel</span>
@@ -62,7 +62,7 @@
                 <!-- User -->
                 @auth
                     <li class="nav-item me-2">
-                        <a class="nav-link" href="/admin/order"
+                        <a class="nav-link" href="/admin/dashboard"
                             role="button">{{ Auth::user()->first_name . ' ' . Auth::user()->last_name }}</a>
                     </li>
                     <li class="nav-item">
