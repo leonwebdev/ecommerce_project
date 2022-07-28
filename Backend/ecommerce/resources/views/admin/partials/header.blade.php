@@ -46,27 +46,27 @@
         <!-- Container wrapper -->
         <div class="container-fluid">
             <!-- Toggle button -->
-            <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#sidebarMenu"
-                aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
-                <i class="fas fa-bars"></i>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#MobileNavBar"
+                aria-expanded="false">
+                <span class="navbar-toggler-icon"></span>
             </button>
-
             <!-- Brand -->
             <a class="navbar-brand" href="#">
-                <img src="/images/logo-uptrend.svg" width="70" height="70" alt="UPtrend logo" />
+                <img src="/images/logo-uptrend.svg" width="70" height="70" alt="UPtrend logo"
+                    class="d-none d-lg-inline" />
                 <span>Admin Panel</span>
             </a>
 
             <!-- Right links -->
-            <ul class="navbar-nav ms-auto d-flex flex-row">
+            <ul class="navbar-nav ms-auto d-flex flex-row align-items-center">
                 <!-- User -->
                 @auth
-                    <li class="nav-item">
-                        <a class="nav-link d-flex align-items-center" href="/admin/order"
+                    <li class="nav-item me-2">
+                        <a class="nav-link" href="/admin/order"
                             role="button">{{ Auth::user()->first_name . ' ' . Auth::user()->last_name }}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link d-flex align-items-center text-danger fw-bold" href="/logout"
+                        <a class="nav-link text-danger fw-bold" href="/logout"
                             onclick="event.preventDefault();
                             document.getElementById('logout-form').submit();">Logout</a>
                     </li>
@@ -75,11 +75,42 @@
                     </form>
                 @else
                     <li class="nav-item">
-                        <span>You have not login yet, this message display for development.</span>
+                        <span>Admin not loggin.</span>
                     </li>
                 @endauth
 
             </ul>
+            <!-- Mobile Navbar -->
+            <div class="collapse flex-grow-1 d-lg-none" id="MobileNavBar" style="flex-basis: 100%">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link text-center" href="/admin/dashboard">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-center" href="/admin/order">Orders</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-center" href="/admin/product">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-center" href="/admin/category">Categories</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-center" href="/admin/advertisement">Advertisements</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-center" href="/admin/inquiry">Inquiry</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-center" href="/admin/user">Users</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-center" href="/admin/address">Addresses</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- Mobile Navbar -->
+
         </div>
         <!-- Container wrapper -->
     </nav>
