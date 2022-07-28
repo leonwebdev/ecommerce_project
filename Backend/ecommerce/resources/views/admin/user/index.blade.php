@@ -43,9 +43,9 @@
                                     role="button">Edit</a>
                             </div>
                             @if ($user->admin == true)
-                                <div class="col-auto ps-0 ms-0">
-                                    <a href="" class="btn btn-outline-danger"
-                                        onclick="event.preventDefault();">Cannot Delete Admin</a>
+                                <div class="col-auto ps-0 ms-0" tabindex="0" data-bs-toggle="tooltip" title="Cannot Delete Admin User">
+                                    <a href="" class="btn btn-outline-danger disabled" role="button"
+                                        onclick="event.preventDefault();">Delete</a>
                                 </div>
                             @else
                                 <div class="col-auto ps-0 ms-0">

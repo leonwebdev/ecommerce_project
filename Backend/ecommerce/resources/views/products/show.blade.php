@@ -43,8 +43,7 @@
                         @endif
 
                         <div class="@if ($product->quantity == 0) disabled @endif">
-                            <a class="btn btn_black" href="#">
-                                Add to bag</a>
+                            <a class="btn btn_black" href="{{ route('createCart', ['id' => $product->id ]) }}">Add to bag</a>
                         </div>
                     </div>
                 </div>
