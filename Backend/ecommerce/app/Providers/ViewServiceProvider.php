@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Advertisement;
 use App\Models\Gender;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Session;
@@ -33,6 +34,24 @@ class ViewServiceProvider extends ServiceProvider
         view()->composer('*', function ($view) {
             $view->with('genders', Gender::all());
         });
+
+        view()->composer('home', function ($view) {
+            $view->with(
+                'ads',
+                Advertisement::where('pages', '=', 'home')
+                ->where('area', '=', 'slider')
+                ->get()
+            );
+        });
+
+        view()->composer('*', function ($view) {
+            $view->with('genders', Gender::all());
+        });
+
+        view()->composer('*', function ($view) {
+            $view->with('genders', Gender::all());
+        });
+
 
 
     }
