@@ -15,7 +15,8 @@ $details-left-margin: 40px;
         font-size: 20px;
     }
 
-    .left, .right {
+    .left,
+    .right {
         display: inline-block;
         vertical-align: top;
     }
@@ -58,4 +59,26 @@ $details-left-margin: 40px;
             }
         }
     }
+}
+.product-images-nav {
+    img {
+        cursor: pointer;
+    }
+    .slick-track {
+        // width: 100% !important;
+        // max-width: 100% !important;
+    }
+    .slick-prev:before,
+    .slick-next:before {
+        color: #707070 !important;
+    }
+}
+
+.slick-center > div {
+    transform: scale(1);
+}
+
+.slick-slide > div {
+    transform: scale(0.85);
+    transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1);
 }
