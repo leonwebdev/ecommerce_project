@@ -17,21 +17,25 @@ class GenderTableSeeder extends Seeder
     {
         DB::table('genders')->insert([
             'name' => 'women',
+            'image' => 'gender/women.jpg',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
         DB::table('genders')->insert([
             'name' => 'men',
+            'image' =>  'gender/men.jpg',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
         DB::table('genders')->insert([
             'name' => 'girls',
+            'image' => 'gender/girls.jpg',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
         DB::table('genders')->insert([
             'name' => 'boys',
+            'image' => 'gender/boys.jpg',
             'created_at' => now(),
             'updated_at' => now(),
         ]);

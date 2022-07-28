@@ -1,8 +1,8 @@
 /* =============== Product List page =============== */
 .list_item {
     display: inline-block;
-	vertical-align: top;
-	width: calc(100% - $sidebar-width - $sidebar-margin - 5px);
+    vertical-align: top;
+    width: calc(100% - $sidebar-width - $sidebar-margin - 5px);
 
     .content {
         display: flex;
@@ -11,7 +11,7 @@
 
         .item {
             flex: 0 0 33.333333%;
-            padding: 0 20px; 
+            padding: 0 20px;
             margin-bottom: 30px;
 
             .product_img {
@@ -26,7 +26,7 @@
                     @include transition();
 
                     &:hover {
-                        background-color: rgba(0,0,0,.1);
+                        background-color: rgba(0, 0, 0, 0.1);
                     }
                 }
 
@@ -46,7 +46,139 @@
                     font-weight: 400;
                 }
             }
+        }
+    }
+}
 
+//pagination start
+.pagination-wrapper {
+    .justify-content-between {
+        justify-content: space-between !important;
+    }
+    .justify-content-sm-between {
+        justify-content: space-between !important;
+    }
+    .align-items-sm-center {
+        align-items: center !important;
+    }
+    .d-sm-flex {
+        display: flex !important;
+        display: flex !important;
+    }
+    .d-sm-none {
+        display: none !important;
+    }
+    .flex-sm-fill {
+        flex: 1 1 auto !important;
+    }
+    .small {
+        font-size: 0.875em;
+    }
+    .text-muted {
+        color: #6c757d !important;
+    }
+    .pagination {
+        display: flex;
+        padding-left: 0;
+        list-style: none;
+    }
+    .page-link {
+        position: relative;
+        display: block;
+        color: #707070;
+        text-decoration: none;
+        background-color: #fff;
+        border: 1px solid #dee2e6;
+        transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
+            box-shadow 0.15s ease-in-out;
+        padding: 0.375rem 0.75rem;
+        &:hover {
+            z-index: 2;
+            color: #707070;
+            background-color: #e9ecef;
+            border-color: #dee2e6;
+        }
+        &:focus {
+            z-index: 3;
+            color: #707070;
+            background-color: #e9ecef;
+            outline: 0;
+            box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+        }
+    }
+    .page-item {
+        &:not(:first-child) {
+            .page-link {
+                margin-left: -1px;
+            }
+        }
+        &:first-child {
+            .page-link {
+                border-top-left-radius: 0.25rem;
+                border-bottom-left-radius: 0.25rem;
+            }
+        }
+        &:last-child {
+            .page-link {
+                border-top-right-radius: 0.25rem;
+                border-bottom-right-radius: 0.25rem;
+            }
+        }
+    }
+    .page-item.active {
+        .page-link {
+            z-index: 3;
+            color: #fff;
+            background-color: #707070;
+            border-color: #707070;
+        }
+    }
+    .page-item.disabled {
+        .page-link {
+            color: #6c757d;
+            pointer-events: none;
+            background-color: #fff;
+            border-color: #dee2e6;
+        }
+    }
+    .pagination-lg {
+        .page-link {
+            padding: 0.75rem 1.5rem;
+            font-size: 1.25rem;
+        }
+        .page-item {
+            &:first-child {
+                .page-link {
+                    border-top-left-radius: 0.3rem;
+                    border-bottom-left-radius: 0.3rem;
+                }
+            }
+            &:last-child {
+                .page-link {
+                    border-top-right-radius: 0.3rem;
+                    border-bottom-right-radius: 0.3rem;
+                }
+            }
+        }
+    }
+    .pagination-sm {
+        .page-link {
+            padding: 0.25rem 0.5rem;
+            font-size: 0.875rem;
+        }
+        .page-item {
+            &:first-child {
+                .page-link {
+                    border-top-left-radius: 0.2rem;
+                    border-bottom-left-radius: 0.2rem;
+                }
+            }
+            &:last-child {
+                .page-link {
+                    border-top-right-radius: 0.2rem;
+                    border-bottom-right-radius: 0.2rem;
+                }
+            }
         }
     }
 }
