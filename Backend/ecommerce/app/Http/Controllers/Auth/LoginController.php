@@ -66,7 +66,7 @@ class LoginController extends Controller
         if (
             Auth::user()->admin
         ) {
-            return '/admin/user';
+            return '/admin/dashboard';
         }
 
         return property_exists($this, 'redirectTo') ? $this->redirectTo : '/home';
