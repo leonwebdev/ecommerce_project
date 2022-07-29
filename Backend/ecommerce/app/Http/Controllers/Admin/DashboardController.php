@@ -47,14 +47,6 @@ class DashboardController extends Controller
             ->orderBy('year', 'desc')
             ->get();
 
-        // monthly sales by gender and category 
-        // $salesByCategory = DB::table('orders')
-        //     ->selectRaw(
-        //         'year(created_at) year,
-        //         monthname(created_at) month,
-        //         count(*)'
-        //     )
-        //     ->get();
 
         return view('/admin/dashboard/index', compact(
             'title',
