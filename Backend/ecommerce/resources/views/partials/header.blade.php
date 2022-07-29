@@ -66,40 +66,5 @@
             </div>
         </div>
 
-        <!-- Nav dropdown menu -->
-        <!-- !!Menu loaded from database when page loaded!! -->
-        <div class="nav_dropdown">
-            <div class="nav_content">
-                <div class="nav_item">
-                    <a href="#">Shop All Women</a>
-                </div>
-                <div class="nav_item">
-                    <div class="nav_dropdown_title">
-                        Categories
-                    </div>
-                    <ul>
-                        <li><a href="?category=women-tops">Tops</a></li>
-                        <li><a href="?category=women-bottoms">Bottoms</a></li>
-                        <li><a href="?category=women-dresses">Dresses</a></li>
-                        <li><a href="?category=women-jackets">Jackets</a></li>
-                        <li><a href="?category=women-sport-wear">Sport Wear</a></li>
-                        <li><a href="?category=women-accessories">Accessories</a></li>
-                    </ul>
-                </div>
-                <div class="nav_item">
-                    <div class="nav_dropdown_title">
-                        Sizes
-                    </div>
-                    <ul>
-                        <li><a href="?size=women-xxl">XXL</a></li>
-                        <li><a href="?size=women-xl">XL</a></li>
-                        <li><a href="?size=women-l">L</a></li>
-                        <li><a href="?size=women-s">S</a></li>
-                        <li><a href="?size=women-xs">XS</a></li>
-                    </ul>
-                </div>
-            </div>
-
-        </div>
     </div>
 </div><!-- Navigation bar end -->
