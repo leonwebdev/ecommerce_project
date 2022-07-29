@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Models\User;
-use App\Models\User_address;
+use App\Models\UserAddress;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
@@ -155,7 +155,7 @@ class RegisterController extends Controller
      */
     public function createUserDefaultAddress(int $id, array $data)
     {
-        return User_address::create([
+        return UserAddress::create([
             'user_id' => $id,
             'street' => $data['street'],
             'city' => $data['city'],
