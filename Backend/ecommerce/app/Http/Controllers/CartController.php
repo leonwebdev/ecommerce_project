@@ -7,7 +7,7 @@ use App\Models\Tax;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\User_address;
+use App\Models\UserAddress;
 
 class CartController extends Controller
 {
@@ -132,13 +132,15 @@ class CartController extends Controller
             $products = [];
             $subtotal = 0;
             $total_qty = 0;
-            // check the country and province from shipping address when checking out
+            // [tax]check the country and province from shipping address when checking out
 
             if($session_address_id) {
-                $default_address = User_address::find( $session_address_id)->full_address();
+                $default_address = UserAddress::find( $session_address_id)->full_address();
             } else {
                 $default_address = $user->full_address();
             }
+
+            // dd(intval($session_address_id), $default_address, $user->default_address_id);
 
             if($session_cart) {
                 $products = Product::whereIn('id', array_keys($session_cart))->with('size')->get();

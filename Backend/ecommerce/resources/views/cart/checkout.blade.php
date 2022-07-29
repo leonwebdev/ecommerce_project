@@ -29,12 +29,12 @@
                             @foreach($address_list as $address)
                             <div class="addr_item">
                                 <input type="radio" id="addr_{{ $address->id }}" name="address_list" value="{{ $address->id }}" 
-                                    @if($session_address_id && $session_address_id == $address->id) checked
+                                    @if(isset($session_address_id) && intval($session_address_id) == $address->id) checked
                                     @elseif($address->id == $user->default_address_id) checked @endif 
                                 />
 
                                 @if($address->id == $user->default_address_id) 
-                                <strong>(Default)</strong>
+                                <span>[Default]</span>
                                 @endif
                                 <label for="addr_{{ $address->id }}">{{ $address->full_address() }}</label>
                             </div>
@@ -95,7 +95,7 @@
                                 @enderror
                             </p>
                             <p>
-                                <button id="register_btn" class="btn btn_white">Create</button>
+                                <button id="register_btn" class="btn btn_black">Create</button>
                             </p>
                             <p class="highlight">* Required fields.</p>
                         </form>
