@@ -9,6 +9,7 @@ use App\Models\Product;
 use App\Models\ProductMedia;
 use App\Models\Size;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
@@ -42,7 +43,6 @@ class ProductController extends Controller
         // dd($request);
         $valid = $request->validate([
             'name' => 'required|string|max:255',
-            'slug' => 'required|string|max:255',
             'description' => 'required|string',
             'color' => 'required|string|max:255',
             'price' => 'required|regex:/^\d+(\.\d{1,2})?$/',
@@ -55,7 +55,7 @@ class ProductController extends Controller
         ]);
         $product = new Product;
         $product->name = $request->name;
-        $product->slug = $request->slug;
+        $product->slug = Str::slug($request->name);
         $product->description = $request->description;
         $product->color = $request->color;
         $product->quantity = $request->quantity;
@@ -102,7 +102,6 @@ class ProductController extends Controller
         $isMediaRequired = $savedMedia > 0 ? 'nullable' : 'required';
         $valid = $request->validate([
             'name' => 'required|string|max:255',
-            'slug' => 'required|string|max:255',
             'description' => 'required|string',
             'color' => 'required|string|max:255',
             'price' => 'required|regex:/^\d+(\.\d{1,2})?$/',
@@ -114,7 +113,7 @@ class ProductController extends Controller
             'images.*' => 'image|mimes:jpeg,png,jpg,svg|max:2048'
         ]);
         $product->name = $request->name;
-        $product->slug = $request->slug;
+        $product->slug = Str::slug($request->name);
         $product->description = $request->description;
         $product->color = $request->color;
         $product->quantity = $request->quantity;
