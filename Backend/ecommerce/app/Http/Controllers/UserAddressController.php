@@ -49,10 +49,15 @@ class UserAddressController extends Controller
                 'terms' => ['required'],
             ],
             [
-                'terms.required' => 'Please check here to accept our terms and conditions to register.',
+                'terms.required' => 'Please check here to accept our terms and conditions to Update.',
             ]
         );
-        User_address::find($id)->update($valid);
+        // User_address::find($id)->update($valid);
+        if (User_address::find($id)->update($valid)) {
+            session()->flash('success', 'Address information was successfully updated.');
+        } else {
+            session()->flash('error', 'There was a problem updating the Address');
+        }
         return redirect('/profile');
     }
 
@@ -101,7 +106,7 @@ class UserAddressController extends Controller
                 'terms' => ['required'],
             ],
             [
-                'terms.required' => 'Please check here to accept our terms and conditions to register.',
+                'terms.required' => 'Please check here to accept our terms and conditions to create.',
             ]
         );
         $user_address = new User_address;
@@ -111,8 +116,13 @@ class UserAddressController extends Controller
         $user_address->province = $valid['province'];
         $user_address->country = $valid['country'];
         $user_address->postal_code = $valid['postal_code'];
-        $user_address->save();
+        // $user_address->save();
 
+        if ($user_address->save()) {
+            session()->flash('success', 'Address was successfully created.');
+        } else {
+            session()->flash('error', 'There was a problem creating the Address');
+        }
         return redirect('/profile#User_address');
     }
 }

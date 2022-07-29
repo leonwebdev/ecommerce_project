@@ -75,7 +75,7 @@ class ProfileController extends Controller
             ],
             [
                 'password.regex' => 'Password must include at least one Capital character, one lowercase character, one digit, one special character. Length between 8-255',
-                'terms.required' => 'Please check here to accept our terms and conditions to register.',
+                'terms.required' => 'Please check here to accept our terms and conditions to Update.',
             ]
         );
         // var_dump($valid);
@@ -86,7 +86,12 @@ class ProfileController extends Controller
         } else {
             $valid['password'] = Hash::make($valid['password']);
         }
-        User::find($id)->update($valid);
+        // User::find($id)->update($valid);
+        if (User::find($id)->update($valid)) {
+            session()->flash('success', 'User information was successfully updated.');
+        } else {
+            session()->flash('error', 'There was a problem updating the User');
+        }
         return redirect('/profile');
     }
 }
