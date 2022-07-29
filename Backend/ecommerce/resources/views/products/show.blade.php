@@ -13,12 +13,6 @@
                                 <img src="/images/item1.jpg" alt="item1">
                             </div>
                         </div>
-                        {{-- <div class="slider product-images-nav">
-                            <div>
-                                <img src="/images/item1.jpg" alt="item1">
-                            </div>
-                        </div> --}}
-                        {{-- {{ $product->product_media }} --}}
                     </div>
                 </div>
                 <div class="right">
@@ -36,6 +30,7 @@
                         </div>
                         <div class="color"><strong>Color: </strong> {{ $product->color }}</div>
                         <div class="size"><strong>Size: </strong> {{ $product->size->name }}</div>
+                        <div class="qutanity"><strong>Available Quantity: </strong> {{ $product->quantity }}</div>
                         @if ($product->quantity == 0)
                             <div class="availability">
                                 <img src="/images/icon-unavailable.svg" alt="unavailable icon" width="17"
@@ -45,7 +40,8 @@
                         @endif
 
                         <div class="@if ($product->quantity == 0) disabled @endif">
-                            <a class="btn btn_black" href="{{ route('createCart', ['id' => $product->id ]) }}">Add to bag</a>
+                            <a class="btn btn_black" href="{{ route('createCart', ['id' => $product->id]) }}">Add to
+                                bag</a>
                         </div>
                     </div>
                 </div>
