@@ -66,6 +66,10 @@
                 @extend .custom_arrow_next;
             }
         }
+
+        .slick-slide > div {
+            transform: scale(1);
+        }
         .banner_item {
             min-height: 700px;
             width: 100%;
