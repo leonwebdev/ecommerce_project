@@ -17,34 +17,34 @@
     <!-- List Tables -->
     <table class="table table-striped">
       <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Name</th>
-            <th scope="col">Email</th>
-            <th scope="col">Phone</th>
-            <th scope="col">Message</th>
-            <th scope="col">Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          @foreach($inquiries as $inquiry)
-          <tr scope="row">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Email</th>
+          <th scope="col">Phone</th>
+          <th scope="col">Message</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        @foreach($inquiries as $inquiry)
+        <tr scope="row">
           <td>{{ $inquiry->id }}</td>
           <td>{{ $inquiry->name }}</td>
           <td>{{ $inquiry->email }}</td>
           <td>{{ $inquiry->phone }}</td>
           <td>{{ $inquiry->message }}</td>
           <td>
-          <form method="post" action="/admin/inquiry/{{ $inquiry->id }}">
-                @csrf
-                @method('DELETE')
-                <input type="hidden" name="id" value="{{ $inquiry->id }}" />
-                <button class="btn btn-danger" onclick="return confirm('Do you really want to delete {{ $inquiry->name }}?')">Delete</button>
-          </form>
-            </td>
-          </tr>
+            <form method="post" action="/admin/inquiry/{{ $inquiry->id }}">
+              @csrf
+              @method('DELETE')
+              <input type="hidden" name="id" value="{{ $inquiry->id }}" />
+              <button class="btn btn-danger" onclick="return confirm('Do you really want to delete {{ $inquiry->name }}?')">Delete</button>
+            </form>
+          </td>
+        </tr>
         @endforeach
-        </tbody>
+      </tbody>
     </table>
     <div class="px-3">
         {!! $inquiries->links('pagination::bootstrap-5') !!}

@@ -38,12 +38,11 @@
           <td>{{ $advertisement->area }}</td> 
           <td><a href="/admin/advertisement/edit/{{ $advertisement->id }}" class="btn btn-info">Edit</a>
           <form method="post" action="/admin/advertisement/{{ $advertisement->id }}">
-                    @csrf
-                    @method('DELETE')
-                    <input type="hidden" name="id" value="{{ $advertisement->id }}" />
-                    <button
-                    class="btn btn-danger" onclick="return confirm('Do you really want to delete {{ $advertisement->title }}?')">Delete</button>
-                </form>
+              @csrf
+              @method('DELETE')
+              <input type="hidden" name="id" value="{{ $advertisement->id }}" />
+              <button class="btn btn-danger" onclick="return confirm('Do you really want to delete {{ $advertisement->title }}?')">Delete</button>
+          </form>
             </td>
           </tr>
         @endforeach

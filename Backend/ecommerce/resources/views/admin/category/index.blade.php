@@ -33,12 +33,11 @@
           <td><img src="/storage/{{ $category->image }}" height="100px" width="100px"/></td>
           <td><a href="/admin/category/edit/{{ $category->id }}" class="btn btn-info">Edit</a>
           <form method="post" action="/admin/category/{{ $category->id }}">
-                    @csrf
-                    @method('DELETE')
-                    <input type="hidden" name="id" value="{{ $category->id }}" />
-                    <button
-                    class="btn btn-danger" onclick="return confirm('Do you really want to delete {{ $category->title }}?')">Delete</button>
-                </form>
+              @csrf
+              @method('DELETE')
+              <input type="hidden" name="id" value="{{ $category->id }}" />
+              <button class="btn btn-danger" onclick="return confirm('Do you really want to delete {{ $category->title }}?')">Delete</button>
+          </form>
             </td>
           </tr>
         @endforeach
