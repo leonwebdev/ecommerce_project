@@ -96,6 +96,8 @@ class UserAddressController extends Controller
      */
     public function store(Request $request)
     {
+
+        
         $valid = $request->validate(
             [
                 'street' => ['required', 'string', 'min:3', 'max:255'],
@@ -123,6 +125,15 @@ class UserAddressController extends Controller
         } else {
             session()->flash('error', 'There was a problem creating the Address');
         }
-        return redirect('/profile#User_address');
+
+        $prev_url = url()->previous();
+        $prev_route = app('router')->getRoutes($prev_url)->match(app('request')->create($prev_url))->getName();
+
+        if($prev_route == 'checkoutCart' ) {
+            session(['shipping_addr' => $user_address->id]);
+            return redirect()->route('checkoutCart');
+        } else {
+            return redirect('/profile#User_address');
+        }
     }
 }

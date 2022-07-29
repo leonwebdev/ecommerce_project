@@ -103,7 +103,7 @@
                 <div class="subtotal"><strong>Subtotal: </strong>${{ $subtotal }} CAD</div>
                 <div class="tital_item"><strong>Quantity: </strong>{{ $total_qty }}</div>
                 <div class="checkout_btn @if($disable_checkout) disabled @endif">
-                    <a class="btn btn_black" href="#">Checkout Cart</a>
+                    <a class="btn btn_black" href="{{ route('checkoutCart') }}">Checkout Cart</a>
                 </div>
             </div>
         </div>
