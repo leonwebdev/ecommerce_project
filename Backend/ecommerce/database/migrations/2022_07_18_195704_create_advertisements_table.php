@@ -22,12 +22,14 @@ return new class extends Migration
             $table->enum('pages', [
                 'all',
                 'home',
-                'product-list'
+                'product-list',
+                'product-detail',
             ]);
             $table->enum('area', [
                 'top',
                 'bottom',
-                'sidebar'
+                'sidebar',
+                'slider',
             ]);
             $table->softDeletes();
             $table->timestamps();
