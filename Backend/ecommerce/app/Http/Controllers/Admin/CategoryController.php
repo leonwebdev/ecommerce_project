@@ -13,10 +13,16 @@ class CategoryController extends Controller
      *
      * @return void
      */
-    public function index()
+    public function index(Request $request)
     {
         $title = 'Admin | Category';
         $categories = Category::latest()->simplePaginate(10);
+        $search = $request->query('search');
+        if ($search) {
+            $categories = Category::latest()->where('title','LIKE','%'.$search."%")->simplePaginate(10);
+        } else {
+            $categories = Category::latest()->simplePaginate(10);
+        }
         
         return view('/admin/category/index', compact('categories','title'));
     }
@@ -116,10 +122,5 @@ class CategoryController extends Controller
         return redirect('/admin/category');
         
     }
-    public function search(Request $request)
-    {
-        $categories = Category::latest()->where('title','LIKE','%'.$request->input('search')."%")->simplePaginate(10);
-            
-        return view('/admin/category', compact('categories'));
-    }
+
 }
