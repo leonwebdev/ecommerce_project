@@ -7,6 +7,51 @@
             text-align: center;
             margin: 80px 0;
         }
+
+        .shipping {
+            border: 1px solid $color-light;
+            padding: 26px 20px;
+            > div {
+                margin-bottom: 10px;
+            }
+
+            a {
+                text-decoration: none;
+            }
+
+            .action {
+                margin-top: 20px;
+                a {
+                    margin-right: 10px;
+                }
+            }
+
+            .btn {
+                font-size: 14px;
+                padding: 12px 14px;
+            }
+
+            .address_list {
+                padding: 1px 20px 20px;
+                background-color: $color-featured;
+                .addr_item {
+                    label {
+                        line-height: 2em;
+                    }
+                }
+            }
+
+            form {
+                p, button {
+                    margin: 0 0 10px 0;
+                }
+
+                button {
+                    min-width: 100px;
+                   
+                }
+            }
+        }
         
         .cart_item {
             padding: 20px 0;

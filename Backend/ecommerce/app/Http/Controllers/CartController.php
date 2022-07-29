@@ -3,10 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Tax;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User_address;
 
 class CartController extends Controller
 {
+
     /**
      * Show the Cart item list.
      *
@@ -15,8 +20,8 @@ class CartController extends Controller
     public function index(Request $request)
     {
         $title = 'Shopping Cart';
-        $session = $request->session()->get('cart');
-
+        $session = $request->session()->get('cart') ?? [];
+        $products = [];
         $subtotal = 0;
         $total_qty = 0;
         $disable_checkout = false;
@@ -34,15 +39,17 @@ class CartController extends Controller
                     $disable_checkout = true;
                 }
             }
-        } else {
-            $products = [];
-            $session = [];
-        }
+        } 
 
         $subtotal = number_format($subtotal, 2);
     
         return view('cart/index', compact(
-            'title', 'products', 'session', 'subtotal', 'total_qty', 'disable_checkout'
+            'title', 
+            'products', 
+            'session', 
+            'subtotal', 
+            'total_qty', 
+            'disable_checkout'
         ));
     }
 
@@ -100,5 +107,91 @@ class CartController extends Controller
         }
 
         return redirect()->route('cartIndex');
+    }
+
+
+    /**
+     * Show the Cart checkout item list and form.
+     *
+     * @param Request $request
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function checkoutCart(Request $request) {
+
+        $title = 'Checkout';
+
+        if(Auth::check()) {
+            // ====== Authenticated User ======
+            $user_id = Auth::user()->id;
+            $user = User::find($user_id);
+            $address_list = $user->user_addresses;
+            $session_address_id = $request->session()->get('shipping_addr') ?? [];
+    
+
+            $session_cart = $request->session()->get('cart') ?? [];
+            $products = [];
+            $subtotal = 0;
+            $total_qty = 0;
+            // check the country and province from shipping address when checking out
+
+            if($session_address_id) {
+                $default_address = User_address::find( $session_address_id)->full_address();
+            } else {
+                $default_address = $user->full_address();
+            }
+
+            if($session_cart) {
+                $products = Product::whereIn('id', array_keys($session_cart))->with('size')->get();
+
+                foreach($products as $product) {
+                    // calc cart summary
+                    $subtotal += 
+                        floatval($product->price) * $session_cart[$product->id];
+                    $total_qty += $session_cart[$product->id];
+                }
+            }
+
+            $subtotal = number_format($subtotal, 2);
+            return view('/cart/checkout', compact(
+                'title',
+                'user',
+                'default_address',
+                'address_list',
+                'products', 
+                'session_cart',
+                'session_address_id',
+                'subtotal', 
+                'total_qty'));
+
+        } else {
+            // ====== Unauthenticated User ======
+            session()->flash('error', 'Please login or register an account before checking out the shopping cart');
+            session(['route_back_cart' => true]);
+            return redirect()->route('login');
+
+        }
+    }
+
+    /**
+     * Update the shipping address from selection 
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function updateShippingAddress(Request $request) {
+
+        $selected_address = $request->input('address_list');
+        session(['shipping_addr' => $selected_address]);
+
+        return redirect()->route('checkoutCart');
+    }
+
+    /**
+     * Checkout purchase and submit credit card information
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function processToPayment() {
+
     }
 }
