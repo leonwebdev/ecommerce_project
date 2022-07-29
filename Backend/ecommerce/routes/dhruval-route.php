@@ -22,6 +22,9 @@ Route::delete('/admin/product/media/{media}', [App\Http\Controllers\Admin\Produc
     ->name('admin_product_media_delete');
 // product end
 
+Route::get('/admin/', function () {
+    return redirect('/admin/dashboard');
+});
 Route::get('/admin/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])
     ->name('admin_dashboard');
 
