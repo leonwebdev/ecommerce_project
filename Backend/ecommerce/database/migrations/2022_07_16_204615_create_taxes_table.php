@@ -17,6 +17,7 @@ return new class extends Migration
         Schema::create('taxes', function (Blueprint $table) {
             $table->id();
             $table->string('province', 255);
+            $table->string('province_short', 255);
             $table->decimal('gst');
             $table->decimal('pst');
             $table->decimal('hst');
