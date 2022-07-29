@@ -7,6 +7,8 @@ import "slick-carousel/slick/slick-theme.css";
 'use strict';
 
 $(document).ready(function () {
+    // menu
+    menuDropdown();
     // footer
     getCurrentYear();
     // home
