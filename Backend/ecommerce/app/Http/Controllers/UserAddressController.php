@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use App\Models\User_address;
+use App\Models\UserAddress;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
@@ -21,7 +21,7 @@ class UserAddressController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit(User_address $user_address)
+    public function edit(UserAddress $user_address)
     {
         $title = 'Edit Address';
         $user = User::find($user_address->user_id);
@@ -53,7 +53,7 @@ class UserAddressController extends Controller
             ]
         );
         // User_address::find($id)->update($valid);
-        if (User_address::find($id)->update($valid)) {
+        if (UserAddress::find($id)->update($valid)) {
             session()->flash('success', 'Address information was successfully updated.');
         } else {
             session()->flash('error', 'There was a problem updating the Address');
@@ -70,7 +70,7 @@ class UserAddressController extends Controller
      */
     public function updateDefaultAddress(Request $request, $id)
     {
-        $user_address = User_address::find($id);
+        $user_address = UserAddress::find($id);
         $user = User::find($user_address->user_id);
         $valid['default_address_id'] = $id;
         $user->update($valid);
@@ -109,7 +109,7 @@ class UserAddressController extends Controller
                 'terms.required' => 'Please check here to accept our terms and conditions to create.',
             ]
         );
-        $user_address = new User_address;
+        $user_address = new UserAddress;
         $user_address->user_id = Auth::user()->id;
         $user_address->street = $valid['street'];
         $user_address->city = $valid['city'];

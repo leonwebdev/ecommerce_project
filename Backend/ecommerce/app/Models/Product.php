@@ -45,7 +45,7 @@ class Product extends Model
      */
     public function product_media()
     {
-        return $this->hasMany(Product_media::class);
+        return $this->hasMany(ProductMedia::class);
     }
 
     /**
@@ -61,6 +61,6 @@ class Product extends Model
      */
     public function orders()
     {
-        return $this->belongsToMany(Order::class)->using(Order_product::class);
+        return $this->belongsToMany(Order::class)->using(OrderProduct::class);
     }
 }

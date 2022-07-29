@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\User;
-use App\Models\User_address;
+use App\Models\UserAddress;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -128,7 +128,7 @@ class UserController extends Controller
         ]);
 
         $user = User::find($id);
-        $address = User_address::find($user->default_address_id);
+        $address = UserAddress::find($user->default_address_id);
 
         // $v_user = [];
         // $v_address = [];
