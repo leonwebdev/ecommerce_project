@@ -70,6 +70,49 @@ class OrderProductTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
-
+        DB::table('order_product')->insert([
+            'order_id' => 3,
+            'product_id' => 12,
+            'unit_price' => 25.99,
+            'quantity' => 1,
+            'line_price' => 25.99,
+            'product_name' => 'Awesome Product Name Bla bla',
+            'size' => 'XL',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('order_product')->insert([
+            'order_id' => 3,
+            'product_id' => 35,
+            'unit_price' => 43.69,
+            'quantity' => 2,
+            'line_price' => 87.58,
+            'product_name' => 'Fabulous Product Name Hahaha',
+            'size' => 'XXL',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('order_product')->insert([
+            'order_id' => 4,
+            'product_id' => 12,
+            'unit_price' => 25.99,
+            'quantity' => 1,
+            'line_price' => 25.99,
+            'product_name' => 'Awesome Product Name Bla bla',
+            'size' => 'XL',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('order_product')->insert([
+            'order_id' => 4,
+            'product_id' => 35,
+            'unit_price' => 43.69,
+            'quantity' => 2,
+            'line_price' => 87.58,
+            'product_name' => 'Fabulous Product Name Hahaha',
+            'size' => 'XXL',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
     }
 }

@@ -240,7 +240,7 @@
         ]);
         let options = {
             title: '',
-            is3D: true,
+            is3D: false,
         };
         let productByGender = new google.visualization.PieChart(document.getElementById('productByGender'));
         productByGender.draw(productByGenderData, options);
@@ -248,7 +248,7 @@
 
     function salesChart() {
         let salesData = google.visualization.arrayToDataTable([
-            ['Month', 'Amount'],
+            ['Month', 'Sales'],
             @php
                 foreach ($sales as $month) {
                     echo "['" . ucfirst($month->month) . "', " . number_format($month->sales, 2) . '],';
@@ -257,7 +257,6 @@
         ]);
         let options = {
             title: '',
-            is3D: true,
         };
         let salesLineChart = new google.visualization.LineChart(document.getElementById('salesLineChart'));
         salesLineChart.draw(salesData, options);
