@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Gender;
 use App\Models\Product;
-use App\Models\Product_media;
+use App\Models\ProductMedia;
 use App\Models\Size;
 use Illuminate\Http\Request;
 
@@ -77,7 +77,7 @@ class ProductController extends Controller
                     'product_id' => $product->id
                 ]);
             }
-            Product_media::insert($imageArray);
+            ProductMedia::insert($imageArray);
         }
         session()->flash('success', 'Product has been successfully created!');
         return redirect('/admin/product');
@@ -136,14 +136,14 @@ class ProductController extends Controller
                     'product_id' => $product->id
                 ]);
             }
-            Product_media::insert($imageArray);
+            ProductMedia::insert($imageArray);
         }
         session()->flash('success', 'Product has been updated successfully!');
         return redirect('/admin/product');
     }
     public function deleteMedia($id)
     {
-        $media = Product_media::find($id);
+        $media = ProductMedia::find($id);
         if ($media->delete()) {
             return response()->json([
                 'success' => 'Media has been deleted successfully!'

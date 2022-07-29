@@ -49,11 +49,11 @@ class User extends Authenticatable
     ];
 
     /**
-     * Define Table Relationship, One User can have many User_address
+     * Define Table Relationship, One User can have many UserAddress
      */
     public function user_addresses()
     {
-        return $this->hasMany(User_address::class);
+        return $this->hasMany(UserAddress::class);
     }
 
     /**
@@ -71,7 +71,7 @@ class User extends Authenticatable
      */
     public function full_address()
     {
-        $address = User_address::find($this->default_address_id);
+        $address = UserAddress::find($this->default_address_id);
         // var_dump($address);
         // die;
         $full_address = $address->street . ', ' . $address->city . ', ' . $address->province . ', ' . $address->country;
@@ -85,7 +85,7 @@ class User extends Authenticatable
      */
     public function user_postal_code()
     {
-        $postal_code = User_address::find($this->default_address_id)->postal_code;
+        $postal_code = UserAddress::find($this->default_address_id)->postal_code;
         // var_dump($address);
         // die;
         return $postal_code;
@@ -98,7 +98,7 @@ class User extends Authenticatable
      */
     public function full_address_obj()
     {
-        $address = User_address::find($this->default_address_id);
+        $address = UserAddress::find($this->default_address_id);
         // var_dump($address);
         // die;
         return $address;
