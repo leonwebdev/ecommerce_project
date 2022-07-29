@@ -11,18 +11,11 @@
                 <li>
                     <a class="active" href="/product">All Outfits</a>
                 </li>
-                <li>
-                    <a href="/women/product">Women</a>
-                </li>
-                <li>
-                    <a href="/men/product">Men</a>
-                </li>
-                <li>
-                    <a href="/boy/product">Boys</a>
-                </li>
-                <li>
-                    <a href="/girl/product">Girls</a>
-                </li>
+                @foreach ($genders as $gender)
+                    <li>
+                        <a href="/{{ $gender->name }}/product" class="text-transform-capitalize">{{ $gender->name }}</a>
+                    </li>
+                @endforeach
             </ul>
         </nav>
         <div class="utils">
@@ -33,7 +26,7 @@
             </div>
             <!-- Profile start-->
             <div class="icon profile">
-                <a href=":javascript;">
+                <a href="" onclick="event.preventDefault();">
                     <img src="/images/icon-profile.svg" alt="profile icon" width="30" height="30" />
                 </a>
                 <div class="profile_dropdown">

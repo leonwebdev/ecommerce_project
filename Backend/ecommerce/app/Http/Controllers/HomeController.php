@@ -6,14 +6,14 @@ use App\Models\Gender;
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
-use App\Models\Product_media;
+use App\Models\ProductMedia;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 
 class HomeController extends Controller
 {
 
     /**
-     * Show the application dashboard.
+     * Show the home page
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */

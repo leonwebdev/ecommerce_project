@@ -22,7 +22,7 @@
 
     <!--Main layout-->
     <main>
-        <div class="container pt-4">
+        <div class="container-lg pt-4">
             <!-- Flash Message -->
             @include('admin.partials.flash')
             <!-- Flash Message -->

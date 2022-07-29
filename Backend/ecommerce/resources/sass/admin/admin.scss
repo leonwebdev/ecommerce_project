@@ -39,6 +39,13 @@ main {
     .sidebar {
         width: 100%;
     }
+
+
+    div.content {
+        padding: 0;
+    }
+
+
 }
 
 .sidebar .active {
@@ -55,11 +62,11 @@ main {
     overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
 }
 
-.container {
+
     .content {
         padding: 0 20px;
     }
-}
+
 
 .header_bar {
     display: flex;

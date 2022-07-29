@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Models\User;
-use App\Models\User_address;
+use App\Models\UserAddress;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
@@ -74,9 +74,11 @@ class RegisterController extends Controller
                     'required', 'string', 'min:8', 'max:255', 'confirmed',
                     'regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[\W]).*$/',
                 ],
+                'terms' => ['required'],
             ],
             [
                 'password.regex' => 'Password must include at least one Capital character, one lowercase character, one digit, one special character. Length between 8-255',
+                'terms.required' => 'Please check here to accept our terms and conditions to register.',
             ]
         );
     }
@@ -153,7 +155,7 @@ class RegisterController extends Controller
      */
     public function createUserDefaultAddress(int $id, array $data)
     {
-        return User_address::create([
+        return UserAddress::create([
             'user_id' => $id,
             'street' => $data['street'],
             'city' => $data['city'],

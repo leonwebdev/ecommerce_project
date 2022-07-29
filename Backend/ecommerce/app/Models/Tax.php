@@ -13,8 +13,9 @@ class Tax extends Model
 
     protected $fillable = [
         'province',
+        'province_short',
         'gst',
         'pst',
-        'vat',
+        'hst',
     ];
 }

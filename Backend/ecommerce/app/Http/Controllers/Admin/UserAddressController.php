@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\User;
-use App\Models\User_address;
+use App\Models\UserAddress;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -14,10 +14,35 @@ class UserAddressController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $title = 'Admin | Address';
-        $addresses = User_address::orderBy('user_id', 'asc')->paginate($this->MAX_PER_PAGE);
+        $search = $request->query('search');
+        if ($search) {
+            $addresses = UserAddress::select(
+                'user_addresses.id',
+                'user_addresses.user_id',
+                'user_addresses.street',
+                'user_addresses.city',
+                'user_addresses.province',
+                'user_addresses.country',
+                'user_addresses.postal_code',
+            )
+                ->join('users', 'users.id', '=', 'user_addresses.user_id')
+                ->where('users.first_name', 'LIKE', '%' . $search . '%')
+                ->orWhere('users.last_name', 'LIKE', '%' . $search . '%')
+                ->orWhere('users.email', 'LIKE', '%' . $search . '%')
+                ->orWhere('user_addresses.street', 'LIKE', '%' . $search . '%')
+                ->orWhere('user_addresses.city', 'LIKE', '%' . $search . '%')
+                ->orWhere('user_addresses.province', 'LIKE', '%' . $search . '%')
+                ->orWhere('user_addresses.country', 'LIKE', '%' . $search . '%')
+                ->orWhere('user_addresses.postal_code', 'LIKE', '%' . $search . '%')
+                ->orderBy('user_addresses.user_id', 'asc')
+                ->orderBy('user_addresses.id', 'asc')
+                ->paginate($this->MAX_PER_PAGE);
+        } else {
+            $addresses = UserAddress::orderBy('user_id', 'asc')->paginate($this->MAX_PER_PAGE);
+        }
         return view('admin.address.index', compact('title', 'addresses',));
     }
 
@@ -58,7 +83,7 @@ class UserAddressController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit(User_address $address)
+    public function edit(UserAddress $address)
     {
         $title = 'Admin | Address';
         // $address = $user_address;
@@ -82,7 +107,7 @@ class UserAddressController extends Controller
             'postal_code' => ['required', 'string', 'min:6', 'max:255'],
         ]);
 
-        $address = User_address::find($id);
+        $address = UserAddress::find($id);
         $address->update($valid);
 
         if ($address->save()) {
@@ -101,7 +126,7 @@ class UserAddressController extends Controller
      */
     public function destroy($id)
     {
-        $address = User_address::find($id);
+        $address = UserAddress::find($id);
         if ($address->delete()) {
             session()->flash('success', 'Address was deleted');
             return redirect('/admin/address');
@@ -119,7 +144,7 @@ class UserAddressController extends Controller
      */
     public function updateDefaultAddress(Request $request, $id)
     {
-        $user_address = User_address::find($id);
+        $user_address = UserAddress::find($id);
         $user = User::find($user_address->user_id);
         $valid['default_address_id'] = $id;
         $user->update($valid);

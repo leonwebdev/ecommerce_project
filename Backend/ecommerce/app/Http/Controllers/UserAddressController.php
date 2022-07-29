@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use App\Models\User_address;
+use App\Models\UserAddress;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
@@ -21,7 +21,7 @@ class UserAddressController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit(User_address $user_address)
+    public function edit(UserAddress $user_address)
     {
         $title = 'Edit Address';
         $user = User::find($user_address->user_id);
@@ -46,9 +46,18 @@ class UserAddressController extends Controller
                 'province' => ['required', 'string', 'min:3', 'max:255'],
                 'country' => ['required', 'string', 'min:3', 'max:255'],
                 'postal_code' => ['required', 'string', 'min:6', 'max:255'],
+                'terms' => ['required'],
             ],
+            [
+                'terms.required' => 'Please check here to accept our terms and conditions to Update.',
+            ]
         );
-        User_address::find($id)->update($valid);
+        // User_address::find($id)->update($valid);
+        if (UserAddress::find($id)->update($valid)) {
+            session()->flash('success', 'Address information was successfully updated.');
+        } else {
+            session()->flash('error', 'There was a problem updating the Address');
+        }
         return redirect('/profile');
     }
 
@@ -61,7 +70,7 @@ class UserAddressController extends Controller
      */
     public function updateDefaultAddress(Request $request, $id)
     {
-        $user_address = User_address::find($id);
+        $user_address = UserAddress::find($id);
         $user = User::find($user_address->user_id);
         $valid['default_address_id'] = $id;
         $user->update($valid);
@@ -87,6 +96,8 @@ class UserAddressController extends Controller
      */
     public function store(Request $request)
     {
+
+        
         $valid = $request->validate(
             [
                 'street' => ['required', 'string', 'min:3', 'max:255'],
@@ -94,17 +105,35 @@ class UserAddressController extends Controller
                 'province' => ['required', 'string', 'min:3', 'max:255'],
                 'country' => ['required', 'string', 'min:3', 'max:255'],
                 'postal_code' => ['required', 'string', 'min:6', 'max:255'],
+                'terms' => ['required'],
             ],
+            [
+                'terms.required' => 'Please check here to accept our terms and conditions to create.',
+            ]
         );
-        $user_address = new User_address;
+        $user_address = new UserAddress;
         $user_address->user_id = Auth::user()->id;
         $user_address->street = $valid['street'];
         $user_address->city = $valid['city'];
         $user_address->province = $valid['province'];
         $user_address->country = $valid['country'];
         $user_address->postal_code = $valid['postal_code'];
-        $user_address->save();
+        // $user_address->save();
 
-        return redirect('/profile#User_address');
+        if ($user_address->save()) {
+            session()->flash('success', 'Address was successfully created.');
+        } else {
+            session()->flash('error', 'There was a problem creating the Address');
+        }
+
+        $prev_url = url()->previous();
+        $prev_route = app('router')->getRoutes($prev_url)->match(app('request')->create($prev_url))->getName();
+
+        if($prev_route == 'checkoutCart' ) {
+            session(['shipping_addr' => $user_address->id]);
+            return redirect()->route('checkoutCart');
+        } else {
+            return redirect('/profile#User_address');
+        }
     }
 }
