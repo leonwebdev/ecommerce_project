@@ -8,9 +8,10 @@
                     <h2 class="mb-0">Add Product</h2>
                 </div>
                 <div class="card-body">
-                    {{-- {{ $errors }} --}}
+
                     <form action="{{ route('admin_product_save') }}" method="POST" enctype="multipart/form-data">
                         @csrf
+
                         <div class="mb-3">
                             <label for="name" class="form-label">Name</label>
                             <input type="text" class="form-control @error('name') is-invalid @enderror" id="name"
@@ -21,16 +22,7 @@
                                 </div>
                             @enderror
                         </div>
-                        <div class="mb-3">
-                            <label for="slug" class="form-label">Slug</label>
-                            <input type="text" class="form-control @error('slug') is-invalid @enderror" id="slug"
-                                name="slug" placeholder="Enter Slug" value="{{ old('slug') }}">
-                            @error('slug')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div>
+
                         <div class="mb-3">
                             <label for="color" class="form-label">Color</label>
                             <input type="text" class="form-control @error('color') is-invalid @enderror" id="color"
@@ -41,6 +33,7 @@
                                 </div>
                             @enderror
                         </div>
+
                         <div class="mb-3">
                             <label for="price" class="form-label">Price</label>
                             <input type="text" class="form-control @error('price') is-invalid @enderror" id="price"
@@ -51,6 +44,7 @@
                                 </div>
                             @enderror
                         </div>
+
                         <div class="mb-3">
                             <label for="quantity" class="form-label">Quantity</label>
                             <input type="text" class="form-control @error('quantity') is-invalid @enderror"
@@ -61,6 +55,7 @@
                                 </div>
                             @enderror
                         </div>
+
                         <div class="mb-3">
                             <label for="images" class="form-label">Image</label>
                             <input type="file" name="images[]" multiple
@@ -73,6 +68,7 @@
                                 @endforeach
                             @endif
                         </div>
+
                         <div class="mb-3">
                             <label for="description" class="form-label">Description</label>
                             <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description"
@@ -83,6 +79,7 @@
                                 </div>
                             @enderror
                         </div>
+
                         <div class="mb-3">
                             <label for="category_id" class="form-label">Category</label>
                             <select multiple class="form-select @error('category_id') is-invalid @enderror"
@@ -99,6 +96,7 @@
                                 </div>
                             @enderror
                         </div>
+
                         <div class="mb-3">
                             <label for="gender_id" class="form-label">Gender</label>
                             <select class="form-select @error('gender_id') is-invalid @enderror" id="gender_id"
@@ -115,6 +113,7 @@
                                 </div>
                             @enderror
                         </div>
+
                         <div class="mb-3">
                             <label for="size_id" class="form-label">Size</label>
                             <select class="form-select @error('size_id') is-invalid @enderror" id="size_id"
@@ -132,6 +131,7 @@
                                 </div>
                             @enderror
                         </div>
+
                         <div class="mb-3">
                             <input type="submit" class="btn btn-primary">
                         </div>
