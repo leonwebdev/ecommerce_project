@@ -69,6 +69,13 @@ class LoginController extends Controller
             return '/admin/dashboard';
         }
 
+        $redirectToCart = session('route_back_cart');
+
+        if ($redirectToCart) {
+            session('route_back_cart', false);
+            return route('checkoutCart');
+        }
+
         return property_exists($this, 'redirectTo') ? $this->redirectTo : '/home';
     }
 }

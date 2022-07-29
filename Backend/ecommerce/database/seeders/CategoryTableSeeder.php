@@ -16,20 +16,44 @@ class CategoryTableSeeder extends Seeder
     public function run()
     {
         DB::table('categories')->insert([
-            'title' => 'Sports',
+            'title' => 'Top',
             'image' => '124132413.jpg',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
         DB::table('categories')->insert([
-            'title' => 'Casual',
+            'title' => 'Bottom',
             'image' => 'adas12225sdasd.jpg',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
         DB::table('categories')->insert([
-            'title' => 'Leisure',
+            'title' => 'One-piece',
             'image' => 'ccxdfe445644ds.jpg',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('categories')->insert([
+            'title' => 'Jeans',
+            'image' => 'fghvacadad.jpg',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('categories')->insert([
+            'title' => 'Casual',
+            'image' => 'fghvacadad.jpg',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('categories')->insert([
+            'title' => 'Leisure',
+            'image' => 'fghvacadad.jpg',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('categories')->insert([
+            'title' => 'Sports',
+            'image' => 'fghvacadad.jpg',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -39,5 +63,30 @@ class CategoryTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+        DB::table('categories')->insert([
+            'title' => 'Co-ords',
+            'image' => 'fghvacadad.jpg',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('categories')->insert([
+            'title' => 'Jackets',
+            'image' => 'fghvacadad.jpg',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('categories')->insert([
+            'title' => 'Shorts',
+            'image' => 'fghvacadad.jpg',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('categories')->insert([
+            'title' => 'Shirts',
+            'image' => 'fghvacadad.jpg',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
     }
 }

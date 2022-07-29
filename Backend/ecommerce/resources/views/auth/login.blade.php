@@ -4,6 +4,7 @@
     <div class="container">
         <div class="wrapper">
             <div class="content form" id="login">
+                <h1>Login</h1>
                 <form method="POST" action="{{ route('login') }}">
                     @csrf
                     <p>
@@ -24,6 +25,7 @@
                     </p>
                     @if (Route::has('password.request'))
                         <span><a href="{{ route('password.request') }}">Forgot password?</a></span>
+                        <span><a href="{{ route('register') }}">Register</a></span>
                     @endif
 
                     <p>
