@@ -16,12 +16,12 @@ class CategoryController extends Controller
     public function index(Request $request)
     {
         $title = 'Admin | Category';
-        //$categories = Category::latest()->Paginate(10);
+        //$categories = Category::latest()->paginate(10);
         $search = $request->query('search');
         if ($search) {
-            $categories = Category::latest()->where('title','LIKE','%'.$search."%")->Paginate(10);
+            $categories = Category::latest()->where('title','LIKE','%'.$search."%")->paginate(10);
         } else {
-            $categories = Category::latest()->Paginate(10);
+            $categories = Category::latest()->paginate(10);
         }
         
         return view('/admin/category/index', compact('categories','title'));
