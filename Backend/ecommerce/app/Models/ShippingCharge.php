@@ -13,6 +13,7 @@ class ShippingCharge extends Model
 
     protected $fillable = [
         'continent',
+        'country',
         'charge',
     ];
 }
