@@ -13,11 +13,15 @@ class InquiryController extends Controller
      *
      * @return void
      */
-    public function index()
+    public function index(Request $request)
     {
         $title = 'Admin | Inquiry';
-        $inquiries = Inquiry::latest()->simplePaginate(10);
-        
+        $search = $request->query('search');
+        if ($search) {
+            $inquiries = Inquiry::latest()->where('name','LIKE','%'.$search."%")->simplePaginate(10);
+        } else {
+            $inquiries = Inquiry::latest()->simplePaginate(10);
+        }  
         return view('/admin/inquiry/index', compact('inquiries','title'));
     }
     /**

@@ -7,11 +7,12 @@
 
       <!-- Search form -->
       <div class="search_form">
-        <form class="d-md-flex input-group w-auto my-auto">
-            <input autocomplete="off" type="search" class="form-control rounded" placeholder='' style="min-width: 225px" />
-            <span class="input-group-text border-0">
-                <i class="fas fa-search"></i></span>
-        </form>
+          <form class="d-md-flex input-group w-auto my-auto" action="/admin/advertisement" method="get">
+              <input autocomplete="off" type="search" class="form-control rounded" name="search" placeholder='Search'
+                  maxlength="255" style="min-width: 225px" />
+              <button class="input-group-text border-0" type="submit">
+                  <i class="fas fa-search"></i></button>
+          </form>
       </div>
     </div>
     <a href="/admin/advertisement/create" class="btn btn-primary">Add a Advertisement</a></td>
@@ -38,12 +39,11 @@
           <td>{{ $advertisement->area }}</td> 
           <td><a href="/admin/advertisement/edit/{{ $advertisement->id }}" class="btn btn-info">Edit</a>
           <form method="post" action="/admin/advertisement/{{ $advertisement->id }}">
-                    @csrf
-                    @method('DELETE')
-                    <input type="hidden" name="id" value="{{ $advertisement->id }}" />
-                    <button
-                    class="btn btn-danger" onclick="return confirm('Do you really want to delete {{ $advertisement->title }}?')">Delete</button>
-                </form>
+              @csrf
+              @method('DELETE')
+              <input type="hidden" name="id" value="{{ $advertisement->id }}" />
+              <button class="btn btn-danger" onclick="return confirm('Do you really want to delete {{ $advertisement->title }}?')">Delete</button>
+          </form>
             </td>
           </tr>
         @endforeach
