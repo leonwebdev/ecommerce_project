@@ -1,5 +1,7 @@
 .cart {
-   
+    a {
+        text-decoration: none;
+    }
     .cart_list {
         margin-right: 80px;
         
@@ -13,10 +15,6 @@
             padding: 26px 20px;
             > div {
                 margin-bottom: 10px;
-            }
-
-            a {
-                text-decoration: none;
             }
 
             .action {
