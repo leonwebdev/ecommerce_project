@@ -18,6 +18,7 @@ return new class extends Migration
         Schema::create('shipping_charges', function (Blueprint $table) {
             $table->id();
             $table->string('continent', 255);
+            $table->string('country', 255);
             $table->decimal('charge');
             $table->softDeletes();
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));

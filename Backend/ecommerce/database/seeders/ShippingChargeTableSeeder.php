@@ -16,8 +16,16 @@ class ShippingChargeTableSeeder extends Seeder
     public function run()
     {
         DB::table('shipping_charges')->insert([
-            'continent' => 'Asia',
+            'continent' => 'North America',
+            'country' => 'Canada',
             'charge' => 5.99,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('shipping_charges')->insert([
+            'continent' => 'Overseas',
+            'country' => 'Overseas',
+            'charge' => 29.99,
             'created_at' => now(),
             'updated_at' => now()
         ]);

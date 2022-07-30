@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
 use App\Models\Tax;
 use App\Models\User;
+use App\Models\Product;
+use App\Models\UserAddress;
 use Illuminate\Http\Request;
+use App\Models\ShippingCharge;
 use Illuminate\Support\Facades\Auth;
-use App\Models\User_address;
 
 class CartController extends Controller
 {
@@ -21,6 +22,11 @@ class CartController extends Controller
     {
         $title = 'Shopping Cart';
         $session = $request->session()->get('cart') ?? [];
+
+        if($request->session()->has('shipping_addr_id')) {
+            $request->session()->forget('shipping_addr_id');
+        }
+
         $products = [];
         $subtotal = 0;
         $total_qty = 0;
@@ -122,36 +128,82 @@ class CartController extends Controller
 
         if(Auth::check()) {
             // ====== Authenticated User ======
+            // user
             $user_id = Auth::user()->id;
             $user = User::find($user_id);
+            // address
             $address_list = $user->user_addresses;
-            $session_address_id = $request->session()->get('shipping_addr') ?? [];
-    
-
+            $session_address_id = $request->session()->get('shipping_addr_id') ?? null;
+            $selected_address_id = null;
+            $country = '';
+            $province = '';
+            // cart items
             $session_cart = $request->session()->get('cart') ?? [];
             $products = [];
+            // summary
             $subtotal = 0;
             $total_qty = 0;
-            // check the country and province from shipping address when checking out
+            $taxes = [];
+            $taxes_total = 0;
+            $free_shipping_amount = null;
+            $shipping_fee = 0;
+            $total = 0;
 
             if($session_address_id) {
-                $default_address = User_address::find( $session_address_id)->full_address();
+                $selected_address_id = intval($session_address_id);
+                $user_address = UserAddress::find( $session_address_id);
+                $default_address = $user_address->full_address() . ', ' . $user_address->user_postal_code();
+                // For summary
+                $country = strtolower($user_address->user_country());
+                $province = strtolower($user_address->user_province());
             } else {
-                $default_address = $user->full_address();
+                $selected_address_id = $user->default_address_id;
+                $user_address = UserAddress::find( $selected_address_id);
+                $default_address = $user_address->full_address() . ', ' . $user_address->user_postal_code();
+                // For summary
+                $country = strtolower($user_address->user_country());
+                $province = strtolower($user_address->user_province());
             }
 
             if($session_cart) {
                 $products = Product::whereIn('id', array_keys($session_cart))->with('size')->get();
 
+                // For Summary
                 foreach($products as $product) {
                     // calc cart summary
                     $subtotal += 
                         floatval($product->price) * $session_cart[$product->id];
                     $total_qty += $session_cart[$product->id];
                 }
+
+                // taxes and shipping fee logic
+                if($country == 'canada') {
+                    // Tax fee
+                    $taxes = Tax::where('province', $province)
+                            ->orWhere('province_short', $province)
+                            ->whereNull('deleted_at')
+                            ->first(['gst', 'pst', 'hst']);
+
+                    foreach($taxes->toArray() as $tax) {
+                        $taxes_total += floatval($tax) * $subtotal;
+                    }
+
+                    // standard shipping fee
+                    $shipping_fee = ShippingCharge::where('country', $country)->first()->charge;
+                    $free_shipping_amount = 80;
+                    $shipping_fee = $subtotal > $free_shipping_amount ? 0 : floatval($shipping_fee);
+                    
+                } else {
+                    // standard shipping fee
+                    $shipping_fee = ShippingCharge::where('country', 'Overseas')->first()->charge;
+                    $free_shipping_amount = 250;
+                    $shipping_fee = $subtotal > $free_shipping_amount ? 0 : floatval($shipping_fee);
+                }
+
+                $subtotal = number_format($subtotal, 2);
+                $total =  number_format($subtotal + $taxes_total + $shipping_fee, 2);
             }
 
-            $subtotal = number_format($subtotal, 2);
             return view('/cart/checkout', compact(
                 'title',
                 'user',
@@ -160,8 +212,14 @@ class CartController extends Controller
                 'products', 
                 'session_cart',
                 'session_address_id',
+                'selected_address_id',
                 'subtotal', 
-                'total_qty'));
+                'total_qty',
+                'taxes',
+                'free_shipping_amount',
+                'shipping_fee',
+                'total'
+            ));
 
         } else {
             // ====== Unauthenticated User ======
@@ -173,15 +231,15 @@ class CartController extends Controller
     }
 
     /**
-     * Update the shipping address from selection 
+     * Update the selected shipping address from selection on checkout page
      *
      * @param Request $request
      * @return void
      */
     public function updateShippingAddress(Request $request) {
 
-        $selected_address = $request->input('address_list');
-        session(['shipping_addr' => $selected_address]);
+        $selected_address_id = $request->input('address_item_id');
+        session(['shipping_addr_id' => $selected_address_id]);
 
         return redirect()->route('checkoutCart');
     }

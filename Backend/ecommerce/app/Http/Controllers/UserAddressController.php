@@ -25,8 +25,6 @@ class UserAddressController extends Controller
     {
         $title = 'Edit Address';
         $user = User::find($user_address->user_id);
-        // var_dump($user);
-        // die;
         return view('auth.address.edit', compact('user_address', 'title', 'user'));
     }
 
@@ -43,13 +41,9 @@ class UserAddressController extends Controller
             [
                 'street' => ['required', 'string', 'min:3', 'max:255'],
                 'city' => ['required', 'string', 'min:3', 'max:255'],
-                'province' => ['required', 'string', 'min:3', 'max:255'],
+                'province' => ['required', 'string', 'min:2', 'max:255'],
                 'country' => ['required', 'string', 'min:3', 'max:255'],
                 'postal_code' => ['required', 'string', 'min:6', 'max:255'],
-                'terms' => ['required'],
-            ],
-            [
-                'terms.required' => 'Please check here to accept our terms and conditions to Update.',
             ]
         );
         // User_address::find($id)->update($valid);
@@ -102,14 +96,10 @@ class UserAddressController extends Controller
             [
                 'street' => ['required', 'string', 'min:3', 'max:255'],
                 'city' => ['required', 'string', 'min:3', 'max:255'],
-                'province' => ['required', 'string', 'min:3', 'max:255'],
+                'province' => ['required', 'string', 'min:2', 'max:255'],
                 'country' => ['required', 'string', 'min:3', 'max:255'],
                 'postal_code' => ['required', 'string', 'min:6', 'max:255'],
-                'terms' => ['required'],
             ],
-            [
-                'terms.required' => 'Please check here to accept our terms and conditions to create.',
-            ]
         );
         $user_address = new UserAddress;
         $user_address->user_id = Auth::user()->id;
@@ -130,7 +120,7 @@ class UserAddressController extends Controller
         $prev_route = app('router')->getRoutes($prev_url)->match(app('request')->create($prev_url))->getName();
 
         if($prev_route == 'checkoutCart' ) {
-            session(['shipping_addr' => $user_address->id]);
+            session(['shipping_addr_id' => $user_address->id]);
             return redirect()->route('checkoutCart');
         } else {
             return redirect('/profile#User_address');

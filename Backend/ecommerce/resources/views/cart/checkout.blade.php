@@ -18,8 +18,8 @@
                     <div class="default_addr">
                         <strong>Address:</strong> {{ $default_address }}
                     </div>
-                    <div class="action change_address">
-                        <a href="#" class="btn btn_black">Change Address</a>
+                    <div class="action select_address">
+                        <a href="#" id="select_addr_btn" class="btn btn_black">Select Another Address</a>
                     </div>
 
                     <div class="address_list hidden">
@@ -28,20 +28,19 @@
                             @csrf
                             @foreach($address_list as $address)
                             <div class="addr_item">
-                                <input type="radio" id="addr_{{ $address->id }}" name="address_list" value="{{ $address->id }}" 
-                                    @if($session_address_id && $session_address_id == $address->id) checked
-                                    @elseif($address->id == $user->default_address_id) checked @endif 
+                                <input type="radio" id="addr_{{ $address->id }}" name="address_item_id" value="{{ $address->id }}" 
+                                    @if(intval($selected_address_id) == $address->id) checked @endif 
                                 />
 
                                 @if($address->id == $user->default_address_id) 
-                                <strong>(Default)</strong>
+                                <span>[Default]</span>
                                 @endif
-                                <label for="addr_{{ $address->id }}">{{ $address->full_address() }}</label>
+                                <label for="addr_{{ $address->id }}">{{ $address->full_address() . ', ' .  $address->user_postal_code() }}</label>
                             </div>
                             @endforeach
                             <div class="action">
                                 <button class="btn btn_black">Update</button>
-                                <a href="#" class="btn btn_black">Create New Address</a>
+                                <a href="#" id="create_addr_btn" class="btn btn_black">Create New Address</a>
                             </div>
                         </form>
                         
@@ -86,16 +85,8 @@
                                     <span class="error">{{ $message }}</span>
                                 @enderror
                             </p>
-                            <p class="col col-12 terms required">
-                                <input type="checkbox" name="terms" id="terms" />
-                                <label for="terms">I accept the <a href="#" target="_blank">Terms of Use</a> & <a
-                                        href="#" target="_blank">Privacy Policy</a> .</label>
-                                @error('terms')
-                                    <span class="error">{{ $message }}</span>
-                                @enderror
-                            </p>
                             <p>
-                                <button id="register_btn" class="btn btn_white">Create</button>
+                                <button id="register_btn" class="btn btn_black">Create</button>
                             </p>
                             <p class="highlight">* Required fields.</p>
                         </form>
@@ -153,14 +144,30 @@
             <div class="cart_info col col-3">
                 <h2>Summary</h2>
                 <div class="subtotal"><strong>Subtotal: </strong>${{ $subtotal }} CAD</div>
-                <div class="tital_item"><strong>Quantity: </strong>{{ $total_qty }}</div>
+                <div class="total_item"><strong>Items: </strong>{{ $total_qty }}</div>
 
-                // tax
-                // Total
-                // Shipping fee logic
+                @if(!empty($taxes))  
+                    @foreach($taxes->toArray() as $key => $tax)
+                        @if(floatval($tax) > 0)
+                            <div><strong>{{ strtoupper($key) }} ({{ floatval($tax) * 100 }}%): </strong> ${{ number_format(floatval($tax) * $subtotal, 2) }} CAD</div>
+                        @endif
+                    @endforeach
+                @endif
+                <div>
+                    <strong>Shipping Fee: </strong>
+                    @if($shipping_fee > 0)
+                        ${{ $shipping_fee }} CAD
+                    @else
+                        Free
+                    @endif
+                </div>
+                
+                <div><strong>Total: </strong>${{ $total }} CAD</div>
+
                 <div class="checkout_btn">
                     <a class="btn btn_black" href="{{ route('processToPayment') }}">Process to Payment</a>
                 </div>
+                <div>* Order exceeded ${{ $free_shipping_amount }}, free shipping applied</div>
             </div>
         </div>
 
