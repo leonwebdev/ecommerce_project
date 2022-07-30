@@ -184,16 +184,31 @@
 }
 
 //Advertisements
-.ads.ads-sidebar{
+.ads.ads-sidebar {
     width: 100%;
 
-    a{
+    a {
         display: block;
         width: 100%;
 
-        img{
+        img {
             display: block;
             width: 100%;
         }
+    }
+}
+//Responsive Design for mobile device
+@media only screen and (max-width: 768px) {
+    aside {
+        width: 100%;
+    }
+    aside form > div {
+        display: inline-block;
+    }
+    .list_item {
+        width: 100%;
+    }
+    .list_item .content .item {
+        flex: 0 0 50%;
     }
 }
