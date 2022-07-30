@@ -16,7 +16,7 @@ class CategoryController extends Controller
     public function index(Request $request)
     {
         $title = 'Admin | Category';
-        $categories = Category::latest()->simplePaginate(10);
+        //$categories = Category::latest()->simplePaginate(10);
         $search = $request->query('search');
         if ($search) {
             $categories = Category::latest()->where('title','LIKE','%'.$search."%")->simplePaginate(10);

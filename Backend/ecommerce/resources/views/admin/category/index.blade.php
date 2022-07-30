@@ -14,7 +14,7 @@
                   <i class="fas fa-search"></i></button>
           </form>
       </div>
-</div>
+    </div>
     <a href="/admin/category/create" class="btn btn-primary">Add a Category</a></td>
     <!-- List Tables -->
     <table class="table table-striped">
