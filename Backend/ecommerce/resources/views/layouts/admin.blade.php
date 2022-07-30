@@ -42,6 +42,7 @@
             return new bootstrap.Tooltip(tooltipTriggerEl)
         })
     </script>
+
     {{-- ckeditor --}}
     <script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
 </body>

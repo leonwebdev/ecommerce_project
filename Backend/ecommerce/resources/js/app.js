@@ -17,8 +17,6 @@ $(document).ready(function () {
 
     // product detail
     productImageSlider();
-    // ckeditor 
-    $('.ckeditor').ckeditor();
 });
 
 /**
