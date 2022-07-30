@@ -153,11 +153,18 @@
                         @endif
                     @endforeach
                 @endif
-                <div><strong>Shipping Fee: </strong></div>
-                <div><strong>Total: </strong></div>
-                // tax
-                // Total
-                // Shipping fee logic
+                <div>
+                    <strong>Shipping Fee: </strong>
+                    @if($shipping_fee > 0)
+                        ${{ $shipping_fee }} CAD
+                    @else
+                        Free
+                        <div>(order exceeded ${{ $free_shipping_amount }}, free shipping applied )</div>
+                    @endif
+                </div>
+                
+                <div><strong>Total: </strong>${{ $total }} CAD</div>
+
                 <div class="checkout_btn">
                     <a class="btn btn_black" href="{{ route('processToPayment') }}">Process to Payment</a>
                 </div>

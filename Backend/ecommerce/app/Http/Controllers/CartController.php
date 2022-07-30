@@ -144,8 +144,8 @@ class CartController extends Controller
             $subtotal = 0;
             $total_qty = 0;
             $taxes = [];
-            $taxes_arr = [];
-            $total_tax = 0;
+            $taxes_total = 0;
+            $free_shipping_amount = null;
             $shipping_fee = 0;
             $total = 0;
 
@@ -159,7 +159,7 @@ class CartController extends Controller
             } else {
                 $selected_address_id = $user->default_address_id;
                 $user_address = UserAddress::find( $selected_address_id);
-                $default_address = $$user_address->full_address() . ', ' . $$user_address->user_postal_code();
+                $default_address = $user_address->full_address() . ', ' . $user_address->user_postal_code();
                 // For summary
                 $country = strtolower($user_address->user_country());
                 $province = strtolower($user_address->user_province());
@@ -184,18 +184,24 @@ class CartController extends Controller
                             ->whereNull('deleted_at')
                             ->first(['gst', 'pst', 'hst']);
 
+                    foreach($taxes->toArray() as $tax) {
+                        $taxes_total += floatval($tax) * $subtotal;
+                    }
+
                     // standard shipping fee
                     $shipping_fee = ShippingCharge::where('country', $country)->first()->charge;
+                    $free_shipping_amount = 80;
+                    $shipping_fee = $subtotal > $free_shipping_amount ? 0 : floatval($shipping_fee);
                     
                 } else {
                     // standard shipping fee
                     $shipping_fee = ShippingCharge::where('country', 'Overseas')->first()->charge;
+                    $free_shipping_amount = 250;
+                    $shipping_fee = $subtotal > $free_shipping_amount ? 0 : floatval($shipping_fee);
                 }
 
-                
-                $shipping_fee = floatval($shipping_fee);
-
                 $subtotal = number_format($subtotal, 2);
+                $total =  number_format($subtotal + $taxes_total + $shipping_fee, 2);
             }
 
             return view('/cart/checkout', compact(
@@ -209,7 +215,10 @@ class CartController extends Controller
                 'selected_address_id',
                 'subtotal', 
                 'total_qty',
-                'taxes'
+                'taxes',
+                'free_shipping_amount',
+                'shipping_fee',
+                'total'
             ));
 
         } else {
