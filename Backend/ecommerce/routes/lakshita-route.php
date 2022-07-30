@@ -21,7 +21,7 @@ use App\Http\Controllers\Admin\AdvertisementController;
 /*
 ---------  Admin User Routes -------------------------------------------
 */
-
+Route::middleware(['auth', 'admin'])->group(function () {
 //Category Controller CRUD
  Route::get('/admin/category', [App\Http\Controllers\Admin\CategoryController::class, 'index']);
  Route::get('/admin/category/create',[App\Http\Controllers\Admin\CategoryController::class, 'create']);
@@ -29,10 +29,11 @@ use App\Http\Controllers\Admin\AdvertisementController;
  Route::get('/admin/category/edit/{category}',[App\Http\Controllers\Admin\CategoryController::class, 'edit'])->name('category_edit');
  Route::put('/admin/category/{id}',[App\Http\Controllers\Admin\CategoryController::class, 'update'])->name('category_update');
  Route::delete('/admin/category/{id}', [App\Http\Controllers\Admin\CategoryController::class, 'destroy']);
-//  Route::post('/admin/category',[App\Http\Controllers\Admin\CategoryController::class, 'search']);
+
 // Inquiry Controler
 Route::get('/admin/inquiry', [App\Http\Controllers\Admin\InquiryController::class, 'index']);
 Route::delete('/admin/inquiry/{id}', [App\Http\Controllers\Admin\InquiryController::class, 'destroy']);
+
 // Advertisement Controler CRUD
 Route::get('/admin/advertisement', [App\Http\Controllers\Admin\AdvertisementController::class, 'index']);
 Route::get('/admin/advertisement/create',[App\Http\Controllers\Admin\AdvertisementController::class, 'create']);
@@ -40,5 +41,5 @@ Route::post('/admin/advertisement',[App\Http\Controllers\Admin\AdvertisementCont
 Route::get('/admin/advertisement/edit/{advertisement}',[App\Http\Controllers\Admin\AdvertisementController::class, 'edit'])->name('advertisement_edit');
 Route::put('/admin/advertisement/{id}',[App\Http\Controllers\Admin\AdvertisementController::class, 'update'])->name('advertisement_update');
 Route::delete('/admin/advertisement/{id}', [App\Http\Controllers\Admin\AdvertisementController::class, 'destroy']);
-// Route::post('/admin/advertisement/search',[App\Http\Controllers\Admin\AdvertisementController::class, 'search']);
+});
 Route::fallback([App\Http\Controllers\PageNotFoundController::class, 'notfound']);
