@@ -53,7 +53,7 @@ class CategoryController extends Controller
         }
 
         // Must give in_print a value
-        $valid['image'] = basename($path ?? 'default.jpg') ;
+        $valid['image'] = basename($path ?? 'default.png') ;
         //$valid['in_print'] = $valid['in_print'] ?? 0;
 
         Category::create($valid);
