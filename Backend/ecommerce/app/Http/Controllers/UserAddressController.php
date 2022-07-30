@@ -120,7 +120,7 @@ class UserAddressController extends Controller
         $prev_route = app('router')->getRoutes($prev_url)->match(app('request')->create($prev_url))->getName();
 
         if($prev_route == 'checkoutCart' ) {
-            session(['shipping_addr' => $user_address->id]);
+            session(['shipping_addr_id' => $user_address->id]);
             return redirect()->route('checkoutCart');
         } else {
             return redirect('/profile#User_address');

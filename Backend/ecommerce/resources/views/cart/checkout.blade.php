@@ -28,9 +28,8 @@
                             @csrf
                             @foreach($address_list as $address)
                             <div class="addr_item">
-                                <input type="radio" id="addr_{{ $address->id }}" name="address_list" value="{{ $address->id }}" 
-                                    @if(isset($session_address_id) && intval($session_address_id) == $address->id) checked
-                                    @elseif($address->id == $user->default_address_id) checked @endif 
+                                <input type="radio" id="addr_{{ $address->id }}" name="address_item_id" value="{{ $address->id }}" 
+                                    @if($selected_address_id && ($session_address_id == $address->id)) checked @endif 
                                 />
 
                                 @if($address->id == $user->default_address_id) 
@@ -145,7 +144,7 @@
             <div class="cart_info col col-3">
                 <h2>Summary</h2>
                 <div class="subtotal"><strong>Subtotal: </strong>${{ $subtotal }} CAD</div>
-                <div class="tital_item"><strong>Quantity: </strong>{{ $total_qty }}</div>
+                <div class="tital_item"><strong>Items: </strong>{{ $total_qty }}</div>
 
                 // tax
                 // Total

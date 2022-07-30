@@ -21,6 +21,11 @@ class CartController extends Controller
     {
         $title = 'Shopping Cart';
         $session = $request->session()->get('cart') ?? [];
+
+        if($request->session()->has('shipping_addr_id')) {
+            $request->session()->forget('shipping_addr_id');
+        }
+
         $products = [];
         $subtotal = 0;
         $total_qty = 0;
@@ -125,7 +130,8 @@ class CartController extends Controller
             $user_id = Auth::user()->id;
             $user = User::find($user_id);
             $address_list = $user->user_addresses;
-            $session_address_id = $request->session()->get('shipping_addr') ?? [];
+            $session_address_id = $request->session()->get('shipping_addr_id') ?? null;
+            $selected_address_id = null;
     
             $session_cart = $request->session()->get('cart') ?? [];
             $products = [];
@@ -134,13 +140,13 @@ class CartController extends Controller
             // [tax]check the country and province from shipping address when checking out
 
             if($session_address_id) {
+                $selected_address_id = intval($session_address_id);
                 $user_address = UserAddress::find( $session_address_id);
                 $default_address = $user_address->full_address() . ', ' . $user_address->user_postal_code();
             } else {
+                $selected_address_id = $user->default_address_id;
                 $default_address = $user->full_address() . ', ' . $user->user_postal_code();
             }
-
-            // dd(intval($session_address_id), $default_address, $user->default_address_id);
 
             if($session_cart) {
                 $products = Product::whereIn('id', array_keys($session_cart))->with('size')->get();
@@ -162,6 +168,7 @@ class CartController extends Controller
                 'products', 
                 'session_cart',
                 'session_address_id',
+                'selected_address_id',
                 'subtotal', 
                 'total_qty'));
 
@@ -175,15 +182,15 @@ class CartController extends Controller
     }
 
     /**
-     * Update the shipping address from selection 
+     * Update the selected shipping address from selection on checkout page
      *
      * @param Request $request
      * @return void
      */
     public function updateShippingAddress(Request $request) {
 
-        $selected_address = $request->input('address_list');
-        session(['shipping_addr' => $selected_address]);
+        $selected_address_id = $request->input('address_item_id');
+        session(['shipping_addr_id' => $selected_address_id]);
 
         return redirect()->route('checkoutCart');
     }
