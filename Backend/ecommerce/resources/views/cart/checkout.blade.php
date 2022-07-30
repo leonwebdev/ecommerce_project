@@ -29,7 +29,7 @@
                             @foreach($address_list as $address)
                             <div class="addr_item">
                                 <input type="radio" id="addr_{{ $address->id }}" name="address_item_id" value="{{ $address->id }}" 
-                                    @if($selected_address_id && ($session_address_id == $address->id)) checked @endif 
+                                    @if(intval($selected_address_id) == $address->id) checked @endif 
                                 />
 
                                 @if($address->id == $user->default_address_id) 
