@@ -6,7 +6,7 @@
             <div class="card mb-4">
                 <div class="card-header">
                     <h2 class="mb-0">Add Category</h2>
-                    </div>
+                </div>
                 <div class="card-body">
                 {{-- {{ $errors }} --}}
                 <form  enctype="multipart/form-data" id="create" action="/admin/category" method="post">
