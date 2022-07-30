@@ -51,6 +51,26 @@ class UserAddress extends Model
     }
 
     /**
+     * Get the Current Province
+     *
+     * @return string Postal Code String
+     */
+    public function user_province()
+    {
+        return $this->province;
+    }
+
+    /**
+     * Get the Current Province
+     *
+     * @return string Postal Code String
+     */
+    public function user_country()
+    {
+        return $this->country;
+    }
+
+    /**
      * Return true if this is User default address
      *
      * @return boolean

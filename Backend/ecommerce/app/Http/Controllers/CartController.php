@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
 use App\Models\Tax;
 use App\Models\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Product;
 use App\Models\UserAddress;
+use Illuminate\Http\Request;
+use App\Models\ShippingCharge;
+use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
@@ -127,39 +128,76 @@ class CartController extends Controller
 
         if(Auth::check()) {
             // ====== Authenticated User ======
+            // user
             $user_id = Auth::user()->id;
             $user = User::find($user_id);
+            // address
             $address_list = $user->user_addresses;
             $session_address_id = $request->session()->get('shipping_addr_id') ?? null;
             $selected_address_id = null;
-    
+            $country = '';
+            $province = '';
+            // cart items
             $session_cart = $request->session()->get('cart') ?? [];
             $products = [];
+            // summary
             $subtotal = 0;
             $total_qty = 0;
-            // [tax]check the country and province from shipping address when checking out
+            $taxes = [];
+            $taxes_arr = [];
+            $total_tax = 0;
+            $shipping_fee = 0;
+            $total = 0;
 
             if($session_address_id) {
                 $selected_address_id = intval($session_address_id);
                 $user_address = UserAddress::find( $session_address_id);
                 $default_address = $user_address->full_address() . ', ' . $user_address->user_postal_code();
+                // For summary
+                $country = strtolower($user_address->user_country());
+                $province = strtolower($user_address->user_province());
             } else {
                 $selected_address_id = $user->default_address_id;
-                $default_address = $user->full_address() . ', ' . $user->user_postal_code();
+                $user_address = UserAddress::find( $selected_address_id);
+                $default_address = $$user_address->full_address() . ', ' . $$user_address->user_postal_code();
+                // For summary
+                $country = strtolower($user_address->user_country());
+                $province = strtolower($user_address->user_province());
             }
 
             if($session_cart) {
                 $products = Product::whereIn('id', array_keys($session_cart))->with('size')->get();
 
+                // For Summary
                 foreach($products as $product) {
                     // calc cart summary
                     $subtotal += 
                         floatval($product->price) * $session_cart[$product->id];
                     $total_qty += $session_cart[$product->id];
                 }
+
+                // taxes and shipping fee logic
+                if($country == 'canada') {
+                    // Tax fee
+                    $taxes = Tax::where('province', $province)
+                            ->orWhere('province_short', $province)
+                            ->whereNull('deleted_at')
+                            ->first(['gst', 'pst', 'hst']);
+
+                    // standard shipping fee
+                    $shipping_fee = ShippingCharge::where('country', $country)->first()->charge;
+                    
+                } else {
+                    // standard shipping fee
+                    $shipping_fee = ShippingCharge::where('country', 'Overseas')->first()->charge;
+                }
+
+                
+                $shipping_fee = floatval($shipping_fee);
+
+                $subtotal = number_format($subtotal, 2);
             }
 
-            $subtotal = number_format($subtotal, 2);
             return view('/cart/checkout', compact(
                 'title',
                 'user',
@@ -170,7 +208,9 @@ class CartController extends Controller
                 'session_address_id',
                 'selected_address_id',
                 'subtotal', 
-                'total_qty'));
+                'total_qty',
+                'taxes'
+            ));
 
         } else {
             // ====== Unauthenticated User ======

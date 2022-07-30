@@ -144,8 +144,17 @@
             <div class="cart_info col col-3">
                 <h2>Summary</h2>
                 <div class="subtotal"><strong>Subtotal: </strong>${{ $subtotal }} CAD</div>
-                <div class="tital_item"><strong>Items: </strong>{{ $total_qty }}</div>
+                <div class="total_item"><strong>Items: </strong>{{ $total_qty }}</div>
 
+                @if(!empty($taxes))  
+                    @foreach($taxes->toArray() as $key => $tax)
+                        @if(floatval($tax) > 0)
+                            <div><strong>{{ strtoupper($key) }} ({{ floatval($tax) * 100 }}%): </strong> ${{ number_format(floatval($tax) * $subtotal, 2) }} CAD</div>
+                        @endif
+                    @endforeach
+                @endif
+                <div><strong>Shipping Fee: </strong></div>
+                <div><strong>Total: </strong></div>
                 // tax
                 // Total
                 // Shipping fee logic
