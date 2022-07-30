@@ -41,6 +41,10 @@
                 }
             }
 
+            .address_list, .address_form {
+                display: none;
+            }
+
             form {
                 p, button {
                     margin: 0 0 10px 0;

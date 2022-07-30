@@ -17,6 +17,9 @@ $(document).ready(function () {
 
     // product detail
     productImageSlider();
+
+    // checkout
+    checkoutAddrEffect();
 });
 
 /**
@@ -125,5 +128,21 @@ function productImageSlider() {
         focusOnSelect: true,
         arrows: true,
         lazyLoad: 'ondemand',
+    });
+}
+
+/**
+ * Checkout page shipping address information effects 
+ */
+function checkoutAddrEffect() {
+    $('.cart #select_addr_btn').click(function(e) {
+        e.preventDefault();
+        $('.cart .address_list').slideDown();
+    });
+
+    $('.cart #create_addr_btn').click(function(e) {
+        e.preventDefault();
+        $('.cart .address_list').slideUp();
+        $('.cart .address_form').slideDown();
     });
 }

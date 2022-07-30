@@ -18,8 +18,8 @@
                     <div class="default_addr">
                         <strong>Address:</strong> {{ $default_address }}
                     </div>
-                    <div class="action change_address">
-                        <a href="#" class="btn btn_black">Change Address</a>
+                    <div class="action select_address">
+                        <a href="#" id="select_addr_btn" class="btn btn_black">Select Another Address</a>
                     </div>
 
                     <div class="address_list hidden">
@@ -40,7 +40,7 @@
                             @endforeach
                             <div class="action">
                                 <button class="btn btn_black">Update</button>
-                                <a href="#" class="btn btn_black">Create New Address</a>
+                                <a href="#" id="create_addr_btn" class="btn btn_black">Create New Address</a>
                             </div>
                         </form>
                         
@@ -159,7 +159,6 @@
                         ${{ $shipping_fee }} CAD
                     @else
                         Free
-                        <div>(order exceeded ${{ $free_shipping_amount }}, free shipping applied )</div>
                     @endif
                 </div>
                 
@@ -168,6 +167,7 @@
                 <div class="checkout_btn">
                     <a class="btn btn_black" href="{{ route('processToPayment') }}">Process to Payment</a>
                 </div>
+                <div>* Order exceeded ${{ $free_shipping_amount }}, free shipping applied</div>
             </div>
         </div>
 
