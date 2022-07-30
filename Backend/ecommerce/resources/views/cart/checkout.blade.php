@@ -36,7 +36,7 @@
                                 @if($address->id == $user->default_address_id) 
                                 <span>[Default]</span>
                                 @endif
-                                <label for="addr_{{ $address->id }}">{{ $address->full_address() }}</label>
+                                <label for="addr_{{ $address->id }}">{{ $address->full_address() . ', ' .  $address->user_postal_code() }}</label>
                             </div>
                             @endforeach
                             <div class="action">

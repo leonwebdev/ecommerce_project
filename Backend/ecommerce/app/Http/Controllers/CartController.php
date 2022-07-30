@@ -127,7 +127,6 @@ class CartController extends Controller
             $address_list = $user->user_addresses;
             $session_address_id = $request->session()->get('shipping_addr') ?? [];
     
-
             $session_cart = $request->session()->get('cart') ?? [];
             $products = [];
             $subtotal = 0;
@@ -135,9 +134,10 @@ class CartController extends Controller
             // [tax]check the country and province from shipping address when checking out
 
             if($session_address_id) {
-                $default_address = UserAddress::find( $session_address_id)->full_address();
+                $user_address = UserAddress::find( $session_address_id);
+                $default_address = $user_address->full_address() . ', ' . $user_address->user_postal_code();
             } else {
-                $default_address = $user->full_address();
+                $default_address = $user->full_address() . ', ' . $user->user_postal_code();
             }
 
             // dd(intval($session_address_id), $default_address, $user->default_address_id);
