@@ -59,26 +59,24 @@
 
             <!-- Right links -->
             <ul class="navbar-nav ms-auto d-flex flex-row align-items-center">
+                <li class="nav-item me-2">
+                    <a class="nav-link btn btn-light" href="/"
+                        role="button">Customer Site</a>
+                </li>
                 <!-- User -->
-                @auth
-                    <li class="nav-item me-2">
-                        <a class="nav-link" href="/admin/dashboard"
-                            role="button">{{ Auth::user()->first_name . ' ' . Auth::user()->last_name }}</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-danger fw-bold" href="/logout"
-                            onclick="event.preventDefault();
-                            document.getElementById('logout-form').submit();">Logout</a>
-                    </li>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                        @csrf
-                    </form>
-                @else
-                    <li class="nav-item">
-                        <span>Admin not loggin.</span>
-                    </li>
-                @endauth
-
+                <li>
+                    <a class="btn btn_white_no_border" href="{{ route('profile') }}">
+                        {{ Auth::user()->first_name . ' ' . Auth::user()->last_name }}
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-danger fw-bold" href="/logout"
+                        onclick="event.preventDefault();
+                        document.getElementById('logout-form').submit();">Logout</a>
+                </li>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @csrf
+                </form>
             </ul>
             <!-- Mobile Navbar -->
             <div class="collapse flex-grow-1 d-lg-none" id="MobileNavBar" style="flex-basis: 100%">
