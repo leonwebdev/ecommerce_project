@@ -27,7 +27,7 @@ class UserController extends Controller
         $title = $this->title;
         $search = $request->query('search');
         if ($search) {
-            $users = User::select(
+            $users = User::with('user_addresses')->select(
                 'users.id',
                 'users.first_name',
                 'users.last_name',
@@ -48,7 +48,7 @@ class UserController extends Controller
                 ->orderBy('users.created_at')
                 ->paginate($this->MAX_PER_PAGE);
         } else {
-            $users = User::latest()->paginate($this->MAX_PER_PAGE);
+            $users = User::with('user_addresses')->latest()->paginate($this->MAX_PER_PAGE);
         }
         // echo $users;
         // var_dump($users);
