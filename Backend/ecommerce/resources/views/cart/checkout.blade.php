@@ -5,7 +5,7 @@
     <div class="wrapper">
         <h1>{{ $title }}</h1>
 
-        <p>Please confirm the <string>Shipping address</string> and <string>cart items</string>.</p>
+        <p>Please confirm the <strong>Shipping address</strong> and <strong>cart items</strong>.</p>
 
         <div class="content form">
             <div class="cart_list col col-8">
@@ -158,16 +158,18 @@
                     @if($shipping_fee > 0)
                         ${{ $shipping_fee }} CAD
                     @else
-                        Free
+                        Free*
                     @endif
                 </div>
                 
                 <div><strong>Total: </strong>${{ $total }} CAD</div>
 
                 <div class="checkout_btn">
-                    <a class="btn btn_black" href="{{ route('processToPayment') }}">Process to Payment</a>
+                    <a class="btn btn_black" href="{{ route('processToBilling') }}">Process to Payment</a>
                 </div>
+                @if($shipping_fee == 0)
                 <div>* Order exceeded ${{ $free_shipping_amount }}, free shipping applied</div>
+                @endif
             </div>
         </div>
 

@@ -204,6 +204,19 @@ class CartController extends Controller
                 $total =  number_format($subtotal + $taxes_total + $shipping_fee, 2);
             }
 
+            $summary = [
+                'selected_address_id' => $selected_address_id,
+                'subtotal' => $subtotal,
+                'total_qty' => $total_qty,
+                'taxes' => $taxes,
+                'free_shipping_amount' => $free_shipping_amount,
+                'shipping_fee' => $shipping_fee,
+                'total' => $total,
+            ];
+
+            // for payment view use
+            $request->session()->put('summary', $summary);
+
             return view('/cart/checkout', compact(
                 'title',
                 'user',
@@ -211,7 +224,6 @@ class CartController extends Controller
                 'address_list',
                 'products', 
                 'session_cart',
-                'session_address_id',
                 'selected_address_id',
                 'subtotal', 
                 'total_qty',
@@ -249,7 +261,57 @@ class CartController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function processToPayment() {
+    public function processToBilling(Request $request) {
+
+        $title = 'Payment';
+
+        // get cart summary from session
+        $summary = $request->session()->get('summary') ?? [];
+
+        // user
+        $user_id = Auth::user()->id;
+        $user = User::find($user_id);
+        $address = 
+            UserAddress::find($summary['selected_address_id'])->full_address() . ', ' . 
+            UserAddress::find($summary['selected_address_id'])->user_postal_code();
+        $billing_address = [];
+
+        // check if user selected to use shipping address as billing address
+        $session_billing_id = $request->session()->get('billing_address_id') ?? null;
+        
+        if($session_billing_id) {
+            $billing_address = UserAddress::find($session_billing_id);
+        }
+
+        return view('cart/billing', compact(
+            'title',
+            'user',
+            'summary',
+            'address',
+            'billing_address',
+        ));
+    }
+
+    /**
+     * Store the billing address in session when user selected to use shipping address as billing address
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function fillBillingForm(Request $request) {
+
+        $checked = $request->input('shipping_as_billing');
+
+        if($checked == 'on') {
+            $summary = $request->session()->get('summary') ?? [];
+            $address_id = $summary['selected_address_id'];
+            $request->session()->put('billing_address_id', $address_id);
+        } else {
+            $request->session()->forget('billing_address_id');
+        }
+        
+        return redirect()->route('processToBilling');
+    }
 
     }
 }
