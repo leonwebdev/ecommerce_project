@@ -68,6 +68,9 @@
                                         </span>{{ $order->shipping_address }}</div>
                                     <div class="mb-0_5"><span class="text-black fw-bold">Billing address:
                                         </span>{{ $order->billing_address }}</div>
+                                    <div class="mb-0_5"><span class="text-black fw-bold">Payment Info:
+                                        </span>CIBC VISA &#42;&#42;&#42;&#42;&#42;3567</div>
+
                                 </div>
                             </div>
                         @endif
