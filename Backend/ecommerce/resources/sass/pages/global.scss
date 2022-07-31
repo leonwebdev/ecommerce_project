@@ -53,6 +53,10 @@ button {
     }
 }
 
+input[type=checkbox] {
+    cursor: pointer;
+}
+
 .col {
     display: inline-block;
     vertical-align: top;
