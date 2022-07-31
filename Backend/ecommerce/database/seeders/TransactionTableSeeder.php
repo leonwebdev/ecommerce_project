@@ -17,7 +17,7 @@ class TransactionTableSeeder extends Seeder
     {
         DB::table('transactions')->insert([
             'order_id' => 1,
-            'response' => '200',
+            'response' => '1',
             'status' => '200',
             'credit_card_info' => '0356',
             'created_at' => now(),

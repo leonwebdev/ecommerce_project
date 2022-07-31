@@ -15,7 +15,7 @@
                         <strong>Name:</strong> {{ $user->first_name }} {{ $user->last_name }}
                     </div>
                     <div class="default_addr">
-                        <strong>Address:</strong> {{ $address }}
+                        <strong>Shipping Address:</strong> {{ $address }}
                     </div>
                     <div><strong>Order Total: </strong>${{ $summary['total'] }} CAD</div>
                 </div>
@@ -25,7 +25,7 @@
                 <h3>Billing Address</h3>
 
                 <div>
-                    <form action="{{ route('fillBillingForm') }}">
+                    <form action="{{ route('useShippingAsBilling') }}">
                         @csrf
                         <input type="checkbox" name="shipping_as_billing" id="terms" onChange="this.form.submit();" @if(!empty($billing_address)) checked @endif/>
                         <label for="shipping_as_billing">Use the shipping address as billing address.</label>
@@ -33,7 +33,7 @@
                 </div>
 
                 @if(empty($billing_address))
-                <form action="{{ route('processCreditCardInfo') }}">
+                <form action="{{ route('showCreditCardForm') }}">
                     @csrf
                     <p class="col col-12 required">
                         <input type="text" id="street" name="street" placeholder="Street"
@@ -72,12 +72,12 @@
                     </p>
                     <p class="highlight">* Required fields.</p>
                     <p>
-                        <button id="register_btn" class="btn btn_black">Next</button>
+                        <button class="btn btn_black">Next</button>
                     </p>
                 </form>
                 @else
                 <div class="col col-12 next_btn">
-                    <a href="{{ route('processCreditCardInfo', ['use_shipping_address' => $summary['selected_address_id'] ]) }}" class="btn btn_black">Next</a>
+                    <a href="{{ route('showCreditCardForm', ['use_shipping_address' => $summary['selected_address_id'] ]) }}" class="btn btn_black">Next</a>
                 </div>
                 @endif
 
