@@ -40,16 +40,26 @@
                                 <li><a class="btn btn_white_no_border" href="{{ route('login') }}">Login</a></li>
                             @endif
                         @else
-                            <li><a class="btn btn_black" href="/logout"
-                                    onclick="event.preventDefault();
-                                    document.getElementById('logout-form').submit();">Logout</a>
+                            @if(Auth::user()->admin)
+                                <li>
+                                    <a class="btn btn_white_no_border"
+                                    href="{{ route('admin_dashboard') }}">Admin Dashboard</a>
+                                </li>
+                            @endif
+
+                            <li>
+                                <a class="btn btn_white_no_border"
+                                href="{{ route('profile') }}">Profile</a>
                             </li>
-                            <li><a class="btn btn_white_no_border"
-                                    href="{{ route('profile') }}">{{ Auth::user()->first_name . ' ' . Auth::user()->last_name }}</a></li>
+                            
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                 @csrf
                             </form>
-
+                            <li>
+                                <a class="btn btn_black" href="/logout"
+                                onclick="event.preventDefault();
+                                document.getElementById('logout-form').submit();">Logout</a>
+                            </li>
                         @endguest
 
                     </ul>

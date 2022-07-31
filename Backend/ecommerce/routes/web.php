@@ -23,10 +23,6 @@ Auth::routes();
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/test', [HomeController::class, 'test']);
 
-Route::middleware(['auth', 'admin'])->group(function() {
-   // includes all admin routes
-});
-
 Route::get('/admin/order', [AdminOrderController::class, 'index'])
     ->name('admin_order');
 
