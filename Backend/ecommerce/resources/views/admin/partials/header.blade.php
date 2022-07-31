@@ -32,10 +32,10 @@
                     <i class="fas fa-user fa-fw me-3"></i>
                     <span>Users</span>
                 </a>
-                <a href="/admin/address" class="list-group-item list-group-item-action py-2 ripple">
+                {{-- <a href="/admin/address" class="list-group-item list-group-item-action py-2 ripple">
                     <i class="fas fa-location-dot fa-fw me-3"></i>
                     <span>Addresses</span>
-                </a>
+                </a> --}}
             </div>
         </div>
     </nav>
