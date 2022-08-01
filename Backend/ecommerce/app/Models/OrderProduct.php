@@ -21,4 +21,20 @@ class OrderProduct extends Pivot
         'product_name',
         'size',
     ];
+
+    /**
+     * Define Relationship, One OrderProduct can belongs To One Order
+     */
+    public function order()
+    {
+        return $this->belongsTo(Order::class);
+    }
+
+     /**
+     * Define Relationship, One OrderProduct can belongs To One Product
+     */
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
 }

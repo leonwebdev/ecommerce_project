@@ -7,6 +7,7 @@ use App\Models\User;
 use Pacewdd\Bx\_5bx;
 use App\Models\Order;
 use App\Helpers\Helper;
+use App\Models\OrderProduct;
 use App\Models\Product;
 use App\Models\UserAddress;
 use Illuminate\Http\Request;
@@ -427,10 +428,28 @@ class CartController extends Controller
         $order->billing_address = $billing_address;
 
         if($order->save()) {
+            // ==========   ===============
+            $cart = $request->session()->get('cart');
+            
+            foreach($cart as $key => $qty) {
+                
+                $product = Product::where('id', $key)->with('size')->first();
+
+                $order_product = new OrderProduct();
+                $order_product->order_id = $order->id;
+                $order_product->product_id = $key;
+                $order_product->unit_price = $product->price;
+                $order_product->quantity = $qty;
+                $order_product->line_price = floatval($product->price) * $qty;
+                $order_product->product_name = $product->name;
+                $order_product->size = $product->size->name;
+
+                $order_product->save();
+            }
 
             // ==== transaction start ====
             $response = Helper::processTransaction($valid, $summary['total'], $order->id);
-           
+
             if( $response->transaction_response->response_code == 1) {
                 // success
                 $transaction = new Transaction();
@@ -451,6 +470,7 @@ class CartController extends Controller
                 }
                 
             } else {
+
                 // failed <- response_code == 2
                 session()->flash('error', 'Error occurred when processing credit card payment, please try again.');
                 return redirect()->route('showCreditCardForm');
