@@ -31,6 +31,24 @@
 
                 <form action="{{ route('storeOrder') }}" method="post">
                     @csrf
+
+                    <p class="col col-12 required">
+                        <span><strong>Card Type: </strong></span>
+
+                        <input type="radio" id="visa" name="card_type" value="visa" @if(old('card_type') == 'visa') checked @endif />
+                        <label for="visa">Visa</label>
+
+                        <input type="radio" id="mastercard " name="card_type" value="mastercard " @if(old('card_type') == 'mastercard') checked @endif />
+                        <label for="mastercard ">Mastercard</label>
+
+                        <input type="radio" id="amex" name="card_type" value="amex" @if(old('card_type') == 'amex') checked @endif />
+                        <label for="amex">AMEX</label>
+
+                        @error('card_type')
+                            <span class="error">{{ $message }}</span>
+                        @enderror
+                    </p>
+
                     <p class="col col-12 required">
                         <input type="text" id="card_holder_name" name="card_holder_name" placeholder="Card Holder Name"
                             value="{{ old('card_holder_name') }}" />
@@ -57,23 +75,6 @@
                         <input type="month" id="card_expiry" name="card_expiry" placeholder="Expiration Date"
                             value="{{ old('card_expiry') }}" />
                         @error('card_expiry')
-                            <span class="error">{{ $message }}</span>
-                        @enderror
-                    </p>
-
-                    <p class="col col-12 required">
-                        <span>Card Type: </span>
-
-                        <input type="radio" id="visa" name="card_type" value="visa" @if(old('card_type') == 'visa') checked @endif />
-                        <label for="visa">Visa</label>
-
-                        <input type="radio" id="mastercard " name="card_type" value="mastercard " @if(old('card_type') == 'mastercard') checked @endif />
-                        <label for="mastercard ">Mastercard</label>
-
-                        <input type="radio" id="amex" name="card_type" value="amex" @if(old('card_type') == 'amex') checked @endif />
-                        <label for="amex">AMEX</label>
-
-                        @error('card_type')
                             <span class="error">{{ $message }}</span>
                         @enderror
                     </p>
