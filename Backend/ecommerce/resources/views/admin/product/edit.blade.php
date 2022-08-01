@@ -8,7 +8,6 @@
                     <h2 class="mb-0">Edit Product</h2>
                 </div>
                 <div class="card-body">
-
                     <form action="{{ route('admin_product_update', ['product' => $product->id]) }}" method="POST"
                         enctype="multipart/form-data">
                         @csrf
@@ -64,7 +63,7 @@
                             @if ($product->product_media && count($product->product_media) > 0)
                                 <div>
                                     @foreach ($product->product_media as $item)
-                                        <div class="d-inline-block p-2">
+                                        <div class="d-inline-block p-2" id="div_{{ $item->id }}">
                                             <img class="img-thumbnail" width="100" height="100"
                                                 data-id="{{ $item->id }}" src="/storage/{{ $item->image }}" />
                                             <button type="button" class="d-block m-auto mt-2 btn btn-danger btn-sm"
@@ -76,14 +75,18 @@
                                 <br />
                             @endif
                             <input type="file" name="images[]" multiple
-                                class="form-control  @error('images') is-invalid @enderror" accept="image/*">
-                            @if ($errors->has('images'))
-                                @foreach ($errors->get('images') as $error)
-                                    <div class="invalid-feedback">
-                                        {{ $error }}
-                                    </div>
-                                @endforeach
-                            @endif
+                                class="form-control  @error('images') is-invalid @enderror @error('images.*') is-invalid @enderror"
+                                accept="image/*">
+                            @error('images')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                            @error('images.*')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
 
                         <div class="mb-3">
@@ -173,7 +176,9 @@
                     _token: '{{ csrf_token() }}'
                 },
                 success: function() {
-                    $(`img[data-id="${id}"]`).hide();
+                    $('div').remove(`#div_${id}`);
+
+                    $(`div[data-id="${id}"]`).hide();
                 }
             });
 
