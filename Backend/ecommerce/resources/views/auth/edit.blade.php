@@ -39,19 +39,6 @@
                                     <span class="error">{{ $message }}</span>
                                 @enderror
                             </p>
-                            <p class="col col-6">
-                                <input type="password" id="password" name="password" placeholder="Password" />
-                                @error('password')
-                                    <span class="error">{{ $message }}</span>
-                                @enderror
-                            </p>
-                            <p class="col col-6">
-                                <input type="password" id="password_confirmation" name="password_confirmation"
-                                    placeholder="Confirm Password" />
-                                @error('password_confirmation')
-                                    <span class="error">{{ $message }}</span>
-                                @enderror
-                            </p>
                             <p class="col col-12 terms required">
                                 <input type="checkbox" name="terms" id="terms" />
                                 <label for="terms">I accept the <a href="/terms-and-conditions" target="_blank">Terms of Use</a> & <a
@@ -64,6 +51,9 @@
                                 <button id="register_btn" class="btn btn_white">Update</button>
                             </p>
                         </form>
+                        @if (Route::has('password.request'))
+                        <div><a href="{{ route('password.request') }}">Change password</a></div>
+                    @endif
                     @else
                         <h1 style="color: red">You are not authorised to edit other people's personal information.</h1>
                     @endif
