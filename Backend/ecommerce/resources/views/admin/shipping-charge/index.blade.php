@@ -48,5 +48,4 @@
     <div class="px-3">
         {!! $shippingcharges->links('pagination::bootstrap-5') !!}
     </div>
-
 @endsection
