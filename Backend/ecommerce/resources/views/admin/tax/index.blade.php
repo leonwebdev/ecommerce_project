@@ -41,11 +41,11 @@
           <td>{{ $tax->pst }}</td>
           <td>{{ $tax->hst }}</td>
           <td><a href="{{ route('adminTaxEdit', $tax->id) }}" class="btn btn-info">Edit</a>
-          <form method="post" action="/admin/tax/{{ $tax->id }}">
+          <form method="post" action="{{ route('adminTaxDestroy', $tax->id) }}">
               @csrf
               @method('DELETE')
               <input type="hidden" name="id" value="{{ $tax->id }}" />
-              <button class="btn btn-danger" onclick="return confirm('Do you really want to delete {{ $tax->title }}?')">Delete</button>
+              <button class="btn btn-danger" onclick="return confirm('Do you really want to delete the tax of {{ $tax->province }}?')">Delete</button>
           </form>
             </td>
           </tr>

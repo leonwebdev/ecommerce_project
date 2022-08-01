@@ -101,4 +101,21 @@ class TaxController extends Controller
         }
         return redirect()->route('adminTaxIndex');
     }
+
+    /**
+     * destroy function
+     *
+     * @return void
+     */
+    public function destroy(Request $request, $id)
+    {
+        $tax = Tax::find($id);
+        if($tax->delete()) {
+            session()->flash('success', 'Tax was deleted');
+            return redirect()->route('adminTaxIndex');
+        }
+        session()->flash('error', 'There was a problem deleting the Tax');
+
+        return redirect()->route('adminTaxIndex');
+    }
 }
