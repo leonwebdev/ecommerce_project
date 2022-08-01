@@ -21,11 +21,45 @@ class TaxController extends Controller
         $search = $request->query('search');
 
         if ($search) {
-            $taxes = Tax::where('province', 'LIKE', '%' . $search . '%')->orWhere('province_short', 'LIKE', '%' . $search . '%')->latest()->paginate(10);
+            $taxes = Tax::where('province', 'LIKE', '%' . $search . '%')->orWhere('province_short', 'LIKE', '%' . $search . '%')->orderBy('id', 'DESC')->paginate(10);
         } else {
-            $taxes = Tax::latest()->paginate(10);
+            $taxes = Tax::orderBy('id', 'DESC')->paginate(10);
         }
         return view('/admin/tax/index', compact('title', 'taxes'));
+    }
+
+     /**
+     * create function
+     *
+     * @return void
+     */
+    public function create()
+    {
+        $title = 'Add Tax';
+        return view('/admin/tax/create', compact('title'));
+    }
+
+    /**
+     * store function
+     *
+     * @return void
+     */
+    public function store(Request $request)
+    {
+
+        $valid = $request->validate([
+            'province' => 'required|string|max:255',
+            'province_short' => 'required|string|max:255',
+            'gst' => 'required|numeric|max:99.99',
+            'pst' => 'required|numeric|max:99.99',
+            'hst' => 'required|numeric|max:99.99',
+        ]);
+
+        Tax::create($valid);
+
+        session()->flash('success', 'Tax successfully created!');
+        
+        return redirect()->route('adminTaxIndex');
     }
 
     /**
