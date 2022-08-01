@@ -36,6 +36,10 @@
                     <i class="fas fa-location-dot fa-fw me-3"></i>
                     <span>Addresses</span>
                 </a> --}}
+                <a href="/admin/tax" class="list-group-item list-group-item-action py-2 ripple">
+                    <i class="fas fa-sack-dollar fa-fw me-3"></i>
+                    <span>Taxes</span>
+                </a>
             </div>
         </div>
     </nav>
