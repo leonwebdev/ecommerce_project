@@ -40,6 +40,10 @@
                     <i class="fas fa-sack-dollar fa-fw me-3"></i>
                     <span>Taxes</span>
                 </a>
+                <a href="/admin/shipping-charge" class="list-group-item list-group-item-action py-2 ripple">
+                    <i class="fas fa-sack-dollar fa-fw me-3"></i>
+                    <span>Shipping Charge</span>
+                </a>
             </div>
         </div>
     </nav>
