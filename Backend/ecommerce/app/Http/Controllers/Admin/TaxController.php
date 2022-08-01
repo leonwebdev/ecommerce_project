@@ -27,4 +27,44 @@ class TaxController extends Controller
         }
         return view('/admin/tax/index', compact('title', 'taxes'));
     }
+
+    /**
+     * edit function
+     *
+     * @return void
+     */
+    public function edit(Tax $tax)
+   
+    {
+        $title = 'Edit Tax';
+        return view('/admin/tax/edit', compact('tax', 'title'));
+    }
+
+    /**
+     * update function
+     *
+     * @return void
+     */
+    public function update(Request $request, $id)
+    {
+        $valid = $request->validate([
+            'id' => 'required|integer',
+            'province' => 'required|string|max:255',
+            'province_short' => 'required|string|max:255',
+            'gst' => 'required|numeric|max:99.99',
+            'pst' => 'required|numeric|max:99.99',
+            'hst' => 'required|numeric|max:99.99',
+        ]);
+
+        $tax = Tax::find($valid['id']);
+
+        $tax->update($valid);
+
+        if($tax->save()) {
+            session()->flash('success', 'Tax was successfully updated'); 
+        } else {
+            session()->flash('error', 'There was a problem updating the Tax');
+        }
+        return redirect()->route('adminTaxIndex');
+    }
 }

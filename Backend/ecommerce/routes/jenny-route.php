@@ -25,10 +25,10 @@ Route::middleware(['auth', 'admin'])->group(function() {
     // Admin Tax Route
     Route::get('/admin/tax', [TaxController::class, 'index'])
     ->name('adminTaxIndex');
-    Route::get('/admin/tax/create',[App\Http\Controllers\Admin\TaxController::class, 'create'])->name('adminTaxCreate');;
-    Route::post('/admin/tax',[App\Http\Controllers\Admin\TaxController::class, 'store'])->name('adminTaxStore');;
-    Route::get('/admin/tax/edit/{tax}',[App\Http\Controllers\Admin\TaxController::class, 'edit'])->name('adminTaxEdit');
-    Route::put('/admin/tax/{id}',[App\Http\Controllers\Admin\TaxController::class, 'update'])->name('adminTaxUpdate');
-    Route::delete('/admin/tax/{id}', [App\Http\Controllers\Admin\TaxController::class, 'destroy'])->name('adminTaxDestroy');;
+    Route::get('/admin/tax/create',[TaxController::class, 'create'])->name('adminTaxCreate');;
+    Route::post('/admin/tax',[TaxController::class, 'store'])->name('adminTaxStore');;
+    Route::get('/admin/tax/edit/{tax}',[TaxController::class, 'edit'])->name('adminTaxEdit');
+    Route::put('/admin/tax/{id}',[TaxController::class, 'update'])->name('adminTaxUpdate');
+    Route::delete('/admin/tax/{id}', [TaxController::class, 'destroy'])->name('adminTaxDestroy');;
     
 });
