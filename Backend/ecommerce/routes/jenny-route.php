@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\Admin\TaxController;
 
 Route::get('/cart', [CartController::class, 'index'])->name('cartIndex');
 Route::get('/cart/add/{id}', [CartController::class, 'create'])->name('createCart');
@@ -20,5 +21,14 @@ Route::middleware(['auth'])->group(function() {
 });
 
 Route::middleware(['auth', 'admin'])->group(function() {
+
+    // Admin Tax Route
+    Route::get('/admin/tax', [TaxController::class, 'index'])
+    ->name('adminTaxIndex');
+    Route::get('/admin/tax/create',[App\Http\Controllers\Admin\TaxController::class, 'create'])->name('adminTaxCreate');;
+    Route::post('/admin/tax',[App\Http\Controllers\Admin\TaxController::class, 'store'])->name('adminTaxStore');;
+    Route::get('/admin/tax/edit/{tax}',[App\Http\Controllers\Admin\TaxController::class, 'edit'])->name('adminTaxEdit');
+    Route::put('/admin/tax/{id}',[App\Http\Controllers\Admin\TaxController::class, 'update'])->name('adminTaxUpdate');
+    Route::delete('/admin/tax/{id}', [App\Http\Controllers\Admin\TaxController::class, 'destroy'])->name('adminTaxDestroy');;
     
 });

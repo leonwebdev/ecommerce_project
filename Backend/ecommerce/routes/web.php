@@ -21,10 +21,6 @@ Route::get('/', [HomeController::class, 'index']);
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-Route::get('/test', [HomeController::class, 'test']);
-
-Route::get('/admin/order', [AdminOrderController::class, 'index'])
-    ->name('admin_order');
 
 require __DIR__ . '/dhruval-route.php';
 require __DIR__ . '/lihang-route.php';
