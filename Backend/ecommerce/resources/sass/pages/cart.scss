@@ -2,6 +2,7 @@
     a {
         text-decoration: none;
     }
+
     .cart_list {
         margin-right: 80px;
         
@@ -10,13 +11,20 @@
             margin: 80px 0;
         }
 
-        .shipping {
-            border: 1px solid $color-light;
+        .shipping, .order_info {
             padding: 26px 20px;
             > div {
                 margin-bottom: 10px;
             }
+        }
 
+        .order_info {
+            background-color: $color-featured;
+        }
+
+        .shipping {
+            border: 1px solid $color-light;
+           
             .action {
                 margin-top: 20px;
                 a {
@@ -121,6 +129,13 @@
         }
     }
 
+    .payment_content {
+        button {
+            min-width: 100px;
+            border: unset;
+        }
+    }
+
     .cart_info {
         border: 1px solid $color-light;
         padding: 10px 30px 30px;
@@ -135,4 +150,21 @@
             display: block;
         }
     }
+
+    .payment_content {
+        margin: 40px auto 0;
+        max-width: 500px;
+
+        .next_btn {
+            margin-top: 40px;
+            text-align: center;
+            a.btn {
+                min-width: 100px;
+                display: inline-block;
+                margin: 0 auto;
+            }
+        }
+        
+    }
+
 }
