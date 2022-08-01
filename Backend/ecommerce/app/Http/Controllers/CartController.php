@@ -440,6 +440,12 @@ class CartController extends Controller
                 $transaction->credit_card_info = substr((string) $valid['card_number'], -4);
 
                 if($transaction->save()) {
+                    // clear session
+                    $request->session()->forget('cart');
+                    $request->session()->forget('shipping_addr_id');
+                    $request->session()->forget('summary');
+
+                    // redirect to invoice
                     session()->flash('success', 'Thank you for your order!');
                     return redirect()->route('order-history-detail', ['id' => $order->id]);
                 }
