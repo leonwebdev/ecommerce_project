@@ -59,4 +59,41 @@ class ShippingChargeController extends Controller
 
 
     }
+       /**
+     * edit function
+     *
+     * @return void
+     */
+    public function edit(ShippingCharge $shippingcharge)
+   
+    {
+        $title = 'Admin | Shipping Charge';
+        return view('/admin/shipping-charge/edit', compact('shippingcharge', 'title'));
+    }
+    /**
+     * update function
+     *
+     * @return void
+     */
+    public function update(Request $request, $id)
+    {
+        $valid = $request->validate([
+            'id' => 'required|integer',
+            'continent' => 'required|string|max:255',
+            'country' => 'required|string|max:255',
+            'charge' => 'required|regex:/^\d+(\.\d{1,2})?$/'  
+        ]);
+
+        $shippingcharge = ShippingCharge::find($valid['id']);
+
+        $shippingcharge->update($valid);
+
+        if($shippingcharge->save()) {
+            session()->flash('success', 'Shipping Charge was successfully updated'); 
+        } else {
+            session()->flash('error', 'There was a problem updating the Shipping Charge');
+        }
+        return redirect('/admin/shipping-charge');
+
+    }
 }
