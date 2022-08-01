@@ -49,5 +49,7 @@ Route::get('/admin/shipping-charge/create',[App\Http\Controllers\Admin\ShippingC
 Route::post('/admin/shipping-charge',[App\Http\Controllers\Admin\ShippingChargeController::class, 'store']);
 Route::get('/admin/shipping-charge/edit/{shippingcharge}',[App\Http\Controllers\Admin\ShippingChargeController::class, 'edit'])->name('shippingcharge_edit');
 Route::put('/admin/shipping-charge/{id}',[App\Http\Controllers\Admin\ShippingChargeController::class, 'update'])->name('shippingcharge_update');
+Route::delete('/admin/shipping-charge/{id}', [App\Http\Controllers\Admin\ShippingChargeController::class, 'destroy']);
+
 });
 Route::fallback([App\Http\Controllers\PageNotFoundController::class, 'notfound']);

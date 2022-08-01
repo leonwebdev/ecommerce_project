@@ -96,4 +96,21 @@ class ShippingChargeController extends Controller
         return redirect('/admin/shipping-charge');
 
     }
+       /**
+     * destroy function
+     *
+     * @return void
+     */
+    public function destroy(Request $request, $id)
+    {
+        $shippingcharge = ShippingCharge::find($id);
+        if($shippingcharge->delete()) {
+            session()->flash('success', 'Shipping Charge was deleted');
+            return redirect('/admin/shipping-charge');
+        }
+        session()->flash('error', 'There was a problem deleting the Shipping Charge');
+        return redirect('/admin/shipping-charge');
+        
+    }
+
 }

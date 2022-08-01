@@ -34,7 +34,7 @@
           <td>{{ $shippingcharge->country }}</td>
           <td>{{ $shippingcharge->charge }}</td>
           <td><a href="/admin/shipping-charge/edit/{{ $shippingcharge->id }}" class="btn btn-info">Edit</a>
-          <form method="post" action="/admin/charge/{{ $shippingcharge->id }}">
+          <form method="post" action="/admin/shipping-charge/{{ $shippingcharge->id }}">
               @csrf
               @method('DELETE')
               <input type="hidden" name="id" value="{{ $shippingcharge->id }}" />
