@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\InquiryController;
 use App\Http\Controllers\PrivacyPolicyController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\AdvertisementController;
+use App\Http\Controllers\Admin\ShippingChargeController;
 
 
  Route::get('/about', [AboutController::class, 'index']);
@@ -41,5 +42,14 @@ Route::post('/admin/advertisement',[App\Http\Controllers\Admin\AdvertisementCont
 Route::get('/admin/advertisement/edit/{advertisement}',[App\Http\Controllers\Admin\AdvertisementController::class, 'edit'])->name('advertisement_edit');
 Route::put('/admin/advertisement/{id}',[App\Http\Controllers\Admin\AdvertisementController::class, 'update'])->name('advertisement_update');
 Route::delete('/admin/advertisement/{id}', [App\Http\Controllers\Admin\AdvertisementController::class, 'destroy']);
+
+//
+Route::get('/admin/shipping-charge', [App\Http\Controllers\Admin\ShippingChargeController::class, 'index']);
+Route::get('/admin/shipping-charge/create',[App\Http\Controllers\Admin\ShippingChargeController::class, 'create']);
+Route::post('/admin/shipping-charge',[App\Http\Controllers\Admin\ShippingChargeController::class, 'store']);
+Route::get('/admin/shipping-charge/edit/{shippingcharge}',[App\Http\Controllers\Admin\ShippingChargeController::class, 'edit'])->name('shippingcharge_edit');
+Route::put('/admin/shipping-charge/{id}',[App\Http\Controllers\Admin\ShippingChargeController::class, 'update'])->name('shippingcharge_update');
+Route::delete('/admin/shipping-charge/{id}', [App\Http\Controllers\Admin\ShippingChargeController::class, 'destroy']);
+
 });
 Route::fallback([App\Http\Controllers\PageNotFoundController::class, 'notfound']);
