@@ -36,15 +36,16 @@ class UserController extends Controller
                 'users.default_address_id',
                 'users.admin',
             )
-                ->join('user_addresses', 'users.id', '=', 'user_addresses.user_id')
                 ->where('users.first_name', 'LIKE', '%' . $search . '%')
                 ->orWhere('users.last_name', 'LIKE', '%' . $search . '%')
                 ->orWhere('users.email', 'LIKE', '%' . $search . '%')
-                ->orWhere('user_addresses.street', 'LIKE', '%' . $search . '%')
-                ->orWhere('user_addresses.city', 'LIKE', '%' . $search . '%')
-                ->orWhere('user_addresses.province', 'LIKE', '%' . $search . '%')
-                ->orWhere('user_addresses.country', 'LIKE', '%' . $search . '%')
-                ->orWhere('user_addresses.postal_code', 'LIKE', '%' . $search . '%')
+                ->orWhereHas('user_addresses', function ($q) use ($search) {
+                    return $q->where('street', 'LIKE', '%' . $search . '%')
+                        ->orWhere('city', 'LIKE', '%' . $search . '%')
+                        ->orWhere('province', 'LIKE', '%' . $search . '%')
+                        ->orWhere('country', 'LIKE', '%' . $search . '%')
+                        ->orWhere('postal_code', 'LIKE', '%' . $search . '%');
+                })
                 ->orderBy('users.created_at')
                 ->paginate($this->MAX_PER_PAGE);
         } else {
