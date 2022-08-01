@@ -147,7 +147,7 @@
                 <div class="total_item"><strong>Items: </strong>{{ $total_qty }}</div>
 
                 @if(!empty($taxes))  
-                    @foreach($taxes->toArray() as $key => $tax)
+                    @foreach($taxes as $key => $tax)
                         @if(floatval($tax) > 0)
                             <div><strong>{{ strtoupper($key) }} ({{ floatval($tax) * 100 }}%): </strong> ${{ number_format(floatval($tax) * $subtotal, 2) }} CAD</div>
                         @endif

@@ -188,9 +188,18 @@ class CartController extends Controller
                             ->orWhere('province_short', $province)
                             ->whereNull('deleted_at')
                             ->first(['gst', 'pst', 'hst']);
-
-                    foreach($taxes->toArray() as $tax) {
-                        $taxes_total += floatval($tax) * $subtotal;
+                    
+                    if($taxes) {
+                        $taxes = $taxes->toArray();
+                        foreach($taxes as $tax) {
+                            $taxes_total += floatval($tax) * $subtotal;
+                        }
+                    } else {
+                        $taxes = [
+                            'gst' => 0.00,
+                            'pst' => 0.00,
+                            'hst' => 0.00,
+                        ];
                     }
 
                     // standard shipping fee
@@ -386,15 +395,27 @@ class CartController extends Controller
     public function storeOrder(Request $request) {
 
         // credit card form information
-        $valid = $request->validate(
-            [
-                'card_holder_name' => ['required', 'string',  'max:255'],
-                'card_number' => ['required', 'numeric', 'digits:16'],
-                'card_cvv' => ['required', 'numeric', 'digits:3'],
-                'card_expiry' => ['required', 'string', 'max:7'],
-                'card_type' => ['required', 'string', 'max:10'],
-            ],
-        );
+        if($request->input('card_type') == 'amex') {
+            $valid = $request->validate(
+                [
+                    'card_holder_name' => ['required', 'string',  'max:255'],
+                    'card_number' => ['required', 'numeric', 'digits:15'],
+                    'card_cvv' => ['required', 'numeric', 'digits:3'],
+                    'card_expiry' => ['required', 'string', 'max:7'],
+                    'card_type' => ['required', 'string', 'max:10'],
+                ],
+            );
+        } else {
+            $valid = $request->validate(
+                [
+                    'card_holder_name' => ['required', 'string',  'max:255'],
+                    'card_number' => ['required', 'numeric', 'digits:16'],
+                    'card_cvv' => ['required', 'numeric', 'digits:3'],
+                    'card_expiry' => ['required', 'string', 'max:7'],
+                    'card_type' => ['required', 'string', 'max:10'],
+                ],
+            );
+        }
 
         $valid['card_expiry'] = substr($valid['card_expiry'], -2) // month e.g.'08'
                         . substr($valid['card_expiry'], -5, 2) // year e.g.'22'
@@ -428,13 +449,14 @@ class CartController extends Controller
         $order->billing_address = $billing_address;
 
         if($order->save()) {
-            // ==========   ===============
+            // ===== Update OrderProduct table =====
             $cart = $request->session()->get('cart');
             
             foreach($cart as $key => $qty) {
                 
                 $product = Product::where('id', $key)->with('size')->first();
 
+                // update order_product table
                 $order_product = new OrderProduct();
                 $order_product->order_id = $order->id;
                 $order_product->product_id = $key;
@@ -445,6 +467,10 @@ class CartController extends Controller
                 $order_product->size = $product->size->name;
 
                 $order_product->save();
+
+                // save product quantity
+                $product->quantity = intval($product->quantity) - intval($qty);
+                $product->save();
             }
 
             // ==== transaction start ====
@@ -459,6 +485,12 @@ class CartController extends Controller
                 $transaction->credit_card_info = substr((string) $valid['card_number'], -4);
 
                 if($transaction->save()) {
+
+                    // update order status in order table
+                    $order_update = Order::find($order->id);
+                    $order_update->order_status = 'confirmed';
+                    $order_update->save();
+
                     // clear session
                     $request->session()->forget('cart');
                     $request->session()->forget('shipping_addr_id');
