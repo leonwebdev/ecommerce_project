@@ -5,35 +5,55 @@
         <div class="wrapper">
             <!-- Aside start -->
             <aside>
+
+                {{-- Category filter: starts --}}
                 <h3>Categories</h3>
-                <form>
-                    @foreach ($categories as $category)
-                        <div>
-                            <input type="checkbox" onclick="filterByCategory(event, this)" name="{{ $category->title }}"
-                                id="{{ $category->title }}" value="{{ $category->title }}" <?php if (in_array($category->title, $categoryFilter)) {
-                                    echo 'checked';
-                                } ?> />
-                            <label for="{{ $category->title }}">{{ $category->title }}</label>
-                        </div>
-                    @endforeach
-                </form>
+                @if (isset($categories) && !count($categories))
+                    <p>There is no categories available!</p>
+                @else
+                    <form>
+
+                        @foreach ($categories as $category)
+                            <div>
+                                <input type="checkbox" onclick="filterByCategory(event, this)" name="{{ $category->title }}"
+                                    id="{{ $category->title }}" value="{{ $category->title }}" <?php if (in_array($category->title, $categoryFilter)) {
+                                        echo 'checked';
+                                    } ?> />
+                                <label for="{{ $category->title }}">{{ $category->title }}</label>
+                            </div>
+                        @endforeach
+                    </form>
+                @endif
+                {{-- Category filter: end --}}
+
+                {{-- Size filter: start --}}
                 <h3>Sizes</h3>
-                <form>
-                    @foreach ($sizes as $size)
-                        <div>
-                            <input type="checkbox" name="{{ $size->name }}" id="{{ $size->name }}"
-                                onclick="filterBySize(event, this)" value="{{ $size->name }}" <?php if (in_array($size->name, $sizeFilter)) {
-                                    echo 'checked';
-                                } ?> />
-                            <label for="{{ $size->name }}">{{ $size->name }}</label>
-                        </div>
-                    @endforeach
-                </form>
+                @if (isset($sizes) && !count($sizes))
+                    <p>There is no sizes available!</p>
+                @else
+                    <form>
+                        @foreach ($sizes as $size)
+                            <div>
+                                <input type="checkbox" name="{{ $size->name }}" id="{{ $size->name }}"
+                                    onclick="filterBySize(event, this)" value="{{ $size->name }}" <?php if (in_array($size->name, $sizeFilter)) {
+                                        echo 'checked';
+                                    } ?> />
+                                <label for="{{ $size->name }}">{{ $size->name }}</label>
+                            </div>
+                        @endforeach
+                    </form>
+                @endif
+                {{-- Size filter: end --}}
+
+                {{-- Advertisement: start --}}
                 <div class="ads ads-sidebar">
                     <a href="{{ $ad->link }}"><img src="/storage/{{ $ad->image }}" alt="{{ $ad->title }}"></a>
                 </div>
+                {{-- Advertisement: end --}}
+
             </aside>
             <!-- Aside ended -->
+
             <!-- Section start -->
             <section class="list_item">
                 <form action="{{ route('product_list') }}" method="get" autocomplete="off" novalidate class="d-flex">
@@ -41,11 +61,36 @@
                         maxlength="255">&nbsp;
                     <button type="submit">Search</button>
                 </form>
+
+                {{-- Display searched input to user --}}
+                @if ($search)
+                    <div>
+                        <h2>You Searched for: {{ $search }}</h2>
+                    </div>
+                @endif
+
                 <div class="content">
+                    {{-- if no product found --}}
+                    @if (isset($products) && count($products) == 0)
+                        @if ($search)
+                            <h3>There is no product found! Please search with different input.</h3>
+                        @else
+                            <h3>There is no product available!</h3>
+                        @endif
+                    @endif
+
+                    {{-- Product list: start --}}
                     @foreach ($products as $product)
                         <div class="item">
-                            <div class="product_img"> <a href="/product/{{ $product->slug }}"></a>
-                                <img src="/images/item1.jpg" alt="item1">
+                            <div class="product_img">
+                                <a href="/product/{{ $product->slug }}"></a>
+                                {{-- display first available image of product --}}
+                                @if (isset($product->product_media) && count($product->product_media) > 0)
+                                    <img src="{{ asset('/storage/' . $product->product_media[0]->image) }}"
+                                        alt="{{ $product->slug }}">
+                                @endif
+                                {{-- <img src="/images/item1.jpg" alt="item1"> --}}
+
                             </div>
                             <div class="desc">
                                 <p>{{ $product->name }}</p>
@@ -53,12 +98,15 @@
                             </div>
                         </div>
                     @endforeach
+                    {{-- Product list: end --}}
+
                 </div>
 
+                {{-- pagination --}}
                 <div class="pagination-wrapper">
-
                     {!! $products->links('pagination::bootstrap-5') !!}
                 </div>
+
             </section>
             <!-- Section ended -->
         </div>
@@ -84,6 +132,7 @@
         } else {
             url = `${url}?category=${categoryStr}`;
         }
+        // refresh page
         window.location = url;
     }
 
@@ -106,6 +155,7 @@
         } else {
             url = `${url}?size=${sizeStr}`;
         }
+        // refresh page
         window.location = url;
     }
 </script>
