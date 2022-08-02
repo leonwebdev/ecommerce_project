@@ -131,4 +131,23 @@ class UserAddressController extends Controller
             return redirect('/profile#User_address');
         }
     }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $address = UserAddress::find($id);
+
+        if ($address->delete()) {
+            session()->flash('success', 'Address was deleted successfully.');
+            return redirect('/profile');
+        }
+        session()->flash('error', 'There was a problem deleting the Address');
+        return redirect('/profile');
+    }
+
 }
