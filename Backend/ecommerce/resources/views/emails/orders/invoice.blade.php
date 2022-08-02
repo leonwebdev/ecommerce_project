@@ -19,7 +19,7 @@
 
         h1 {
             text-align: center;
-            margin: 3em auto;
+            margin: 2em auto;
         }
 
         h2 {
@@ -96,8 +96,16 @@
             padding-right: 1em;
         }
 
+        .pe-1_5 {
+            padding-right: 1.5em;
+        }
+
         .pm-1 {
             padding-bottom: 1em;
+        }
+
+        .pm-2 {
+            padding-bottom: 2em;
         }
 
         .text-black {
@@ -133,6 +141,10 @@
             margin-bottom: 0.5em;
         }
 
+        .mb-0 {
+            margin-bottom: 0 !important;
+        }
+
         .text-align-right {
             text-align: right;
         }
@@ -164,6 +176,25 @@
         .flex-wrap {
             flex-wrap: wrap;
         }
+
+        .col-4 {
+            width: calc((100% - 8px) / 12 * 4);
+        }
+        .wrap-content{
+            width: min-content;
+        }
+        @media only screen and (max-width: 767px) {
+            #order_history_container .order_container > div{
+                display: block;
+            }
+            .col-4{
+                padding-right: 0;
+                width: 100%;
+            }
+            .wrap-content{
+            width: max-content;
+        }
+        }
     </style>
 </head>
 
@@ -174,16 +205,36 @@
         <p>We really appreciate your patronage. Here is your order invoice, please keep this for your records.</p>
         <div id="order_history_container" class="">
             <div class="order_container">
-                <div class="my-2 mt-4">
-                    <div class="mb-1"><span class="text-black fw-bold">Customer Name:
-                        </span>{{ $user->first_name . ' ' . $user->last_name }}</div>
-                    <div class="mb-1"><span class="text-black fw-bold">Customer Email:
-                        </span>{{ $user->email }}</div>
-                    <div class="mb-1"><span class="text-black fw-bold">Customer Phone:
-                        </span>{{ $user->phone }}</div>
-                    <div class="mb-1"><span class="text-black fw-bold">Payment Info:
-                        </span>CIBC VISA &#42;&#42;&#42;&#42;&#42;3567</div>
-
+                <div class="d-flex">
+                    <div class="my-2 pm-2 pe-1_5 border-grey col-4">
+                        <h3>Company Information</h3>
+                        <div class="mb-0_5"><strong>Uptrend</strong> International Co.,Ltd</div>
+                        <div class="mb-0_5">Unit 2701, 1257 Square Tower, Winnipeg, Manitoba, Canada</div>
+                        <div class="mb-0_5"><span class="text-black fw-bold">R3B 9S7</span></div>
+                        <div class="mb-0_5"><strong>Tel: </strong>&#40;+1&#41; 207-589-1426</div>
+                        <div class="mb-0_5"><strong>Email: </strong>contact@uptrend.com</div>
+                        <div class="mb-0"><strong>Uptrend</strong>.com</div>
+                    </div>
+                    <div class="my-2 pm-2 pe-1_5 border-grey col-4">
+                        <h3>Customer Information</h3>
+                        <div class="mb-0_5"><span class="text-black fw-bold">Name:
+                            </span>{{ $user->first_name . ' ' . $user->last_name }}</div>
+                        <div class="mb-0_5"><span class="text-black fw-bold">Email:
+                            </span>{{ $user->email }}</div>
+                        <div class="mb-0_5"><span class="text-black fw-bold">Phone:
+                            </span>{{ $user->phone }}</div>
+                    </div>
+                    <div class="my-2 pm-2 border-grey col-4">
+                        <h3 class="wrap-content">Order Information</h3>
+                        <div class="mb-0_5"><span class="text-black fw-bold">Order Date:
+                            </span>{{ $order->created_at }} GST</div>
+                        <div class="mb-0_5"><span class="text-black fw-bold">Shipping address:
+                            </span>{{ $order->shipping_address }}</div>
+                        <div class="mb-0_5"><span class="text-black fw-bold">Billing address:
+                            </span>{{ $order->billing_address }}</div>
+                        <div class="mb-0"><span class="text-black fw-bold">Payment Info:
+                            </span>&#42;&#42;&#42;&#42;&#42;{{ $transaction->credit_card_info }}</div>
+                    </div>
                 </div>
                 <div class="product_list overflow-x-scroll">
                     <table style="border-collapse: collapse" class="">
@@ -233,12 +284,6 @@
                             </span>&#36;{{ $order->total }}</div>
                     </div>
                 </div>
-                <div class="mb-1"><span class="text-black fw-bold">Order Date:
-                    </span>{{ $order->created_at }} GST</div>
-                <div class="mb-1"><span class="text-black fw-bold">Shipping address:
-                    </span>{{ $order->shipping_address }}</div>
-                <div class="mb-1"><span class="text-black fw-bold">Billing address:
-                    </span>{{ $order->billing_address }}</div>
             </div>
         </div>
     </div>
