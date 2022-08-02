@@ -43,4 +43,29 @@ class OrderController extends Controller
         return view('/admin/order/index', compact('title', 'orders'));
         
     }
+
+    /**
+     * update function
+     *
+     * @return void
+     */
+    public function update(Request $request, Order $order)
+    {
+        
+        $valid = $request->validate([
+            'id' => 'required|integer',
+            'order_status' => 'required|in:pending,confirmed,delivered,cancelled',
+        ]);
+
+        $order->update($valid);
+
+        if($order->save()) {
+            session()->flash('success', 'Order status was successfully updated'); 
+        } else {
+            session()->flash('error', 'There was a problem updating the Order status');
+        }
+        return redirect()->route('admin_order_list');
+    }
+
+
 }

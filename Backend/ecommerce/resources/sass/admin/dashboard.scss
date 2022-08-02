@@ -52,6 +52,19 @@
     border-bottom: 0.25rem solid #5a5c69 !important;
 }
 
-.collapse .shipping_info > div {
-    margin: 10px 0;
+
+.hiddenRow {
+    padding: 0 !important;
+    .order_status {
+        border: 1px solid #707070;
+        padding: 20px;
+
+        .submit_btn {
+            margin-top: 10px;
+        }
+    }
+}
+
+.collapse .shipping_info {
+    margin: 20px 0;
 }

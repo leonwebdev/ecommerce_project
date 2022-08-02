@@ -90,16 +90,51 @@
                                 {{ $order->shipping_address }}
                             </div>
                         </div>
-                        <div class="status">
+                        <div class="order_status">
                             <h4>Update Order Status</h4>
-                            <a class="btn btn-secondary"
-                                href="{{ route('admin_product_edit', ['product' => $order->id]) }}">Pending</a>
-                            <a class="btn btn-primary"
-                                href="{{ route('admin_product_edit', ['product' => $order->id]) }}">Confirmed</a>
-                            <a class="btn btn-success"
-                                href="{{ route('admin_product_edit', ['product' => $order->id]) }}">Delivered</a>
-                            <a class="btn btn-danger"
-                                href="{{ route('admin_product_edit', ['product' => $order->id]) }}">Cancelled</a>
+                            <form action="{{ route('admin_order_update', $order->id) }}" method="post">
+                                @csrf
+                                @method('PUT')
+
+                                <input type="hidden" name="id" value="{{ $order->id }}" />
+
+                                <!-- Pending -->
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" id="order_{{ $order->id }}_pending" name="order_status" value="pending" 
+                                        @if( $order->order_status == 'pending') checked @endif 
+                                    />
+                                    <label class="form-check-label" for="order_{{ $order->id }}_pending">Pending</label>
+                                </div>
+
+                                <!-- Confirmed -->
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" id="order_{{ $order->id }}_confirmed" name="order_status" value="confirmed" 
+                                    @if( $order->order_status == 'confirmed') checked @endif 
+                                    />
+                                    <label class="form-check-label" for="order_{{ $order->id }}_confirmed">Confirmed</label>
+                                </div>
+
+                                 <!-- Delivered -->
+                                 <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" id="order_{{ $order->id }}_delivered" name="order_status" value="delivered" 
+                                        @if( $order->order_status == 'delivered') checked @endif 
+                                    />
+                                    <label class="form-check-label" for="order_{{ $order->id }}_delivered">Delivered</label>
+                                </div>
+
+                                <!-- Cancelled -->
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" id="order_{{ $order->id }}_cancelled" name="order_status" value="cancelled" 
+                                        @if( $order->order_status == 'cancelled') checked @endif 
+                                    />
+                                    <label class="form-check-label" for="order_{{ $order->id }}_cancelled">Cancelled</label>
+                                </div>
+
+                                <div class="submit_btn">
+                                    <input type="submit" class="btn btn-primary">
+                                </div>
+                                
+                            </form>
                         </div>
                         <table class="table">
                             <thead>

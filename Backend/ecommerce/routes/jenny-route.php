@@ -26,6 +26,9 @@ Route::middleware(['auth', 'admin'])->group(function() {
     // Admin Order Route
     Route::get('/admin/order', [OrderController::class, 'index'])
     ->name('admin_order_list');
+    Route::put('/admin/order/{order}', [OrderController::class, 'update'])
+    ->name('admin_order_update');
+
     // Admin Tax Route
     Route::get('/admin/tax', [TaxController::class, 'index'])
     ->name('adminTaxIndex');
