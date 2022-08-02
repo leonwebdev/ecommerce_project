@@ -89,7 +89,7 @@
                                     <img src="{{ asset('/storage/' . $product->product_media[0]->image) }}"
                                         alt="{{ $product->slug }}">
                                 @else
-                                    <img src="/images/item1.jpg" alt="item1">
+                                    <img src="/images/product-image-not-found.jpg" alt="product-image-not-found">
                                 @endif
                             </div>
                             <div class="desc">
