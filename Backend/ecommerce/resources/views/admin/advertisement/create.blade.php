@@ -2,16 +2,16 @@
 
 @section('content')
 <div class="row justify-content-center">
-        <div class="col-8">
+        <div class="col-md-8">
             <div class="card mb-4">
                 <div class="card-header">
                     <h2 class="mb-0">Add Advertisement</h2>
                 </div>
-              
+
                 <div class="card-body">
                 {{-- {{ $errors }} --}}
                 <form  enctype="multipart/form-data" id="create" action="/admin/advertisement" method="post">
-                @csrf 
+                @csrf
                 <div class="mb-3">
                     <label for="image" class="form-label">Image</label>
                     <input type="file" name="image" class="form-control" id="image" />
@@ -65,5 +65,5 @@
 
         </div>
 </div>
-    
+
 @endsection
