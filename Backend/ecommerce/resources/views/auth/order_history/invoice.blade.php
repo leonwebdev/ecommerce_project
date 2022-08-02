@@ -184,6 +184,21 @@
         .col-4 {
             width: calc((100% - 8px) / 12 * 4);
         }
+        .wrap-content{
+            width: min-content;
+        }
+        @media only screen and (max-width: 767px) {
+            #order_history_container .order_container > div{
+                display: block;
+            }
+            .col-4{
+                padding-right: 0;
+                width: 100%;
+            }
+            .wrap-content{
+            width: max-content;
+        }
+        }
     </style>
 </head>
 
@@ -214,9 +229,7 @@
                             </span>{{ $user->phone }}</div>
                     </div>
                     <div class="my-2 pm-2 border-grey col-4">
-                        <h3>
-                            <div>Order</div>Information
-                        </h3>
+                        <h3 class="wrap-content">Order Information</h3>
                         <div class="mb-0_5"><span class="text-black fw-bold">Order Date:
                             </span>{{ $order->created_at }} GST</div>
                         <div class="mb-0_5"><span class="text-black fw-bold">Shipping address:

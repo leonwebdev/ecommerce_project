@@ -46,6 +46,7 @@
                                             @endforeach
                                         </tbody>
                                     </table>
+                                </div>
                                     <div class="d-flex justify-content-end my-2">
                                         <div>
                                             <div class="mb-0_5 text-align-right"><span class="text-black fw-bold">GST:
@@ -76,7 +77,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
                             </div>
                         @endif
                     </div>

@@ -67,25 +67,15 @@ class ProfileController extends Controller
                     'regex:/^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/',
                 ],
                 'email' => ['required', 'string', 'email', 'min:5', 'max:255', 'unique:users,email,' . $id,],
-                'password' => [
-                    'nullable', 'string', 'min:8', 'max:255', 'confirmed',
-                    'regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[\W]).*$/',
-                ],
                 'terms' => ['required'],
             ],
             [
-                'password.regex' => 'Password must include at least one Capital character, one lowercase character, one digit, one special character. Length between 8-255',
                 'terms.required' => 'Please check here to accept our terms and conditions to Update.',
             ]
         );
         // var_dump($valid);
         // var_dump(User::find($id)->password);
         // die;
-        if (is_null($valid['password'])) {
-            $valid['password'] = User::find($id)->password;
-        } else {
-            $valid['password'] = Hash::make($valid['password']);
-        }
         // User::find($id)->update($valid);
         if (User::find($id)->update($valid)) {
             session()->flash('success', 'User information was successfully updated.');
