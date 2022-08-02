@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="row justify-content-center">
-        <div class="col-8">
+        <div class="col-md-8">
             <div class="card mb-4">
                 <div class="card-header">
                     <h2 class="mb-0">Add Category</h2>
@@ -10,7 +10,7 @@
                 <div class="card-body">
                 {{-- {{ $errors }} --}}
                 <form  enctype="multipart/form-data" id="create" action="/admin/category" method="post">
-                @csrf 
+                @csrf
                 <div class="mb-3">
                     <label for="title" class="form-label">Title</label>
                     <input type="text" name="title" class="form-control" id="title" value="{{ old('title') }}" />
@@ -34,5 +34,5 @@
 
         </div>
 </div>
-    
+
 @endsection

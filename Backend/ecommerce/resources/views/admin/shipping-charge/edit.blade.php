@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="row justify-content-center">
-  <div class="col-8">
+  <div class="col-md-8">
       <div class="card mb-4">
         <div class="card-header">
             <h2 class="mb-0">Edit Shipping Charge</h2>
@@ -10,7 +10,7 @@
         <div class="card-body">
             {{-- {{ $errors }} --}}
           <form  enctype="multipart/form-data" id="edit" action="/admin/shipping-charge/{{ $shippingcharge->id }}" method="post">
-              @csrf 
+              @csrf
               @method('PUT')
               <input type="hidden" name="id" value="{{ $shippingcharge->id }}" />
               <div class="mb-3">
@@ -42,5 +42,5 @@
       </div>
   </div>
 </div>
-       
+
 @endsection

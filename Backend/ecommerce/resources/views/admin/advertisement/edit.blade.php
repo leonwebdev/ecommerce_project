@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="row justify-content-center">
-  <div class="col-8">
+  <div class="col-md-8">
       <div class="card mb-4">
         <div class="card-header">
             <h2 class="mb-0">Edit Advertisement</h2>
@@ -10,13 +10,13 @@
         <div class="card-body">
             {{-- {{ $errors }} --}}
           <form  enctype="multipart/form-data" id="edit" action="/admin/advertisement/{{ $advertisement->id }}" method="post">
-              @csrf 
+              @csrf
               @method('PUT')
               <input type="hidden" name="id" value="{{ $advertisement->id }}" />
               <div class="mb-3">
                 <label for="image" class="form-label">Image</label>
                 @if($advertisement->image)
-                <img src="/storage/{{ $advertisement->image }}" alt="{{ $advertisement->title }}" 
+                <img src="/storage/{{ $advertisement->image }}" alt="{{ $advertisement->title }}"
                     style="height: 100px;width:auto"/><br />
                 @endif
                 <input type="file" name="image" class="form-control" id="image" />
@@ -41,7 +41,7 @@
               <div class="mb-3">
                 <label for="pages" class="form-label">Select the page</label>
                 <select class="form-select" name="pages" aria-label="Default select example">
-                
+
                         @foreach($pages as $page)
                         <option @if(old('page', $page)==$advertisement->pages) selected @endif value="{{$page}}">{{$page}}</option>
                         @endforeach
@@ -53,7 +53,7 @@
               <div class="mb-3">
                 <label for="area" class="form-label">Select the area</label>
                 <select class="form-select" name="area" aria-label="Default select example">
-                
+
                         @foreach($area as $areaa)
                         <option @if(old('areaa', $areaa)==$advertisement->area) selected @endif value="{{$areaa}}">{{$areaa}}</option>
                         @endforeach
@@ -71,6 +71,6 @@
       </div>
   </div>
 </div>
-    
-    
+
+
 @endsection
