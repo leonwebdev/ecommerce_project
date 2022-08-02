@@ -40,11 +40,9 @@ main {
         width: 100%;
     }
 
-
     div.content {
         padding: 0;
     }
-
 
 }
 
@@ -62,11 +60,9 @@ main {
     overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
 }
 
-
-    .content {
-        padding: 0 20px;
-    }
-
+.content {
+    padding: 0 20px;
+}
 
 .header_bar {
     display: flex;
