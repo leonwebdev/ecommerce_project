@@ -63,7 +63,7 @@
                 </form>
 
                 {{-- Display searched input to user --}}
-                @if ($search)
+                @if (isset($search) && $search)
                     <div>
                         <h2>You Searched for: {{ $search }}</h2>
                     </div>
@@ -72,7 +72,7 @@
                 <div class="content">
                     {{-- if no product found --}}
                     @if (isset($products) && count($products) == 0)
-                        @if ($search)
+                        @if (isset($search) && $search)
                             <h3>There is no product found! Please search with different input.</h3>
                         @else
                             <h3>There is no product available!</h3>
