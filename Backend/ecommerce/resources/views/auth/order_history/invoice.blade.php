@@ -5,6 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <title>Uptrend | {{ $title }}</title>
     <style>
         body {
             font-family: Arial, Helvetica, sans-serif;
@@ -285,23 +289,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="container footer">
-        <div class="d-flex flex-wrap justify-content-space-between mx-2 mb-2 mt-1">
-            <p class="small mt-0 pe-1"><a href="#">Privacy</a></p>
-            <p class="small mt-0 pe-1"><a href="#">Email Preference</a></p>
-            <p class="small mt-0 pe-1"><a href="#">Terms &amp; Conditions</a></p>
-            <p class="small mt-0 pe-1"><a href="#">Unsubscribe</a></p>
-            <p class="small mt-0 pe-1"><a href="#">Help Center</a></p>
-        </div>
-        <div class="mx-2">
-            <p class="small"><strong>Uptrend</strong> International Co.,Ltd</p>
-            <p class="small">Unit 2701, 1257 Square Tower, </p>
-            <p class="small">Winnipeg, Manitoba, Canada</p>
-            <p class="small fw-bold">R3B 9S7</p>
-            <p class="small">&#40;+1&#41; 207-589-1426</p>
-            <p class="small"><a href="https://team3.uwpace.ca"><strong>Uptrend</strong>.com</a></p>
         </div>
     </div>
 </body>

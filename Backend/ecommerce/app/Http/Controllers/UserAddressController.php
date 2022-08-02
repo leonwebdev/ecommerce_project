@@ -67,7 +67,12 @@ class UserAddressController extends Controller
         $user_address = UserAddress::find($id);
         $user = User::find($user_address->user_id);
         $valid['default_address_id'] = $id;
-        $user->update($valid);
+
+        if ($user->update($valid)) {
+            session()->flash('success', 'Default address was successfully updated.');
+        } else {
+            session()->flash('error', 'There was a problem updating the Default address');
+        }
         return redirect('/profile#User_address');
     }
 
@@ -91,7 +96,7 @@ class UserAddressController extends Controller
     public function store(Request $request)
     {
 
-        
+
         $valid = $request->validate(
             [
                 'street' => ['required', 'string', 'min:3', 'max:255'],

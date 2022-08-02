@@ -4,6 +4,7 @@ namespace App\Mail;
 
 use App\Models\User;
 use App\Models\Order;
+use App\Models\Transaction;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
@@ -39,10 +40,12 @@ class Invoice extends Mailable
     {
         $order = $this->order;
         $user = User::find($order->user_id);
+        $transaction = Transaction::where('order_id', '=', $order->id)->first();
         return $this->view('emails.orders.invoice')
             ->with([
                 'order' => $order,
                 'user' => $user,
+            'transaction' => $transaction,
             ]);
     }
 }
