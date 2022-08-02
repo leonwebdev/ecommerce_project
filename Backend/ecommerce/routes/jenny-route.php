@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\Admin\TaxController;
+use App\Http\Controllers\Admin\OrderController;
 
 Route::get('/cart', [CartController::class, 'index'])->name('cartIndex');
 Route::get('/cart/add/{id}', [CartController::class, 'create'])->name('createCart');
@@ -22,6 +23,9 @@ Route::middleware(['auth'])->group(function() {
 
 Route::middleware(['auth', 'admin'])->group(function() {
 
+    // Admin Order Route
+    Route::get('/admin/order', [OrderController::class, 'index'])
+    ->name('admin_order_list');
     // Admin Tax Route
     Route::get('/admin/tax', [TaxController::class, 'index'])
     ->name('adminTaxIndex');

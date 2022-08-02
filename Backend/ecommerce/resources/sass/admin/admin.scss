@@ -83,5 +83,10 @@ table td form {
     display: inline-block;
 }
 
+.hiddenRow {
+    padding: 0 !important;
+
+}
+
 // pages
 @import "dashboard.scss";
