@@ -88,12 +88,12 @@
                                 @if (isset($product->product_media) && count($product->product_media) > 0)
                                     <img src="{{ asset('/storage/' . $product->product_media[0]->image) }}"
                                         alt="{{ $product->slug }}">
+                                @else
+                                    <img src="/images/item1.jpg" alt="item1">
                                 @endif
-                                {{-- <img src="/images/item1.jpg" alt="item1"> --}}
-
                             </div>
                             <div class="desc">
-                                <p>{{ $product->name }}</p>
+                                <a href="/product/{{ $product->slug }}">{{ $product->name }}</a>
                                 <div class="price">${{ number_format($product->price, 2) }} CAD</div>
                             </div>
                         </div>
