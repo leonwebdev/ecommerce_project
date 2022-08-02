@@ -5,9 +5,9 @@
         <!-- Banner -->
         <div class="banner">
             @foreach ($ads as $ad)
-            <div class="banner_item" style="background-image: url('/storage/{{ $ad->image }}')">
-                <a href="{{ $ad->link }}"></a>
-            </div>
+                <div class="banner_item" style="background-image: url('/storage/{{ $ad->image }}')">
+                    <a href="{{ $ad->link }}"></a>
+                </div>
             @endforeach
         </div><!-- End Banner -->
 
@@ -54,11 +54,16 @@
                                         <div class="featured_item">
                                             <div class="product_img">
                                                 <a href="/product/{{ $item->slug }}">
-                                                    <img src="/images/item1.jpg" alt="item" />
+                                                    @if (isset($item->product_media) && count($item->product_media) > 0)
+                                                        <img src="{{ asset('/storage/' . $item->product_media[0]->image) }}"
+                                                            alt="{{ $item->slug }}">
+                                                    @else
+                                                        <img src="/images/item1.jpg" alt="item1">
+                                                    @endif
                                                 </a>
                                             </div>
                                             <div class="title">
-                                                {{ $item->name }}
+                                                <a href="/product/{{ $item->slug }}"> {{ $item->name }}</a>
                                             </div>
                                             <div class="price">${{ $item->price }} CAD</div>
                                         </div>
