@@ -37,10 +37,27 @@
                                     <div class="width-max-content pe-0_5"><a
                                             href="{{ route('address-edit', ['user_address' => $address->id]) }}"
                                             class="lh-btn">Edit</a></div>
+                                    <div class="width-max-content pe-0_5">
+                                        @if ($address->is_default_address())
+                                            <div class="width-max-content flex-grow-1">
+                                                <a href="" class="lh-btn-outline" style="color: rgb(181, 182, 185);border: 1px solid rgb(189, 189, 192);"
+                                                    onclick="event.preventDefault();">Delete</a>
+                                            </div>
+                                        @else
+                                            <form method="post" action="/address/{{ $address->id }}"
+                                                style="width: min-content">
+                                                @csrf
+                                                @method('DELETE')
+                                                <input type="hidden" name="id" value="{{ $address->id }}" />
+                                                <button onclick="return confirm('Confirm delete this?')"
+                                                    class="lh-btn-delete">Delete</button>
+                                            </form>
+                                        @endif
+                                    </div>
                                     @if ($address->is_default_address())
                                         <div class="width-max-content flex-grow-1">
                                             <a href="" class="lh-btn-outline"
-                                                onclick="event.preventDefault();">Default Address</a>
+                                                onclick="event.preventDefault();">Default Addr.</a>
                                         </div>
                                     @else
                                         <div class="width-max-content flex-grow-1">

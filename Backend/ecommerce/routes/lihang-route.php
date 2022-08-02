@@ -24,6 +24,7 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/profile/{id}', [ProfileController::class, 'update']);
     Route::get('/address/edit/{user_address}', [UserAddressController::class, 'edit'])->name('address-edit');
     Route::put('/address/{id}', [UserAddressController::class, 'update']);
+    Route::delete('/address/{id}', [UserAddressController::class, 'destroy']);
     Route::get('/address/create', [UserAddressController::class, 'create'])->name('address_add');
     Route::post('/address', [UserAddressController::class, 'store']);
     Route::put('/default-address/{id}', [UserAddressController::class, 'updateDefaultAddress']);
