@@ -112,22 +112,49 @@ function homeFeaturedSlider() {
  * Product Detail page product images
  */
 function productImageSlider() {
-    $('.product-images').slick({
+    $('.product-media-slider').slick({
         slidesToShow: 1,
         slidesToScroll: 1,
-        arrows: true,
+        arrows: false,
         fade: true,
-        asNavFor: '.slider-nav'
+        asNavFor: '.product-media-slider-nav'
     });
-    $('.product-images-nav').slick({
+    $('.product-media-slider-nav').slick({
         slidesToShow: 3,
         slidesToScroll: 1,
-        asNavFor: '.slider-for',
-        dots: true,
+        asNavFor: '.product-media-slider',
+        dots: false,
         centerMode: true,
         focusOnSelect: true,
-        arrows: true,
-        lazyLoad: 'ondemand',
+        responsive: [
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 3,
+                    infinite: false,
+                    dots: false
+                }
+            },
+            {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 2,
+                    infinite: false,
+
+                }
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    infinite: false,
+
+                }
+            }
+        ]
     });
 }
 
@@ -135,12 +162,12 @@ function productImageSlider() {
  * Checkout page shipping address information effects 
  */
 function checkoutAddrEffect() {
-    $('.cart #select_addr_btn').click(function(e) {
+    $('.cart #select_addr_btn').click(function (e) {
         e.preventDefault();
         $('.cart .address_list').slideDown();
     });
 
-    $('.cart #create_addr_btn').click(function(e) {
+    $('.cart #create_addr_btn').click(function (e) {
         e.preventDefault();
         $('.cart .address_list').slideUp();
         $('.cart .address_form').slideDown();

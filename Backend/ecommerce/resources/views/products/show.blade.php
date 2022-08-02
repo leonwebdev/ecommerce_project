@@ -7,13 +7,34 @@
             </div>
             <div class="content">
                 <div class="left">
-                    <div class="product_image">
-                        <div class="slider product-images">
-                            <div>
-                                <img src="/images/item1.jpg" alt="item1">
+                    <div class="product-media-slider">
+                        {{-- @if (isset($product->product_media) && count($product->product_media) > 0)
+                            <img src="{{ asset('/storage/' . $product->product_media[0]->image) }}"
+                                alt="{{ $product->slug }}">
+                        @else
+                            <img src="/images/item1.jpg" alt="item1">
+                        @endif --}}
+                        @foreach ($product->product_media as $index => $item)
+                            <div class="media-item">
+                                <img src="{{ asset('/storage/' . $item->image) }}"
+                                    alt="{{ $product->name }}_{{ $index }}" />
                             </div>
-                        </div>
+                        @endforeach
+
                     </div>
+                    <div class="product-media-slider-nav">
+                        @foreach ($product->product_media as $index => $item)
+                            <div class="product_media_nav">
+                                <img src="{{ asset('/storage/' . $item->image) }}"
+                                    alt="{{ $product->name }}_nav_{{ $index }}" width="80px" height="auto" />
+                            </div>
+                        @endforeach
+
+                    </div>
+                    {{-- <div class="product_image">
+                                <img src="/images/item1.jpg" alt="item1">
+                        </div>
+                    </div> --}}
                 </div>
                 <div class="right">
                     <div class="product_desc">
@@ -30,7 +51,8 @@
                         </div>
                         <div class="color"><strong>Color: </strong> {{ $product->color }}</div>
                         <div class="size"><strong>Size: </strong> {{ $product->size->name }}</div>
-                        <div class="qutanity"><strong>Available Quantity: </strong> {{ $product->quantity }}</div>
+                        <div class="qutanity"><strong>Available Quantity: </strong> {{ $product->quantity }}
+                        </div>
                         @if ($product->quantity == 0)
                             <div class="availability">
                                 <img src="/images/icon-unavailable.svg" alt="unavailable icon" width="17"
