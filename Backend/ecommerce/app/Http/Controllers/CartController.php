@@ -38,7 +38,7 @@ class CartController extends Controller
         $disable_checkout = false;
 
         if($session) {
-            $products = Product::whereIn('id', array_keys($session))->with('size')->get();
+            $products = Product::whereIn('id', array_keys($session))->with(['size', 'product_media'])->get();
 
             foreach($products as $product) {
                 // calc cart summary

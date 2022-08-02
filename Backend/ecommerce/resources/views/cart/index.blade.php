@@ -17,7 +17,14 @@
                     @foreach($products as $product)
                     <div class="cart_item">
                         <div class="product_image col col-2">
-                            <a href="/product/{{ $product->slug }}"><img src="/images/item1.jpg" alt="item 1" /></a>
+                            <a href="/product/{{ $product->slug }}">
+                                @if (isset($product->product_media) && count($product->product_media) > 0)
+                                    <img src="{{ asset('/storage/' . $product->product_media[0]->image) }}"
+                                        alt="{{ $product->slug }}">
+                                @else
+                                    <img src="/images/product-image-not-found.jpg" alt="product-image-not-found">
+                                @endif
+                            </a>
                         </div>
                         
                         <div class="desc col col-10">
