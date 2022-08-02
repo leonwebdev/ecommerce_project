@@ -63,7 +63,7 @@
                 </form>
 
                 {{-- Display searched input to user --}}
-                @if ($search)
+                @if (isset($search) && $search)
                     <div>
                         <h2>You Searched for: {{ $search }}</h2>
                     </div>
@@ -72,7 +72,7 @@
                 <div class="content">
                     {{-- if no product found --}}
                     @if (isset($products) && count($products) == 0)
-                        @if ($search)
+                        @if (isset($search) && $search)
                             <h3>There is no product found! Please search with different input.</h3>
                         @else
                             <h3>There is no product available!</h3>
@@ -88,12 +88,12 @@
                                 @if (isset($product->product_media) && count($product->product_media) > 0)
                                     <img src="{{ asset('/storage/' . $product->product_media[0]->image) }}"
                                         alt="{{ $product->slug }}">
+                                @else
+                                    <img src="/images/item1.jpg" alt="item1">
                                 @endif
-                                {{-- <img src="/images/item1.jpg" alt="item1"> --}}
-
                             </div>
                             <div class="desc">
-                                <p>{{ $product->name }}</p>
+                                <a href="/product/{{ $product->slug }}">{{ $product->name }}</a>
                                 <div class="price">${{ number_format($product->price, 2) }} CAD</div>
                             </div>
                         </div>
