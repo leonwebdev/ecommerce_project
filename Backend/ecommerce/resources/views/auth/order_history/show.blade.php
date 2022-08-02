@@ -6,7 +6,7 @@
             <div class="wrapper d-flex">
                 <aside class="width-12 p-e-2 border-right d-block m-e-0">
                     <a href="{{ route('profile') }}" class="d-block btn btn_white_no_border lh">User Info</a>
-                    <a href="#" class="d-block btn btn_black bg-black fw-bold">Order History</a>
+                    <a href="{{ route('order-history') }}" class="d-block btn btn_black bg-black fw-bold">Order History</a>
                 </aside>
                 <div class="content form" id="profile">
                     <h1 class="my-2">{{ $title }}</h1>
@@ -21,7 +21,7 @@
                                     <div><a href="" class="lh-btn no-hover text-transform-capitalize"
                                             onclick="event.preventDefault();">{{ $order->order_status }}</a></div>
                                 </div>
-                                <div class="product_list">
+                                <div class="product_list overflow-x-scroll">
                                     <table style="border-collapse: collapse">
                                         <thead>
                                             <tr>
@@ -68,9 +68,14 @@
                                         </span>{{ $order->shipping_address }}</div>
                                     <div class="mb-0_5"><span class="text-black fw-bold">Billing address:
                                         </span>{{ $order->billing_address }}</div>
-                                    <div class="mb-0_5"><span class="text-black fw-bold">Payment Info:
-                                        </span>CIBC VISA &#42;&#42;&#42;&#42;&#42;3567</div>
-
+                                    <div class="d-flex justify-content-end my-2">
+                                        <div>
+                                            <div class="text-align-right">
+                                                <a href="{{ route('order-history-invoice', ['id' => $order->id]) }}"
+                                                    class="lh-btn fs-1" target="_blank">View Invoice</a>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         @endif

@@ -317,10 +317,7 @@ a#shopping_now {
 }
 
 .order_container {
-    border-bottom: 1px solid rgba(92, 92, 92, 0.382);
     padding-bottom: 1rem;
-    // font-family: Arial, Helvetica, sans-serif;
-    // padding-right: 1px;
 }
 
 .min-width-20 {
@@ -368,22 +365,26 @@ a#shopping_now {
     background-color: #f8d7da;
 }
 
-.wrapper-alert{
+.wrapper-alert {
     padding: 0 20px;
 }
 
-.lh-btn.no-hover.text-transform-capitalize.pending{
+.lh-btn.no-hover.text-transform-capitalize.pending {
     background-color: rgb(6, 87, 122);
 }
 
-.lh-btn.no-hover.text-transform-capitalize.confirmed{
+.lh-btn.no-hover.text-transform-capitalize.confirmed {
     background-color: rgb(7, 101, 18);
 }
 
-.lh-btn.no-hover.text-transform-capitalize.delivered{
+.lh-btn.no-hover.text-transform-capitalize.delivered {
     background-color: rgb(135, 103, 8);
 }
 
-.lh-btn.no-hover.text-transform-capitalize.cancelled{
+.lh-btn.no-hover.text-transform-capitalize.cancelled {
     background-color: rgb(148, 7, 7);
+}
+
+.overflow-x-scroll {
+    overflow-x: scroll;
 }

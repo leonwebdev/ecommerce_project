@@ -23,5 +23,30 @@ class TransactionTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+        DB::table('transactions')->insert([
+            'order_id' => 2,
+            'response' => '1',
+            'status' => '200',
+            'credit_card_info' => '1158',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('transactions')->insert([
+            'order_id' => 3,
+            'response' => '1',
+            'status' => '200',
+            'credit_card_info' => '4568',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('transactions')->insert([
+            'order_id' => 4,
+            'response' => '1',
+            'status' => '200',
+            'credit_card_info' => '6657',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
     }
 }

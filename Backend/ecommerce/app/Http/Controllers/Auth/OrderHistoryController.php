@@ -8,6 +8,7 @@ use App\Models\UserAddress;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
+use App\Models\Transaction;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Auth\Events\Registered;
@@ -58,4 +59,16 @@ class OrderHistoryController extends Controller
 
         return view('auth.order_history.show', compact('title', 'order', 'user'));
     }
+    public function invoice($id)
+    {
+        $title = "Invoice";
+
+        $order = Order::find($id);
+        $user = User::find($order->user_id);
+        $transaction = Transaction::where('order_id', '=', $id)->first();
+        // var_dump($transaction);
+        // die;
+        return view('auth.order_history.invoice', compact('title', 'order', 'user', 'transaction'));
+    }
+
 }
