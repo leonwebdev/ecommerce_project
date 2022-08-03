@@ -54,7 +54,7 @@ class UserController extends Controller
         // echo $users;
         // var_dump($users);
         // die;
-        return view('admin.user.index', compact('users', 'title'));
+        return view('admin.user.index', compact('users', 'title', 'search'));
     }
 
     /**
