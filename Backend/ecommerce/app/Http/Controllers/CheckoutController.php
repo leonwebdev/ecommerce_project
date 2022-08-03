@@ -311,7 +311,7 @@ class CheckoutController extends Controller
         if($request->input('card_type') == 'amex') {
             $valid = $request->validate(
                 [
-                    'card_holder_name' => ['required', 'string',  'max:255'],
+                    'card_holder_name' => ['required', 'string', 'max:255'],
                     'card_number' => ['required', 'numeric', 'digits:15'],
                     'card_cvv' => ['required', 'numeric', 'digits:3'],
                     'card_expiry' => ['required', 'string', 'max:7'],
@@ -321,7 +321,7 @@ class CheckoutController extends Controller
         } else {
             $valid = $request->validate(
                 [
-                    'card_holder_name' => ['required', 'string',  'max:255'],
+                    'card_holder_name' => ['required', 'string', 'max:255'],
                     'card_number' => ['required', 'numeric', 'digits:16'],
                     'card_cvv' => ['required', 'numeric', 'digits:3'],
                     'card_expiry' => ['required', 'string', 'max:7'],
@@ -349,80 +349,88 @@ class CheckoutController extends Controller
             $billing_address = $shipping_address;
         }
 
-        $order = new Order();
-        $order->user_id = Auth::user()->id;
-        $order->gst = $summary['taxes']['gst'];
-        $order->pst = $summary['taxes']['pst'];
-        $order->hst = $summary['taxes']['hst'];
-        $order->sub_total = $summary['subtotal'];
-        $order->shipping_charge = $summary['shipping_fee'];
-        $order->total = $summary['total'];
-        $order->order_status = 'pending';
-        $order->shipping_address = $shipping_address;
-        $order->billing_address = $billing_address;
+        // if order has been placed
+        $latest_order_id = $request->session()->get('latest_order_id') ?? null;
 
-        if($order->save()) {
-            // ===== Update OrderProduct table =====
-            $cart = $request->session()->get('cart');
-            
-            foreach($cart as $key => $qty) {
+        if($latest_order_id) {
+
+            $request->session()->forget('latest_order_id');
+
+            // go for transaction directly
+            $response = Helper::processTransaction($valid, $summary['total'], $latest_order_id);
+
+            $result = Helper::storeTransaction($request, $latest_order_id, $valid['card_number'], $response);
+
+            if($result) {
+                // redirect to invoice
+                session()->flash('success', 'Thank you for your order!');
+
+                return redirect()->route('order-history-detail', ['id' => $latest_order_id]);
+            } else {
+                session()->flash('error', 'Credit card information incorrect. Please input again.');
                 
-                $product = Product::where('id', $key)->with('size')->first();
-
-                // update order_product table
-                $order_product = new OrderProduct();
-                $order_product->order_id = $order->id;
-                $order_product->product_id = $key;
-                $order_product->unit_price = $product->price;
-                $order_product->quantity = $qty;
-                $order_product->line_price = floatval($product->price) * $qty;
-                $order_product->product_name = $product->name;
-                $order_product->size = $product->size->name;
-
-                $order_product->save();
-
-                // save product quantity
-                $product->quantity = intval($product->quantity) - intval($qty);
-                $product->save();
+                return redirect()->route('showCreditCardForm');
             }
 
-            // ==== transaction start ====
-            $response = Helper::processTransaction($valid, $summary['total'], $order->id);
+        } else {
+            // start from placing order -> order_product -> transaction
+            $order = new Order();
+            $order->user_id = Auth::user()->id;
+            $order->gst = $summary['taxes']['gst'];
+            $order->pst = $summary['taxes']['pst'];
+            $order->hst = $summary['taxes']['hst'];
+            $order->sub_total = $summary['subtotal'];
+            $order->shipping_charge = $summary['shipping_fee'];
+            $order->total = $summary['total'];
+            $order->order_status = 'pending';
+            $order->shipping_address = $shipping_address;
+            $order->billing_address = $billing_address;
 
-            if( $response->transaction_response->response_code == 1) {
-                // success
-                $transaction = new Transaction();
-                $transaction->order_id = $order->id;
-                $transaction->response = $response->transaction_response->response_code;
-                $transaction->status = "200";
-                $transaction->credit_card_info = substr((string) $valid['card_number'], -4);
+            if($order->save()) {
+                // ===== Update OrderProduct table =====
+                $cart = $request->session()->get('cart');
+                
+                foreach($cart as $key => $qty) {
+                    
+                    $product = Product::where('id', $key)->with('size')->first();
 
-                if($transaction->save()) {
+                    // update order_product table
+                    $order_product = new OrderProduct();
+                    $order_product->order_id = $order->id;
+                    $order_product->product_id = $key;
+                    $order_product->unit_price = $product->price;
+                    $order_product->quantity = $qty;
+                    $order_product->line_price = floatval($product->price) * $qty;
+                    $order_product->product_name = $product->name;
+                    $order_product->size = $product->size->name;
 
-                    // update order status in order table
-                    $order_update = Order::find($order->id);
-                    $order_update->order_status = 'confirmed';
-                    $order_update->save();
+                    $order_product->save();
 
-                    // clear session
-                    $request->session()->forget('cart');
-                    $request->session()->forget('shipping_addr_id');
-                    $request->session()->forget('summary');
+                    // save product quantity
+                    $product->quantity = intval($product->quantity) - intval($qty);
+                    $product->save();
+                }
 
+                // ======= transaction start =======
+                $response = Helper::processTransaction($valid, $summary['total'], $order->id);
+
+                $result = Helper::storeTransaction($request, $order->id, $valid['card_number'], $response);
+
+                if($result) {
                     // redirect to invoice
                     session()->flash('success', 'Thank you for your order!');
                     return redirect()->route('order-history-detail', ['id' => $order->id]);
-                }
-                
-            } else {
+                } else {
+                    session()->flash('error', 'Credit card information incorrect. Please input again.');
 
-                // failed <- response_code == 2
-                session()->flash('error', 'Error occurred when processing credit card payment, please try again.');
-                return redirect()->route('showCreditCardForm');
+                    return redirect()->route('showCreditCardForm');
+                }
+
+            } else {
+                session()->flash('error', 'There is error processing the order. Please try again later, or contact our customer service. Sorry for the inconvenience caused.');
+                return redirect()->route('cartIndex');
             }
-        } else {
-            session()->flash('error', 'There is error processing the order. Please try again later, or contact our customer service. Sorry for the inconvenience caused.');
-            return redirect()->route('cartIndex');
         }
+        
     }
 }
