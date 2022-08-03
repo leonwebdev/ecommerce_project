@@ -20,42 +20,49 @@
         </div>
     </div>
 
-
-    <!-- List Tables -->
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Province</th>
-                <th scope="col">Province Short</th>
-                <th scope="col">GST</th>
-                <th scope="col">PST</th>
-                <th scope="col">HST</th>
-                <th scope="col">Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($taxes as $tax)
-                <tr scope="row">
-                    <td>{{ $tax->id }}</td>
-                    <td>{{ $tax->province }}</td>
-                    <td>{{ $tax->province_short }}</td>
-                    <td>{{ $tax->gst }}</td>
-                    <td>{{ $tax->pst }}</td>
-                    <td>{{ $tax->hst }}</td>
-                    <td><a href="{{ route('adminTaxEdit', $tax->id) }}" class="btn btn-info">Edit</a>
-                        <form method="post" action="{{ route('adminTaxDestroy', $tax->id) }}">
-                            @csrf
-                            @method('DELETE')
-                            <input type="hidden" name="id" value="{{ $tax->id }}" />
-                            <button class="btn btn-danger"
-                                onclick="return confirm('Do you really want to delete the tax of {{ $tax->province }}?')">Delete</button>
-                        </form>
-                    </td>
+    @if (isset($taxes) && !count($taxes))
+        @if (isset($search) && $search)
+            <h3 class="py-5 text-center"> Sorry, we could not find any taxes matching your request!</h3>
+        @else
+            <h3 class="py-5 text-center"> There no data available! </h3>
+        @endif
+    @else
+        <!-- List Tables -->
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Province</th>
+                    <th scope="col">Province Short</th>
+                    <th scope="col">GST</th>
+                    <th scope="col">PST</th>
+                    <th scope="col">HST</th>
+                    <th scope="col">Actions</th>
                 </tr>
-            @endforeach
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach ($taxes as $tax)
+                    <tr scope="row">
+                        <td>{{ $tax->id }}</td>
+                        <td>{{ $tax->province }}</td>
+                        <td>{{ $tax->province_short }}</td>
+                        <td>{{ $tax->gst }}</td>
+                        <td>{{ $tax->pst }}</td>
+                        <td>{{ $tax->hst }}</td>
+                        <td><a href="{{ route('adminTaxEdit', $tax->id) }}" class="btn btn-info">Edit</a>
+                            <form method="post" action="{{ route('adminTaxDestroy', $tax->id) }}">
+                                @csrf
+                                @method('DELETE')
+                                <input type="hidden" name="id" value="{{ $tax->id }}" />
+                                <button class="btn btn-danger"
+                                    onclick="return confirm('Do you really want to delete the tax of {{ $tax->province }}?')">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    @endif
     <div class="px-3">
         {!! $taxes->links('pagination::bootstrap-5') !!}
     </div>

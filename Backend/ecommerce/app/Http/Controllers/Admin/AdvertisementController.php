@@ -8,7 +8,7 @@ use App\Http\Controllers\Controller;
 
 class AdvertisementController extends Controller
 {
-   /**
+    /**
      * Index function
      *
      * @return void
@@ -18,14 +18,14 @@ class AdvertisementController extends Controller
         $title = 'Admin | Advertisement';
         $search = $request->query('search');
         if ($search) {
-            $advertisements = Advertisement::latest()->where('title','LIKE','%'.$search."%")->paginate(10);
+            $advertisements = Advertisement::latest()->where('title', 'LIKE', '%' . $search . "%")->paginate(10);
         } else {
             $advertisements = Advertisement::latest()->paginate(10);
         }
 
-        return view('/admin/advertisement/index', compact('advertisements','title'));
+        return view('/admin/advertisement/index', compact('advertisements', 'title', 'search'));
     }
-     /**
+    /**
      * create function
      *
      * @return void
@@ -35,7 +35,7 @@ class AdvertisementController extends Controller
         $title = 'Admin | Advertisement';
         $pages = ['all', 'home', 'product-list', 'product-detail',];
         $area = ['top', 'bottom', 'sidebar', 'slider',];
-        return view('/admin/advertisement/create', compact('title','pages','area'));
+        return view('/admin/advertisement/create', compact('title', 'pages', 'area'));
     }
     /**
      * store function
@@ -53,12 +53,12 @@ class AdvertisementController extends Controller
             'area' => 'required|string|max:255'
 
         ]);
-        if($request->file('image')) {
+        if ($request->file('image')) {
             $path =  $request->file('image')->store('public');
         }
 
         // Must give in_print a value
-        $valid['image'] = basename($path ?? 'default.png') ;
+        $valid['image'] = basename($path ?? 'default.png');
         //$valid['in_print'] = $valid['in_print'] ?? 0;
 
         Advertisement::create($valid);
@@ -79,7 +79,7 @@ class AdvertisementController extends Controller
         $title = 'Admin | Advertisement';
         $pages = ['all', 'home', 'product-list', 'product-detail',];
         $area = ['top', 'bottom', 'sidebar', 'slider',];
-        return view('/admin/advertisement/edit', compact('advertisement', 'title','pages','area'));
+        return view('/admin/advertisement/edit', compact('advertisement', 'title', 'pages', 'area'));
     }
     /**
      * update function
@@ -97,7 +97,7 @@ class AdvertisementController extends Controller
             'area' => 'required|string|max:255'
         ]);
 
-        if($request->file('image')) {
+        if ($request->file('image')) {
             $path = $request->file('image')->store('public');
         }
 
@@ -107,13 +107,12 @@ class AdvertisementController extends Controller
 
         $advertisement->update($valid);
 
-        if($advertisement->save()) {
+        if ($advertisement->save()) {
             session()->flash('success', 'Advertisement was successfully updated');
         } else {
             session()->flash('error', 'There was a problem updating the advertisement');
         }
         return redirect('/admin/advertisement');
-
     }
     /**
      * destroy function
@@ -123,13 +122,11 @@ class AdvertisementController extends Controller
     public function destroy(Request $request, $id)
     {
         $advertisement = Advertisement::find($id);
-        if($advertisement->delete()) {
+        if ($advertisement->delete()) {
             session()->flash('success', 'Advertisement was deleted');
             return redirect('/admin/advertisement');
         }
         session()->flash('error', 'There was a problem deleting the advertisement');
         return redirect('/admin/advertisement');
-
     }
-
 }

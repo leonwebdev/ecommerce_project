@@ -19,35 +19,44 @@
             </div>
         </div>
     </div>
-    <!-- List Tables -->
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Title</th>
-                <th scope="col">Image</th>
-                <th scope="col">Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($categories as $category)
-                <tr scope="row">
-                    <td>{{ $category->id }}</td>
-                    <td>{{ $category->title }}</td>
-                    <td><img src="/storage/{{ $category->image }}" height="100px" width="100px" /></td>
-                    <td><a href="/admin/category/edit/{{ $category->id }}" class="btn btn-info">Edit</a>
-                        <form method="post" action="/admin/category/{{ $category->id }}">
-                            @csrf
-                            @method('DELETE')
-                            <input type="hidden" name="id" value="{{ $category->id }}" />
-                            <button class="btn btn-danger"
-                                onclick="return confirm('Do you really want to delete {{ $category->title }}?')">Delete</button>
-                        </form>
-                    </td>
+    @if (isset($categories) && !count($categories))
+        @if (isset($search) && $search)
+            <h3 class="py-5 text-center"> Sorry, we could not find any category matching your request!</h3>
+        @else
+            <h3 class="py-5 text-center"> There no data available! </h3>
+        @endif
+    @else
+        <!-- List Tables -->
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Image</th>
+                    <th scope="col">Action</th>
                 </tr>
-            @endforeach
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach ($categories as $category)
+                    <tr scope="row">
+                        <td>{{ $category->id }}</td>
+                        <td>{{ $category->title }}</td>
+                        <td><img src="/storage/{{ $category->image }}" height="100px" width="100px" /></td>
+                        <td><a href="/admin/category/edit/{{ $category->id }}" class="btn btn-info">Edit</a>
+                            <form method="post" action="/admin/category/{{ $category->id }}">
+                                @csrf
+                                @method('DELETE')
+                                <input type="hidden" name="id" value="{{ $category->id }}" />
+                                <button class="btn btn-danger"
+                                    onclick="return confirm('Do you really want to delete {{ $category->title }}?')">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    @endif
+
     <div class="px-3">
         {!! $categories->links('pagination::bootstrap-5') !!}
     </div>

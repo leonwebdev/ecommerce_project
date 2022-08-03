@@ -24,13 +24,13 @@ class OrderController extends Controller
 
         if ($search) {
             $orders = Order::where('order_status', 'LIKE', '%' . $search . '%')
-                ->orWhere('shipping_address', 'LIKE', '%'. $search . '%')
-                ->orWhere('billing_address', 'LIKE', '%'. $search . '%')
+                ->orWhere('shipping_address', 'LIKE', '%' . $search . '%')
+                ->orWhere('billing_address', 'LIKE', '%' . $search . '%')
                 ->orWhereHas('user', function ($q) use ($search) {
                     $q->where('first_name', 'LIKE', '%' . $search . '%')
-                                ->orWhere('last_name', 'LIKE', '%'. $search . '%')
-                                ->orWhere('phone', 'LIKE', '%'. $search . '%')
-                                ->orWhere('email', 'LIKE', '%'. $search . '%');
+                        ->orWhere('last_name', 'LIKE', '%' . $search . '%')
+                        ->orWhere('phone', 'LIKE', '%' . $search . '%')
+                        ->orWhere('email', 'LIKE', '%' . $search . '%');
                 })
                 ->orWhereHas('products', function ($q) use ($search) {
                     $q->where('name', 'LIKE', '%' . $search . '%');
@@ -40,8 +40,7 @@ class OrderController extends Controller
         } else {
             $orders = Order::with(['products', 'user'])->latest()->paginate(10);
         }
-        return view('/admin/order/index', compact('title', 'orders'));
-        
+        return view('/admin/order/index', compact('title', 'orders', 'search'));
     }
 
     /**
@@ -51,7 +50,7 @@ class OrderController extends Controller
      */
     public function update(Request $request, Order $order)
     {
-        
+
         $valid = $request->validate([
             'id' => 'required|integer',
             'order_status' => 'required|in:pending,confirmed,delivered,cancelled',
@@ -59,13 +58,11 @@ class OrderController extends Controller
 
         $order->update($valid);
 
-        if($order->save()) {
-            session()->flash('success', 'Order status was successfully updated'); 
+        if ($order->save()) {
+            session()->flash('success', 'Order status was successfully updated');
         } else {
             session()->flash('error', 'There was a problem updating the Order status');
         }
         return redirect()->route('admin_order_list');
     }
-
-
 }

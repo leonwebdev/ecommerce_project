@@ -30,7 +30,7 @@ class ProductController extends Controller
         } else {
             $products = Product::with(['product_media', 'gender', 'size', 'categories'])->latest()->paginate(10);
         }
-        return view('/admin/product/index', compact('title', 'products'));
+        return view('/admin/product/index', compact('title', 'products', 'search'));
     }
 
     /**

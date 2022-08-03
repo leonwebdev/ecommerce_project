@@ -18,11 +18,11 @@ class InquiryController extends Controller
         $title = 'Admin | Inquiry';
         $search = $request->query('search');
         if ($search) {
-            $inquiries = Inquiry::latest()->where('name','LIKE','%'.$search."%")->paginate(10);
+            $inquiries = Inquiry::latest()->where('name', 'LIKE', '%' . $search . "%")->paginate(10);
         } else {
             $inquiries = Inquiry::latest()->paginate(10);
-        }  
-        return view('/admin/inquiry/index', compact('inquiries','title'));
+        }
+        return view('/admin/inquiry/index', compact('inquiries', 'title', 'search'));
     }
     /**
      * destroy function
@@ -32,12 +32,11 @@ class InquiryController extends Controller
     public function destroy(Request $request, $id)
     {
         $inquiry = Inquiry::find($id);
-        if($inquiry->delete()) {
+        if ($inquiry->delete()) {
             session()->flash('success', 'Inquiry was deleted');
             return redirect('/admin/inquiry');
         }
         session()->flash('error', 'There was a problem deleting the Inquiry');
         return redirect('/admin/inquiry');
     }
-       
 }

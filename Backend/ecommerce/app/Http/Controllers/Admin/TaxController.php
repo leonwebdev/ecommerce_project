@@ -25,10 +25,10 @@ class TaxController extends Controller
         } else {
             $taxes = Tax::orderBy('id', 'DESC')->paginate(10);
         }
-        return view('/admin/tax/index', compact('title', 'taxes'));
+        return view('/admin/tax/index', compact('title', 'taxes', 'search'));
     }
 
-     /**
+    /**
      * create function
      *
      * @return void
@@ -58,7 +58,7 @@ class TaxController extends Controller
         Tax::create($valid);
 
         session()->flash('success', 'Tax successfully created!');
-        
+
         return redirect()->route('adminTaxIndex');
     }
 
@@ -68,7 +68,7 @@ class TaxController extends Controller
      * @return void
      */
     public function edit(Tax $tax)
-   
+
     {
         $title = 'Edit Tax';
         return view('/admin/tax/edit', compact('tax', 'title'));
@@ -94,8 +94,8 @@ class TaxController extends Controller
 
         $tax->update($valid);
 
-        if($tax->save()) {
-            session()->flash('success', 'Tax was successfully updated'); 
+        if ($tax->save()) {
+            session()->flash('success', 'Tax was successfully updated');
         } else {
             session()->flash('error', 'There was a problem updating the Tax');
         }
@@ -110,7 +110,7 @@ class TaxController extends Controller
     public function destroy(Request $request, $id)
     {
         $tax = Tax::find($id);
-        if($tax->delete()) {
+        if ($tax->delete()) {
             session()->flash('success', 'Tax was deleted');
             return redirect()->route('adminTaxIndex');
         }

@@ -19,40 +19,48 @@
             </div>
         </div>
     </div>
-    <!-- List Tables -->
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Image</th>
-                <th scope="col">Title</th>
-                <th scope="col">Link</th>
-                <th scope="col">Pages</th>
-                <th scope="col">Area</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($advertisements as $advertisement)
-                <tr scope="row">
-                    <td>{{ $advertisement->id }}</td>
-                    <td><img src="/storage/{{ $advertisement->image }}" height="100px" width="100px" /></td>
-                    <td>{{ $advertisement->title }}</td>
-                    <td><a href="{{ $advertisement->link }}" title="link">{{ $advertisement->link }}</a></td>
-                    <td>{{ $advertisement->pages }}</td>
-                    <td>{{ $advertisement->area }}</td>
-                    <td><a href="/admin/advertisement/edit/{{ $advertisement->id }}" class="btn btn-info">Edit</a>
-                        <form method="post" action="/admin/advertisement/{{ $advertisement->id }}">
-                            @csrf
-                            @method('DELETE')
-                            <input type="hidden" name="id" value="{{ $advertisement->id }}" />
-                            <button class="btn btn-danger"
-                                onclick="return confirm('Do you really want to delete {{ $advertisement->title }}?')">Delete</button>
-                        </form>
-                    </td>
+    @if (isset($advertisements) && !count($advertisements))
+        @if (isset($search) && $search)
+            <h3 class="py-5 text-center"> Sorry, we could not find any advertisements matching your request!</h3>
+        @else
+            <h3 class="py-5 text-center"> There no data available! </h3>
+        @endif
+    @else
+        <!-- List Tables -->
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Image</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Link</th>
+                    <th scope="col">Pages</th>
+                    <th scope="col">Area</th>
                 </tr>
-            @endforeach
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach ($advertisements as $advertisement)
+                    <tr scope="row">
+                        <td>{{ $advertisement->id }}</td>
+                        <td><img src="/storage/{{ $advertisement->image }}" height="100px" width="100px" /></td>
+                        <td>{{ $advertisement->title }}</td>
+                        <td><a href="{{ $advertisement->link }}" title="link">{{ $advertisement->link }}</a></td>
+                        <td>{{ $advertisement->pages }}</td>
+                        <td>{{ $advertisement->area }}</td>
+                        <td><a href="/admin/advertisement/edit/{{ $advertisement->id }}" class="btn btn-info">Edit</a>
+                            <form method="post" action="/admin/advertisement/{{ $advertisement->id }}">
+                                @csrf
+                                @method('DELETE')
+                                <input type="hidden" name="id" value="{{ $advertisement->id }}" />
+                                <button class="btn btn-danger"
+                                    onclick="return confirm('Do you really want to delete {{ $advertisement->title }}?')">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    @endif
     <div class="px-3">
         {!! $advertisements->links('pagination::bootstrap-5') !!}
     </div>

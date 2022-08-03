@@ -19,14 +19,14 @@ class CategoryController extends Controller
         //$categories = Category::latest()->paginate(10);
         $search = $request->query('search');
         if ($search) {
-            $categories = Category::latest()->where('title','LIKE','%'.$search."%")->paginate(10);
+            $categories = Category::latest()->where('title', 'LIKE', '%' . $search . "%")->paginate(10);
         } else {
             $categories = Category::latest()->paginate(10);
         }
-        
-        return view('/admin/category/index', compact('categories','title'));
+
+        return view('/admin/category/index', compact('categories', 'title', 'search'));
     }
-     /**
+    /**
      * create function
      *
      * @return void
@@ -48,21 +48,19 @@ class CategoryController extends Controller
             'title' => 'required|string|max:255',
             'image' => 'nullable|image'
         ]);
-        if($request->file('image')) {
+        if ($request->file('image')) {
             $path =  $request->file('image')->store('public');
         }
 
         // Must give in_print a value
-        $valid['image'] = basename($path ?? 'default.png') ;
+        $valid['image'] = basename($path ?? 'default.png');
         //$valid['in_print'] = $valid['in_print'] ?? 0;
 
         Category::create($valid);
 
         session()->flash('success', 'Category successfully created!');
-        
+
         return redirect('/admin/category');
-
-
     }
     /**
      * edit function
@@ -70,7 +68,7 @@ class CategoryController extends Controller
      * @return void
      */
     public function edit(Category $category)
-   
+
     {
         $title = 'Admin | Category';
         return view('/admin/category/edit', compact('category', 'title'));
@@ -88,7 +86,7 @@ class CategoryController extends Controller
             'image' => 'nullable|image'
         ]);
 
-        if($request->file('image')) {
+        if ($request->file('image')) {
             $path = $request->file('image')->store('public');
         }
 
@@ -98,13 +96,12 @@ class CategoryController extends Controller
 
         $category->update($valid);
 
-        if($category->save()) {
-            session()->flash('success', 'Category was successfully updated'); 
+        if ($category->save()) {
+            session()->flash('success', 'Category was successfully updated');
         } else {
             session()->flash('error', 'There was a problem updating the Category');
         }
         return redirect('/admin/category');
-
     }
     /**
      * destroy function
@@ -114,13 +111,11 @@ class CategoryController extends Controller
     public function destroy(Request $request, $id)
     {
         $category = Category::find($id);
-        if($category->delete()) {
+        if ($category->delete()) {
             session()->flash('success', 'Category was deleted');
             return redirect('/admin/category');
         }
         session()->flash('error', 'There was a problem deleting the Category');
         return redirect('/admin/category');
-        
     }
-
 }
