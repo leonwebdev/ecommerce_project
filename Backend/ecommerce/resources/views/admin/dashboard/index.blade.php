@@ -188,16 +188,16 @@
         <div class="row g-2">
             <div class="col-md-6">
                 <h2 class="h4 text-gray-800">Product by Category</h2>
-                <div id="productByCategory" style="width: 600px; height: 500px;margin: auto;"></div>
+                <div id="productByCategory"></div>
             </div>
             <div class="col-md-6">
                 <h2 class="h4 text-gray-800">Product by Gender</h2>
-                <div id="productByGender" style="width: 600px; height: 500px;margin: auto;"></div>
+                <div id="productByGender"></div>
             </div>
             <!-- line Chart -->
             <div class="col-md-6">
                 <h2 class="h4 text-gray-800">Monthly Sales</h2>
-                <div id="salesLineChart" style="width: 600px; height: 500px;margin: auto;"></div>
+                <div id="salesLineChart"></div>
             </div>
         </div>
 

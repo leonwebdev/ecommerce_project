@@ -52,7 +52,6 @@
     border-bottom: 0.25rem solid #5a5c69 !important;
 }
 
-
 .hiddenRow {
     padding: 0 !important;
     .order_status {
@@ -67,4 +66,13 @@
 
 .collapse .shipping_info {
     margin: 20px 0;
+}
+
+// chart
+#productByCategory,
+#productByGender,
+#salesLineChart {
+    min-width: 40%;
+    min-height: 400px;
+    margin: auto;
 }
