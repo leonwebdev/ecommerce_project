@@ -8,11 +8,18 @@ use App\Models\Gender;
 use App\Models\Product;
 use App\Models\ProductMedia;
 use App\Models\Size;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
+    /**
+     * index function for product list
+     *
+     * @param Request $request
+     * @return void
+     */
     public function index(Request $request)
     {
 
@@ -25,6 +32,7 @@ class ProductController extends Controller
         }
         return view('/admin/product/index', compact('title', 'products'));
     }
+
     /**
      * create function for add Product form
      *
@@ -38,9 +46,15 @@ class ProductController extends Controller
         $sizes = Size::all();
         return view('admin/product/create', compact('title', 'categories', 'genders', 'sizes'));
     }
+
+    /**
+     * save new product 
+     *
+     * @param Request $request
+     * @return void
+     */
     public function store(Request $request)
     {
-        // dd($request);
         $valid = $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'required|string',
@@ -53,35 +67,55 @@ class ProductController extends Controller
             'images' => 'required',
             'images.*' => 'image|mimes:jpeg,png,jpg,svg|max:2048'
         ]);
-        $product = new Product;
-        $product->name = $request->name;
-        $product->slug = Str::slug($request->name);
-        $product->description = $request->description;
-        $product->color = $request->color;
-        $product->quantity = $request->quantity;
-        $product->price = $request->price;
-        $product->gender_id = $request->gender_id;
-        $product->size_id = $request->size_id;
-        $product->summary = '';
-        $product->save();
-        $product->categories()->attach($request->category_id);
+        try {
 
-        if ($request->hasfile('images')) {
-            $images = $request->file('images');
-            $imageArray = [];
-            foreach ($images as $image) {
-                $path =  basename($image->store('public'));
-                array_push($imageArray, [
-                    'image' => $path,
-                    'label' => '',
-                    'product_id' => $product->id
-                ]);
+            $product = new Product;
+            $product->name = $request->name;
+            // unique slug
+            $slug = Str::slug($request->name);
+            $numSlugs = Product::where('name', $request->name)->count();
+            if ($numSlugs == 0) {
+                $product->slug = $slug;
+            } else {
+                $product->slug = $slug . '-' . $numSlugs + 1;
             }
-            ProductMedia::insert($imageArray);
+            $product->description = $request->description;
+            $product->color = $request->color;
+            $product->quantity = $request->quantity;
+            $product->price = $request->price;
+            $product->gender_id = $request->gender_id;
+            $product->size_id = $request->size_id;
+            $product->summary = '';
+            $product->save();
+            $product->categories()->attach($request->category_id);
+
+            if ($request->hasfile('images')) {
+                $images = $request->file('images');
+                $imageArray = [];
+                foreach ($images as $image) {
+                    $path =  basename($image->store('public'));
+                    array_push($imageArray, [
+                        'image' => $path,
+                        'label' => '',
+                        'product_id' => $product->id
+                    ]);
+                }
+                $product->product_media()->insert($imageArray);
+            }
+            session()->flash('success', 'Product has been successfully created!');
+            return redirect('/admin/product');
+        } catch (Exception $e) {
+            session()->flash('error', $e->getMessage());
+            return redirect('/admin/product');
         }
-        session()->flash('success', 'Product has been successfully created!');
-        return redirect('/admin/product');
     }
+
+    /**
+     * edit product
+     *
+     * @param Product $product
+     * @return void
+     */
     public function edit(Product $product)
     {
 
@@ -93,10 +127,16 @@ class ProductController extends Controller
         $oldCategoryIds = $product->categories->pluck('id');
         return view('admin/product/edit', compact('title', 'categories', 'genders', 'sizes', 'product', 'oldCategoryIds'));
     }
+
+    /**
+     * update product 
+     *
+     * @param Request $request
+     * @param [type] $id
+     * @return void
+     */
     public function update(Request $request, $id)
     {
-        // dd($request);
-
         $product = Product::find($id);
         $savedMedia = $product->product_media()->count();
         $isMediaRequired = $savedMedia > 0 ? 'nullable' : 'required';
@@ -112,34 +152,53 @@ class ProductController extends Controller
             'images' => $isMediaRequired,
             'images.*' => 'image|mimes:jpeg,png,jpg,svg|max:2048'
         ]);
-        $product->name = $request->name;
-        $product->slug = Str::slug($request->name);
-        $product->description = $request->description;
-        $product->color = $request->color;
-        $product->quantity = $request->quantity;
-        $product->price = $request->price;
-        $product->gender_id = $request->gender_id;
-        $product->size_id = $request->size_id;
-        $product->summary = '';
-        $product->update();
-        $product->categories()->sync($request->category_id);
-
-        if ($request->hasfile('images')) {
-            $images = $request->file('images');
-            $imageArray = [];
-            foreach ($images as $image) {
-                $path =  basename($image->store('public'));
-                array_push($imageArray, [
-                    'image' => $path,
-                    'label' => '',
-                    'product_id' => $product->id
-                ]);
+        try {
+            $product->name = $request->name;
+            // unique slug
+            $slug = Str::slug($request->name);
+            $numSlugs = Product::where('name', $request->name)->count();
+            if ($numSlugs == 0) {
+                $product->slug = $slug;
+            } else {
+                $product->slug = $slug . '-' . $numSlugs + 1;
             }
-            ProductMedia::insert($imageArray);
+            $product->description = $request->description;
+            $product->color = $request->color;
+            $product->quantity = $request->quantity;
+            $product->price = $request->price;
+            $product->gender_id = $request->gender_id;
+            $product->size_id = $request->size_id;
+            $product->summary = '';
+            $product->update();
+            $product->categories()->sync($request->category_id);
+
+            if ($request->hasfile('images')) {
+                $images = $request->file('images');
+                $imageArray = [];
+                foreach ($images as $image) {
+                    $path =  basename($image->store('public'));
+                    array_push($imageArray, [
+                        'image' => $path,
+                        'label' => '',
+                        'product_id' => $product->id
+                    ]);
+                }
+                $product->product_media()->insert($imageArray);
+            }
+            session()->flash('success', 'Product has been updated successfully!');
+            return redirect('/admin/product');
+        } catch (Exception $e) {
+            session()->flash('error', $e->getMessage());
+            return redirect('/admin/product');
         }
-        session()->flash('success', 'Product has been updated successfully!');
-        return redirect('/admin/product');
     }
+
+    /**
+     * delete product media
+     *
+     * @param [type] $id
+     * @return void
+     */
     public function deleteMedia($id)
     {
         $media = ProductMedia::find($id);
@@ -152,6 +211,13 @@ class ProductController extends Controller
             'error' => 'There was a problem deleting media!'
         ]);
     }
+
+    /**
+     * delete product
+     *
+     * @param Product $product
+     * @return void
+     */
     public function destroy(Product $product)
     {
         if ($product->delete()) {
