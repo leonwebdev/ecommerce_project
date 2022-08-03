@@ -16,11 +16,14 @@
     </div>
     @if (isset($orders) && !count($orders))
         @if (isset($search) && $search)
-            <h3 class="py-5 text-center"> Sorry, we could not find any order matching your request!</h3>
+            <h3 class="py-5 text-center"> Sorry, we could not find any order matching "{{ $search }}"!</h3>
         @else
             <h3 class="py-5 text-center"> There no data available! </h3>
         @endif
     @else
+        @if (isset($search) && $search)
+            <h4 class="text-muted"> You searched for: {{ $search }}</h4>
+        @endif
         <div>* All currency is displayed in CAD.</div>
         <!-- List Tables -->
         <table class="table table-condensed table-striped">

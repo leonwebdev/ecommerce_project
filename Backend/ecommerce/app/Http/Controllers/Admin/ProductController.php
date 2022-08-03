@@ -85,7 +85,6 @@ class ProductController extends Controller
             $product->price = $request->price;
             $product->gender_id = $request->gender_id;
             $product->size_id = $request->size_id;
-            $product->summary = '';
             $product->save();
             $product->categories()->attach($request->category_id);
 
@@ -96,7 +95,6 @@ class ProductController extends Controller
                     $path =  basename($image->store('public'));
                     array_push($imageArray, [
                         'image' => $path,
-                        'label' => '',
                         'product_id' => $product->id
                     ]);
                 }
@@ -168,7 +166,6 @@ class ProductController extends Controller
             $product->price = $request->price;
             $product->gender_id = $request->gender_id;
             $product->size_id = $request->size_id;
-            $product->summary = '';
             $product->update();
             $product->categories()->sync($request->category_id);
 
@@ -179,7 +176,6 @@ class ProductController extends Controller
                     $path =  basename($image->store('public'));
                     array_push($imageArray, [
                         'image' => $path,
-                        'label' => '',
                         'product_id' => $product->id
                     ]);
                 }

@@ -8,33 +8,33 @@
             <div class="content">
                 <div class="left">
                     <div class="product-media-slider">
-                        {{-- @if (isset($product->product_media) && count($product->product_media) > 0)
-                            <img src="{{ asset('/storage/' . $product->product_media[0]->image) }}"
-                                alt="{{ $product->slug }}">
+                        {{-- multiple images --}}
+                        @if (isset($product->product_media) && count($product->product_media) > 0)
+                            @foreach ($product->product_media as $index => $item)
+                                <div class="media-item">
+                                    <img src="{{ asset('/storage/' . $item->image) }}"
+                                        alt="{{ $product->name }}_{{ $index }}" />
+                                </div>
+                            @endforeach
                         @else
-                            <img src="/images/product-image-not-found.jpg" alt="product-image-not-found">
-                        @endif --}}
-                        @foreach ($product->product_media as $index => $item)
+                            {{-- placeholder image --}}
                             <div class="media-item">
-                                <img src="{{ asset('/storage/' . $item->image) }}"
-                                    alt="{{ $product->name }}_{{ $index }}" />
+                                <img src="/images/product-image-not-found.jpg" alt="product-image-not-found">
                             </div>
-                        @endforeach
-
+                        @endif
                     </div>
-                    <div class="product-media-slider-nav">
-                        @foreach ($product->product_media as $index => $item)
-                            <div class="product_media_nav">
-                                <img src="{{ asset('/storage/' . $item->image) }}"
-                                    alt="{{ $product->name }}_nav_{{ $index }}" width="80px" height="auto" />
-                            </div>
-                        @endforeach
-
-                    </div>
-                    {{-- <div class="product_image">
-                            <img src="/images/product-image-not-found.jpg" alt="product-image-not-found">
+                    {{-- display image option for multiple image --}}
+                    {{-- hide image navigation for single image --}}
+                    @if (isset($product->product_media) && count($product->product_media) > 1)
+                        <div class="product-media-slider-nav">
+                            @foreach ($product->product_media as $index => $item)
+                                <div class="product_media_nav">
+                                    <img src="{{ asset('/storage/' . $item->image) }}"
+                                        alt="{{ $product->name }}_nav_{{ $index }}" width="80px" height="auto" />
+                                </div>
+                            @endforeach
                         </div>
-                    </div> --}}
+                    @endif
                 </div>
                 <div class="right">
                     <div class="product_desc">
