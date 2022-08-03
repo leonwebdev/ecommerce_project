@@ -4,18 +4,21 @@
     <div class="header_bar">
         <h1>{{ $title }}</h1>
 
-        <!-- Search form -->
-        <div class="search_form">
-            <form class="d-md-flex input-group w-auto my-auto" action="{{ route('admin_product_list') }}" method="get">
-                <input autocomplete="off" type="search" class="form-control rounded" name="search" placeholder='Search'
-                    maxlength="255" style="min-width: 225px" />
-                <button class="input-group-text border-0" type="submit">
-                    <i class="fas fa-search"></i></button>
-            </form>
-        </div>
+        <div class="d-flex my-auto">
+            <!-- add product -->
+            <a href="{{ route('admin_product_add') }}" class="btn btn-secondary mx-2">Add a Product</a>
 
+            <!-- Search form -->
+            <div class="search_form">
+                <form class="d-md-flex input-group w-auto my-auto" action="{{ route('admin_product_list') }}" method="get">
+                    <input autocomplete="off" type="search" class="form-control rounded" name="search" placeholder='Search'
+                        maxlength="255" style="min-width: 225px" />
+                    <button class="input-group-text border-0" type="submit">
+                        <i class="fas fa-search"></i></button>
+                </form>
+            </div>
+        </div>
     </div>
-    <a href="{{ route('admin_product_add') }}" class="btn btn-primary">Add a Product</a>
 
     <!-- List Tables -->
     <table class="table table-striped">
