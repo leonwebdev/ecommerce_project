@@ -95,7 +95,6 @@ class ProductController extends Controller
                     $path =  basename($image->store('public'));
                     array_push($imageArray, [
                         'image' => $path,
-                        'label' => '',
                         'product_id' => $product->id
                     ]);
                 }
@@ -177,7 +176,6 @@ class ProductController extends Controller
                     $path =  basename($image->store('public'));
                     array_push($imageArray, [
                         'image' => $path,
-                        'label' => '',
                         'product_id' => $product->id
                     ]);
                 }
