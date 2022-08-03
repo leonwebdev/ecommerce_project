@@ -374,11 +374,13 @@ class CheckoutController extends Controller
 
         } else {
             // start from placing order -> order_product -> transaction
+
+
             $order = new Order();
             $order->user_id = Auth::user()->id;
-            $order->gst = $summary['taxes']['gst'];
-            $order->pst = $summary['taxes']['pst'];
-            $order->hst = $summary['taxes']['hst'];
+            $order->gst = floatval($summary['taxes']['gst']) * $summary['subtotal'];
+            $order->pst = floatval($summary['taxes']['pst']) * $summary['subtotal'];
+            $order->hst = floatval($summary['taxes']['hst']) * $summary['subtotal'];
             $order->sub_total = $summary['subtotal'];
             $order->shipping_charge = $summary['shipping_fee'];
             $order->total = $summary['total'];
