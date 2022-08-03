@@ -95,7 +95,14 @@ class UserAddressController extends Controller
      */
     public function store(Request $request)
     {
+        
+        $prev_url = url()->previous();
+        $prev_route = app('router')->getRoutes($prev_url)->match(app('request')->create($prev_url))->getName();
 
+        if($prev_route == 'checkoutCart' ) {
+            // for checkout address selection use
+            session(['addr_store_form' => true]);
+        }
 
         $valid = $request->validate(
             [
@@ -121,8 +128,6 @@ class UserAddressController extends Controller
             session()->flash('error', 'There was a problem creating the Address');
         }
 
-        $prev_url = url()->previous();
-        $prev_route = app('router')->getRoutes($prev_url)->match(app('request')->create($prev_url))->getName();
 
         if($prev_route == 'checkoutCart' ) {
             session(['shipping_addr_id' => $user_address->id]);
