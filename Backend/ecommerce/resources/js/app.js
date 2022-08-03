@@ -9,6 +9,7 @@ import "slick-carousel/slick/slick-theme.css";
 $(document).ready(function () {
     // menu
     menuDropdown();
+    searchAnimation();
     // footer
     getCurrentYear();
     // home
@@ -51,6 +52,32 @@ function menuDropdown() {
     $('nav ul li a, .nav_dropdown').mouseleave(function (e) {
         e.preventDefault();
         $('.nav_dropdown').stop().fadeOut(200);
+    });
+}
+
+/**
+ * Apply animation to the search box on menu bar
+ * return void
+ */
+function searchAnimation() {
+    $('.nav_bar .utils .search > a').click(function(e) {
+        e.preventDefault();
+
+        $('.search #search_bar')
+        .css({
+            "z-index": 999,
+            visibility: 'visible'
+        })
+        .animate({
+            // show 
+            opacity: 1,
+        }, 150)
+        .animate(300, function() {
+            setTimeout(function() {
+                $('.search #search_bar #search').focus(); 
+            }, 600);
+        })
+        .css("pointer-events", "auto");
     });
 }
 
