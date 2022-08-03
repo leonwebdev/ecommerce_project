@@ -309,6 +309,39 @@ button {
                 }
             }
         }
+
+        .icon.search {
+            position: relative;
+        }
+        #search_bar {
+            position: absolute;
+            display: inline-block;
+            top: 49%;
+            right: 5px;
+            transform: translateY(-52%);
+            -webkit-transform: translateY(-52%);
+            opacity: 0;
+            visibility: hidden;
+            z-index: -999;
+
+            form {
+                position: relative;
+                margin: 0;
+
+                input:not([type=image]) {
+                    line-height: 2.2em;
+                    padding: 10px;
+                    font-size: 14px;
+                    border: none;
+                    border-bottom: 1px solid $color-light;
+                }
+                input[type=image] {
+                    position: absolute;
+                    right: 10px;
+                    bottom: 10px;
+                }
+            }
+        }
     }
 }
 

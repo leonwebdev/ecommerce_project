@@ -56,12 +56,6 @@
 
             <!-- Section start -->
             <section class="list_item">
-                <form action="{{ route('product_list') }}" method="get" autocomplete="off" novalidate class="d-flex">
-                    <input class="form-control me-2" type="search" name="search" placeholder="Search" aria-label="Search"
-                        maxlength="255">&nbsp;
-                    <button type="submit">Search</button>
-                </form>
-
                 {{-- Display searched input to user --}}
                 @if (isset($search) && $search && isset($products) && count($products))
                     <div>

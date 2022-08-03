@@ -19,14 +19,24 @@
             </ul>
         </nav>
         <div class="utils">
+            <!-- Search button & search bar for product search -->
             <div class="icon search">
-                <a href=":javascript;">
+                <a href="javascript:;">
                     <img src="/images/icon-magnifier.svg" alt="search icon" width="30" height="30" />
                 </a>
+
+                <div id="search_bar">
+                    <form action="{{ route('product_list') }}" method="get" autocomplete="off" novalidate class="d-flex">
+                        <input id="search" class="form-control me-2" type="search" name="search" placeholder="Search Outfit" aria-label="Search"
+                            maxlength="255">&nbsp;
+                        <input type="image" src="/images/icon-magnifier.svg" alt="search icon" width="30" height="30" />
+                    </form>
+                </div>
             </div>
+            
             <!-- Profile start-->
             <div class="icon profile">
-                <a href="" onclick="event.preventDefault();">
+                <a href="javascript:;">
                     <img src="/images/icon-profile.svg" alt="profile icon" width="30" height="30" />
                 </a>
                 <div class="profile_dropdown">
