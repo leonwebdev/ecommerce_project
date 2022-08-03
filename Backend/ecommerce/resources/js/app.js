@@ -164,12 +164,24 @@ function productImageSlider() {
 function checkoutAddrEffect() {
     $('.cart #select_addr_btn').click(function (e) {
         e.preventDefault();
-        $('.cart .address_list').slideDown();
+        $('.cart .address_form').slideUp();
+
+        if($('.cart .address_list').css('display') == 'block') {
+            $('.cart .address_list').slideUp();
+        } else {
+            $('.cart .address_list').slideDown();
+        }
     });
 
     $('.cart #create_addr_btn').click(function (e) {
         e.preventDefault();
+
         $('.cart .address_list').slideUp();
-        $('.cart .address_form').slideDown();
+
+        if($('.cart .address_form').css('display') == 'block') {
+            $('.cart .address_form').slideUp();
+        } else {
+            $('.cart .address_form').slideDown();
+        }
     });
 }

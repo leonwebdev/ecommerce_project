@@ -132,6 +132,17 @@ class CartController extends Controller
         $title = 'Checkout';
 
         if(Auth::check()) {
+
+            // check if user just submit the create address form and validation failed
+            // if validatation failed, and user route back to the checkout again, the create address form should remain opened
+            $expend_create_addr_form = false;
+            $route_from_address_create = $request->session()->get('addr_store_form') ?? null;
+   
+            if($route_from_address_create) {
+                $expend_create_addr_form = true;
+                $request->session()->forget('addr_store_form');
+            }
+
             // ====== Authenticated User ======
             // user
             $user_id = Auth::user()->id;
@@ -155,6 +166,7 @@ class CartController extends Controller
             $total = 0;
 
             if($session_address_id) {
+                // if user chosse other shipping address rather than default address
                 $selected_address_id = intval($session_address_id);
                 $user_address = UserAddress::find( $session_address_id);
                 $default_address = $user_address->full_address() . ', ' . $user_address->user_postal_code();
@@ -162,6 +174,7 @@ class CartController extends Controller
                 $country = strtolower($user_address->user_country());
                 $province = strtolower($user_address->user_province());
             } else {
+                // If user is not choosing other address, default will be selected
                 $selected_address_id = $user->default_address_id;
                 $user_address = UserAddress::find( $selected_address_id);
                 $default_address = $user_address->full_address() . ', ' . $user_address->user_postal_code();
@@ -190,11 +203,13 @@ class CartController extends Controller
                             ->first(['gst', 'pst', 'hst']);
                     
                     if($taxes) {
+                        // apply tax when province could be found in database
                         $taxes = $taxes->toArray();
                         foreach($taxes as $tax) {
                             $taxes_total += floatval($tax) * $subtotal;
                         }
                     } else {
+                        // init taxes to $0 when province could not be found (might due to spelling mistake)
                         $taxes = [
                             'gst' => 0.00,
                             'pst' => 0.00,
@@ -208,7 +223,7 @@ class CartController extends Controller
                     $shipping_fee = $subtotal > $free_shipping_amount ? 0 : floatval($shipping_fee);
                     
                 } else {
-                    // standard shipping fee
+                    // international shipping fee
                     $shipping_fee = ShippingCharge::where('country', 'Overseas')->first()->charge;
                     $free_shipping_amount = 250;
                     $shipping_fee = $subtotal > $free_shipping_amount ? 0 : floatval($shipping_fee);
@@ -218,6 +233,8 @@ class CartController extends Controller
                 $total =  number_format($subtotal + $taxes_total + $shipping_fee, 2);
             }
 
+             // save to session to display the summary in the following steps(pages) 
+             // and store the summary in database when order is placed successfully
             $summary = [
                 'selected_address_id' => $selected_address_id,
                 'subtotal' => $subtotal,
@@ -228,7 +245,6 @@ class CartController extends Controller
                 'total' => $total,
             ];
 
-            // for payment view use
             $request->session()->put('summary', $summary);
 
             return view('/cart/checkout', compact(
@@ -239,6 +255,7 @@ class CartController extends Controller
                 'products', 
                 'session_cart',
                 'selected_address_id',
+                'expend_create_addr_form',
                 'subtotal', 
                 'total_qty',
                 'taxes',
@@ -248,6 +265,7 @@ class CartController extends Controller
             ));
 
         } else {
+
             // ====== Unauthenticated User ======
             session()->flash('error', 'Please login or register an account before checking out the shopping cart');
             session(['route_back_cart' => true]);

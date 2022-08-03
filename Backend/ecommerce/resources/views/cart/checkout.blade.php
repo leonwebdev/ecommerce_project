@@ -18,8 +18,15 @@
                     <div class="default_addr">
                         <strong>Address:</strong> {{ $default_address }}
                     </div>
-                    <div class="action select_address">
-                        <a href="#" id="select_addr_btn" class="btn btn_black">Select Another Address</a>
+
+                    <div class="action">
+                        <span class="select_address">
+                            <a href="#" id="select_addr_btn" class="btn btn_black">Select Another Address</a>
+                        </span>
+
+                        <span>
+                            <a href="#" id="create_addr_btn" class="btn btn_black">Create New Address</a>
+                        </span>
                     </div>
 
                     <div class="address_list hidden">
@@ -40,13 +47,12 @@
                             @endforeach
                             <div class="action">
                                 <button class="btn btn_black">Update</button>
-                                <a href="#" id="create_addr_btn" class="btn btn_black">Create New Address</a>
                             </div>
                         </form>
                         
                     </div>
 
-                    <div class="address_form hidden">
+                    <div class="address_form @if(!$expend_create_addr_form) hidden @endif">
                         <h3>Add New Shipping Address:</h3>
                         <form action="/address" method="POST">
                             @csrf
