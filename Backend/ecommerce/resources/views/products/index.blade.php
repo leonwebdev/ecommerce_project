@@ -63,7 +63,7 @@
                 </form>
 
                 {{-- Display searched input to user --}}
-                @if (isset($search) && $search)
+                @if (isset($search) && $search && isset($products) && count($products))
                     <div>
                         <h2>You Searched for: {{ $search }}</h2>
                     </div>
@@ -73,32 +73,33 @@
                     {{-- if no product found --}}
                     @if (isset($products) && count($products) == 0)
                         @if (isset($search) && $search)
-                            <h3>There is no product found! Please search with different input.</h3>
+                            <h3>There is no product found with "{{ $search }}"! Please search with different input.
+                            </h3>
                         @else
                             <h3>There is no product available!</h3>
                         @endif
+                    @else
+                        {{-- Product list: start --}}
+                        @foreach ($products as $product)
+                            <div class="item">
+                                <div class="product_img">
+                                    <a href="/product/{{ $product->slug }}"></a>
+                                    {{-- display first available image of product --}}
+                                    @if (isset($product->product_media) && count($product->product_media) > 0)
+                                        <img src="{{ asset('/storage/' . $product->product_media[0]->image) }}"
+                                            alt="{{ $product->slug }}">
+                                    @else
+                                        <img src="/images/product-image-not-found.jpg" alt="product-image-not-found">
+                                    @endif
+                                </div>
+                                <div class="desc">
+                                    <a href="/product/{{ $product->slug }}">{{ $product->name }}</a>
+                                    <div class="price">${{ number_format($product->price, 2) }} CAD</div>
+                                </div>
+                            </div>
+                        @endforeach
+                        {{-- Product list: end --}}
                     @endif
-
-                    {{-- Product list: start --}}
-                    @foreach ($products as $product)
-                        <div class="item">
-                            <div class="product_img">
-                                <a href="/product/{{ $product->slug }}"></a>
-                                {{-- display first available image of product --}}
-                                @if (isset($product->product_media) && count($product->product_media) > 0)
-                                    <img src="{{ asset('/storage/' . $product->product_media[0]->image) }}"
-                                        alt="{{ $product->slug }}">
-                                @else
-                                    <img src="/images/product-image-not-found.jpg" alt="product-image-not-found">
-                                @endif
-                            </div>
-                            <div class="desc">
-                                <a href="/product/{{ $product->slug }}">{{ $product->name }}</a>
-                                <div class="price">${{ number_format($product->price, 2) }} CAD</div>
-                            </div>
-                        </div>
-                    @endforeach
-                    {{-- Product list: end --}}
 
                 </div>
 
