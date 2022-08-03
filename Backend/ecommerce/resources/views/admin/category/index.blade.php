@@ -33,7 +33,7 @@
                     <th scope="col">#</th>
                     <th scope="col">Title</th>
                     <th scope="col">Image</th>
-                    <th scope="col">Action</th>
+                    <th scope="col" class="action-btn">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -42,13 +42,18 @@
                         <td>{{ $category->id }}</td>
                         <td>{{ $category->title }}</td>
                         <td><img src="/storage/{{ $category->image }}" height="100px" width="100px" /></td>
-                        <td><a href="/admin/category/edit/{{ $category->id }}" class="btn btn-info">Edit</a>
+                        <td>
+                            <a href="/admin/category/edit/{{ $category->id }}" class="btn btn-outline-primary">
+                                <i class="fas fa-pencil"></i>
+                            </a>
                             <form method="post" action="/admin/category/{{ $category->id }}">
                                 @csrf
                                 @method('DELETE')
                                 <input type="hidden" name="id" value="{{ $category->id }}" />
-                                <button class="btn btn-danger"
-                                    onclick="return confirm('Do you really want to delete {{ $category->title }}?')">Delete</button>
+                                <button class="btn btn-outline-danger"
+                                    onclick="return confirm('Do you really want to delete {{ $category->title }}?')">
+                                    <i class="fas fa-trash"></i>
+                                </button>
                             </form>
                         </td>
                     </tr>

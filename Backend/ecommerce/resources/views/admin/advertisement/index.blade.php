@@ -36,6 +36,7 @@
                     <th scope="col">Link</th>
                     <th scope="col">Pages</th>
                     <th scope="col">Area</th>
+                    <th scope="col" class="action-btn">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -47,13 +48,18 @@
                         <td><a href="{{ $advertisement->link }}" title="link">{{ $advertisement->link }}</a></td>
                         <td>{{ $advertisement->pages }}</td>
                         <td>{{ $advertisement->area }}</td>
-                        <td><a href="/admin/advertisement/edit/{{ $advertisement->id }}" class="btn btn-info">Edit</a>
+                        <td>
+                            <a href="/admin/advertisement/edit/{{ $advertisement->id }}" class="btn btn-outline-primary">
+                                <i class="fas fa-pencil"></i>
+                            </a>
                             <form method="post" action="/admin/advertisement/{{ $advertisement->id }}">
                                 @csrf
                                 @method('DELETE')
                                 <input type="hidden" name="id" value="{{ $advertisement->id }}" />
-                                <button class="btn btn-danger"
-                                    onclick="return confirm('Do you really want to delete {{ $advertisement->title }}?')">Delete</button>
+                                <button class="btn btn-outline-danger"
+                                    onclick="return confirm('Do you really want to delete {{ $advertisement->title }}?')">
+                                    <i class="fas fa-trash"></i>
+                                </button>
                             </form>
                         </td>
                     </tr>

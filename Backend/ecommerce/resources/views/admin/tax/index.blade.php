@@ -37,7 +37,7 @@
                     <th scope="col">GST</th>
                     <th scope="col">PST</th>
                     <th scope="col">HST</th>
-                    <th scope="col">Actions</th>
+                    <th scope="col" class="action-btn">Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -49,13 +49,18 @@
                         <td>{{ $tax->gst }}</td>
                         <td>{{ $tax->pst }}</td>
                         <td>{{ $tax->hst }}</td>
-                        <td><a href="{{ route('adminTaxEdit', $tax->id) }}" class="btn btn-info">Edit</a>
+                        <td>
+                            <a href="{{ route('adminTaxEdit', $tax->id) }}" class="btn btn-outline-primary">
+                                <i class="fas fa-pencil"></i>
+                            </a>
                             <form method="post" action="{{ route('adminTaxDestroy', $tax->id) }}">
                                 @csrf
                                 @method('DELETE')
                                 <input type="hidden" name="id" value="{{ $tax->id }}" />
-                                <button class="btn btn-danger"
-                                    onclick="return confirm('Do you really want to delete the tax of {{ $tax->province }}?')">Delete</button>
+                                <button class="btn btn-outline-danger"
+                                    onclick="return confirm('Do you really want to delete the tax of {{ $tax->province }}?')">
+                                    <i class="fas fa-trash"></i>
+                                </button>
                             </form>
                         </td>
                     </tr>

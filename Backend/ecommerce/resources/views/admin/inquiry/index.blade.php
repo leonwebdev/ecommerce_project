@@ -46,8 +46,10 @@
                                 @csrf
                                 @method('DELETE')
                                 <input type="hidden" name="id" value="{{ $inquiry->id }}" />
-                                <button class="btn btn-danger"
-                                    onclick="return confirm('Do you really want to delete {{ $inquiry->name }}?')">Delete</button>
+                                <button class="btn btn-outline-danger"
+                                    onclick="return confirm('Do you really want to delete {{ $inquiry->name }}?')">
+                                    <i class="fas fa-trash"></i>
+                                </button>
                             </form>
                         </td>
                     </tr>

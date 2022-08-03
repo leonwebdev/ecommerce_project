@@ -39,7 +39,7 @@
                     <th scope="col">Category</th>
                     <th scope="col">Size</th>
                     <th scope="col">Gender</th>
-                    <th scope="col">Action</th>
+                    <th scope="col" class="action-btn">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -59,14 +59,19 @@
                         <td>{{ $product->size->name }}</td>
                         <td>{{ $product->gender->name }}</td>
                         <td>
-                            <a class="btn btn-info"
-                                href="{{ route('admin_product_edit', ['product' => $product->id]) }}">Edit</a>
-                            <form method="post" action="{{ route('admin_product_delete', ['product' => $product->id]) }}">
+                            <a class="btn btn-outline-primary"
+                                href="{{ route('admin_product_edit', ['product' => $product->id]) }}">
+                                <i class="fas fa-pencil"></i>
+                            </a>
+                            <form method="post" class="d-inline"
+                                action="{{ route('admin_product_delete', ['product' => $product->id]) }}">
                                 @csrf
                                 @method('DELETE')
                                 <input type="hidden" name="id" value="{{ $product->id }}" />
-                                <button class="btn btn-danger"
-                                    onclick="return confirm('Do you really want to delete {{ $product->name }}?')">Delete</button>
+                                <button class="btn btn-outline-danger"
+                                    onclick="return confirm('Do you really want to delete {{ $product->name }}?')">
+                                    <i class="fas fa-trash"></i>
+                                </button>
                             </form>
                         </td>
                     </tr>

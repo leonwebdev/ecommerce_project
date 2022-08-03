@@ -22,36 +22,45 @@
         @endif
     @else
         @foreach ($users as $user)
-            <div class="row shadow-lg my-2 p-2 rounded bg-light">
-                <div class="col-md-3">
+            <div class="row shadow-lg my-2 p-2 rounded bg-light align-content-center">
+                <div class="col-md-1">
                     <p class="small mb-1">#{{ $user->id }}</p>
+                </div>
+                <div class="col-md-2">
                     <i class="fa fa-user" aria-hidden="true"></i>
                     <a href="{{ route('admin_user_edit', ['user' => $user->id]) }}"
                         class="text-decoration-none">{{ $user->first_name . ' ' . $user->last_name }}</a>
+
                 </div>
-                <div class="col-md-3">
-                    <p class=" mb-0"> <i class="fa fa-phone" aria-hidden="true"></i> {{ $user->phone }}
+                <div class="col-md-2">
+                    <p> <i class="fa fa-phone" aria-hidden="true"></i> {{ $user->phone }}
                     </p>
-                    <p class=""> <i class="fa fa-envelope" aria-hidden="true"></i> {{ $user->email }}</p>
                 </div>
-                <div class="col-md-3"> <i class="fa fa-home" aria-hidden="true"></i> {{ $user->full_address() }}
-                    {{ $user->user_postal_code() }}</div>
                 <div class="col-md-3">
-                    <button class="btn btn-sm btn-secondary m-1" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#address_{{ $user->id }}" aria-expanded="false"
-                        aria-controls="address_{{ $user->id }}">
-                        View Address
-                    </button>
-                    <div class="row mx-0">
+                    <p> <i class="fa fa-envelope" aria-hidden="true"></i> {{ $user->email }}</p>
+                </div>
+                <div class="col-md-4 text-end">
+                    <div class="row mx-0 justify-content-end">
                         <div class="col-auto ps-0 ms-0">
-                            <a class="btn btn-sm btn-info  m-1"
-                                href="{{ route('admin_user_edit', ['user' => $user->id]) }}" role="button">Edit</a>
+                            <button class="btn btn-sm btn-secondary m-1" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#address_{{ $user->id }}" aria-expanded="false"
+                                aria-controls="address_{{ $user->id }}">
+                                View Address
+                            </button>
+                        </div>
+                        <div class="col-auto ps-0 ms-0">
+                            <a class="btn btn-sm btn-outline-primary  m-1"
+                                href="{{ route('admin_user_edit', ['user' => $user->id]) }}" role="button">
+                                <i class="fas fa-pencil"></i>
+                            </a>
                         </div>
                         @if ($user->admin == true)
                             <div class="col-auto ps-0 ms-0  m-1" tabindex="0" data-bs-toggle="tooltip"
                                 title="Cannot Delete Admin User">
                                 <a href="" class="btn btn-sm btn-outline-danger disabled" role="button"
-                                    onclick="event.preventDefault();">Delete</a>
+                                    onclick="event.preventDefault();">
+                                    <i class="fas fa-trash"></i>
+                                </a>
                             </div>
                         @else
                             <div class="col-auto ps-0 ms-0  m-1">
@@ -60,7 +69,9 @@
                                     @method('DELETE')
                                     <input type="hidden" name="id" value="{{ $user->id }}" />
                                     <button onclick="return confirm('Confirm delete this?')"
-                                        class="btn btn-sm btn-danger">Delete</button>
+                                        class="btn btn-sm btn-outline-danger">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
                                 </form>
                             </div>
                         @endif
@@ -81,17 +92,21 @@
                                     <td>{{ $address->id }}</td>
                                     <td>{{ $address->full_address() }} {{ $address->postal_code }}</td>
                                     <td>
-                                        <div class="row mx-0" style="width: fit-content">
+                                        <div class="row mx-0 justify-content-end" style="width: fit-content">
                                             <div class="col-auto ps-0 ms-0">
-                                                <a class="btn btn-sm btn-info"
+                                                <a class="btn btn-sm btn-outline-primary"
                                                     href="{{ route('admin_address_edit', ['address' => $address->id]) }}"
-                                                    role="button">Edit</a>
+                                                    role="button">
+                                                    <i class="fas fa-pencil"></i>
+                                                </a>
                                             </div>
                                             @if ($address->is_default_address())
                                                 <div class="col-auto ps-0 ms-0" tabindex="0" data-bs-toggle="tooltip"
                                                     title="Cannot Delete Default Address">
                                                     <a href="" class="btn btn-sm btn-outline-danger disabled"
-                                                        role="button" onclick="event.preventDefault();">Delete</a>
+                                                        role="button" onclick="event.preventDefault();">
+                                                        <i class="fas fa-trash"></i>
+                                                    </a>
                                                 </div>
                                             @else
                                                 <div class="col-auto ps-0 ms-0">
@@ -100,14 +115,17 @@
                                                         @method('DELETE')
                                                         <input type="hidden" name="id" value="{{ $address->id }}" />
                                                         <button onclick="return confirm('Confirm delete this?')"
-                                                            class="btn btn-sm btn-danger">Delete</button>
+                                                            class="btn btn-sm btn-outline-danger">
+                                                            <i class="fas fa-trash"></i>
+                                                        </button>
                                                     </form>
                                                 </div>
                                                 <div class="col-auto ps-0 ms-0">
                                                     <a href="" class="btn btn-sm btn-success"
                                                         onclick="event.preventDefault();
-                                        document.getElementById('set_default_address_{{ $address->id }}').submit();">Set
-                                                        as Default</a>
+                                        document.getElementById('set_default_address_{{ $address->id }}').submit();">
+                                                        Set as Default
+                                                    </a>
                                                 </div>
                                                 <form action="/admin/default-address/{{ $address->id }}" method="post"
                                                     class="d-none" id="set_default_address_{{ $address->id }}">

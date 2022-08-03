@@ -35,6 +35,7 @@
                     <th scope="col">Continent</th>
                     <th scope="col">Country</th>
                     <th scope="col">Charge</th>
+                    <th scope="col" class="action-btn">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -44,13 +45,18 @@
                         <td>{{ $shippingcharge->continent }}</td>
                         <td>{{ $shippingcharge->country }}</td>
                         <td>{{ $shippingcharge->charge }}</td>
-                        <td><a href="/admin/shipping-charge/edit/{{ $shippingcharge->id }}" class="btn btn-info">Edit</a>
+                        <td>
+                            <a href="/admin/shipping-charge/edit/{{ $shippingcharge->id }}" class="btn btn-outline-primary">
+                                <i class="fas fa-pencil"></i>
+                            </a>
                             <form method="post" action="/admin/shipping-charge/{{ $shippingcharge->id }}">
                                 @csrf
                                 @method('DELETE')
                                 <input type="hidden" name="id" value="{{ $shippingcharge->id }}" />
-                                <button class="btn btn-danger"
-                                    onclick="return confirm('Do you really want to delete {{ $shippingcharge->continent }}?')">Delete</button>
+                                <button class="btn btn-outline-danger"
+                                    onclick="return confirm('Do you really want to delete {{ $shippingcharge->continent }}?')">
+                                    <i class="fas fa-trash"></i>
+                                </button>
                             </form>
                         </td>
                     </tr>
