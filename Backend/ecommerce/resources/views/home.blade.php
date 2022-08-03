@@ -25,7 +25,7 @@
                     @foreach ($categoryCollection as $key => $item)
                         <div class="item item_{{ $key + 4 }}">
                             <a href="/product?category={{ $item->title }}"><span>{{ ucfirst($item->title) }}</span></a>
-                            <div class="bg_img" style="background-image: url(/storage/{{ $item->image }})"></div>
+                            <div class="bg_img" style="background-image: url('/storage/{{ $item->image }}')"></div>
                         </div>
                     @endforeach
                 </div>
@@ -33,6 +33,7 @@
         </div><!-- End Collections -->
 
         <!-- Sliders for featured products -->
+        @if(count($featured) != 0)
         <div class="featured">
             <div class="wrapper">
                 <div class="heading">
@@ -75,6 +76,7 @@
                 </div>
             </div>
         </div><!-- End of Sliders for featured products -->
+        @endif
 
         <!-- Service description  -->
         <div class="shipping_desc">
