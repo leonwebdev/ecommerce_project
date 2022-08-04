@@ -36,56 +36,22 @@ class UserController extends Controller
                 'users.default_address_id',
                 'users.admin',
             )
-                ->join('user_addresses', 'users.id', '=', 'user_addresses.user_id')
                 ->where('users.first_name', 'LIKE', '%' . $search . '%')
                 ->orWhere('users.last_name', 'LIKE', '%' . $search . '%')
                 ->orWhere('users.email', 'LIKE', '%' . $search . '%')
-                ->orWhere('user_addresses.street', 'LIKE', '%' . $search . '%')
-                ->orWhere('user_addresses.city', 'LIKE', '%' . $search . '%')
-                ->orWhere('user_addresses.province', 'LIKE', '%' . $search . '%')
-                ->orWhere('user_addresses.country', 'LIKE', '%' . $search . '%')
-                ->orWhere('user_addresses.postal_code', 'LIKE', '%' . $search . '%')
+                ->orWhereHas('user_addresses', function ($q) use ($search) {
+                    return $q->where('street', 'LIKE', '%' . $search . '%')
+                        ->orWhere('city', 'LIKE', '%' . $search . '%')
+                        ->orWhere('province', 'LIKE', '%' . $search . '%')
+                        ->orWhere('country', 'LIKE', '%' . $search . '%')
+                        ->orWhere('postal_code', 'LIKE', '%' . $search . '%');
+                })
                 ->orderBy('users.created_at')
                 ->paginate($this->MAX_PER_PAGE);
         } else {
             $users = User::with('user_addresses')->latest()->paginate($this->MAX_PER_PAGE);
         }
-        // echo $users;
-        // var_dump($users);
-        // die;
-        return view('admin.user.index', compact('users', 'title'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        return view('admin.user.index', compact('users', 'title', 'search'));
     }
 
     /**
@@ -143,8 +109,6 @@ class UserController extends Controller
         $v_address['country'] = $valid['country'];
         $v_address['postal_code'] = $valid['postal_code'];
 
-        // var_dump($v_user, $v_address);
-        // die;
 
         $user->update($v_user);
         $address->update($v_address);

@@ -18,7 +18,6 @@ return new class extends Migration
         Schema::create('product_media', function (Blueprint $table) {
             $table->id();
             $table->integer('product_id');
-            $table->string('label', 255);
             $table->string('image', 255);
             $table->softDeletes();
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));

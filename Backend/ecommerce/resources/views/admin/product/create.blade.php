@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="row justify-content-center">
-        <div class="col-8">
+        <div class="col-md-8">
             <div class="card mb-4">
                 <div class="card-header">
                     <h2 class="mb-0">Add Product</h2>
@@ -59,14 +59,18 @@
                         <div class="mb-3">
                             <label for="images" class="form-label">Image</label>
                             <input type="file" name="images[]" multiple
-                                class="form-control  @error('images') is-invalid @enderror"" accept="image/*">
-                            @if ($errors->has('images'))
-                                @foreach ($errors->get('images') as $error)
-                                    <div class="invalid-feedback">
-                                        {{ $error }}
-                                    </div>
-                                @endforeach
-                            @endif
+                                class="form-control  @error('images') is-invalid @enderror @error('images.*') is-invalid @enderror"
+                                accept="image/*">
+                            @error('images')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                            @error('images.*')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
                         <div class="mb-3">
                             <label for="description" class="form-label">Description</label>

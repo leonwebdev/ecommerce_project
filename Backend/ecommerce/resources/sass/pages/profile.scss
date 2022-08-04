@@ -183,7 +183,7 @@
 
 .address_row {
     padding-bottom: 1rem;
-    margin-bottom: 1rem;
+    margin-bottom: 3rem;
 }
 
 .width-max-content {
@@ -282,7 +282,7 @@ hr {
     border-bottom: none;
 }
 #order_history_container {
-    max-width: 700px;
+    max-width: 630px;
 }
 
 .text-align-left {
@@ -317,18 +317,15 @@ a#shopping_now {
 }
 
 .order_container {
-    border-bottom: 1px solid rgba(92, 92, 92, 0.382);
     padding-bottom: 1rem;
-    // font-family: Arial, Helvetica, sans-serif;
-    // padding-right: 1px;
 }
 
 .min-width-20 {
-    min-width: 20rem;
+    min-width: 18rem;
 }
 
 .min-width-40 {
-    min-width: 40rem;
+    min-width: 500px;
 }
 
 .text-black {
@@ -368,22 +365,136 @@ a#shopping_now {
     background-color: #f8d7da;
 }
 
-.wrapper-alert{
+.wrapper-alert {
     padding: 0 20px;
 }
 
-.lh-btn.no-hover.text-transform-capitalize.pending{
+.lh-btn.no-hover.text-transform-capitalize.pending {
     background-color: rgb(6, 87, 122);
 }
 
-.lh-btn.no-hover.text-transform-capitalize.confirmed{
+.lh-btn.no-hover.text-transform-capitalize.confirmed {
     background-color: rgb(7, 101, 18);
 }
 
-.lh-btn.no-hover.text-transform-capitalize.delivered{
+.lh-btn.no-hover.text-transform-capitalize.delivered {
     background-color: rgb(135, 103, 8);
 }
 
-.lh-btn.no-hover.text-transform-capitalize.cancelled{
+.lh-btn.no-hover.text-transform-capitalize.cancelled {
     background-color: rgb(148, 7, 7);
+}
+
+.overflow-x-scroll {
+    overflow-x: scroll;
+}
+
+.form form button.lh-btn-delete{
+    padding: 5px;
+    min-width: 0;
+    margin: 0;
+    font-size: 1rem;
+    display: inline-block;
+    text-decoration: none;
+    font-weight: 700;
+    border: none;
+    border-radius: 3px;
+    background-color: rgb(43, 43, 43);
+    color: rgb(213, 9, 9);
+    transition: all 300ms ease-in-out;
+    -webkit-transition: all 300ms ease-in-out;
+}
+.form form button.lh-btn-delete:hover {
+    background-color: rgb(213, 9, 9);
+    color: rgb(43, 43, 43);
+}
+/* ----------------------------------------------------------------------
+                    Mobile CSS
+---------------------------------------------------------------------- */
+@media only screen and (max-width: 930px) and (min-width: 768px) {
+    .form.content#profile{
+        margin-left: 2rem;
+    }
+}
+@media only screen and (max-width: 810px) and (min-width: 768px) {
+    #order_history_container {
+    max-width: 570px;
+}
+}
+
+@media only screen and (max-width: 767px) {
+    main {
+        .container {
+            div.wrapper {
+                display: block;
+                aside {
+                    display: flex;
+                    border-right: none;
+                    width: 100%;
+                    padding-right: 0;
+                    justify-content: center;
+                    a {
+                        width: 50%;
+                    }
+                }
+            }
+            div#profile {
+                margin-left: 0;
+                p.text-end {
+                    width: calc((100% - 10px) / 12 * 5);
+                }
+                p.text-start {
+                    width: calc((100% - 10px) / 12 * 7);
+                }
+                #User_address {
+                    .address_row {
+                        .key,
+                        .full_address {
+                            font-size: 1.1rem;
+                        }
+                        .full_address {
+                            flex-grow: 1;
+                        }
+                        .action {
+                            display: block;
+                            div.pe-0_5 {
+                                display: flex;
+                                justify-content: end;
+                                padding-right: 0;
+                                padding-bottom: 0.5rem;
+                                text-align: right;
+                                width: 100%;
+                            }
+                            div.flex-grow-1 {
+                                display: flex;
+                                justify-content: end;
+                                padding-right: 0;
+                                text-align: right;
+                            }
+                        }
+                    }
+                }
+                #order_history_container{
+                    margin-left: auto;
+                    margin-right: auto;
+                    .order_container{
+                        margin-left: 0;
+                        margin-right: 0;
+                        .product_list{
+                            min-width: 0px;
+                            div.d-flex{
+                                div.text-align-right{
+                                    flex-grow: 0;
+                                    a{
+                                        width: max-content;
+                                        display: block;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

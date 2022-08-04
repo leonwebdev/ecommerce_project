@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="row justify-content-center">
-        <div class="col-8">
+        <div class="col-md-8">
             <div class="card mb-4">
                 <div class="card-header">
                     <h2 class="mb-0">Add Shipping Charge</h2>
@@ -10,7 +10,7 @@
                 <div class="card-body">
                 {{-- {{ $errors }} --}}
                 <form  enctype="multipart/form-data" id="create" action="/admin/shipping-charge" method="post">
-                @csrf 
+                @csrf
                 <div class="mb-3">
                     <label for="continent" class="form-label">Continent</label>
                     <input type="text" name="continent" class="form-control @error('continent') is-invalid @enderror"  id="continent" value="{{ old('continent') }}" />
@@ -47,5 +47,5 @@
 
         </div>
 </div>
-    
+
 @endsection

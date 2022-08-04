@@ -1,7 +1,7 @@
 <!--Main Navigation-->
 <header>
     <!-- Sidebar -->
-    <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white">
+    <nav id="sidebarMenu" class="d-lg-block sidebar collapse bg-white">
         <div class="position-sticky">
             <div class="list-group list-group-flush mx-3 mt-4">
                 <a href="/admin/dashboard" class="list-group-item list-group-item-action py-2 ripple">
@@ -41,7 +41,7 @@
                     <span>Taxes</span>
                 </a>
                 <a href="/admin/shipping-charge" class="list-group-item list-group-item-action py-2 ripple">
-                    <i class="fas fa-sack-dollar fa-fw me-3"></i>
+                    <i class="fas fa-truck-fast fa-fw me-3"></i>
                     <span>Shipping Charge</span>
                 </a>
             </div>
@@ -62,23 +62,23 @@
             <a class="navbar-brand" href="/admin/dashboard">
                 <img src="/images/logo-uptrend.svg" width="70" height="70" alt="UPtrend logo"
                     class="d-none d-lg-inline" />
-                <span>Admin Panel</span>
+                <span class="d-none d-lg-inline">Admin Panel</span>
             </a>
 
             <!-- Right links -->
             <ul class="navbar-nav ms-auto d-flex flex-row align-items-center">
                 <li class="nav-item me-2">
-                    <a class="nav-link btn btn-light" href="/"
+                    <a class="nav-link btn text-success" href="/" target="_blank"
                         role="button">Customer Site</a>
                 </li>
                 <!-- User -->
-                <li>
-                    <a class="btn btn_white_no_border" href="{{ route('profile') }}">
-                        {{ Auth::user()->first_name . ' ' . Auth::user()->last_name }}
-                    </a>
+                <li class="nav-item me-2">
+                    <a class="nav-link btn" href="{{ route('profile') }}"
+                        target="_blank"
+                        >{{ Auth::user()->first_name }}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-danger fw-bold" href="/logout"
+                    <a class="nav-link btn text-danger" href="/logout"
                         onclick="event.preventDefault();
                         document.getElementById('logout-form').submit();">Logout</a>
                 </li>
@@ -111,7 +111,10 @@
                         <a class="nav-link text-center" href="/admin/user">Users</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-center" href="/admin/address">Addresses</a>
+                        <a class="nav-link text-center" href="/admin/tax">Taxes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-center" href="/admin/shipping-charge">Shipping Charge</a>
                     </li>
                 </ul>
             </div>

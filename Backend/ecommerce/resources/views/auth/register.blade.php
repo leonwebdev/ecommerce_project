@@ -85,8 +85,8 @@
                         </p>
                         <p class="col col-12 terms required">
                             <input type="checkbox" name="terms" id="terms" />
-                            <label for="terms">I accept the <a href="#" target="_blank">Terms of Use</a> & <a
-                                    href="#" target="_blank">Privacy Policy</a> .</label>
+                            <label for="terms">I accept the <a href="/terms-and-conditions" target="_blank">Terms of Use</a> & <a
+                                        href="/privacy-policy" target="_blank">Privacy Policy</a> .</label>
                             @error('terms')
                                 <span class="error">{{ $message }}</span>
                             @enderror

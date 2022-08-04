@@ -71,14 +71,35 @@
                 @enderror
               </div>
 
-              <div class="mb-3">
-                <input type="submit" class="btn btn-primary">
-              </div>
-          </form>
+                                @foreach ($pages as $page)
+                                    <option @if (old('page', $page) == $advertisement->pages) selected @endif value="{{ $page }}">
+                                        {{ $page }}</option>
+                                @endforeach
+                            </select>
+                            @error('pages')
+                                <span style="color: #900">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label for="area" class="form-label">Select the area</label>
+                            <select class="form-select" name="area" aria-label="Default select example">
+
+                                @foreach ($area as $areaa)
+                                    <option @if (old('areaa', $areaa) == $advertisement->area) selected @endif value="{{ $areaa }}">
+                                        {{ $areaa }}</option>
+                                @endforeach
+                            </select>
+                            @error('pages')
+                                <span style="color: #900">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="mb-3">
+                            <input type="submit" class="btn btn-primary">
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-      </div>
-  </div>
-</div>
-    
-    
+    </div>
 @endsection

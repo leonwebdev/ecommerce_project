@@ -67,7 +67,12 @@ class UserAddressController extends Controller
         $user_address = UserAddress::find($id);
         $user = User::find($user_address->user_id);
         $valid['default_address_id'] = $id;
-        $user->update($valid);
+
+        if ($user->update($valid)) {
+            session()->flash('success', 'Default address was successfully updated.');
+        } else {
+            session()->flash('error', 'There was a problem updating the Default address');
+        }
         return redirect('/profile#User_address');
     }
 
@@ -90,8 +95,15 @@ class UserAddressController extends Controller
      */
     public function store(Request $request)
     {
-
         
+        $prev_url = url()->previous();
+        $prev_route = app('router')->getRoutes($prev_url)->match(app('request')->create($prev_url))->getName();
+
+        if($prev_route == 'checkoutCart' ) {
+            // for checkout address selection use
+            session(['addr_store_form' => true]);
+        }
+
         $valid = $request->validate(
             [
                 'street' => ['required', 'string', 'min:3', 'max:255'],
@@ -116,8 +128,6 @@ class UserAddressController extends Controller
             session()->flash('error', 'There was a problem creating the Address');
         }
 
-        $prev_url = url()->previous();
-        $prev_route = app('router')->getRoutes($prev_url)->match(app('request')->create($prev_url))->getName();
 
         if($prev_route == 'checkoutCart' ) {
             session(['shipping_addr_id' => $user_address->id]);
@@ -126,4 +136,23 @@ class UserAddressController extends Controller
             return redirect('/profile#User_address');
         }
     }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $address = UserAddress::find($id);
+
+        if ($address->delete()) {
+            session()->flash('success', 'Address was deleted successfully.');
+            return redirect('/profile');
+        }
+        session()->flash('error', 'There was a problem deleting the Address');
+        return redirect('/profile');
+    }
+
 }

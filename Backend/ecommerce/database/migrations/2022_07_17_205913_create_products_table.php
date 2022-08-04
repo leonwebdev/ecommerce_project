@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('name', 255);
             $table->string('slug', 255)->unique();
             $table->string('color', 255);
-            $table->text('summary');
             $table->longText('description');
             $table->decimal('price');
             $table->integer('quantity');

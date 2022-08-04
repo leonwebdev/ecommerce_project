@@ -80,7 +80,8 @@ class ProductController extends Controller
                 'sizes',
                 'products',
                 'categoryFilter',
-                'sizeFilter'
+                'sizeFilter',
+                'search'
             )
         );
     }

@@ -59,7 +59,7 @@ class UserAddressTableSeeder extends Seeder
             'user_id' => '1',
             'street' => '1354 Johnson Street',
             'city' => 'Brandon',
-            'province' => 'Princess Edward Island',
+            'province' => 'Prince Edward Island',
             'country' => 'Canada',
             'postal_code' => 'W0Z 8K2',
             'created_at' => now(),

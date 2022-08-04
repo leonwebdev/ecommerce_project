@@ -6,10 +6,11 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\ShippingCharge;
 use App\Http\Controllers\Controller;
+use Exception;
 
 class ShippingChargeController extends Controller
 {
-        /**
+    /**
      * Index function
      *
      * @return void
@@ -17,17 +18,17 @@ class ShippingChargeController extends Controller
     public function index(Request $request)
     {
         $title = 'Admin | Shipping Charge';
-        //$categories = Category::latest()->paginate(10);
+
         $search = $request->query('search');
         if ($search) {
-            $shippingcharges = ShippingCharge::latest()->where('continent','LIKE','%'.$search."%")->paginate(10);
+            $shippingcharges = ShippingCharge::latest()->where('continent', 'LIKE', '%' . $search . "%")->paginate(10);
         } else {
             $shippingcharges = ShippingCharge::latest()->paginate(10);
         }
-        
-        return view('/admin/shipping-charge/index', compact('shippingcharges','title'));
+
+        return view('/admin/shipping-charge/index', compact('shippingcharges', 'title', 'search'));
     }
-         /**
+    /**
      * create function
      *
      * @return void
@@ -48,24 +49,28 @@ class ShippingChargeController extends Controller
         $valid = $request->validate([
             'continent' => 'required|string|max:255',
             'country' => 'required|string|max:255',
-            'charge' => 'required|regex:/^\d+(\.\d{1,2})?$/'  
+            'charge' => 'required|regex:/^\d+(\.\d{1,2})?$/'
         ]);
+        try {
 
-        ShippingCharge::create($valid);
+            ShippingCharge::create($valid);
 
-        session()->flash('success', 'Shipping Charge successfully created!');
-        
-        return redirect('/admin/shipping-charge');
+            session()->flash('success', 'Shipping Charge successfully created!');
 
+            return redirect('/admin/shipping-charge');
+        } catch (Exception $e) {
+            session()->flash('error', 'There was a problem creating the Shipping Charge!');
 
+            return redirect('/admin/shipping-charge');
+        }
     }
-       /**
+    /**
      * edit function
      *
      * @return void
      */
     public function edit(ShippingCharge $shippingcharge)
-   
+
     {
         $title = 'Admin | Shipping Charge';
         return view('/admin/shipping-charge/edit', compact('shippingcharge', 'title'));
@@ -81,22 +86,21 @@ class ShippingChargeController extends Controller
             'id' => 'required|integer',
             'continent' => 'required|string|max:255',
             'country' => 'required|string|max:255',
-            'charge' => 'required|regex:/^\d+(\.\d{1,2})?$/'  
+            'charge' => 'required|regex:/^\d+(\.\d{1,2})?$/'
         ]);
 
         $shippingcharge = ShippingCharge::find($valid['id']);
 
         $shippingcharge->update($valid);
 
-        if($shippingcharge->save()) {
-            session()->flash('success', 'Shipping Charge was successfully updated'); 
+        if ($shippingcharge->save()) {
+            session()->flash('success', 'Shipping Charge was successfully updated!');
         } else {
-            session()->flash('error', 'There was a problem updating the Shipping Charge');
+            session()->flash('error', 'There was a problem updating the Shipping Charge!');
         }
         return redirect('/admin/shipping-charge');
-
     }
-       /**
+    /**
      * destroy function
      *
      * @return void
@@ -104,13 +108,11 @@ class ShippingChargeController extends Controller
     public function destroy(Request $request, $id)
     {
         $shippingcharge = ShippingCharge::find($id);
-        if($shippingcharge->delete()) {
-            session()->flash('success', 'Shipping Charge was deleted');
+        if ($shippingcharge->delete()) {
+            session()->flash('success', 'Shipping Charge record has been deleted!');
             return redirect('/admin/shipping-charge');
         }
-        session()->flash('error', 'There was a problem deleting the Shipping Charge');
+        session()->flash('error', 'There was a problem deleting the Shipping Charge!');
         return redirect('/admin/shipping-charge');
-        
     }
-
 }

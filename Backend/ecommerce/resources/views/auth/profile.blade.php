@@ -17,12 +17,12 @@
                         <div class="width-8 text-align-end"><a href="{{ route('profile-edit', ['user' => $user->id]) }}"
                                 class="lh-btn fs-1">Edit</a></div>
                     </div>
-                    <p class="col col-6 fs-1_4 text-end fw-bold">Name : </p>
-                    <p class="col col-6 fs-1_4 text-start">{{ $user->first_name . ' ' . $user->last_name }}</p>
-                    <p class="col col-6 fs-1_4 text-end fw-bold">Email : </p>
-                    <p class="col col-6 fs-1_4 text-start">{{ $user->email }}</p>
-                    <p class="col col-6 fs-1_4 text-end fw-bold">Phone : </p>
-                    <p class="col col-6 fs-1_4 text-start">{{ $user->phone }}</p>
+                    <p class="col col-5 fs-1_4 text-end fw-bold">Name : </p>
+                    <p class="col col-7 fs-1_4 text-start">{{ $user->first_name . ' ' . $user->last_name }}</p>
+                    <p class="col col-5 fs-1_4 text-end fw-bold">Email : </p>
+                    <p class="col col-7 fs-1_4 text-start">{{ $user->email }}</p>
+                    <p class="col col-5 fs-1_4 text-end fw-bold">Phone : </p>
+                    <p class="col col-7 fs-1_4 text-start">{{ $user->phone }}</p>
                     <hr class="my-2">
                     <div id="User_address">
                         <h1 class="my-3">User Address</h1>
@@ -37,10 +37,27 @@
                                     <div class="width-max-content pe-0_5"><a
                                             href="{{ route('address-edit', ['user_address' => $address->id]) }}"
                                             class="lh-btn">Edit</a></div>
+                                    <div class="width-max-content pe-0_5">
+                                        @if ($address->is_default_address())
+                                            <div class="width-max-content flex-grow-1">
+                                                <a href="" class="lh-btn-outline" style="color: rgb(181, 182, 185);border: 1px solid rgb(189, 189, 192);"
+                                                    onclick="event.preventDefault();">Delete</a>
+                                            </div>
+                                        @else
+                                            <form method="post" action="/address/{{ $address->id }}"
+                                                style="width: min-content">
+                                                @csrf
+                                                @method('DELETE')
+                                                <input type="hidden" name="id" value="{{ $address->id }}" />
+                                                <button onclick="return confirm('Confirm delete this?')"
+                                                    class="lh-btn-delete">Delete</button>
+                                            </form>
+                                        @endif
+                                    </div>
                                     @if ($address->is_default_address())
                                         <div class="width-max-content flex-grow-1">
                                             <a href="" class="lh-btn-outline"
-                                                onclick="event.preventDefault();">Default Address</a>
+                                                onclick="event.preventDefault();">Default Addr.</a>
                                         </div>
                                     @else
                                         <div class="width-max-content flex-grow-1">

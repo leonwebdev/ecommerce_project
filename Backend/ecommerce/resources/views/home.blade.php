@@ -5,9 +5,9 @@
         <!-- Banner -->
         <div class="banner">
             @foreach ($ads as $ad)
-            <div class="banner_item" style="background-image: url('/storage/{{ $ad->image }}')">
-                <a href="{{ $ad->link }}"></a>
-            </div>
+                <div class="banner_item" style="background-image: url('/storage/{{ $ad->image }}')">
+                    <a href="{{ $ad->link }}"></a>
+                </div>
             @endforeach
         </div><!-- End Banner -->
 
@@ -25,7 +25,7 @@
                     @foreach ($categoryCollection as $key => $item)
                         <div class="item item_{{ $key + 4 }}">
                             <a href="/product?category={{ $item->title }}"><span>{{ ucfirst($item->title) }}</span></a>
-                            <div class="bg_img" style="background-image: url(/storage/{{ $item->image }})"></div>
+                            <div class="bg_img" style="background-image: url('/storage/{{ $item->image }}')"></div>
                         </div>
                     @endforeach
                 </div>
@@ -33,6 +33,7 @@
         </div><!-- End Collections -->
 
         <!-- Sliders for featured products -->
+        @if(count($featured) != 0)
         <div class="featured">
             <div class="wrapper">
                 <div class="heading">
@@ -54,11 +55,16 @@
                                         <div class="featured_item">
                                             <div class="product_img">
                                                 <a href="/product/{{ $item->slug }}">
-                                                    <img src="/images/item1.jpg" alt="item" />
+                                                    @if (isset($item->product_media) && count($item->product_media) > 0)
+                                                        <img src="{{ asset('/storage/' . $item->product_media[0]->image) }}"
+                                                            alt="{{ $item->slug }}">
+                                                    @else
+                                                        <img src="/images/product-image-not-found.jpg" alt="product-image-not-found">
+                                                    @endif
                                                 </a>
                                             </div>
                                             <div class="title">
-                                                {{ $item->name }}
+                                                <a href="/product/{{ $item->slug }}"> {{ $item->name }}</a>
                                             </div>
                                             <div class="price">${{ $item->price }} CAD</div>
                                         </div>
@@ -70,6 +76,7 @@
                 </div>
             </div>
         </div><!-- End of Sliders for featured products -->
+        @endif
 
         <!-- Service description  -->
         <div class="shipping_desc">
@@ -110,7 +117,7 @@
                 <img src="/images/home/influencers_10.jpg" alt="influencers" />
             </div>
             <div class="black_layer">
-                <a href="#" class="btn btn_white_border">Instagram Influencers</a>
+                <span>Instagram Influencers</span>
             </div>
         </div><!-- End of Instagram influencer -->
 
