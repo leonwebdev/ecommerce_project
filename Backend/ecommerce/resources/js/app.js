@@ -80,21 +80,24 @@ function menuDropdown() {
  * return void
  */
 function searchAnimation() {
-    $('.nav_bar .utils .search > a').click(function (e) {
+    $(".nav_bar .utils .search > a").click(function (e) {
         e.preventDefault();
 
-        $('.search #search_bar')
+        $(".search #search_bar")
             .css({
                 "z-index": 999,
-                visibility: 'visible'
+                visibility: "visible",
             })
-            .animate({
-                // show 
-                opacity: 1,
-            }, 150)
+            .animate(
+                {
+                    // show
+                    opacity: 1,
+                },
+                150
+            )
             .animate(300, function () {
                 setTimeout(function () {
-                    $('.search #search_bar #search').focus();
+                    $(".search #search_bar #search").focus();
                 }, 600);
             })
             .css("pointer-events", "auto");
@@ -105,7 +108,7 @@ function searchAnimation() {
  * Home page banner slider animation control
  */
 function homeBannerSlider() {
-    $('.home .banner').slick({
+    $(".home .banner").slick({
         dots: true,
         arrows: true,
         infinite: true,
@@ -113,8 +116,8 @@ function homeBannerSlider() {
         autoplay: true,
         autoplaySpeed: 3000,
         fade: true,
-        cssEase: 'linear',
-        draggable: true
+        cssEase: "linear",
+        draggable: true,
     });
 }
 
@@ -122,32 +125,42 @@ function homeBannerSlider() {
  * Home page featured products slider animation control
  */
 function homeFeaturedSlider() {
-    $('.featured_slider').slick({
+    $(".featured_slider").slick({
         slidesToShow: 3,
         slidesToScroll: 1,
         dots: true,
         centerMode: true,
         focusOnSelect: true,
-        lazyLoad: 'ondemand',
+        lazyLoad: "ondemand",
+        responsive: [
+            {
+                breakpoint: 767,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 2,
+                    infinite: true,
+                    dots: false,
+                },
+            },
+        ],
     });
 
     // add class name to the first tabs item when page loaded
-    $('.featured .tabs ul li:first').addClass('active');
-    $('.featured .content .row:first').addClass('show');
+    $(".featured .tabs ul li:first").addClass("active");
+    $(".featured .content .row:first").addClass("show");
 
-    $('.featured .tabs ul li').each(function (tabIdx) {
-
+    $(".featured .tabs ul li").each(function (tabIdx) {
         $(this).click(function (e) {
             e.preventDefault();
             // add class to selected tab
-            $('.featured .tabs ul li').removeClass('active');
-            $(this).addClass('active');
-            $('.featured .content .row').removeClass('show');
+            $(".featured .tabs ul li").removeClass("active");
+            $(this).addClass("active");
+            $(".featured .content .row").removeClass("show");
             // add class to selected slider
-            $('.featured .content .row').each(function (itemIdx) {
+            $(".featured .content .row").each(function (itemIdx) {
                 var item = $(this);
                 if (tabIdx == itemIdx) {
-                    item.addClass('show');
+                    item.addClass("show");
                 }
             });
         });
@@ -208,7 +221,7 @@ function productImageSlider() {
 }
 
 /**
- * Checkout page shipping address information effects 
+ * Checkout page shipping address information effects
  */
 function checkoutAddrEffect() {
     $('.cart #select_addr_btn').click(function (e) {
