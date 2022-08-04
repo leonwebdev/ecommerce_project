@@ -3,12 +3,16 @@
     display: inline-block;
     vertical-align: top;
     width: calc(100% - $sidebar-width - $sidebar-margin - 5px);
-
+    padding-top: 20px;
     .content {
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
-
+        .no-data-label {
+            height: 50vh;
+            display: flex;
+            align-items: center;
+        }
         .item {
             flex: 0 0 33.333333%;
             padding: 0 20px;
@@ -207,8 +211,15 @@
     }
     .list_item {
         width: 100%;
-    }
-    .list_item .content .item {
-        flex: 0 0 50%;
+        .content {
+            .no-data-label {
+                display: block;
+                padding: 15px 0;
+                height: 100%;
+            }
+            .item {
+                flex: 0 0 50%;
+            }
+        }
     }
 }
