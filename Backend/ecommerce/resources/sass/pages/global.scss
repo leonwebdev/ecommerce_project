@@ -183,6 +183,11 @@ button {
     display: inline-block;
     vertical-align: top;
     padding: 24px 5px;
+
+    @media only screen and (max-width: 767px) {
+        padding: 10px 0;
+    }
+
     a {
         display: block;
         padding: 10px;
@@ -381,16 +386,33 @@ footer {
     padding: 35px 0;
 
     .footer_menu {
+        @media only screen and (max-width: 470px) {
+            margin-bottom: 40px;
+        }
         ul li {
             display: inline-block;
             vertical-align: top;
+            @media only screen and (max-width: 470px) {
+                display: block;
+            }
 
             a {
                 display: block;
                 padding: 30px 20px;
+                @media only screen and (max-width: 767px) {
+                    padding: 20px 10px;
+                }
+                @media only screen and (max-width: 470px) {
+                    padding: 10px 10px;
+                }
             }
         }
     }
+
+    @media only screen and (max-width: 767px) {
+        padding: 25px 0;
+    }
+
 }
 
 /* =============== Form page =============== */
