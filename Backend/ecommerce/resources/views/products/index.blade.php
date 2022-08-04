@@ -107,50 +107,63 @@
         </div>
     </div>
 @endsection
-<script>
-    function filterByCategory(e, el) {
-        const urlSearchParams = new URLSearchParams(window.location.search);
-        const params = Object.fromEntries(urlSearchParams.entries());
-        let selectedCategory = params.category ? params.category.split(',') : [];
-        if (selectedCategory.findIndex(x => x == e.target.value) === -1) {
-            // add selected category in url
-            selectedCategory.push(e.target.value);
-        } else {
-            // remove unselected category from url
-            selectedCategory.splice(selectedCategory.findIndex(x => x == e.target.value), 1);
-        }
+@section('footer-script')
+    <script>
+        /** 
+         * filter by Category function to create dynamic url 
+         * based on category selection
+         * 
+         *  event and element as argument 
+         */
+        function filterByCategory(e, el) {
+            const urlSearchParams = new URLSearchParams(window.location.search);
+            const params = Object.fromEntries(urlSearchParams.entries());
+            let selectedCategory = params.category ? params.category.split(',') : [];
+            if (selectedCategory.findIndex(x => x == e.target.value) === -1) {
+                // add selected category in url
+                selectedCategory.push(e.target.value);
+            } else {
+                // remove unselected category from url
+                selectedCategory.splice(selectedCategory.findIndex(x => x == e.target.value), 1);
+            }
 
-        let url = window.location.pathname;
-        let categoryStr = selectedCategory.toString();
-        if (params.size) {
-            url = `${url}?category=${categoryStr}&size=${params.size}`;
-        } else {
-            url = `${url}?category=${categoryStr}`;
+            let url = window.location.pathname;
+            let categoryStr = selectedCategory.toString();
+            if (params.size) {
+                url = `${url}?category=${categoryStr}&size=${params.size}`;
+            } else {
+                url = `${url}?category=${categoryStr}`;
+            }
+            // refresh page
+            window.location = url;
         }
-        // refresh page
-        window.location = url;
-    }
+        /** 
+         * filter by size function to create dynamic url 
+         * based on size selection
+         * 
+         *  event and element as argument 
+         */
+        function filterBySize(e, el) {
+            const urlSearchParams = new URLSearchParams(window.location.search);
+            const params = Object.fromEntries(urlSearchParams.entries());
+            let selectedSize = params.size ? params.size.split(',') : [];
+            if (selectedSize.findIndex(x => x == e.target.value) === -1) {
+                // add selected size in url
+                selectedSize.push(e.target.value);
+            } else {
+                // remove unselected size from url
+                selectedSize.splice(selectedSize.findIndex(x => x == e.target.value), 1);
+            }
 
-    function filterBySize(e, el) {
-        const urlSearchParams = new URLSearchParams(window.location.search);
-        const params = Object.fromEntries(urlSearchParams.entries());
-        let selectedSize = params.size ? params.size.split(',') : [];
-        if (selectedSize.findIndex(x => x == e.target.value) === -1) {
-            // add selected size in url
-            selectedSize.push(e.target.value);
-        } else {
-            // remove unselected size from url
-            selectedSize.splice(selectedSize.findIndex(x => x == e.target.value), 1);
+            let url = window.location.pathname;
+            let sizeStr = selectedSize.toString();
+            if (params.category) {
+                url = `${url}?category=${params.category}&size=${sizeStr}`;
+            } else {
+                url = `${url}?size=${sizeStr}`;
+            }
+            // refresh page
+            window.location = url;
         }
-
-        let url = window.location.pathname;
-        let sizeStr = selectedSize.toString();
-        if (params.category) {
-            url = `${url}?category=${params.category}&size=${sizeStr}`;
-        } else {
-            url = `${url}?size=${sizeStr}`;
-        }
-        // refresh page
-        window.location = url;
-    }
-</script>
+    </script>
+@endsection

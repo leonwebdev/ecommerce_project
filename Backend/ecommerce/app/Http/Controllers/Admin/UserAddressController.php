@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\UserAddress;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Exception;
 
 class UserAddressController extends Controller
 {
@@ -44,38 +45,6 @@ class UserAddressController extends Controller
             $addresses = UserAddress::orderBy('user_id', 'asc')->paginate($this->MAX_PER_PAGE);
         }
         return view('admin.address.index', compact('title', 'addresses',));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
@@ -131,7 +100,7 @@ class UserAddressController extends Controller
             session()->flash('success', 'Address was deleted');
             return redirect('/admin/address');
         }
-        session()->flash('error', 'There was a problem deleting the Address');
+        session()->flash('error', 'There was a problem deleting the Address!');
         return redirect('/admin/address');
     }
 
@@ -147,7 +116,12 @@ class UserAddressController extends Controller
         $user_address = UserAddress::find($id);
         $user = User::find($user_address->user_id);
         $valid['default_address_id'] = $id;
-        $user->update($valid);
-        return redirect('/admin/address');
+        try {
+            $user->update($valid);
+            return redirect('/admin/address');
+        } catch (Exception $e) {
+            session()->flash('error', 'There was a problem updating the default Address!');
+            return redirect('/admin/address');
+        }
     }
 }

@@ -60,24 +60,24 @@ function menuDropdown() {
  * return void
  */
 function searchAnimation() {
-    $('.nav_bar .utils .search > a').click(function(e) {
+    $('.nav_bar .utils .search > a').click(function (e) {
         e.preventDefault();
 
         $('.search #search_bar')
-        .css({
-            "z-index": 999,
-            visibility: 'visible'
-        })
-        .animate({
-            // show 
-            opacity: 1,
-        }, 150)
-        .animate(300, function() {
-            setTimeout(function() {
-                $('.search #search_bar #search').focus(); 
-            }, 600);
-        })
-        .css("pointer-events", "auto");
+            .css({
+                "z-index": 999,
+                visibility: 'visible'
+            })
+            .animate({
+                // show 
+                opacity: 1,
+            }, 150)
+            .animate(300, function () {
+                setTimeout(function () {
+                    $('.search #search_bar #search').focus();
+                }, 600);
+            })
+            .css("pointer-events", "auto");
     });
 }
 
@@ -139,6 +139,7 @@ function homeFeaturedSlider() {
  * Product Detail page product images
  */
 function productImageSlider() {
+    //slider
     $('.product-media-slider').slick({
         slidesToShow: 1,
         slidesToScroll: 1,
@@ -146,6 +147,7 @@ function productImageSlider() {
         fade: true,
         asNavFor: '.product-media-slider-nav'
     });
+    // slider navigation
     $('.product-media-slider-nav').slick({
         slidesToShow: 3,
         slidesToScroll: 1,
@@ -193,7 +195,7 @@ function checkoutAddrEffect() {
         e.preventDefault();
         $('.cart .address_form').slideUp();
 
-        if($('.cart .address_list').css('display') == 'block') {
+        if ($('.cart .address_list').css('display') == 'block') {
             $('.cart .address_list').slideUp();
         } else {
             $('.cart .address_list').slideDown();
@@ -205,7 +207,7 @@ function checkoutAddrEffect() {
 
         $('.cart .address_list').slideUp();
 
-        if($('.cart .address_form').css('display') == 'block') {
+        if ($('.cart .address_form').css('display') == 'block') {
             $('.cart .address_form').slideUp();
         } else {
             $('.cart .address_form').slideDown();
