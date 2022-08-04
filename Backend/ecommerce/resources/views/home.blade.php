@@ -117,7 +117,7 @@
                 <img src="/images/home/influencers_10.jpg" alt="influencers" />
             </div>
             <div class="black_layer">
-                <a href="#" class="btn btn_white_border">Instagram Influencers</a>
+                <span>Instagram Influencers</span>
             </div>
         </div><!-- End of Instagram influencer -->
 
