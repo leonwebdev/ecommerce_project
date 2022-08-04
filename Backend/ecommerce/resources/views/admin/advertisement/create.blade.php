@@ -16,21 +16,27 @@
                     <label for="image" class="form-label">Image</label>
                     <input type="file" name="image" class="form-control" id="image" />
                     @error('image')
-                        <span style="color: #900">{{ $message }}</span>
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
                     @enderror
                 </div>
                 <div class="mb-3">
                     <label for="title" class="form-label">Title</label>
                     <input type="text" name="title" class="form-control" id="title" value="{{ old('title') }}" />
                     @error('title')
-                        <span style="color: #900">{{ $message }}</span>
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
                     @enderror
                 </div>
                 <div class="mb-3">
                     <label for="link" class="form-label">Link</label>
                     <input type="text" name="link" class="form-control" id="link" value="{{ old('link') }}" />
                     @error('link')
-                        <span style="color: #900">{{ $message }}</span>
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
                     @enderror
                 </div>
                 <div class="mb-3">
@@ -41,7 +47,9 @@
                         @endforeach
                     </select>
                     @error('pages')
-                                    <span style="color: #900">{{ $message }}</span>
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
                     @enderror
                 </div>
                 <div class="mb-3">
@@ -52,7 +60,9 @@
                         @endforeach
                     </select>
                     @error('area')
-                                    <span style="color: #900">{{ $message }}</span>
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
                     @enderror
                 </div>
 
