@@ -5,8 +5,10 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Gender;
+use App\Models\Inquiry;
 use App\Models\Order;
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -26,15 +28,14 @@ class DashboardController extends Controller
         $orderCount = Order::all()->count();
         $pendingOrderCount = Order::where('order_status', '=', 'pending')->count();
         $deliveredOrderCount = Order::where('order_status', '=', 'delivered')->count();
-        $deliveredOrderCount = Order::where('order_status', '=', 'delivered')->count();
         $avgOrderValue = Order::avg('total');
         // order end
 
         // summary start
         $productCount = Product::all()->count();
         $categoryCount = Category::all()->count();
-        $userCount = Category::all()->count();
-        $inquiryCount = Category::all()->count();
+        $userCount = User::all()->count();
+        $inquiryCount = Inquiry::all()->count();
         // summary end
 
         // pie chart
