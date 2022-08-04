@@ -8,7 +8,7 @@ class AboutController extends Controller
 {
     public function index()
     {
-        $title = 'About';
+        $title = 'About Uptrend Group';
         return view('about', compact('title'));
     }
 }

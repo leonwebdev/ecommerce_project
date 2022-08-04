@@ -30,9 +30,9 @@
                             @enderror
                         </p>
                         <p class="col col-12 required">
-                        <label for="message">Message:</label><br />
-                            <textarea rows="6" cols="90" id="message" name="message" placeholder="Message">
-                                {{ old('message') }}
+                            <label for="message">Message:</label>
+                            <textarea rows="10" id="message" name="message" placeholder="Message">
+                                    {{ old('message') }}
                             </textarea>
                             @error('message')
                                 <span class="error">{{ $message }}</span>
