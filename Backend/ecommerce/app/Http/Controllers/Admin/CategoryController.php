@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Exception;
 
 class CategoryController extends Controller
 {
@@ -16,7 +17,7 @@ class CategoryController extends Controller
     public function index(Request $request)
     {
         $title = 'Admin | Category';
-        //$categories = Category::latest()->paginate(10);
+
         $search = $request->query('search');
         if ($search) {
             $categories = Category::latest()->where('title', 'LIKE', '%' . $search . "%")->paginate(10);
@@ -52,15 +53,20 @@ class CategoryController extends Controller
             $path =  $request->file('image')->store('public');
         }
 
-        // Must give in_print a value
         $valid['image'] = basename($path ?? 'default.png');
-        //$valid['in_print'] = $valid['in_print'] ?? 0;
 
-        Category::create($valid);
+        try {
 
-        session()->flash('success', 'Category successfully created!');
+            Category::create($valid);
 
-        return redirect('/admin/category');
+            session()->flash('success', 'Category successfully created!');
+
+            return redirect('/admin/category');
+        } catch (Exception $e) {
+
+            session()->flash('error', 'There was a problem creating the Category!');
+            return redirect('/admin/category');
+        }
     }
     /**
      * edit function
@@ -97,9 +103,9 @@ class CategoryController extends Controller
         $category->update($valid);
 
         if ($category->save()) {
-            session()->flash('success', 'Category was successfully updated');
+            session()->flash('success', 'Category was successfully updated!');
         } else {
-            session()->flash('error', 'There was a problem updating the Category');
+            session()->flash('error', 'There was a problem updating the Category!');
         }
         return redirect('/admin/category');
     }

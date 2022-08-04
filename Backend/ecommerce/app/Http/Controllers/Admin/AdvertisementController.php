@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Models\Advertisement;
 use App\Http\Controllers\Controller;
+use Exception;
 
 class AdvertisementController extends Controller
 {
@@ -57,21 +58,24 @@ class AdvertisementController extends Controller
             $path =  $request->file('image')->store('public');
         }
 
-        // Must give in_print a value
         $valid['image'] = basename($path ?? 'default.png');
-        //$valid['in_print'] = $valid['in_print'] ?? 0;
+        try {
+            Advertisement::create($valid);
 
-        Advertisement::create($valid);
+            session()->flash('success', 'Advertisement successfully created!');
 
-        session()->flash('success', 'Advertisement successfully created!');
+            return redirect('/admin/advertisement');
+        } catch (Exception $e) {
 
-        return redirect('/admin/advertisement');
+            session()->flash('error', 'There was a problem creating advertisement!');
+            return redirect('/admin/advertisement');
+        }
     }
-    // /**
-    //  * edit function
-    //  *
-    //  * @return void
-    //  */
+    /**
+     * edit function
+     *
+     * @return void
+     */
     public function edit(Advertisement $advertisement)
 
     {

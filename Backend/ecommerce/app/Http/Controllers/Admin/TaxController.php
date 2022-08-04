@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Tax;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Exception;
 
 class TaxController extends Controller
 {
@@ -54,12 +55,18 @@ class TaxController extends Controller
             'pst' => 'required|numeric|max:99.99',
             'hst' => 'required|numeric|max:99.99',
         ]);
+        try {
 
-        Tax::create($valid);
+            Tax::create($valid);
 
-        session()->flash('success', 'Tax successfully created!');
+            session()->flash('success', 'Tax successfully created!');
 
-        return redirect()->route('adminTaxIndex');
+            return redirect()->route('adminTaxIndex');
+        } catch (Exception $e) {
+            session()->flash('error', 'There was a problem creating the Tax!');
+
+            return redirect()->route('adminTaxIndex');
+        }
     }
 
     /**
@@ -97,7 +104,7 @@ class TaxController extends Controller
         if ($tax->save()) {
             session()->flash('success', 'Tax was successfully updated');
         } else {
-            session()->flash('error', 'There was a problem updating the Tax');
+            session()->flash('error', 'There was a problem updating the Tax!');
         }
         return redirect()->route('adminTaxIndex');
     }

@@ -51,42 +51,7 @@ class UserController extends Controller
         } else {
             $users = User::with('user_addresses')->latest()->paginate($this->MAX_PER_PAGE);
         }
-        // echo $users;
-        // var_dump($users);
-        // die;
         return view('admin.user.index', compact('users', 'title', 'search'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
@@ -144,8 +109,6 @@ class UserController extends Controller
         $v_address['country'] = $valid['country'];
         $v_address['postal_code'] = $valid['postal_code'];
 
-        // var_dump($v_user, $v_address);
-        // die;
 
         $user->update($v_user);
         $address->update($v_address);
