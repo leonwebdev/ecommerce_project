@@ -205,9 +205,16 @@
 @media only screen and (max-width: 768px) {
     aside {
         width: 100%;
-    }
-    aside form > div {
-        display: inline-block;
+        margin-right: 0;
+        h3 {
+            margin: 10px 0;
+        }
+        form {
+            margin-bottom: 15px;
+            & > div {
+                display: inline-block;
+            }
+        }
     }
     .list_item {
         width: 100%;
