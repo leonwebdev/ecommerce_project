@@ -323,12 +323,12 @@
     .featured {
         background-color: #f8f8f8;
         @media only screen and (max-width: 815px) {
-            min-height: 600px;
+            min-height: 550px;
         }
         .wrapper {
             overflow-x: hidden;
             @media only screen and (max-width: 815px) {
-                min-height: 600px;
+                min-height: 550px;
             }
         }
 
