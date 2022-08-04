@@ -65,7 +65,7 @@ class ProductController extends Controller
             'size_id' => 'required|min:1',
             'category_id' => 'required|array|min:1',
             'images' => 'required',
-            'images.*' => 'image|mimes:jpeg,png,jpg,svg|max:2048'
+            'images.*' => 'image|max:2048'
         ]);
         try {
 

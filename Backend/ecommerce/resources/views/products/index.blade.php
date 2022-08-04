@@ -67,10 +67,11 @@
                     {{-- if no product found --}}
                     @if (isset($products) && count($products) == 0)
                         @if (isset($search) && $search)
-                            <h3>There is no product found with "{{ $search }}"! Please search with different input.
+                            <h3 class="no-data-label">There is no product found with "{{ $search }}"! Please search
+                                with different input.
                             </h3>
                         @else
-                            <h3>There is no product available!</h3>
+                            <h3 class="no-data-label">There is no product available!</h3>
                         @endif
                     @else
                         {{-- Product list: start --}}
