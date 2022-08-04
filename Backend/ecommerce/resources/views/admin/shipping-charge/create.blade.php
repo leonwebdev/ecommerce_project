@@ -13,23 +13,29 @@
                 @csrf
                 <div class="mb-3">
                     <label for="continent" class="form-label">Continent</label>
-                    <input type="text" name="continent" class="form-control" id="continent" value="{{ old('continent') }}" />
+                    <input type="text" name="continent" class="form-control @error('continent') is-invalid @enderror"  id="continent" value="{{ old('continent') }}" />
                     @error('continent')
-                        <span style="color: #900">{{ $message }}</span>
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
                     @enderror
                 </div>
                 <div class="mb-3">
                     <label for="country" class="form-label">Country</label>
-                    <input type="text" name="country" class="form-control" id="country" value="{{ old('country') }}" />
+                    <input type="text" name="country" class="form-control @error('country') is-invalid @enderror" id="country" value="{{ old('country') }}" />
                     @error('country')
-                        <span style="color: #900">{{ $message }}</span>
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
                     @enderror
                 </div>
                 <div class="mb-3">
                     <label for="charge" class="form-label">Charge</label>
-                    <input type="text" name="charge" class="form-control" id="charge" value="{{ old('charge') }}" />
+                    <input type="text" name="charge" class="form-control @error('charge') is-invalid @enderror" id="charge" value="{{ old('charge') }}" />
                     @error('charge')
-                        <span style="color: #900">{{ $message }}</span>
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
                     @enderror
                 </div>
                 <div class="mb-3">
