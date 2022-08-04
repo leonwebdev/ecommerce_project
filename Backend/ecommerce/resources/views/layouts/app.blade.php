@@ -41,6 +41,10 @@
     <!-- Page Content-->
     <!-- Page Footer-->
     @include('partials.footer')
+
+    <!-- Footer Script-->
+    @yield('footer-script')
+
 </body>
 
 </html>
