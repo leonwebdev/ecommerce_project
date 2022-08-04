@@ -47,7 +47,7 @@ class AdvertisementController extends Controller
     {
 
         $valid = $request->validate([
-            'image' => 'nullable|image',
+            'image' => 'required|image',
             'title' => 'required|string|max:255',
             'link' => 'required|string|max:255',
             'pages' => 'required|string|max:255',
@@ -94,7 +94,7 @@ class AdvertisementController extends Controller
     {
         $valid = $request->validate([
             'id' => 'required|integer',
-            'image' => 'nullable|image',
+            'image' => 'required|image',
             'title' => 'required|string|max:255',
             'link' => 'required|string|max:255',
             'pages' => 'required|string|max:255',
