@@ -21,46 +21,54 @@
                 @endif
                 <input type="file" name="image" class="form-control" id="image" />
                 @error('image')
-                <span style="color: #900">{{ $message }}</span>
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
                 @enderror
               </div>
               <div class="mb-3">
                 <label for="title" class="form-label">Title</label>
                 <input type="text" name="title" class="form-control" id="title" value="{{ old('title', $advertisement->title) }}" />
-                @error('name')
-                  <span style="color: #900">{{ $message }}</span>
+                @error('title')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
                 @enderror
               </div>
               <div class="mb-3">
                 <label for="link" class="form-label">Link</label>
                 <input type="text" name="link" class="form-control" id="link" value="{{ old('link', $advertisement->link) }}" />
                 @error('link')
-                  <span style="color: #900">{{ $message }}</span>
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
                 @enderror
               </div>
               <div class="mb-3">
                 <label for="pages" class="form-label">Select the page</label>
                 <select class="form-select" name="pages" aria-label="Default select example">
-                
-                        @foreach($pages as $page)
-                        <option @if(old('page', $page)==$advertisement->pages) selected @endif value="{{$page}}">{{$page}}</option>
-                        @endforeach
-                    </select>
-                    @error('pages')
-                        <span style="color: #900">{{ $message }}</span>
-                    @enderror
+                    @foreach($pages as $page)
+                    <option @if(old('page', $page)==$advertisement->pages) selected @endif value="{{$page}}">{{$page}}</option>
+                    @endforeach
+                </select>
+                @error('pages')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
               </div>
               <div class="mb-3">
                 <label for="area" class="form-label">Select the area</label>
                 <select class="form-select" name="area" aria-label="Default select example">
-                
-                        @foreach($area as $areaa)
-                        <option @if(old('areaa', $areaa)==$advertisement->area) selected @endif value="{{$areaa}}">{{$areaa}}</option>
-                        @endforeach
-                    </select>
-                    @error('pages')
-                        <span style="color: #900">{{ $message }}</span>
-                    @enderror
+                    @foreach($area as $areaa)
+                    <option @if(old('areaa', $areaa)==$advertisement->area) selected @endif value="{{$areaa}}">{{$areaa}}</option>
+                    @endforeach
+                </select>
+                @error('pages')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
               </div>
 
               <div class="mb-3">
