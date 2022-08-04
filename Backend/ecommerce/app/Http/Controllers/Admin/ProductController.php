@@ -86,9 +86,10 @@ class ProductController extends Controller
             $product->gender_id = $request->gender_id;
             $product->size_id = $request->size_id;
             $product->save();
+            // attach category with product
             $product->categories()->attach($request->category_id);
 
-            if ($request->hasfile('images')) {
+            if ($request->hasFile('images')) {
                 $images = $request->file('images');
                 $imageArray = [];
                 foreach ($images as $image) {

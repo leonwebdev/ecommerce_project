@@ -12,6 +12,12 @@ use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
+    /**
+     * index function for admin dashboard
+     *
+     * @param Request $request
+     * @return void
+     */
     public function index(Request $request)
     {
         $title = 'Admin | Dashboard';
@@ -23,7 +29,6 @@ class DashboardController extends Controller
         $deliveredOrderCount = Order::where('order_status', '=', 'delivered')->count();
         $avgOrderValue = Order::avg('total');
         // order end
-
 
         // summary start
         $productCount = Product::all()->count();
