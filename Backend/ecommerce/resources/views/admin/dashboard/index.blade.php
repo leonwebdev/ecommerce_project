@@ -247,11 +247,16 @@
     }
 
     function salesChart() {
+
         let salesData = google.visualization.arrayToDataTable([
             ['Month', 'Sales'],
             @php
-                foreach ($sales as $month) {
-                    echo "['" . ucfirst($month->month) . "', " . number_format($month->sales, 2) . '],';
+                if (count($sales)) {
+                    foreach ($sales as $month) {
+                        echo "['" . ucfirst($month->month) . "', " . number_format($month->sales, 2) . '],';
+                    }
+                } else {
+                    echo "['No Data', 0]";
                 }
             @endphp
         ]);
