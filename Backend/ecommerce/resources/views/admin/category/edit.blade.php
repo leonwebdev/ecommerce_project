@@ -15,7 +15,7 @@
               <input type="hidden" name="id" value="{{ $category->id }}" />
               <div class="mb-3">
                 <label for="title" class="form-label">Title</label>
-                <input type="text" name="title"class="form-control @error('title') is-invalid @enderror" id="title" value="{{ old('title', $category->title) }}" />
+                <input type="text" name="title" class="form-control @error('title') is-invalid @enderror" id="title" value="{{ old('title', $category->title) }}" />
                 @error('title')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -28,7 +28,7 @@
                 <img src="/storage/{{ $category->image }}" alt="{{ $category->title }}" 
                     style="height: 100px;width:auto"/><br />
                 @endif
-                <input type="file" name="image"class="form-control @error('image') is-invalid @enderror" id="image" />
+                <input type="file" name="image" class="form-control @error('image') is-invalid @enderror" id="image" />
                 @error('image')
                   <div class="invalid-feedback">
                       {{ $message }}

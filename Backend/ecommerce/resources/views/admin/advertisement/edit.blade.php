@@ -19,7 +19,7 @@
                 <img src="/storage/{{ $advertisement->image }}" alt="{{ $advertisement->title }}" 
                     style="height: 100px;width:auto"/><br />
                 @endif
-                <input type="file" name="image" class="form-control" id="image" />
+                <input type="file" name="image" class="form-control  @error('image') is-invalid @enderror" id="image" />
                 @error('image')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -28,7 +28,7 @@
               </div>
               <div class="mb-3">
                 <label for="title" class="form-label">Title</label>
-                <input type="text" name="title" class="form-control" id="title" value="{{ old('title', $advertisement->title) }}" />
+                <input type="text" name="title" class="form-control  @error('title') is-invalid @enderror" id="title" value="{{ old('title', $advertisement->title) }}" />
                 @error('title')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -37,7 +37,7 @@
               </div>
               <div class="mb-3">
                 <label for="link" class="form-label">Link</label>
-                <input type="text" name="link" class="form-control" id="link" value="{{ old('link', $advertisement->link) }}" />
+                <input type="text" name="link" class="form-control  @error('link') is-invalid @enderror" id="link" value="{{ old('link', $advertisement->link) }}" />
                 @error('link')
                     <div class="invalid-feedback">
                         {{ $message }}
