@@ -112,7 +112,7 @@
                                 </div>
                                 <div class="row no-gutters align-items-center">
                                     <div class="col-auto">
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $productCount }}</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $categoryCount }}</div>
                                     </div>
                                 </div>
                             </div>
@@ -133,7 +133,7 @@
                                 </div>
                                 <div class="row no-gutters align-items-center">
                                     <div class="col-auto">
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $categoryCount }}</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $productCount }}</div>
                                     </div>
                                 </div>
                             </div>
