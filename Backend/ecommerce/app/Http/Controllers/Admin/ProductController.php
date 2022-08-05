@@ -26,7 +26,7 @@ class ProductController extends Controller
         $title = 'Admin | Product';
         $search = $request->query('search');
         if ($search) {
-            $products = Product::with(['product_media', 'gender', 'size', 'categories'])->where('name', 'LIKE', '%' . $search . '%')->latest()->paginate(10);
+            $products = Product::with(['product_media', 'gender', 'size', 'categories'])->where('name', 'LIKE', '%' . $search . '%')->latest()->paginate(10)->withQueryString();
         } else {
             $products = Product::with(['product_media', 'gender', 'size', 'categories'])->latest()->paginate(10);
         }

@@ -19,7 +19,7 @@ class AdvertisementController extends Controller
         $title = 'Admin | Advertisement';
         $search = $request->query('search');
         if ($search) {
-            $advertisements = Advertisement::latest()->where('title', 'LIKE', '%' . $search . "%")->paginate(10);
+            $advertisements = Advertisement::latest()->where('title', 'LIKE', '%' . $search . "%")->paginate(10)->withQueryString();
         } else {
             $advertisements = Advertisement::latest()->paginate(10);
         }

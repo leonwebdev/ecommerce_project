@@ -18,7 +18,7 @@ class InquiryController extends Controller
         $title = 'Admin | Inquiry';
         $search = $request->query('search');
         if ($search) {
-            $inquiries = Inquiry::latest()->where('name', 'LIKE', '%' . $search . "%")->paginate(10);
+            $inquiries = Inquiry::latest()->where('name', 'LIKE', '%' . $search . "%")->paginate(10)->withQueryString();
         } else {
             $inquiries = Inquiry::latest()->paginate(10);
         }

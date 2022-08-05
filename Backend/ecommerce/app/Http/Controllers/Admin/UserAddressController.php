@@ -40,7 +40,8 @@ class UserAddressController extends Controller
                 ->orWhere('user_addresses.postal_code', 'LIKE', '%' . $search . '%')
                 ->orderBy('user_addresses.user_id', 'asc')
                 ->orderBy('user_addresses.id', 'asc')
-                ->paginate($this->MAX_PER_PAGE);
+                ->paginate($this->MAX_PER_PAGE)
+                ->withQueryString();
         } else {
             $addresses = UserAddress::orderBy('user_id', 'asc')->paginate($this->MAX_PER_PAGE);
         }

@@ -112,7 +112,7 @@
                                 </div>
                                 <div class="row no-gutters align-items-center">
                                     <div class="col-auto">
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $productCount }}</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $categoryCount }}</div>
                                     </div>
                                 </div>
                             </div>
@@ -133,7 +133,7 @@
                                 </div>
                                 <div class="row no-gutters align-items-center">
                                     <div class="col-auto">
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $categoryCount }}</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $productCount }}</div>
                                     </div>
                                 </div>
                             </div>
@@ -205,69 +205,89 @@
     </div>
     <!-- /.container-fluid -->
 @endsection
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<script type="text/javascript">
-    google.charts.load('current', {
-        'packages': ['corechart']
-    });
-    google.charts.setOnLoadCallback(drawChart);
+@section('footer-script')
+    {{-- google chart library --}}
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', {
+            'packages': ['corechart']
+        });
+        google.charts.setOnLoadCallback(drawChart);
 
-    function productByCategoryChart() {
-        let productByCategoryData = google.visualization.arrayToDataTable([
-            ['Category', 'Product Count'],
-            @php
-                foreach ($productByCategory as $cat) {
-                    echo "['" . $cat->title . "', " . $cat->products_count . '],';
-                }
-            @endphp
-        ]);
-        let options = {
-            title: '',
-            is3D: false,
-        };
-        let productByCategory = new google.visualization.PieChart(document.getElementById('productByCategory'));
-        productByCategory.draw(productByCategoryData, options);
-    }
+        /** 
+         * product By category pie chart
+         */
+        function productByCategoryChart() {
+            let productByCategoryData = google.visualization.arrayToDataTable([
+                ['Category', 'Product Count'],
+                @php
+                    foreach ($productByCategory as $cat) {
+                        echo "['" . $cat->title . "', " . $cat->products_count . '],';
+                    }
+                @endphp
+            ]);
+            let options = {
+                title: '',
+                is3D: false,
+            };
+            let productByCategory = new google.visualization.PieChart(document.getElementById('productByCategory'));
+            productByCategory.draw(productByCategoryData, options);
+        }
 
-    function productByGenderChart() {
-        let productByGenderData = google.visualization.arrayToDataTable([
-            ['Gender', 'Product Count'],
-            @php
-                foreach ($productByGender as $gender) {
-                    echo "['" . ucfirst($gender->name) . "', " . $gender->products_count . '],';
-                }
-            @endphp
-        ]);
-        let options = {
-            title: '',
-            is3D: false,
-        };
-        let productByGender = new google.visualization.PieChart(document.getElementById('productByGender'));
-        productByGender.draw(productByGenderData, options);
-    }
+        /** 
+         * product By gender pie chart
+         */
+        function productByGenderChart() {
+            let productByGenderData = google.visualization.arrayToDataTable([
+                ['Gender', 'Product Count'],
+                @php
+                    foreach ($productByGender as $gender) {
+                        echo "['" . ucfirst($gender->name) . "', " . $gender->products_count . '],';
+                    }
+                @endphp
+            ]);
+            let options = {
+                title: '',
+                is3D: false,
+            };
+            let productByGender = new google.visualization.PieChart(document.getElementById('productByGender'));
+            productByGender.draw(productByGenderData, options);
+        }
 
-    function salesChart() {
-        let salesData = google.visualization.arrayToDataTable([
-            ['Month', 'Sales'],
-            @php
-                foreach ($sales as $month) {
-                    echo "['" . ucfirst($month->month) . "', " . number_format($month->sales, 2) . '],';
-                }
-            @endphp
-        ]);
-        let options = {
-            title: '',
-        };
-        let salesLineChart = new google.visualization.LineChart(document.getElementById('salesLineChart'));
-        salesLineChart.draw(salesData, options);
-    }
+        /** 
+         * line chart of sales By delivered and confirmend order 
+         */
+        function salesChart() {
 
-    function drawChart() {
-        // pie chart
-        productByCategoryChart();
-        productByGenderChart();
+            let salesData = google.visualization.arrayToDataTable([
+                ['Month', 'Sales'],
+                @php
+                    if (count($sales)) {
+                        foreach ($sales as $month) {
+                            echo "['" . ucfirst($month->month) . "', " . number_format($month->sales, 2) . '],';
+                        }
+                    } else {
+                        echo "['No Data', 0]";
+                    }
+                @endphp
+            ]);
+            let options = {
+                title: '',
+            };
+            let salesLineChart = new google.visualization.LineChart(document.getElementById('salesLineChart'));
+            salesLineChart.draw(salesData, options);
+        }
 
-        // line chart
-        salesChart();
-    }
-</script>
+        /** 
+         * on load draw chart and call function to generate chart
+         */
+        function drawChart() {
+            // pie chart
+            productByCategoryChart();
+            productByGenderChart();
+
+            // line chart
+            salesChart();
+        }
+    </script>
+@endsection

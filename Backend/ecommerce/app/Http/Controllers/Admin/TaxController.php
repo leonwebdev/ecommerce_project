@@ -22,7 +22,7 @@ class TaxController extends Controller
         $search = $request->query('search');
 
         if ($search) {
-            $taxes = Tax::where('province', 'LIKE', '%' . $search . '%')->orWhere('province_short', 'LIKE', '%' . $search . '%')->orderBy('id', 'DESC')->paginate(10);
+            $taxes = Tax::where('province', 'LIKE', '%' . $search . '%')->orWhere('province_short', 'LIKE', '%' . $search . '%')->orderBy('id', 'DESC')->paginate(10)->withQueryString();
         } else {
             $taxes = Tax::orderBy('id', 'DESC')->paginate(10);
         }

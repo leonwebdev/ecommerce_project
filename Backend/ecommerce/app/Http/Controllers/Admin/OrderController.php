@@ -36,7 +36,7 @@ class OrderController extends Controller
                     $q->where('name', 'LIKE', '%' . $search . '%');
                 })
                 ->latest()
-                ->paginate(10);
+                ->paginate(10)->withQueryString();
         } else {
             $orders = Order::with(['products', 'user'])->latest()->paginate(10);
         }

@@ -20,7 +20,7 @@ class CategoryController extends Controller
 
         $search = $request->query('search');
         if ($search) {
-            $categories = Category::latest()->where('title', 'LIKE', '%' . $search . "%")->paginate(10);
+            $categories = Category::latest()->where('title', 'LIKE', '%' . $search . "%")->paginate(10)->withQueryString();
         } else {
             $categories = Category::latest()->paginate(10);
         }

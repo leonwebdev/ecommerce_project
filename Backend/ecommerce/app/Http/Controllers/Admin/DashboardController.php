@@ -28,7 +28,7 @@ class DashboardController extends Controller
         $orderCount = Order::all()->count();
         $pendingOrderCount = Order::where('order_status', '=', 'pending')->count();
         $deliveredOrderCount = Order::where('order_status', '=', 'delivered')->count();
-        $avgOrderValue = Order::avg('total');
+        $avgOrderValue = Order::where('order_status', '=', 'delivered')->orWhere('order_status', '=', 'confirmed')->avg('total');
         // order end
 
         // summary start
@@ -46,9 +46,9 @@ class DashboardController extends Controller
         $productByGender = Gender::withCount('products')
             ->orderBy('products_count', 'desc')
             ->get();
-
         // monthly sales 
-        $sales = Order::selectRaw('year(created_at) year, monthname(created_at) month,count(*) as count, sum(total) as sales')
+        $sales = Order::where('order_status', '=', 'delivered')
+            ->selectRaw('year(created_at) year, monthname(created_at) month,count(*) as count, sum(total) as sales')
             ->groupBy('year', 'month')
             ->orderBy('year', 'desc')
             ->get();
