@@ -47,7 +47,8 @@ class UserController extends Controller
                         ->orWhere('postal_code', 'LIKE', '%' . $search . '%');
                 })
                 ->orderBy('users.created_at')
-                ->paginate($this->MAX_PER_PAGE);
+                ->paginate($this->MAX_PER_PAGE)
+                ->withQueryString();
         } else {
             $users = User::with('user_addresses')->latest()->paginate($this->MAX_PER_PAGE);
         }

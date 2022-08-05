@@ -21,7 +21,7 @@ class ShippingChargeController extends Controller
 
         $search = $request->query('search');
         if ($search) {
-            $shippingcharges = ShippingCharge::latest()->where('continent', 'LIKE', '%' . $search . "%")->paginate(10);
+            $shippingcharges = ShippingCharge::latest()->where('continent', 'LIKE', '%' . $search . "%")->paginate(10)->withQueryString();
         } else {
             $shippingcharges = ShippingCharge::latest()->paginate(10);
         }
