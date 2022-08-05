@@ -116,7 +116,7 @@
             @media only screen and (max-width: 767px) {
                 min-height: 450px;
             }
-    
+
             > a {
                 position: absolute;
                 width: 100%;
@@ -131,7 +131,7 @@
             li {
                 button {
                     &:before {
-                        color: rgba(0,0,0,.6);
+                        color: rgba(0, 0, 0, 0.6);
                         font-size: 10px;
                         width: 30px;
                         height: 30px;
@@ -159,7 +159,7 @@
             @media only screen and (max-width: 1190px) {
                 max-width: 780px;
             }
-            
+
             @media only screen and (max-width: 980px) {
                 max-width: 710px;
             }
@@ -167,7 +167,6 @@
             @media only screen and (max-width: 850px) {
                 max-width: 620px;
             }
-    
         }
 
         .decorative_text {
@@ -203,12 +202,12 @@
 
             @media only screen and (max-width: 1190px) {
                 grid-template-areas:
-                "item_1 item_1 item_1 item_3 item_3"
-                "item_1 item_1 item_1 item_3 item_3"
-                ". . item_4 item_4"
-                ". item_2 item_2 item_4 item_4"
-                ". item_2 item_2 item_5 item_5"
-                ". item_2 item_2 item_5 item_5";
+                    "item_1 item_1 item_1 item_3 item_3"
+                    "item_1 item_1 item_1 item_3 item_3"
+                    ". . item_4 item_4"
+                    ". item_2 item_2 item_4 item_4"
+                    ". item_2 item_2 item_5 item_5"
+                    ". item_2 item_2 item_5 item_5";
 
                 margin-top: 20px;
             }
@@ -292,7 +291,7 @@
             .item_1 {
                 height: 290px;
             }
-    
+
             .item_2,
             .item_3,
             .item_4,
@@ -300,7 +299,7 @@
                 height: 190px;
             }
         }
-        
+
         @media only screen and (max-width: 980px) {
             .item_1 {
                 height: 228px;
@@ -312,7 +311,6 @@
             .item_5 {
                 height: 146px;
             }
-
         }
 
         @media only screen and (max-width: 767px) {
@@ -320,14 +318,18 @@
                 height: 146px;
             }
         }
-
     }
 
     .featured {
         background-color: #f8f8f8;
-
+        @media only screen and (max-width: 815px) {
+            min-height: 550px;
+        }
         .wrapper {
             overflow-x: hidden;
+            @media only screen and (max-width: 815px) {
+                min-height: 550px;
+            }
         }
 
         .decorative_text {
@@ -365,7 +367,7 @@
                         @media only screen and (max-width: 767px) {
                             font-size: 24px;
                         }
-                
+
                         cursor: pointer;
 
                         &:last-of-type {
@@ -456,6 +458,9 @@
                     }
                     &.slick-prev {
                         left: -40px;
+                        @media only screen and (max-width: 1050px) {
+                            left: 8px;
+                        }
                         @extend .custom_arrow_prev;
                     }
                     &.slick-next {
@@ -512,6 +517,7 @@
 
             @media only screen and (max-width: 850px) {
                 padding: 0 30px;
+                margin-bottom: 40px;
             }
         }
     }

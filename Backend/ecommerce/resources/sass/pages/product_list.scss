@@ -190,7 +190,9 @@
 //Advertisements
 .ads.ads-sidebar {
     width: 100%;
-
+    @media only screen and (max-width: 768px) {
+        display: none;
+    }
     a {
         display: block;
         width: 100%;

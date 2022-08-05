@@ -47,7 +47,7 @@ class CategoryController extends Controller
 
         $valid = $request->validate([
             'title' => 'required|string|max:255',
-            'image' => 'nullable|image'
+            'image' => 'required|image|max:2048'
         ]);
         if ($request->file('image')) {
             $path =  $request->file('image')->store('public');
@@ -89,7 +89,7 @@ class CategoryController extends Controller
         $valid = $request->validate([
             'id' => 'required|integer',
             'title' => 'required|string|max:255',
-            'image' => 'nullable|image'
+            'image' => 'nullable|image|max:2048'
         ]);
 
         if ($request->file('image')) {
