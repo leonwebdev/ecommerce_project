@@ -47,11 +47,7 @@ class AdvertisementController extends Controller
     {
 
         $valid = $request->validate([
-<<<<<<< HEAD
-            'image' => 'required|image|max:2048',
-=======
             'image' => 'required|image',
->>>>>>> 0d222d55d442182c1f6f5d8045bad7ab276116c5
             'title' => 'required|string|max:255',
             'link' => 'required|string|max:255',
             'pages' => 'required|string|max:255',
